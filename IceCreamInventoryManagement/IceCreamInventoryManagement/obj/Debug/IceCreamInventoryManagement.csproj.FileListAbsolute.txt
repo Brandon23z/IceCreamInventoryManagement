@@ -1,2 +1,3 @@
 \\umd-home.umd.umich.edu\scvierk\private\my documents\visual studio 2015\Projects\IceCreamInventoryManagement\IceCreamInventoryManagement\bin\Debug\IceCreamInventoryManagement.exe.config
 H:\Private\My Documents\Visual Studio 2015\Projects\IceCreamInventoryManagement\IceCreamInventoryManagement\bin\Debug\IceCreamInventoryManagement.exe.config
+C:\Users\scvierk\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\bin\Debug\IceCreamInventoryManagement.exe.config
