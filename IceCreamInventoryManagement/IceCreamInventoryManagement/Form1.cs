@@ -25,8 +25,8 @@ namespace IceCreamInventoryManagement
 
         private void btnTestRegex_Click(object sender, EventArgs e)
         {
-            string input = "HD 0103    2016-03-01";
-            regexClass r = checkRegex(input, @"^(HD) (\d\d\d\d)    (\d{4}-\d{2}-\d{2})$");
+            string input = "HD 0103      2016-03-01";
+            regexClass r = checkRegex(input, @"^(HD) (\d\d\d\d)      (\d{4}-\d{2}-\d{2})");
             if (r.valid)
             {
                 MessageBox.Show("Header is valid");
