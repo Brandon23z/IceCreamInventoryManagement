@@ -9,7 +9,7 @@ namespace IceCreamInventoryManagement
 {
     class RegexMethods
     {
-        public static regexClass checkRegex(string input, string regex)
+        public static RegexClass checkRegex(string input, string regex)
         {
             string output = "";
             Match match = Regex.Match(input, regex);
@@ -20,25 +20,25 @@ namespace IceCreamInventoryManagement
                 {
                     values.Add(g.Value);
                 }
-                return new regexClass(values);
+                return new RegexClass(values);
             }
             else
             {
-                return new regexClass(false);
+                return new RegexClass(false);
             }
         }
 
-        public class regexClass
+        public class RegexClass
         {
             public bool valid;
             public List<string> groupValues;
 
-            public regexClass(bool _valid)
+            public RegexClass(bool _valid)
             {
                 valid = _valid;
             }
 
-            public regexClass(List<string> values)
+            public RegexClass(List<string> values)
             {
                 groupValues = values;
                 valid = true;

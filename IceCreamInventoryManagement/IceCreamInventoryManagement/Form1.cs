@@ -36,7 +36,7 @@ namespace IceCreamInventoryManagement
                 cityUploadFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
             }
 
-            regexClass r = checkRegex(cityUploadFile[0], @"^(HD) (\d\d\d\d)      (\d{4}-\d{2}-\d{2})( )*$");
+            RegexClass r = checkRegex(cityUploadFile[0], @"^(HD) (\d\d\d\d)      (\d{4}-\d{2}-\d{2})( )*$");
             if (r.valid)
             {
                 string seqNum = r.groupValues[2];
@@ -156,58 +156,3 @@ namespace IceCreamInventoryManagement
         }
     }
 }
-
-
-
-
-//string input = "HD 0103      2016-03-01";
-//regexClass r = checkRegex(input, @"^(HD) (\d\d\d\d)      (\d{4}-\d{2}-\d{2})");
-//            if (r.valid)
-//            {
-//                MessageBox.Show("Header is valid");
-//                string sequence = r.groupValues[2];
-//string dateString = r.groupValues[3];
-//DateTime date = DateTime.Parse(dateString);
-//            }
-//            else
-//            {
-//                MessageBox.Show("Header is invalid");
-//            }
-
-/*
-//UNIVERSAL HEADER//
-    HD 0103      2016-03-01
-    ^(HD) (\d\d\d\d)      (\d{4}-\d{2}-\d{2})( )*$
-
-//UNIVERSAL TRAILER//
-    T 0003
-    ^(T) (\d\d\d\d)( )*$
-
-//CITY UPLOAD//
-    Dearborn 1          Dearborn            MI          
-    ^(.{20})(.{20})(.{2})( )*$                
-
-//LOAD ICE CREAM TRUCK//
-    TR |Truck Number|
-    ^(TR) (\d\d\d\d)( )*$
-
-    |Item Number||Adjustment Quantity|
-    ^(\d\d\d\d)(((\d)|-)\d\d\d)( )*$
-
-//LOAD ICE CREAM TRUCK SALES//
-
-
-
-//LOAD INVENTORY UPDATE//
-
-
-//LOAD TRUCK ROUTE//
-
-
-//ROUTE UPLOAD//
-
-
-//TRUCK UPLOAD//
-
-
-*/
