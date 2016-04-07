@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static IceCreamInventoryManagement.RegexMethods;
+using static IceCreamInventoryManagement.RegexStr;
 
 namespace IceCreamInventoryManagement
 {
@@ -30,26 +31,28 @@ namespace IceCreamInventoryManagement
             openFileDialog1.Title = "Select an Input File";
 
             string[] cityUploadFile = { "" };
+            DateTime date = Convert.ToDateTime("1970-01-01");
+            string seqNum = "";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 cityUploadFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
             }
 
-            RegexClass r = checkRegex(cityUploadFile[0], @"^(HD) (\d\d\d\d)      (\d{4}-\d{2}-\d{2})( )*$");
+            RegexClass r = checkRegex(cityUploadFile[0], headerEx);
             if (r.valid)
             {
-                string seqNum = r.groupValues[2];
+                seqNum = r.groupValues[2];
                 string dateString = r.groupValues[3];
-                DateTime date = DateTime.Parse(dateString);
+                date = Convert.ToDateTime(dateString);
             }
 
-            r = checkRegex(cityUploadFile[cityUploadFile.Length - 1], @"^(T) (\d\d\d\d)( )*$");
+            r = checkRegex(cityUploadFile[cityUploadFile.Length - 1], trailerEx);
 
             int numOfRows = 0;
-            string[] cityLabels = { "" };
-            string[] cityNames = { "" };
-            string[] states = { "" };
+            List<string> cityLabels = new List<string>();
+            List<string> cityNames = new List<string>();
+            List<string> states = new List<string>();
 
             if (r.valid)
             {
@@ -57,17 +60,30 @@ namespace IceCreamInventoryManagement
                 numOfRows = Int32.Parse(numOfRowsString); 
             }
 
-            for (int i = 1; i < numOfRows; i++)
+            bool numRowsValid = false;
+
+            if (numOfRows != cityUploadFile.Length - 2)
             {
-                r = checkRegex(cityUploadFile[i], @"^(.{20})(.{20})(.{2})( )*$");
-                if (r.valid)
-                {
-                    cityLabels[i - 1] = r.groupValues[1];
-                    cityNames[i - 1] = r.groupValues[2];
-                    states[i - 1] = r.groupValues[3];
-                }
+                MessageBox.Show("trailer number does not match the actual number of rows");
+                numRowsValid = true;
             }
-            string x = "change";
+
+            if (numRowsValid == false)
+            {
+                for (int i = 1; i < numOfRows + 1; i++)
+                {
+                    r = checkRegex(cityUploadFile[i], cityEx);
+                    if (r.valid)
+                    {
+                        cityLabels.Add(r.groupValues[1]);
+                        cityNames.Add(r.groupValues[2]);
+                        states.Add(r.groupValues[3]);
+                    }
+                }
+
+            }
+
+            MessageBox.Show("file read succesfully");
 
         }
 
@@ -153,6 +169,19 @@ namespace IceCreamInventoryManagement
             {
                 inventoryUpdateFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
             }
+        }
+
+        setDefaultForm secondForm = new setDefaultForm();
+        settingsForm thirdForm = new settingsForm();
+
+        private void btnSetDefault_Click(object sender, EventArgs e)
+        {
+            secondForm.ShowDialog();
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            thirdForm.ShowDialog();
         }
     }
 }

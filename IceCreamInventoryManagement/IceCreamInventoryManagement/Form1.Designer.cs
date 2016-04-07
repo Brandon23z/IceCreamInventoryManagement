@@ -42,6 +42,8 @@
             this.btnInventoryUpdate = new System.Windows.Forms.Button();
             this.btnCityUpload = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnSetDefault = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -177,11 +179,33 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "Load Ice Cream from Trucks:";
             // 
+            // btnSetDefault
+            // 
+            this.btnSetDefault.Location = new System.Drawing.Point(440, 26);
+            this.btnSetDefault.Name = "btnSetDefault";
+            this.btnSetDefault.Size = new System.Drawing.Size(138, 23);
+            this.btnSetDefault.TabIndex = 16;
+            this.btnSetDefault.Text = "Set Default Inventory";
+            this.btnSetDefault.UseVisualStyleBackColor = true;
+            this.btnSetDefault.Click += new System.EventHandler(this.btnSetDefault_Click);
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.Location = new System.Drawing.Point(475, 65);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(75, 23);
+            this.btnSettings.TabIndex = 17;
+            this.btnSettings.Text = "Settings";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(601, 308);
+            this.Controls.Add(this.btnSettings);
+            this.Controls.Add(this.btnSetDefault);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnCityUpload);
             this.Controls.Add(this.btnInventoryUpdate);
@@ -219,6 +243,8 @@
         private System.Windows.Forms.Button btnInventoryUpdate;
         private System.Windows.Forms.Button btnCityUpload;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnSetDefault;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
 
