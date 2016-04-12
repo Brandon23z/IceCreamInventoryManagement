@@ -102,7 +102,7 @@
             // 
             // btnRouteUpload
             // 
-            this.btnRouteUpload.Location = new System.Drawing.Point(153, 50);
+            this.btnRouteUpload.Location = new System.Drawing.Point(184, 50);
             this.btnRouteUpload.Name = "btnRouteUpload";
             this.btnRouteUpload.Size = new System.Drawing.Size(75, 23);
             this.btnRouteUpload.TabIndex = 8;
@@ -112,7 +112,7 @@
             // 
             // btnTruckUpload
             // 
-            this.btnTruckUpload.Location = new System.Drawing.Point(152, 88);
+            this.btnTruckUpload.Location = new System.Drawing.Point(184, 88);
             this.btnTruckUpload.Name = "btnTruckUpload";
             this.btnTruckUpload.Size = new System.Drawing.Size(75, 23);
             this.btnTruckUpload.TabIndex = 9;
@@ -132,7 +132,7 @@
             // 
             // btnIceCreamToTrucks
             // 
-            this.btnIceCreamToTrucks.Location = new System.Drawing.Point(164, 159);
+            this.btnIceCreamToTrucks.Location = new System.Drawing.Point(184, 159);
             this.btnIceCreamToTrucks.Name = "btnIceCreamToTrucks";
             this.btnIceCreamToTrucks.Size = new System.Drawing.Size(75, 23);
             this.btnIceCreamToTrucks.TabIndex = 11;
@@ -142,7 +142,7 @@
             // 
             // btnIceCreamFromTrucks
             // 
-            this.btnIceCreamFromTrucks.Location = new System.Drawing.Point(175, 193);
+            this.btnIceCreamFromTrucks.Location = new System.Drawing.Point(184, 193);
             this.btnIceCreamFromTrucks.Name = "btnIceCreamFromTrucks";
             this.btnIceCreamFromTrucks.Size = new System.Drawing.Size(75, 23);
             this.btnIceCreamFromTrucks.TabIndex = 12;
@@ -152,7 +152,7 @@
             // 
             // btnInventoryUpdate
             // 
-            this.btnInventoryUpdate.Location = new System.Drawing.Point(169, 226);
+            this.btnInventoryUpdate.Location = new System.Drawing.Point(184, 226);
             this.btnInventoryUpdate.Name = "btnInventoryUpdate";
             this.btnInventoryUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnInventoryUpdate.TabIndex = 13;
@@ -162,7 +162,7 @@
             // 
             // btnCityUpload
             // 
-            this.btnCityUpload.Location = new System.Drawing.Point(141, 12);
+            this.btnCityUpload.Location = new System.Drawing.Point(184, 12);
             this.btnCityUpload.Name = "btnCityUpload";
             this.btnCityUpload.Size = new System.Drawing.Size(75, 23);
             this.btnCityUpload.TabIndex = 14;
