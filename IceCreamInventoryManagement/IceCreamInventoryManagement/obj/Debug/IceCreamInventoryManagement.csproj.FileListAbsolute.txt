@@ -46,3 +46,4 @@ C:\Users\khanha\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManage
 C:\Users\khanha\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\obj\Debug\IceCreamInventoryManagement.pdb
 C:\Users\khanha\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\obj\Debug\IceCreamInventoryManagement.setDefaultForm.resources
 C:\Users\khanha\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\obj\Debug\IceCreamInventoryManagement.settingsForm.resources
+C:\Users\khanha\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\obj\Debug\IceCreamInventoryManagement.logForm.resources

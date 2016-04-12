@@ -9,11 +9,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static IceCreamInventoryManagement.RegexMethods;
 using static IceCreamInventoryManagement.RegexStr;
+using static IceCreamInventoryManagement.ourClasses;
+using System.Globalization;
 
 namespace IceCreamInventoryManagement
 {
     public partial class Form1 : Form
     {
+        //public List<string> log = new List<string>();
+
+        DateTime now = DateTime.Now;
+
+        string dateTimeFormat = "M/d/yy - h:mm ";
+
+
+
+
         public Form1()
         {
             InitializeComponent();
@@ -26,6 +37,7 @@ namespace IceCreamInventoryManagement
 
         private void btnCityUpload_Click(object sender, EventArgs e)
         {
+
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "Text Files|*.txt";
             openFileDialog1.Title = "Select an Input File";
@@ -37,6 +49,7 @@ namespace IceCreamInventoryManagement
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 cityUploadFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
+                addToLog("City Upload File Read");
             }
 
             RegexClass r = checkRegex(cityUploadFile[0], headerEx);
@@ -64,7 +77,7 @@ namespace IceCreamInventoryManagement
 
             if (numOfRows != cityUploadFile.Length - 2)
             {
-                MessageBox.Show("trailer number does not match the actual number of rows");
+                addToLog("City Upload File Invalid: Trailer # does not match Actual # of Rows");
                 numRowsValid = true;
             }
 
@@ -83,7 +96,8 @@ namespace IceCreamInventoryManagement
 
             }
 
-            MessageBox.Show("file read succesfully");
+            addToLog("City Upload File Valid");
+            //MessageBox.Show("file read succesfully");
 
         }
 
@@ -98,6 +112,7 @@ namespace IceCreamInventoryManagement
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 routeUploadFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
+                addToLog("Route Upload File Read");
             }
         }
 
@@ -112,6 +127,7 @@ namespace IceCreamInventoryManagement
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 salesFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
+                addToLog("Sales File Read");
             }
         }
 
@@ -126,6 +142,7 @@ namespace IceCreamInventoryManagement
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 iceCreamtoTrucksFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
+                addToLog("Ice Cream to Trucks File Read");
             }
         }
 
@@ -140,6 +157,7 @@ namespace IceCreamInventoryManagement
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 truckRouteFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
+                addToLog("Truck-Route File Read"); 
             }
         }
 
@@ -154,6 +172,7 @@ namespace IceCreamInventoryManagement
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 inventoryUpdateFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
+                addToLog("Inventory Update File Read");
             }
         }
 
@@ -163,16 +182,18 @@ namespace IceCreamInventoryManagement
             openFileDialog1.Filter = "Text Files|*.txt";
             openFileDialog1.Title = "Select an Input File";
 
-            string[] inventoryUpdateFile = { "" };
+            string[] truckUploadFile = { "" };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                inventoryUpdateFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
+                truckUploadFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
+                addToLog("Truck Upload File Read");
             }
         }
 
         setDefaultForm secondForm = new setDefaultForm();
         settingsForm thirdForm = new settingsForm();
+        logForm fourthForm = new logForm();
 
         private void btnSetDefault_Click(object sender, EventArgs e)
         {
@@ -182,6 +203,11 @@ namespace IceCreamInventoryManagement
         private void btnSettings_Click(object sender, EventArgs e)
         {
             thirdForm.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            fourthForm.ShowDialog();
         }
     }
 }
