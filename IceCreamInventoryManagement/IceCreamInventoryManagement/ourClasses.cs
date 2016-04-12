@@ -8,6 +8,23 @@ namespace IceCreamInventoryManagement
 {
     class ourClasses
     {
+
+
+        public class LogVariable
+        {
+            public static List<string> log = new List<string>();
+
+        }
+
+        public static void addToLog(string x)
+        {
+            DateTime now = DateTime.Now;
+
+            string dateTimeFormat = "M/d/yy - h:mm ";
+
+            LogVariable.log.Add("(" + now.ToString(dateTimeFormat) + ") "+ x + "\n");
+        }
+
         class City
         {
             public string citylabel;
@@ -32,8 +49,8 @@ namespace IceCreamInventoryManagement
             public int trucknumber;
             public int itemnumber;
             public int quantity;
-            public long initialprice;
-            public long saleprice;
+            public double intitialprice;
+            public double saleprice;
         }
 
         class Inventory
