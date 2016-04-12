@@ -10,30 +10,50 @@ namespace IceCreamInventoryManagement
     {
         class City
         {
-            string cityLabel;
-            string city;
-            string state;
+            public string citylabel;
+            public string cityname;
+            public string state;
         }
 
         class Route
         {
-            string routeNumber;
+            public int routenumber;
+            public string citylabel1, citylabel2, citylabel3, citylabel4, citylabel5, citylabel6, citylabel7, citylabel8, citylabel9, citylabel10;
         }
 
         class Truck
         {
-            string truckNumber;
+            public int trucknumber;
+            public int routenumber;
         }
 
-        class Product
+        class TruckInventory
         {
-            string itemNumber;
-            int price;
+            public int trucknumber;
+            public int itemnumber;
+            public int quantity;
+            public long initialprice;
+            public long saleprice;
         }
 
-        class Driver
+        class Inventory
         {
-            string driverId;
+            public int itemnumber;
+            public int quantity;
+            public double intitialprice;
+            public double saleprice;
+            public string description;
+        }
+
+        class Sales
+        {
+            public int itemnumber;
+            public int quantity;
+            public double intitialprice;
+            public double saleprice;
+            public TimeSpan saledate;
+            public int trucknumber;
+            public int routenumber;
         }
     }
 }
