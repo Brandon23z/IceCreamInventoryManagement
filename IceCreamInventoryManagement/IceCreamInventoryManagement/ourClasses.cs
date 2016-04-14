@@ -25,26 +25,26 @@ namespace IceCreamInventoryManagement
             LogVariable.log.Add("(" + now.ToString(dateTimeFormat) + ") "+ x + "\n");
         }
 
-        class City
+        public class Zone
         {
             public string citylabel;
             public string cityname;
             public string state;
         }
 
-        class Route
+        public class Route
         {
             public int routenumber;
             public string citylabel1, citylabel2, citylabel3, citylabel4, citylabel5, citylabel6, citylabel7, citylabel8, citylabel9, citylabel10;
         }
 
-        class Truck
+        public class Truck
         {
             public int trucknumber;
             public int routenumber;
         }
 
-        class TruckInventory
+        public class TruckInventory
         {
             public int trucknumber;
             public int itemnumber;
@@ -53,7 +53,7 @@ namespace IceCreamInventoryManagement
             public double saleprice;
         }
 
-        class Inventory
+        public class Inventory
         {
             public int itemnumber;
             public int quantity;
@@ -62,7 +62,7 @@ namespace IceCreamInventoryManagement
             public string description;
         }
 
-        class Sales
+        public class Sale
         {
             public int itemnumber;
             public int quantity;
@@ -71,6 +71,13 @@ namespace IceCreamInventoryManagement
             public TimeSpan saledate;
             public int trucknumber;
             public int routenumber;
+            public int drivernumber;
+        }
+
+        public class Driver
+        {
+            public int trucknumber;
+            public int drivernumber;
         }
     }
 }

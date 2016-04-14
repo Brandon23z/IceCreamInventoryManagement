@@ -48,6 +48,7 @@
             this.truckInvReset.TabIndex = 1;
             this.truckInvReset.Text = "Truck Inventory Reset";
             this.truckInvReset.UseVisualStyleBackColor = true;
+            this.truckInvReset.CheckedChanged += new System.EventHandler(this.truckInvReset_CheckedChanged);
             // 
             // dailyInvCalc
             // 
@@ -58,6 +59,7 @@
             this.dailyInvCalc.TabIndex = 2;
             this.dailyInvCalc.Text = "Daily Inventory Calculated";
             this.dailyInvCalc.UseVisualStyleBackColor = true;
+            this.dailyInvCalc.CheckedChanged += new System.EventHandler(this.dailyInvCalc_CheckedChanged);
             // 
             // itemAddedAutoOrder
             // 

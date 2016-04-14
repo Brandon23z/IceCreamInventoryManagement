@@ -21,5 +21,15 @@ namespace IceCreamInventoryManagement
         {
 
         }
+
+        private void truckInvReset_CheckedChanged(object sender, EventArgs e)
+        {
+            if (truckInvReset.Checked == true)
+        }
+
+        private void dailyInvCalc_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

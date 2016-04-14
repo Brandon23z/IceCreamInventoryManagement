@@ -209,5 +209,10 @@ namespace IceCreamInventoryManagement
         {
             fourthForm.ShowDialog();
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
     }
 }
