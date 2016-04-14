@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using static IceCreamInventoryManagement.RegexMethods;
 using static IceCreamInventoryManagement.RegexStr;
 using static IceCreamInventoryManagement.ourClasses;
+using static IceCreamInventoryManagement.SQLMethods;
 using System.Globalization;
 
 namespace IceCreamInventoryManagement
@@ -32,7 +33,7 @@ namespace IceCreamInventoryManagement
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            initializeDatabase();
         }
 
         private void btnCityUpload_Click(object sender, EventArgs e)
@@ -52,6 +53,7 @@ namespace IceCreamInventoryManagement
                 addToLog("City Upload File Read");
             }
 
+            //Check and parse header
             RegexClass r = checkRegex(cityUploadFile[0], headerEx);
             if (r.valid)
             {
@@ -60,12 +62,10 @@ namespace IceCreamInventoryManagement
                 date = Convert.ToDateTime(dateString);
             }
 
+            //check and parse trailer
             r = checkRegex(cityUploadFile[cityUploadFile.Length - 1], trailerEx);
 
             int numOfRows = 0;
-            List<string> cityLabels = new List<string>();
-            List<string> cityNames = new List<string>();
-            List<string> states = new List<string>();
 
             if (r.valid)
             {
@@ -73,31 +73,33 @@ namespace IceCreamInventoryManagement
                 numOfRows = Int32.Parse(numOfRowsString); 
             }
 
-            bool numRowsValid = false;
 
             if (numOfRows != cityUploadFile.Length - 2)
             {
                 addToLog("City Upload File Invalid: Trailer # does not match Actual # of Rows");
-                numRowsValid = true;
             }
 
-            if (numRowsValid == false)
+
+            for (int i = 1; i < cityUploadFile.Length - 1; i++)
             {
-                for (int i = 1; i < numOfRows + 1; i++)
+                r = checkRegex(cityUploadFile[i], cityEx);
+                if (r.valid)
                 {
-                    r = checkRegex(cityUploadFile[i], cityEx);
-                    if (r.valid)
-                    {
-                        cityLabels.Add(r.groupValues[1]);
-                        cityNames.Add(r.groupValues[2]);
-                        states.Add(r.groupValues[3]);
-                    }
+                    string citylabel = r.groupValues[1];
+                    string cityname = r.groupValues[2];
+                    string state = r.groupValues[3];
+                    bool test = addZone(new Zone(citylabel, cityname, state));
                 }
-
             }
+            
 
             addToLog("City Upload File Valid");
             //MessageBox.Show("file read succesfully");
+
+            //temporary form
+
+            DisplayTableForm d = new DisplayTableForm();
+            d.Show();
 
         }
 

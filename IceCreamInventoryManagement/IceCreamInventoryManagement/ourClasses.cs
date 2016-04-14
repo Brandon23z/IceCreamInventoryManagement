@@ -30,6 +30,12 @@ namespace IceCreamInventoryManagement
             public string citylabel;
             public string cityname;
             public string state;
+            public Zone(string citylabel_, string cityname_, string state_)
+            {
+                citylabel = citylabel_;
+                cityname = cityname_;
+                state = state_;
+            }
         }
 
         public class Route
