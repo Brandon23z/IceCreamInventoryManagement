@@ -3,12 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
+using System.Net.Mail;
 
 namespace IceCreamInventoryManagement
 {
     class ourClasses
     {
+        public class TextSetting
+        {
+            public static bool truckInventoryReset;
 
+            public static bool dailyInventoryCalculated;
+
+            public static bool itemAddedToAutoOrder;
+
+            public static bool autoOrderGenerated;
+             
+            public static string phoneNumber;
+            public static string carrier;
+        }
+
+        public static void sendTextMessage(string messageBody)
+        {
+            var fromAddress = new MailAddress("winterwaterinteractive@gmail.com", "Winter Water Interactive");
+            var toAddress = new MailAddress(TextSetting.phoneNumber + TextSetting.carrier, TextSetting.phoneNumber);
+            const string fromPassword = "Cis375WWI";
+            const string subject = "Ice Cream Management";
+            string body = messageBody;
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword),
+                Timeout = 20000
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                smtp.Send(message);
+            }
+        }
 
         public class LogVariable
         {

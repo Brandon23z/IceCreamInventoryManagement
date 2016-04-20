@@ -70,6 +70,7 @@
             this.itemAddedAutoOrder.TabIndex = 3;
             this.itemAddedAutoOrder.Text = "Item Added to Auto Order";
             this.itemAddedAutoOrder.UseVisualStyleBackColor = true;
+            this.itemAddedAutoOrder.CheckedChanged += new System.EventHandler(this.itemAddedAutoOrder_CheckedChanged);
             // 
             // autoOrderGen
             // 
@@ -80,6 +81,7 @@
             this.autoOrderGen.TabIndex = 4;
             this.autoOrderGen.Text = "Auto Order Generated";
             this.autoOrderGen.UseVisualStyleBackColor = true;
+            this.autoOrderGen.CheckedChanged += new System.EventHandler(this.autoOrderGen_CheckedChanged);
             // 
             // label1
             // 
@@ -135,6 +137,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 10;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // settingsForm
             // 

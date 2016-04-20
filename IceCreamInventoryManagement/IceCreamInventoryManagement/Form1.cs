@@ -98,8 +98,8 @@ namespace IceCreamInventoryManagement
 
             //temporary form
 
-            DisplayTableForm d = new DisplayTableForm();
-            d.Show();
+            //DisplayTableForm d = new DisplayTableForm();
+            //d.Show();
 
         }
 
@@ -133,7 +133,7 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        private void btnIceCreamToTrucks_Click(object sender, EventArgs e)
+        private void btnChangeTruckInventory_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "Text Files|*.txt";
@@ -193,6 +193,21 @@ namespace IceCreamInventoryManagement
             }
         }
 
+        private void btnDriverUpload_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Text Files|*.txt";
+            openFileDialog1.Title = "Select an Input File";
+
+            string[] driverUploadFile = { "" };
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                driverUploadFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
+                addToLog("Driver Upload File Read");
+            }
+        }
+
         setDefaultForm secondForm = new setDefaultForm();
         settingsForm thirdForm = new settingsForm();
         logForm fourthForm = new logForm();
@@ -216,5 +231,12 @@ namespace IceCreamInventoryManagement
         {
 
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

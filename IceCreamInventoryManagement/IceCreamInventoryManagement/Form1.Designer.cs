@@ -37,7 +37,7 @@
             this.btnRouteUpload = new System.Windows.Forms.Button();
             this.btnTruckUpload = new System.Windows.Forms.Button();
             this.btnTruckRouteUpload = new System.Windows.Forms.Button();
-            this.btnIceCreamToTrucks = new System.Windows.Forms.Button();
+            this.btnChangeTruckInventory = new System.Windows.Forms.Button();
             this.btnIceCreamFromTrucks = new System.Windows.Forms.Button();
             this.btnInventoryUpdate = new System.Windows.Forms.Button();
             this.btnCityUpload = new System.Windows.Forms.Button();
@@ -45,12 +45,15 @@
             this.btnSetDefault = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnDriverUpload = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 17);
+            this.label1.Location = new System.Drawing.Point(579, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(113, 13);
             this.label1.TabIndex = 1;
@@ -59,7 +62,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 55);
+            this.label2.Location = new System.Drawing.Point(579, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(125, 13);
             this.label2.TabIndex = 2;
@@ -68,7 +71,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 93);
+            this.label3.Location = new System.Drawing.Point(579, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(124, 13);
             this.label3.TabIndex = 3;
@@ -77,7 +80,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 128);
+            this.label4.Location = new System.Drawing.Point(35, 30);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(156, 13);
             this.label4.TabIndex = 4;
@@ -86,16 +89,17 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 164);
+            this.label5.Location = new System.Drawing.Point(319, 30);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(136, 13);
+            this.label5.Size = new System.Drawing.Size(128, 13);
             this.label5.TabIndex = 5;
-            this.label5.Text = "Load Ice Cream to Trucks: ";
+            this.label5.Text = "Change Truck Inventory: ";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(22, 231);
+            this.label7.Location = new System.Drawing.Point(35, 133);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(141, 13);
             this.label7.TabIndex = 7;
@@ -103,7 +107,7 @@
             // 
             // btnRouteUpload
             // 
-            this.btnRouteUpload.Location = new System.Drawing.Point(184, 50);
+            this.btnRouteUpload.Location = new System.Drawing.Point(741, 63);
             this.btnRouteUpload.Name = "btnRouteUpload";
             this.btnRouteUpload.Size = new System.Drawing.Size(75, 23);
             this.btnRouteUpload.TabIndex = 8;
@@ -113,7 +117,7 @@
             // 
             // btnTruckUpload
             // 
-            this.btnTruckUpload.Location = new System.Drawing.Point(184, 88);
+            this.btnTruckUpload.Location = new System.Drawing.Point(741, 101);
             this.btnTruckUpload.Name = "btnTruckUpload";
             this.btnTruckUpload.Size = new System.Drawing.Size(75, 23);
             this.btnTruckUpload.TabIndex = 9;
@@ -123,7 +127,7 @@
             // 
             // btnTruckRouteUpload
             // 
-            this.btnTruckRouteUpload.Location = new System.Drawing.Point(184, 123);
+            this.btnTruckRouteUpload.Location = new System.Drawing.Point(197, 25);
             this.btnTruckRouteUpload.Name = "btnTruckRouteUpload";
             this.btnTruckRouteUpload.Size = new System.Drawing.Size(75, 23);
             this.btnTruckRouteUpload.TabIndex = 10;
@@ -131,19 +135,19 @@
             this.btnTruckRouteUpload.UseVisualStyleBackColor = true;
             this.btnTruckRouteUpload.Click += new System.EventHandler(this.btnTruckRouteUpload_Click);
             // 
-            // btnIceCreamToTrucks
+            // btnChangeTruckInventory
             // 
-            this.btnIceCreamToTrucks.Location = new System.Drawing.Point(184, 159);
-            this.btnIceCreamToTrucks.Name = "btnIceCreamToTrucks";
-            this.btnIceCreamToTrucks.Size = new System.Drawing.Size(75, 23);
-            this.btnIceCreamToTrucks.TabIndex = 11;
-            this.btnIceCreamToTrucks.Text = "Browse";
-            this.btnIceCreamToTrucks.UseVisualStyleBackColor = true;
-            this.btnIceCreamToTrucks.Click += new System.EventHandler(this.btnIceCreamToTrucks_Click);
+            this.btnChangeTruckInventory.Location = new System.Drawing.Point(459, 25);
+            this.btnChangeTruckInventory.Name = "btnChangeTruckInventory";
+            this.btnChangeTruckInventory.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeTruckInventory.TabIndex = 11;
+            this.btnChangeTruckInventory.Text = "Browse";
+            this.btnChangeTruckInventory.UseVisualStyleBackColor = true;
+            this.btnChangeTruckInventory.Click += new System.EventHandler(this.btnChangeTruckInventory_Click);
             // 
             // btnIceCreamFromTrucks
             // 
-            this.btnIceCreamFromTrucks.Location = new System.Drawing.Point(184, 193);
+            this.btnIceCreamFromTrucks.Location = new System.Drawing.Point(197, 95);
             this.btnIceCreamFromTrucks.Name = "btnIceCreamFromTrucks";
             this.btnIceCreamFromTrucks.Size = new System.Drawing.Size(75, 23);
             this.btnIceCreamFromTrucks.TabIndex = 12;
@@ -153,7 +157,7 @@
             // 
             // btnInventoryUpdate
             // 
-            this.btnInventoryUpdate.Location = new System.Drawing.Point(184, 226);
+            this.btnInventoryUpdate.Location = new System.Drawing.Point(197, 128);
             this.btnInventoryUpdate.Name = "btnInventoryUpdate";
             this.btnInventoryUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnInventoryUpdate.TabIndex = 13;
@@ -163,7 +167,7 @@
             // 
             // btnCityUpload
             // 
-            this.btnCityUpload.Location = new System.Drawing.Point(184, 12);
+            this.btnCityUpload.Location = new System.Drawing.Point(741, 25);
             this.btnCityUpload.Name = "btnCityUpload";
             this.btnCityUpload.Size = new System.Drawing.Size(75, 23);
             this.btnCityUpload.TabIndex = 14;
@@ -174,7 +178,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(22, 198);
+            this.label6.Location = new System.Drawing.Point(35, 100);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(144, 13);
             this.label6.TabIndex = 15;
@@ -182,7 +186,7 @@
             // 
             // btnSetDefault
             // 
-            this.btnSetDefault.Location = new System.Drawing.Point(440, 26);
+            this.btnSetDefault.Location = new System.Drawing.Point(336, 187);
             this.btnSetDefault.Name = "btnSetDefault";
             this.btnSetDefault.Size = new System.Drawing.Size(138, 23);
             this.btnSetDefault.TabIndex = 16;
@@ -192,7 +196,7 @@
             // 
             // btnSettings
             // 
-            this.btnSettings.Location = new System.Drawing.Point(475, 65);
+            this.btnSettings.Location = new System.Drawing.Point(371, 226);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(75, 23);
             this.btnSettings.TabIndex = 17;
@@ -202,7 +206,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(475, 122);
+            this.button1.Location = new System.Drawing.Point(372, 264);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 18;
@@ -210,11 +214,42 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(68, 63);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(160, 23);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "Load Ice Cream to Trucks";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(580, 143);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(124, 13);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Load Driver Upload File: ";
+            // 
+            // btnDriverUpload
+            // 
+            this.btnDriverUpload.Location = new System.Drawing.Point(741, 138);
+            this.btnDriverUpload.Name = "btnDriverUpload";
+            this.btnDriverUpload.Size = new System.Drawing.Size(75, 23);
+            this.btnDriverUpload.TabIndex = 21;
+            this.btnDriverUpload.Text = "Browse";
+            this.btnDriverUpload.UseVisualStyleBackColor = true;
+            this.btnDriverUpload.Click += new System.EventHandler(this.btnDriverUpload_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 308);
+            this.ClientSize = new System.Drawing.Size(832, 300);
+            this.Controls.Add(this.btnDriverUpload);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnSetDefault);
@@ -222,7 +257,7 @@
             this.Controls.Add(this.btnCityUpload);
             this.Controls.Add(this.btnInventoryUpdate);
             this.Controls.Add(this.btnIceCreamFromTrucks);
-            this.Controls.Add(this.btnIceCreamToTrucks);
+            this.Controls.Add(this.btnChangeTruckInventory);
             this.Controls.Add(this.btnTruckRouteUpload);
             this.Controls.Add(this.btnTruckUpload);
             this.Controls.Add(this.btnRouteUpload);
@@ -251,7 +286,7 @@
         private System.Windows.Forms.Button btnRouteUpload;
         private System.Windows.Forms.Button btnTruckUpload;
         private System.Windows.Forms.Button btnTruckRouteUpload;
-        private System.Windows.Forms.Button btnIceCreamToTrucks;
+        private System.Windows.Forms.Button btnChangeTruckInventory;
         private System.Windows.Forms.Button btnIceCreamFromTrucks;
         private System.Windows.Forms.Button btnInventoryUpdate;
         private System.Windows.Forms.Button btnCityUpload;
@@ -259,6 +294,9 @@
         private System.Windows.Forms.Button btnSetDefault;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnDriverUpload;
     }
 }
 
