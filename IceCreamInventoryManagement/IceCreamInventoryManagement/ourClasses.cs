@@ -10,6 +10,12 @@ namespace IceCreamInventoryManagement
 {
     class ourClasses
     {
+        public class AutoOrder
+        {
+            public static List<string> ProductID = new List<string>();
+            public static List<int> amount = new List<int>();
+        }
+
         public class TextSetting
         {
             public static bool truckInventoryReset;
@@ -48,6 +54,7 @@ namespace IceCreamInventoryManagement
             })
             {
                 smtp.Send(message);
+                addToLog("Message sent: " + messageBody);
             }
         }
 
