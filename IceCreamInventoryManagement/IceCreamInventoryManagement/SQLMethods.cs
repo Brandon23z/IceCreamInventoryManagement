@@ -164,10 +164,28 @@ namespace IceCreamInventoryManagement
         public static bool addRoute(Route addRoute)
         {
             SQLResult result = sqlquery("INSERT INTO ROUTE VALUES (@routenumber, @citylabel1, @citylabel2, @citylabel3, @citylabel4, @citylabel5, @citylabel6, @citylabel7, @citylabel8, @citylabel9, @citylabel10);",
-                new Dictionary<string, string>() { { "@routenumber", addRoute.routenumber.ToString() }, { "@citylabel1", addRoute.citylabel1 }, { "@citylabel2", addRoute.citylabel2 }
-                                                , { "@citylabel3", addRoute.citylabel3 }, { "@citylabel4", addRoute.citylabel4 }, { "@citylabel5", addRoute.citylabel5 }
-                                                , { "@citylabel6", addRoute.citylabel6 }, { "@citylabel7", addRoute.citylabel7 }, { "@citylabel8", addRoute.citylabel8 }
-                                                , { "@citylabel9", addRoute.citylabel9 }, { "@citylabel10", addRoute.citylabel10 }});
+                new Dictionary<string, string>() { { "@routenumber", addRoute.routenumber.ToString() }, { "@citylabel1", addRoute.cityLabels[0] }, { "@citylabel2", addRoute.cityLabels[1] }
+                                                , { "@citylabel3", addRoute.cityLabels[2] }, { "@citylabel4", addRoute.cityLabels[3] }, { "@citylabel5", addRoute.cityLabels[4] }
+                                                , { "@citylabel6", addRoute.cityLabels[5] }, { "@citylabel7", addRoute.cityLabels[6] }, { "@citylabel8", addRoute.cityLabels[7] }
+                                                , { "@citylabel9", addRoute.cityLabels[8] }, { "@citylabel10", addRoute.cityLabels[9] }});
+            if (result.error == SQLError.none && result.rowsAffected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static bool updateRoute(Route addRoute)
+        {
+            SQLResult result = sqlquery("UPDATE ROUTE set citylabel1 = @citylabel1, citylabel2 = @citylabel2, " +
+                                        "citylabel3 = @citylabel3, citylabel4 = @citylabel4, citylabel5 = @citylabel5, citylabel6 = @citylabel6, " +
+                                        "citylabel7 = @citylabel7, citylabel8 = @citylabel8, citylabel9 = @citylabel9, citylabel10 = @citylabel10 where routenumber = @routenumber;",
+                new Dictionary<string, string>() { { "@routenumber", addRoute.routenumber.ToString() }, { "@citylabel1", addRoute.cityLabels[0] }, { "@citylabel2", addRoute.cityLabels[1] }
+                                                , { "@citylabel3", addRoute.cityLabels[2] }, { "@citylabel4", addRoute.cityLabels[3] }, { "@citylabel5", addRoute.cityLabels[4] }
+                                                , { "@citylabel6", addRoute.cityLabels[5] }, { "@citylabel7", addRoute.cityLabels[6] }, { "@citylabel8", addRoute.cityLabels[7] }
+                                                , { "@citylabel9", addRoute.cityLabels[8] }, { "@citylabel10", addRoute.cityLabels[9] }});
             if (result.error == SQLError.none && result.rowsAffected == 1)
             {
                 return true;
@@ -190,6 +208,20 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
+        public static bool deleteRoute(int routeID)
+        {
+            SQLResult result = sqlquery("DELETE FROM ROUTES WHERE routenumber=@routenumber;", new Dictionary<string, string>() { { "@routenumber", routeID.ToString() } });
+            if (result.error == SQLError.none)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
         //ROUTE//
 
         //TRUCK//
@@ -304,15 +336,20 @@ namespace IceCreamInventoryManagement
         //TRUCK INVENTORY//
 
         //INVENTORY//
-        public static Truck getInventory(int getTruckNumber)
+        public static Truck getInventoryItem(int getItemNumber)
         {
-            SQLResult result = sqlquery("SELECT * FROM TRUCKS WHERE trucknumber = @truck;",
-                new Dictionary<string, string>() { { "@truck", getTruckNumber.ToString() } });
+            // SQL.sqlnonquery("CREATE TABLE INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(30));");
+            SQLResult result = sqlquery("SELECT * FROM INVENTORY WHERE itemnumber = @itemnumber;",
+                new Dictionary<string, string>() { { "@itemnumber", getItemNumber.ToString() } });
             if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
             {
-                int trucknumber = Convert.ToInt32(result.data.getField(0, "trucknumber"));
+                int itemnumber = Convert.ToInt32(result.data.getField(0, "itemnumber"));
+                int quantity = Convert.ToInt32(result.data.getField(0, "routenumber"));
+                int initialprice = Convert.ToInt32(result.data.getField(0, "routenumber"));
+                int saleprice = Convert.ToInt32(result.data.getField(0, "routenumber"));
                 int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
-                return new Truck(trucknumber, routenumber);
+                int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
+                return new InventoryItem(asd,);
             }
             else
             {

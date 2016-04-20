@@ -89,24 +89,12 @@ namespace IceCreamInventoryManagement
         public class Route
         {
             public int routenumber;
-            public string citylabel1, citylabel2, citylabel3, citylabel4, citylabel5, citylabel6, citylabel7, citylabel8, citylabel9, citylabel10;
+            public string[] cityLabels;
 
-            public Route(int routenumber_, string citylabel1_ = "", string citylabel2_ = "", 
-                string citylabel3_ = "", string citylabel4_ = "", string citylabel5_ = "",
-                string citylabel6_ = "", string citylabel7_ = "", string citylabel8_ = "",
-                string citylabel9_ = "", string citylabel10_ = "")
+            public Route(int routenumber_, string[] cityLabels_)
             {
                 routenumber = routenumber_;
-                citylabel1 = citylabel1_;
-                citylabel2 = citylabel2_;
-                citylabel3 = citylabel3_;
-                citylabel4 = citylabel4_;
-                citylabel5 = citylabel5_;
-                citylabel6 = citylabel6_;
-                citylabel7 = citylabel7_;
-                citylabel8 = citylabel8_;
-                citylabel9 = citylabel9_;
-                citylabel10 = citylabel10_;
+                cityLabels = cityLabels_;
             }
         }
 
@@ -180,9 +168,18 @@ namespace IceCreamInventoryManagement
         {
             public int itemnumber;
             public int quantity;
-            public double intitialprice;
+            public double initialprice;
             public double saleprice;
             public string description;
+
+            public InventoryItem(int itemnumber_, int quantity_, double initialprice_, double saleprice_, string description_)
+            {
+                itemnumber = itemnumber_;
+                quantity = quantity_;
+                initialprice = initialprice_;
+                saleprice = saleprice_;
+                description = description_;
+            }
         }
 
         public class Sale
