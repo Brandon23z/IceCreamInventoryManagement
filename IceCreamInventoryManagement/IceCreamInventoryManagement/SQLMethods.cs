@@ -33,6 +33,7 @@ namespace IceCreamInventoryManagement
             }
         }
 
+        //ZONE//
         public static Zone getZone(string getCityLabel)
         {
             SQLResult result = sqlquery("SELECT * FROM ZONES WHERE citylabel = @zone;",
@@ -98,5 +99,274 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
-     }
+        //ZONE//
+
+        //ROUTE//
+        public static Route getRoute(int getRouteNumber)
+        {
+            SQLResult result = sqlquery("SELECT * FROM ROUTES WHERE routenumber = @route;",
+                new Dictionary<string, string>() { { "@route", getRouteNumber.ToString() } });
+            if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
+            {
+                int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
+                string citylabel1 = result.data.getField(0, "citylabel1");
+                string citylabel2 = result.data.getField(0, "citylabel2");
+                string citylabel3 = result.data.getField(0, "citylabel3");
+                string citylabel4 = result.data.getField(0, "citylabel4");
+                string citylabel5 = result.data.getField(0, "citylabel5");
+                string citylabel6 = result.data.getField(0, "citylabel6");
+                string citylabel7 = result.data.getField(0, "citylabel7");
+                string citylabel8 = result.data.getField(0, "citylabel8");
+                string citylabel9 = result.data.getField(0, "citylabel9");
+                string citylabel10 = result.data.getField(0, "citylabel10");
+                return new Route(routenumber, citylabel1, citylabel2, citylabel3
+                    , citylabel4, citylabel5, citylabel6, citylabel7
+                    , citylabel8, citylabel9, citylabel10);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static List<Route> getAllRoutes()
+        {
+            List<Route> routeList = new List<Route>();
+            SQLResult result = sqlquery("SELECT * FROM ROUTES;");
+            if (result.error == SQLError.none && result.data != null)
+            {
+                for (int i = 0; i < result.data.data.Count; i++)
+                {
+                    int routenumber = Convert.ToInt32(result.data.getField(i, "routenumber"));
+                    string citylabel1 = result.data.getField(i, "citylabel1");
+                    string citylabel2 = result.data.getField(i, "citylabel2");
+                    string citylabel3 = result.data.getField(i, "citylabel3");
+                    string citylabel4 = result.data.getField(i, "citylabel4");
+                    string citylabel5 = result.data.getField(i, "citylabel5");
+                    string citylabel6 = result.data.getField(i, "citylabel6");
+                    string citylabel7 = result.data.getField(i, "citylabel7");
+                    string citylabel8 = result.data.getField(i, "citylabel8");
+                    string citylabel9 = result.data.getField(i, "citylabel9");
+                    string citylabel10 = result.data.getField(i, "citylabel10");
+                    Route tempRoute = new Route(routenumber, citylabel1, citylabel2, citylabel3
+                        , citylabel4, citylabel5, citylabel6, citylabel7
+                        , citylabel8, citylabel9, citylabel10);
+                    routeList.Add(tempRoute);
+                }
+                return routeList;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool addRoute(Route addRoute)
+        {
+            SQLResult result = sqlquery("INSERT INTO ROUTE VALUES (@routenumber, @citylabel1, @citylabel2, @citylabel3, @citylabel4, @citylabel5, @citylabel6, @citylabel7, @citylabel8, @citylabel9, @citylabel10);",
+                new Dictionary<string, string>() { { "@routenumber", addRoute.routenumber.ToString() }, { "@citylabel1", addRoute.citylabel1 }, { "@citylabel2", addRoute.citylabel2 }
+                                                , { "@citylabel3", addRoute.citylabel3 }, { "@citylabel4", addRoute.citylabel4 }, { "@citylabel5", addRoute.citylabel5 }
+                                                , { "@citylabel6", addRoute.citylabel6 }, { "@citylabel7", addRoute.citylabel7 }, { "@citylabel8", addRoute.citylabel8 }
+                                                , { "@citylabel9", addRoute.citylabel9 }, { "@citylabel10", addRoute.citylabel10 }});
+            if (result.error == SQLError.none && result.rowsAffected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool clearRoutes()
+        {
+            SQLResult result = sqlquery("DELETE FROM ROUTES;");
+            if (result.error == SQLError.none)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //ROUTE//
+
+        //TRUCK//
+        public static Truck getTruck(int getTruckNumber)
+        {
+            SQLResult result = sqlquery("SELECT * FROM TRUCKS WHERE trucknumber = @truck;",
+                new Dictionary<string, string>() { { "@truck", getTruckNumber.ToString() } });
+            if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
+            {
+                int trucknumber = Convert.ToInt32(result.data.getField(0, "trucknumber"));
+                int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
+                return new Truck(trucknumber, routenumber);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static List<Truck> getAllTrucks()
+        {
+            List<Truck> truckList = new List<Truck> ();
+            SQLResult result = sqlquery("SELECT * FROM TRUCKS;");
+            if (result.error == SQLError.none && result.data != null)
+            {
+                for (int i = 0; i < result.data.data.Count; i++)
+                {
+                    int trucknumber = Convert.ToInt32(result.data.getField(i, "trucknumber"));
+                    int routenumber = Convert.ToInt32(result.data.getField(i, "routenumber"));
+                    truckList.Add(new Truck(trucknumber, routenumber));
+                }
+                return truckList;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool addTruck(Truck addTruck)
+        {
+            SQLResult result = sqlquery("INSERT INTO TRUCKS VALUES (@trucknumber, @routenumber);",
+                new Dictionary<string, string>() { { "@trucknumber", addTruck.trucknumber.ToString() }, { "@routenumber", addTruck.routenumber.ToString() } });
+            if (result.error == SQLError.none && result.rowsAffected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool clearTrucks()
+        {
+            SQLResult result = sqlquery("DELETE FROM TRUCKS;");
+            if (result.error == SQLError.none)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //TRUCK//
+
+        //TRUCK INVENTORY//
+        public static Truck getTruckInventory(int getTruckNumber)
+        {
+            SQLResult result = sqlquery("SELECT * FROM TRUCKS WHERE trucknumber = @truck;",
+                new Dictionary<string, string>() { { "@truck", getTruckNumber.ToString() } });
+            if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
+            {
+                int trucknumber = Convert.ToInt32(result.data.getField(0, "trucknumber"));
+                int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
+                return new Truck(trucknumber, routenumber);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool addTruckInventoryItem(int truckNumber, TruckInventoryItem addItem)
+        {
+            SQLResult result = sqlquery("INSERT INTO TRUCKINVENTORY VALUES (@trucknumber, @itemnumber, @quantity, @initialprice, @saleprice);",
+                new Dictionary<string, string>() { { "@trucknumber", truckNumber.ToString() }, { "@itemnumber", addItem.itemnumber.ToString() }
+                , { "@quantity", addItem.quantity.ToString() }, { "@initialprice", addItem.initialprice.ToString() }, { "@saleprice", addItem.saleprice.ToString() }});
+            if (result.error == SQLError.none && result.rowsAffected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool clearAllTruckInventory()
+        {
+            SQLResult result = sqlquery("DELETE FROM TRUCKINVENTORY;");
+            if (result.error == SQLError.none)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //TRUCK INVENTORY//
+
+        //INVENTORY//
+        public static Truck getInventory(int getTruckNumber)
+        {
+            SQLResult result = sqlquery("SELECT * FROM TRUCKS WHERE trucknumber = @truck;",
+                new Dictionary<string, string>() { { "@truck", getTruckNumber.ToString() } });
+            if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
+            {
+                int trucknumber = Convert.ToInt32(result.data.getField(0, "trucknumber"));
+                int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
+                return new Truck(trucknumber, routenumber);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static List<Truck> getAllTrucks()
+        {
+            List<Truck> truckList = new List<Truck>();
+            SQLResult result = sqlquery("SELECT * FROM TRUCKS;");
+            if (result.error == SQLError.none && result.data != null)
+            {
+                for (int i = 0; i < result.data.data.Count; i++)
+                {
+                    int trucknumber = Convert.ToInt32(result.data.getField(i, "trucknumber"));
+                    int routenumber = Convert.ToInt32(result.data.getField(i, "routenumber"));
+                    truckList.Add(new Truck(trucknumber, routenumber));
+                }
+                return truckList;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool addTruck(Truck addTruck)
+        {
+            SQLResult result = sqlquery("INSERT INTO TRUCKS VALUES (@trucknumber, @routenumber);",
+                new Dictionary<string, string>() { { "@trucknumber", addTruck.trucknumber.ToString() }, { "@routenumber", addTruck.routenumber.ToString() } });
+            if (result.error == SQLError.none && result.rowsAffected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool clearTrucks()
+        {
+            SQLResult result = sqlquery("DELETE FROM TRUCKS;");
+            if (result.error == SQLError.none)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //INVENTORY//
+
+    }
 }
