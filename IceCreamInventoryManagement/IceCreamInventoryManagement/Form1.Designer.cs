@@ -45,9 +45,12 @@
             this.btnSetDefault = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.btnDriverUpload = new System.Windows.Forms.Button();
+            this.btnAutoOrder = new System.Windows.Forms.Button();
+            this.btnLoadIceCreamToTrucks = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnCustomerRequests = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -80,7 +83,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(35, 30);
+            this.label4.Location = new System.Drawing.Point(48, 63);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(156, 13);
             this.label4.TabIndex = 4;
@@ -99,7 +102,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(35, 133);
+            this.label7.Location = new System.Drawing.Point(48, 27);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(141, 13);
             this.label7.TabIndex = 7;
@@ -127,7 +130,7 @@
             // 
             // btnTruckRouteUpload
             // 
-            this.btnTruckRouteUpload.Location = new System.Drawing.Point(197, 25);
+            this.btnTruckRouteUpload.Location = new System.Drawing.Point(210, 58);
             this.btnTruckRouteUpload.Name = "btnTruckRouteUpload";
             this.btnTruckRouteUpload.Size = new System.Drawing.Size(75, 23);
             this.btnTruckRouteUpload.TabIndex = 10;
@@ -147,7 +150,7 @@
             // 
             // btnIceCreamFromTrucks
             // 
-            this.btnIceCreamFromTrucks.Location = new System.Drawing.Point(197, 95);
+            this.btnIceCreamFromTrucks.Location = new System.Drawing.Point(210, 128);
             this.btnIceCreamFromTrucks.Name = "btnIceCreamFromTrucks";
             this.btnIceCreamFromTrucks.Size = new System.Drawing.Size(75, 23);
             this.btnIceCreamFromTrucks.TabIndex = 12;
@@ -157,7 +160,7 @@
             // 
             // btnInventoryUpdate
             // 
-            this.btnInventoryUpdate.Location = new System.Drawing.Point(197, 128);
+            this.btnInventoryUpdate.Location = new System.Drawing.Point(210, 22);
             this.btnInventoryUpdate.Name = "btnInventoryUpdate";
             this.btnInventoryUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnInventoryUpdate.TabIndex = 13;
@@ -178,15 +181,16 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(35, 100);
+            this.label6.Location = new System.Drawing.Point(59, 133);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(144, 13);
+            this.label6.Size = new System.Drawing.Size(117, 13);
             this.label6.TabIndex = 15;
-            this.label6.Text = "Load Ice Cream from Trucks:";
+            this.label6.Text = "Calculate Sales of Day:";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // btnSetDefault
             // 
-            this.btnSetDefault.Location = new System.Drawing.Point(336, 187);
+            this.btnSetDefault.Location = new System.Drawing.Point(340, 241);
             this.btnSetDefault.Name = "btnSetDefault";
             this.btnSetDefault.Size = new System.Drawing.Size(138, 23);
             this.btnSetDefault.TabIndex = 16;
@@ -196,7 +200,7 @@
             // 
             // btnSettings
             // 
-            this.btnSettings.Location = new System.Drawing.Point(371, 226);
+            this.btnSettings.Location = new System.Drawing.Point(375, 280);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(75, 23);
             this.btnSettings.TabIndex = 17;
@@ -206,22 +210,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(372, 264);
+            this.button1.Location = new System.Drawing.Point(376, 318);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 18;
             this.button1.Text = "Log";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(68, 63);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(160, 23);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "Load Ice Cream to Trucks";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -242,14 +237,56 @@
             this.btnDriverUpload.UseVisualStyleBackColor = true;
             this.btnDriverUpload.Click += new System.EventHandler(this.btnDriverUpload_Click);
             // 
+            // btnAutoOrder
+            // 
+            this.btnAutoOrder.Location = new System.Drawing.Point(129, 280);
+            this.btnAutoOrder.Name = "btnAutoOrder";
+            this.btnAutoOrder.Size = new System.Drawing.Size(75, 23);
+            this.btnAutoOrder.TabIndex = 22;
+            this.btnAutoOrder.Text = "Auto Order";
+            this.btnAutoOrder.UseVisualStyleBackColor = true;
+            this.btnAutoOrder.Click += new System.EventHandler(this.btnAutoOrder_Click);
+            // 
+            // btnLoadIceCreamToTrucks
+            // 
+            this.btnLoadIceCreamToTrucks.Location = new System.Drawing.Point(99, 96);
+            this.btnLoadIceCreamToTrucks.Name = "btnLoadIceCreamToTrucks";
+            this.btnLoadIceCreamToTrucks.Size = new System.Drawing.Size(153, 23);
+            this.btnLoadIceCreamToTrucks.TabIndex = 23;
+            this.btnLoadIceCreamToTrucks.Text = "Load Ice Cream to Trucks";
+            this.btnLoadIceCreamToTrucks.UseVisualStyleBackColor = true;
+            this.btnLoadIceCreamToTrucks.Click += new System.EventHandler(this.btnLoadIceCreamToTrucks_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(48, 168);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(132, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Load Customer Requests: ";
+            // 
+            // btnCustomerRequests
+            // 
+            this.btnCustomerRequests.Location = new System.Drawing.Point(210, 163);
+            this.btnCustomerRequests.Name = "btnCustomerRequests";
+            this.btnCustomerRequests.Size = new System.Drawing.Size(75, 23);
+            this.btnCustomerRequests.TabIndex = 25;
+            this.btnCustomerRequests.Text = "Browse";
+            this.btnCustomerRequests.UseVisualStyleBackColor = true;
+            this.btnCustomerRequests.Click += new System.EventHandler(this.btnCustomerRequests_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 300);
+            this.ClientSize = new System.Drawing.Size(832, 361);
+            this.Controls.Add(this.btnCustomerRequests);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.btnLoadIceCreamToTrucks);
+            this.Controls.Add(this.btnAutoOrder);
             this.Controls.Add(this.btnDriverUpload);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnSetDefault);
@@ -294,9 +331,12 @@
         private System.Windows.Forms.Button btnSetDefault;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnDriverUpload;
+        private System.Windows.Forms.Button btnAutoOrder;
+        private System.Windows.Forms.Button btnLoadIceCreamToTrucks;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnCustomerRequests;
     }
 }
 
