@@ -41,12 +41,12 @@ namespace IceCreamInventoryManagement
         public const string inventoryItemEx = @"^(\d{4})(\d{6})((\d{4})(.{0,30}))?(?: )*$";
 
         //LOAD TRUCK ROUTE//
-        //|Truck Number||Route Number|
-        public const string truckRouteEx = @"^(\d{4})(\d{4})(?: )*$";
+        //|Truck Number||Route Number||Driver Number|
+        public const string truckRouteEx = @"^(\d{4})(\d{4})(\d{4})(?: )*$";
 
         //ROUTE UPLOAD//
         //|action code||Route Number||-----city label-----|*10
-        public const string routeCitys = @"^(A|C|D)(\d{4})(.{20})(.{20})?(.{20})?(.{20})?(.{20})?(.{20})?(.{20})?(.{20})?(.{20})?(.{20})?(?: )*$";
+        public const string routeCitys = @"^(?:(A|C)(\d{4})(.{20})(.{20})?(.{20})?(.{20})?(.{20})?(.{20})?(.{20})?(.{20})?(.{20})?(.{20})?(?: )*)|(?:(D)(\d{4}))$";
 
         //TRUCK UPLOAD//
         //|Truck Number|

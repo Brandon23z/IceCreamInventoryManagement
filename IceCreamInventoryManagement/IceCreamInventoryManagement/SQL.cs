@@ -140,10 +140,12 @@ namespace IceCreamInventoryManagement
             }
             catch (FbException e)
             {
+                Console.WriteLine(e.Message);
                 return new SQLResult(parseErrorCode(e.ErrorCode), 0);
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.Message);
                 return new SQLResult(SQLError.error, 0);
             }
         }

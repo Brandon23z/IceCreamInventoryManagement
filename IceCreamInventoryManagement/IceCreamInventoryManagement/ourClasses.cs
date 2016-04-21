@@ -89,7 +89,7 @@ namespace IceCreamInventoryManagement
         public class Route
         {
             public int routenumber;
-            public string[] cityLabels;
+            public string[] cityLabels = { };
 
             public Route(int routenumber_, string[] cityLabels_)
             {

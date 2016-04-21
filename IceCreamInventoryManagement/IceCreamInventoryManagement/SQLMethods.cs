@@ -23,8 +23,8 @@ namespace IceCreamInventoryManagement
                 cs.Password = "masterkey";
                 cs.ServerType = FbServerType.Embedded;
                 FbConnection.CreateDatabase(cs.ToString());
-                SQL.sqlnonquery("CREATE TABLE ZONES(citylabel VARCHAR(30) NOT NULL PRIMARY KEY, cityname VARCHAR(30) NOT NULL, state VARCHAR(2) NOT NULL);");
-                SQL.sqlnonquery("CREATE TABLE ROUTES(routenumber int NOT NULL PRIMARY KEY, citylabel1 VARCHAR(30) NOT NULL, citylabel2 VARCHAR(30) NOT NULL, citylabel3 VARCHAR(30) NOT NULL, citylabel4 VARCHAR(30) NOT NULL, citylabel5 VARCHAR(30) NOT NULL, citylabel6 VARCHAR(30) NOT NULL, citylabel7 VARCHAR(30) NOT NULL, citylabel8 VARCHAR(30) NOT NULL, citylabel9 VARCHAR(30) NOT NULL, citylabel10 VARCHAR(30) NOT NULL);");
+                SQL.sqlnonquery("CREATE TABLE ZONES(citylabel VARCHAR(20) NOT NULL PRIMARY KEY, cityname VARCHAR(20) NOT NULL, state VARCHAR(2) NOT NULL);");
+                SQL.sqlnonquery("CREATE TABLE ROUTES(routenumber int NOT NULL PRIMARY KEY, citylabel1 VARCHAR(20) NOT NULL, citylabel2 VARCHAR(20), citylabel3 VARCHAR(20), citylabel4 VARCHAR(20), citylabel5 VARCHAR(20), citylabel6 VARCHAR(20), citylabel7 VARCHAR(20), citylabel8 VARCHAR(20), citylabel9 VARCHAR(20), citylabel10 VARCHAR(20));");
                 SQL.sqlnonquery("CREATE TABLE TRUCKS(trucknumber int NOT NULL PRIMARY KEY, routenumber int);");
                 SQL.sqlnonquery("CREATE TABLE TRUCKINVENTORY(trucknumber int NOT NULL PRIMARY KEY, itemnumber int NOT NULL, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL);");
                 SQL.sqlnonquery("CREATE TABLE INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(30));");
@@ -165,7 +165,7 @@ namespace IceCreamInventoryManagement
 
         public static bool addRoute(Route addRoute)
         {
-            SQLResult result = sqlquery("INSERT INTO ROUTE VALUES (@routenumber, @citylabel1, @citylabel2, @citylabel3, @citylabel4, @citylabel5, @citylabel6, @citylabel7, @citylabel8, @citylabel9, @citylabel10);",
+            SQLResult result = sqlquery("INSERT INTO ROUTES VALUES (@routenumber, @citylabel1, @citylabel2, @citylabel3, @citylabel4, @citylabel5, @citylabel6, @citylabel7, @citylabel8, @citylabel9, @citylabel10);",
                 new Dictionary<string, string>() { { "@routenumber", addRoute.routenumber.ToString() }, { "@citylabel1", addRoute.cityLabels[0] }, { "@citylabel2", addRoute.cityLabels[1] }
                                                 , { "@citylabel3", addRoute.cityLabels[2] }, { "@citylabel4", addRoute.cityLabels[3] }, { "@citylabel5", addRoute.cityLabels[4] }
                                                 , { "@citylabel6", addRoute.cityLabels[5] }, { "@citylabel7", addRoute.cityLabels[6] }, { "@citylabel8", addRoute.cityLabels[7] }
@@ -181,7 +181,7 @@ namespace IceCreamInventoryManagement
         }
         public static bool updateRoute(Route addRoute)
         {
-            SQLResult result = sqlquery("UPDATE ROUTE set citylabel1 = @citylabel1, citylabel2 = @citylabel2, " +
+            SQLResult result = sqlquery("UPDATE ROUTES set citylabel1 = @citylabel1, citylabel2 = @citylabel2, " +
                                         "citylabel3 = @citylabel3, citylabel4 = @citylabel4, citylabel5 = @citylabel5, citylabel6 = @citylabel6, " +
                                         "citylabel7 = @citylabel7, citylabel8 = @citylabel8, citylabel9 = @citylabel9, citylabel10 = @citylabel10 where routenumber = @routenumber;",
                 new Dictionary<string, string>() { { "@routenumber", addRoute.routenumber.ToString() }, { "@citylabel1", addRoute.cityLabels[0] }, { "@citylabel2", addRoute.cityLabels[1] }
@@ -277,6 +277,19 @@ namespace IceCreamInventoryManagement
             }
         }
 
+        public static bool assignTruckToRoute(int trucknumber, int routenumber)
+        {
+            SQLResult result = sqlquery("UPDATE TRUCKS set routenumber = @routenumber WHERE trucknumber = @trucknumber;",
+                new Dictionary<string, string>() { { "@trucknumber", trucknumber.ToString() }, { "@routenumber", routenumber.ToString() } });
+            if (result.error == SQLError.none && result.rowsAffected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public static bool clearTrucks()
         {
             SQLResult result = sqlquery("DELETE FROM TRUCKS;");
@@ -387,7 +400,7 @@ namespace IceCreamInventoryManagement
 
         public static bool addInventoryItem(InventoryItem addItem)
         {
-            //INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(30));
+            //INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(20));
             SQLResult result = sqlquery("INSERT INTO INVENTORY VALUES (@itemnumber, @quantity, @initialprice, @saleprice, @description);",
                 new Dictionary<string, string>() { { "@itemnumber", addItem.itemnumber.ToString() }, { "@quantity", addItem.quantity.ToString() }
                     , { "@initialprice", addItem.initialprice.ToString() }, { "@saleprice", addItem.saleprice.ToString() }, { "@description", addItem.description }});
@@ -461,6 +474,20 @@ namespace IceCreamInventoryManagement
 
             SQLResult result = sqlquery("INSERT INTO DRIVERS VALUES (@drivernumber, @trucknumber);",
                 new Dictionary<string, string>() { { "@drivernumber", addDriver.drivernumber.ToString() }, { "@trucknumber", addDriver.trucknumber.ToString() } });
+            if (result.error == SQLError.none && result.rowsAffected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool assignDriverToTruck(int drivernumber, int trucknumber)
+        {
+            SQLResult result = sqlquery("UPDATE DRIVERS set trucknumber = @trucknumber WHERE drivernumber = @drivernumber;",
+                new Dictionary<string, string>() { { "@drivernumber", drivernumber.ToString() }, { "@trucknumber", trucknumber.ToString() } });
             if (result.error == SQLError.none && result.rowsAffected == 1)
             {
                 return true;

@@ -80,6 +80,8 @@ namespace IceCreamInventoryManagement
             }
 
 
+            clearRoutes();
+            clearZones();
             for (int i = 1; i < cityUploadFile.Length - 1; i++)
             {
                 r = checkRegex(cityUploadFile[i], cityEx);
@@ -106,7 +108,7 @@ namespace IceCreamInventoryManagement
             List<Zone> myZones = new List<Zone>();
 
             myZones = getAllZones();
-
+            zoneGridView.Rows.Clear();
             for (int i = 0; i < myZones.Count(); i++)
             {
                 //DataGridViewRow row = new DataGridViewRow();
@@ -174,7 +176,7 @@ namespace IceCreamInventoryManagement
                         string[] citylabels = new string[10];
                         citylabels[0] = r.groupValues[3];
                         int temp = 4;
-                        for (int k = 1; k < 14; k++)
+                        for (int k = 1; k < 10; k++)
                         {
                             if (r.groupValues[temp] == "")
                                 break;
@@ -190,22 +192,23 @@ namespace IceCreamInventoryManagement
                         int routenumber = Int32.Parse(r.groupValues[2]);
                         string[] citylabels = new string[10];
                         citylabels[0] = r.groupValues[3];
-
-                        for (int k = 1; k < 14; k++)
+                        int temp = 4;
+                        for (int k = 1; k < 10; k++)
                         {
-                            if (r.groupValues[k] == "")
+                            if (r.groupValues[temp] == "")
                                 break;
                             else
-                                citylabels[k] = r.groupValues[k];
+                                citylabels[k] = r.groupValues[temp];
+                            temp++;
                         }
 
                         bool test = updateRoute(new Route(routenumber, citylabels));
                         if(!test)
                             addToLog("Route # " + routenumber + "failed to update.");
                     }
-                    if (r.groupValues[1] == "D")
+                    if (r.groupValues[13] == "D")
                     {
-                        int routenumber = Int32.Parse(r.groupValues[2]);
+                        int routenumber = Int32.Parse(r.groupValues[14]);
                         bool test = deleteRoute(routenumber);
                     }
                 }
@@ -221,6 +224,7 @@ namespace IceCreamInventoryManagement
 
             myRoutes = getAllRoutes();
 
+            routeGridView.Rows.Clear();
             for (int i = 0; i < myRoutes.Count(); i++)
             {
                 //DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
@@ -271,6 +275,9 @@ namespace IceCreamInventoryManagement
             {
                 iceCreamtoTrucksFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
                 addToLog("Ice Cream to Trucks File Read");
+            }else
+            {
+                return;
             }
 
             //Check and parse header
@@ -321,12 +328,74 @@ namespace IceCreamInventoryManagement
             openFileDialog1.Title = "Select an Input File";
 
             string[] truckRouteFile = { "" };
+            DateTime date = Convert.ToDateTime("1970-01-01");
+            string seqNum = "";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 truckRouteFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
-                addToLog("Truck-Route File Read"); 
+                //addToLog("Truck-Route File Read"); 
             }
+
+            //Check and parse header
+            RegexClass r = checkRegex(truckRouteFile[0], headerEx);
+            if (r.valid)
+            {
+                seqNum = r.groupValues[2];
+                string dateString = r.groupValues[3];
+                date = Convert.ToDateTime(dateString);
+            }
+
+            //check and parse trailer
+            r = checkRegex(truckRouteFile[truckRouteFile.Length - 1], trailerEx);
+
+            int numOfRows = 0;
+
+            if (r.valid)
+            {
+                string numOfRowsString = r.groupValues[2];
+                numOfRows = Int32.Parse(numOfRowsString);
+            }
+
+
+            if (numOfRows != truckRouteFile.Length - 2)
+            {
+                //addToLog("Truck Upload File Invalid: Trailer # does not match Actual # of Rows");
+            }
+
+            for (int i = 1; i < truckRouteFile.Length - 1; i++)
+            {
+                r = checkRegex(truckRouteFile[i], truckRouteEx);
+                if (r.valid)
+                {
+                    int trucknumber = Int32.Parse(r.groupValues[1]);
+                    int routenumber = Int32.Parse(r.groupValues[2]);
+                    int drivernumber = Int32.Parse(r.groupValues[3]);
+                    assignTruckToRoute(trucknumber, routenumber);
+                    assignDriverToTruck(drivernumber, trucknumber);
+                }
+            }
+            //addToLog("Truck Upload File Valid");
+
+            List<Truck> myTrucks = new List<Truck>();
+
+            myTrucks = getAllTrucks();
+            truckGridView.Rows.Clear();
+            for (int i = 0; i < myTrucks.Count(); i++)
+            {
+                truckGridView.Rows.Add(myTrucks[i].trucknumber, myTrucks[i].routenumber);
+            }
+
+            List<Driver> myDrivers = new List<Driver>();
+
+            myDrivers = getAllDrivers();
+
+            driverGridView.Rows.Clear();
+            for (int i = 0; i < myDrivers.Count(); i++)
+            {
+                driverGridView.Rows.Add(myDrivers[i].drivernumber, myDrivers[i].trucknumber);
+            }
+
         }
 
         private void btnInventoryUpdate_Click(object sender, EventArgs e)
@@ -342,6 +411,8 @@ namespace IceCreamInventoryManagement
                 inventoryUpdateFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
                 addToLog("Inventory Update File Read");
             }
+
+
         }
 
         private void btnTruckUpload_Click(object sender, EventArgs e)
@@ -387,6 +458,7 @@ namespace IceCreamInventoryManagement
             }
 
 
+            clearTrucks();
             for (int i = 1; i < truckUploadFile.Length - 1; i++)
             {
                 r = checkRegex(truckUploadFile[i], trucksEx);
@@ -404,7 +476,7 @@ namespace IceCreamInventoryManagement
             List<Truck> myTrucks = new List<Truck>();
 
             myTrucks = getAllTrucks();
-
+            truckGridView.Rows.Clear();
             for (int i = 0; i < myTrucks.Count(); i++)
             {
                 truckGridView.Rows.Add(myTrucks[i].trucknumber, myTrucks[i].routenumber);
@@ -459,7 +531,7 @@ namespace IceCreamInventoryManagement
                 addToLog("Driver Upload File Invalid: Trailer # does not match Actual # of Rows");
             }
 
-
+            clearDrivers();
             for (int i = 1; i < driverUploadFile.Length - 1; i++)
             {
                 r = checkRegex(driverUploadFile[i], trucksEx);
@@ -479,6 +551,7 @@ namespace IceCreamInventoryManagement
 
             myDrivers = getAllDrivers();
 
+            driverGridView.Rows.Clear();
             for (int i = 0; i < myDrivers.Count(); i++)
             {
                 driverGridView.Rows.Add(myDrivers[i].drivernumber, myDrivers[i].trucknumber);
