@@ -154,7 +154,7 @@
             this.Controls.Add(this.dailyInvCalc);
             this.Controls.Add(this.truckInvReset);
             this.Name = "settingsForm";
-            this.Text = "settingsForm";
+            this.Text = "Settings";
             this.ResumeLayout(false);
             this.PerformLayout();
 

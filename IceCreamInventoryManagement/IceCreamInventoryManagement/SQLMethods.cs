@@ -99,9 +99,9 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
-        //ZONE//
+        ZONE//
 
-        //ROUTE//
+        ROUTE//
         public static Route getRoute(int getRouteNumber)
         {
             SQLResult result = sqlquery("SELECT * FROM ROUTES WHERE routenumber = @route;",
@@ -243,7 +243,7 @@ namespace IceCreamInventoryManagement
 
         public static List<Truck> getAllTrucks()
         {
-            List<Truck> truckList = new List<Truck> ();
+            List<Truck> truckList = new List<Truck>();
             SQLResult result = sqlquery("SELECT * FROM TRUCKS;");
             if (result.error == SQLError.none && result.data != null)
             {
@@ -349,7 +349,7 @@ namespace IceCreamInventoryManagement
                 int saleprice = Convert.ToInt32(result.data.getField(0, "routenumber"));
                 int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
                 int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
-                return new InventoryItem(asd,);
+                return new InventoryItem();
             }
             else
             {
@@ -403,7 +403,7 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
-        //INVENTORY//
+        INVENTORY//
 
     }
 }

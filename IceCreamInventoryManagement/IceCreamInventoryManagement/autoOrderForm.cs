@@ -24,10 +24,6 @@ namespace IceCreamInventoryManagement
                 row.Cells[1].Value = AutoOrder.amount[i];
                 dataGridView1.Rows.Add(row);
             }
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
         }
     }
