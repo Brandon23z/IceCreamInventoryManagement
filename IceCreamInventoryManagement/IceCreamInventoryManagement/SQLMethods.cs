@@ -34,6 +34,7 @@ namespace IceCreamInventoryManagement
         }
 
         //ZONE//
+        #region ZONE
         public static Zone getZone(string getCityLabel)
         {
             SQLResult result = sqlquery("SELECT * FROM ZONES WHERE citylabel = @zone;",
@@ -99,9 +100,11 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
+        #endregion
         //ZONE//
 
         //ROUTE//
+        #region ROUTE
         public static Route getRoute(int getRouteNumber)
         {
             SQLResult result = sqlquery("SELECT * FROM ROUTES WHERE routenumber = @route;",
@@ -220,9 +223,11 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
+        #endregion
         //ROUTE//
 
         //TRUCK//
+        #region TRUCK
         public static Truck getTruck(int getTruckNumber)
         {
             SQLResult result = sqlquery("SELECT * FROM TRUCKS WHERE trucknumber = @truck;",
@@ -285,9 +290,11 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
+        #endregion
         //TRUCK//
 
         //TRUCK INVENTORY//
+        #region TRUCK INVENTORY
         public static Truck getTruckInventory(int getTruckNumber)
         {
             SQLResult result = sqlquery("SELECT * FROM TRUCKS WHERE trucknumber = @truck;",
@@ -331,9 +338,11 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
+        #endregion
         //TRUCK INVENTORY//
 
         //INVENTORY//
+        #region INVENTORY
         public static InventoryItem getInventoryItem(int getItemNumber)
         {
             SQLResult result = sqlquery("SELECT * FROM INVENTORY WHERE itemnumber = @itemnumber;",
@@ -405,21 +414,20 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
+        #endregion
         //INVENTORY//
 
         //DRIVERS//
+        #region DRIVERS
         public static Driver getDriver(int getDriverNumber)
         {
             SQLResult result = sqlquery("SELECT * FROM DRIVERS WHERE drivernumber = @drivernumber;",
                 new Dictionary<string, string>() { { "@drivernumber", getDriverNumber.ToString() } });
             if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
             {
-                int itemnumber = Convert.ToInt32(result.data.getField(0, "drivernumber"));
-                int quantity = Convert.ToInt32(result.data.getField(0, "trucknumber"));
-                double initialprice = Convert.ToDouble(result.data.getField(0, "initialprice"));
-                double saleprice = Convert.ToDouble(result.data.getField(0, "saleprice"));
-                string description = result.data.getField(0, "description");
-                return new InventoryItem(itemnumber, quantity, initialprice, saleprice, description);
+                int drivernumber = Convert.ToInt32(result.data.getField(0, "drivernumber"));
+                int trucknumber = Convert.ToInt32(result.data.getField(0, "trucknumber"));
+                return new Driver(drivernumber, trucknumber);
             }
             else
             {
@@ -427,23 +435,20 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        public static List<InventoryItem> getInventory()
+        public static List<Driver> getDrivers()
         {
-            List<InventoryItem> itemList = new List<InventoryItem>();
-            SQLResult result = sqlquery("SELECT * FROM INVENTORY;");
+            List<Driver> driverList = new List<Driver>();
+            SQLResult result = sqlquery("SELECT * FROM DRIVERS;");
             if (result.error == SQLError.none && result.data != null)
             {
                 for (int i = 0; i < result.data.data.Count; i++)
                 {
-                    int itemnumber = Convert.ToInt32(result.data.getField(i, "itemnumber"));
-                    int quantity = Convert.ToInt32(result.data.getField(i, "quantity"));
-                    double initialprice = Convert.ToDouble(result.data.getField(i, "initialprice"));
-                    double saleprice = Convert.ToDouble(result.data.getField(i, "saleprice"));
-                    string description = result.data.getField(i, "description");
-                    InventoryItem item = new InventoryItem(itemnumber, quantity, initialprice, saleprice, description);
-                    itemList.Add(item);
+                    int drivernumber = Convert.ToInt32(result.data.getField(0, "drivernumber"));
+                    int trucknumber = Convert.ToInt32(result.data.getField(0, "trucknumber"));
+                    Driver driver = new Driver(drivernumber, trucknumber);
+                    driverList.Add(driver);
                 }
-                return itemList;
+                return driverList;
             }
             else
             {
@@ -451,12 +456,12 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        public static bool addInventoryItem(InventoryItem addItem)
+        public static bool addDriver(Driver addDriver)
         {
-            //INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(30));
-            SQLResult result = sqlquery("INSERT INTO INVENTORY VALUES (@itemnumber, @quantity, @initialprice, @saleprice, @description);",
-                new Dictionary<string, string>() { { "@itemnumber", addItem.itemnumber.ToString() }, { "@quantity", addItem.quantity.ToString() }
-                    , { "@initialprice", addItem.initialprice.ToString() }, { "@saleprice", addItem.saleprice.ToString() }, { "@description", addItem.description }});
+            //SQL.sqlnonquery("CREATE TABLE DRIVERS(drivernumber int NOT NULL PRIMARY KEY, int trucknumber);");
+
+            SQLResult result = sqlquery("INSERT INTO DRIVERS VALUES (@drivernumber, @trucknumber);",
+                new Dictionary<string, string>() { { "@drivernumber", addDriver.drivernumber.ToString() }, { "@trucknumber", addDriver.trucknumber.ToString() } });
             if (result.error == SQLError.none && result.rowsAffected == 1)
             {
                 return true;
@@ -467,9 +472,9 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        public static bool clearInventory()
+        public static bool clearDrivers()
         {
-            SQLResult result = sqlquery("DELETE FROM INVENTORY;");
+            SQLResult result = sqlquery("DELETE FROM DRIVERS;");
             if (result.error == SQLError.none)
             {
                 return true;
@@ -479,6 +484,7 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
+        #endregion
         //DRIVERS//
     }
 }
