@@ -10,6 +10,13 @@ namespace IceCreamInventoryManagement
 {
     class ourClasses
     {
+
+        public class DefaultOrder
+        {
+            public static string[] ProductID = new string[5];
+            public static string[] amount = new string[5];
+        }
+
         public class AutoOrder
         {
             public static List<string> ProductID = new List<string>();
