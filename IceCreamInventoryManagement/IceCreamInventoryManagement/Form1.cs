@@ -109,11 +109,12 @@ namespace IceCreamInventoryManagement
 
             for (int i = 0; i < myZones.Count(); i++)
             {
-                DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
-                row.Cells[0].Value = myZones[i].citylabel;
-                row.Cells[1].Value = myZones[i].cityname;
-                row.Cells[2].Value = myZones[i].state;
-                zoneGridView.Rows.Add(row);
+                //DataGridViewRow row = new DataGridViewRow();
+                zoneGridView.Rows.Add(myZones[i].citylabel, myZones[i].cityname, myZones[i].state);
+                //row.Cells[0].Value = myZones[i].citylabel;
+                //row.Cells[1].Value = myZones[i].cityname;
+                //row.Cells[2].Value = myZones[i].state;
+                //zoneGridView.Rows.Add(row);
             }
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,14 +223,15 @@ namespace IceCreamInventoryManagement
 
             for (int i = 0; i < myRoutes.Count(); i++)
             {
-                DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
-                row.Cells[0].Value = myRoutes[i].routenumber;
-                row.Cells[1].Value = myRoutes[i].cityLabels[0];
-                row.Cells[2].Value = myRoutes[i].cityLabels[1];
-                row.Cells[3].Value = myRoutes[i].cityLabels[2];
-                row.Cells[4].Value = myRoutes[i].cityLabels[3];
-                row.Cells[5].Value = myRoutes[i].cityLabels[4];
-                zoneGridView.Rows.Add(row);
+                //DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
+                routeGridView.Rows.Add(myRoutes[i].routenumber, myRoutes[i].cityLabels[0], myRoutes[i].cityLabels[1], myRoutes[i].cityLabels[2], myRoutes[i].cityLabels[3], myRoutes[i].cityLabels[4]);
+                //row.Cells[0].Value = myRoutes[i].routenumber;
+                //row.Cells[1].Value = myRoutes[i].cityLabels[0];
+                //row.Cells[2].Value = myRoutes[i].cityLabels[1];
+                //row.Cells[3].Value = myRoutes[i].cityLabels[2];
+                //row.Cells[4].Value = myRoutes[i].cityLabels[3];
+                //row.Cells[5].Value = myRoutes[i].cityLabels[4];
+                //zoneGridView.Rows.Add(row);
             }
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -395,6 +397,24 @@ namespace IceCreamInventoryManagement
                 }
             }
             addToLog("Truck Upload File Valid");
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            List<Truck> myTrucks = new List<Truck>();
+
+            myTrucks = getAllTrucks();
+
+            for (int i = 0; i < myTrucks.Count(); i++)
+            {
+                truckGridView.Rows.Add(myTrucks[i].trucknumber, myTrucks[i].routenumber);
+                //DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
+                //row.Cells[0].Value = myTrucks[i].trucknumber;
+                //row.Cells[1].Value = myTrucks[i].routenumber;
+                //zoneGridView.Rows.Add(row);
+            }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         private void btnDriverUpload_Click(object sender, EventArgs e)
@@ -455,17 +475,17 @@ namespace IceCreamInventoryManagement
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            List<Driver> myDrivers = new List<Zone>();
+            List<Driver> myDrivers = new List<Driver>();
 
-            myDrivers = getAllDrivers();
+            myDrivers = getDrivers();
 
             for (int i = 0; i < myDrivers.Count(); i++)
             {
-                DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
-                row.Cells[0].Value = myDrivers[i].citylabel;
-                row.Cells[1].Value = myDrivers[i].cityname;
-                row.Cells[2].Value = myDrivers[i].state;
-                zoneGridView.Rows.Add(row);
+                driverGridView.Rows.Add(myDrivers[i].drivernumber, myDrivers[i].trucknumber);
+                //DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
+                //row.Cells[0].Value = myDrivers[i].drivernumber;
+                //row.Cells[1].Value = myDrivers[i].trucknumber;
+                //zoneGridView.Rows.Add(row);
             }
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -210,9 +210,9 @@ namespace IceCreamInventoryManagement
                 drivernumber = drivernumber_;
             }
 
-            public Driver(int trucknumber_)
+            public Driver(int drivernumber_)
             {
-                trucknumber = trucknumber_;
+                drivernumber = drivernumber_;
             }
         }
     }

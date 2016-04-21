@@ -111,20 +111,19 @@ namespace IceCreamInventoryManagement
                 new Dictionary<string, string>() { { "@route", getRouteNumber.ToString() } });
             if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
             {
+                string[] cityLabels = new string[10];
                 int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
-                string citylabel1 = result.data.getField(0, "citylabel1");
-                string citylabel2 = result.data.getField(0, "citylabel2");
-                string citylabel3 = result.data.getField(0, "citylabel3");
-                string citylabel4 = result.data.getField(0, "citylabel4");
-                string citylabel5 = result.data.getField(0, "citylabel5");
-                string citylabel6 = result.data.getField(0, "citylabel6");
-                string citylabel7 = result.data.getField(0, "citylabel7");
-                string citylabel8 = result.data.getField(0, "citylabel8");
-                string citylabel9 = result.data.getField(0, "citylabel9");
-                string citylabel10 = result.data.getField(0, "citylabel10");
-                return new Route(routenumber, citylabel1, citylabel2, citylabel3
-                    , citylabel4, citylabel5, citylabel6, citylabel7
-                    , citylabel8, citylabel9, citylabel10);
+                cityLabels[0] = result.data.getField(0, "citylabel1");
+                cityLabels[1] = result.data.getField(0, "citylabel2");
+                cityLabels[2] = result.data.getField(0, "citylabel3");
+                cityLabels[3] = result.data.getField(0, "citylabel4");
+                cityLabels[4] = result.data.getField(0, "citylabel5");
+                cityLabels[5] = result.data.getField(0, "citylabel6");
+                cityLabels[6] = result.data.getField(0, "citylabel7");
+                cityLabels[7] = result.data.getField(0, "citylabel8");
+                cityLabels[8] = result.data.getField(0, "citylabel9");
+                cityLabels[9] = result.data.getField(0, "citylabel10");
+                return new Route(routenumber, cityLabels);
             }
             else
             {
@@ -443,8 +442,8 @@ namespace IceCreamInventoryManagement
             {
                 for (int i = 0; i < result.data.data.Count; i++)
                 {
-                    int drivernumber = Convert.ToInt32(result.data.getField(0, "drivernumber"));
-                    int trucknumber = Convert.ToInt32(result.data.getField(0, "trucknumber"));
+                    int drivernumber = Convert.ToInt32(result.data.getField(i, "drivernumber"));
+                    int trucknumber = Convert.ToInt32(result.data.getField(i, "trucknumber"));
                     Driver driver = new Driver(drivernumber, trucknumber);
                     driverList.Add(driver);
                 }
