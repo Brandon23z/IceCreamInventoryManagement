@@ -26,7 +26,7 @@ namespace IceCreamInventoryManagement
 
         //LOAD ICE CREAM TRUCK//
         //|Item Number||Adjustment Quantity|
-        public const string truckItemEx = @"^(\d{4})(((\d)|-)\d{3})(?: )*$";
+        public const string truckItemEx = @"^(\d{4})((?:(\d)|-)\d{3})(?: )*$";
         //IR #ROWS FOR TRUCK
         public const string truckItemsTrailerEx = @"^(IR) (\d{4})(?: )*$";
 

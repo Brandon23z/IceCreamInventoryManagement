@@ -306,14 +306,44 @@ namespace IceCreamInventoryManagement
                 addToLog("Ice Cream to Trucks File Invalid: Trailer # does not match Actual # of Rows");
             }
 
-            string truckNum = "";
-
+            int trucknumber = 0;
+            bool inTruck = false;
+            int itemsAdded = 0;
             for (int i = 1; i < iceCreamtoTrucksFile.Length - 1; i++)
             {
-                r = checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx);
-                if (r.valid)
+                if (checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx).valid && inTruck == false)
                 {
-                    truckNum = r.groupValues[2];
+                    r = checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx);
+                    trucknumber = Int32.Parse(r.groupValues[2]);
+                    inTruck = true;
+                    Console.WriteLine("Filling truck " + trucknumber.ToString());
+                }
+                else if (checkRegex(iceCreamtoTrucksFile[i], truckItemEx).valid && inTruck == true)
+                {
+                    r = checkRegex(iceCreamtoTrucksFile[i], truckItemEx);
+                    int itemnumber = Int32.Parse(r.groupValues[1]);
+                    int amount = Int32.Parse(r.groupValues[2]);
+                    itemsAdded++;
+                    Console.WriteLine("Adding " + amount.ToString() + " of item " + itemnumber + " to truck " + trucknumber);
+                    //update amount
+                }
+                else if (checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx).valid && inTruck == true)
+                {
+                    r = checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx);
+                    int numberOfItems = Int32.Parse(r.groupValues[2]);
+                    if(numberOfItems != itemsAdded)
+                    {
+                        Console.WriteLine("Number of items in trailer does not match the number of items added");
+                    }
+
+                    inTruck = false;
+                    itemsAdded = 0;
+                    Console.WriteLine("Done filling truck " + trucknumber);
+                }
+                else
+                {
+                    //file is invalid in format
+                    Console.WriteLine("File is invalid in format");
                 }
             }
 

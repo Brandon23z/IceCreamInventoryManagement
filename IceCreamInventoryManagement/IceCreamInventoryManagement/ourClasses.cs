@@ -13,8 +13,19 @@ namespace IceCreamInventoryManagement
 
         public class DefaultOrder
         {
-            public static string[] ProductID = new string[5];
-            public static string[] amount = new string[5];
+            public static DefaultItem[] defaults = new DefaultItem[5];
+        }
+
+        public class DefaultItem
+        {
+            public int productID { get; set; }
+            public int amount { get; set; }
+
+            public DefaultItem(int productID_, int amount_)
+            {
+                productID = productID_;
+                amount = amount_;
+            }
         }
 
         public class AutoOrder
@@ -124,20 +135,29 @@ namespace IceCreamInventoryManagement
 
         public class TruckInventory
         {
-            public List<TruckInventoryItem> items = new List<TruckInventoryItem>();
-            public TruckInventory(List<TruckInventoryItem> items_)
+            public int trucknumber;
+            public Dictionary<int,TruckInventoryItem> items = new Dictionary<int, TruckInventoryItem>();
+            public TruckInventory(int trucknumber_, Dictionary<int, TruckInventoryItem> items_)
             {
+                trucknumber = trucknumber_;
                 items = items_;
             }
 
-            public TruckInventory()
+            public TruckInventory(int trucknumber_)
             {
-
+                trucknumber = trucknumber_;
             }
-            
-            public void addItem(TruckInventoryItem item)
+
+            public void addUpdateItem(TruckInventoryItem addItem)
             {
-                items.Add(item);
+                if(items.ContainsKey(addItem.itemnumber))
+                {
+                    items[addItem.itemnumber].quantity += addItem.quantity;
+                }
+                else
+                {
+                    items.Add(addItem.itemnumber, addItem);
+                }
             }
         }
 

@@ -307,15 +307,24 @@ namespace IceCreamInventoryManagement
 
         //TRUCK INVENTORY//
         #region TRUCK INVENTORY
-        public static Truck getTruckInventory(int getTruckNumber)
+        public static Dictionary<int,TruckInventoryItem> getTruckInventory(int getTruckNumber)
         {
-            SQLResult result = sqlquery("SELECT * FROM TRUCKS WHERE trucknumber = @truck;",
-                new Dictionary<string, string>() { { "@truck", getTruckNumber.ToString() } });
-            if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
+            Dictionary<int, TruckInventoryItem> itemList = new Dictionary<int, TruckInventoryItem>();
+            SQLResult result = sqlquery("SELECT * FROM TRUCKINVENTORY WHERE trucknumber = @trucknumber;", 
+                new Dictionary<string, string>() { { "@trucknumber", getTruckNumber.ToString() } });
+            if (result.error == SQLError.none && result.data != null)
             {
-                int trucknumber = Convert.ToInt32(result.data.getField(0, "trucknumber"));
-                int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
-                return new Truck(trucknumber, routenumber);
+                for (int i = 0; i < result.data.data.Count; i++)
+                {
+                    int itemnumber = Convert.ToInt32(result.data.getField(i, "itemnumber"));
+                    int quantity = Convert.ToInt32(result.data.getField(i, "quantity"));
+                    double initialprice = Convert.ToDouble(result.data.getField(i, "initialprice"));
+                    double saleprice = Convert.ToDouble(result.data.getField(i, "saleprice"));
+                    string description = result.data.getField(i, "description");
+                    TruckInventoryItem item = new TruckInventoryItem(itemnumber, quantity, initialprice, saleprice);
+                    itemList.Add(item.itemnumber, item);
+                }
+                return itemList;
             }
             else
             {

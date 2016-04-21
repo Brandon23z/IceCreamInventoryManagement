@@ -16,7 +16,6 @@ namespace IceCreamInventoryManagement
         public setDefaultForm()
         {
             InitializeComponent();
-            dataGridView1.Rows.Add(5);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -26,11 +25,13 @@ namespace IceCreamInventoryManagement
 
         private void setDefault_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 5; i++)
-            {
-                DefaultOrder.ProductID[i] = Convert.ToString(dataGridView1.Rows[i].Cells["Column1"].Value);
-                DefaultOrder.amount[i] = Convert.ToString(dataGridView1.Rows[i].Cells["Column2"].Value);
-            }
+            DefaultItem[] defaultA = new DefaultItem[5];
+            defaultA[0] = new DefaultItem(Convert.ToInt32(nudItem1Product.Value), Convert.ToInt32(nudItem1Quantity.Value));
+            defaultA[1] = new DefaultItem(Convert.ToInt32(nudItem2Product.Value), Convert.ToInt32(nudItem2Quantity.Value));
+            defaultA[2] = new DefaultItem(Convert.ToInt32(nudItem3Product.Value), Convert.ToInt32(nudItem3Quantity.Value));
+            defaultA[3] = new DefaultItem(Convert.ToInt32(nudItem4Product.Value), Convert.ToInt32(nudItem4Quantity.Value));
+            defaultA[4] = new DefaultItem(Convert.ToInt32(nudItem5Product.Value), Convert.ToInt32(nudItem5Quantity.Value));
+            DefaultOrder.defaults = defaultA;
             this.Close();
         }
 
