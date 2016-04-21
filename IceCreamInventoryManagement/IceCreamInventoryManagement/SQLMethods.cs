@@ -28,7 +28,7 @@ namespace IceCreamInventoryManagement
                 SQL.sqlnonquery("CREATE TABLE TRUCKS(trucknumber int NOT NULL PRIMARY KEY, routenumber int);");
                 SQL.sqlnonquery("CREATE TABLE TRUCKINVENTORY(trucknumber int NOT NULL PRIMARY KEY, itemnumber int NOT NULL, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL);");
                 SQL.sqlnonquery("CREATE TABLE INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(30));");
-                SQL.sqlnonquery("CREATE TABLE DRIVERS(drivernumber int NOT NULL PRIMARY KEY, int trucknumber);");
+                SQL.sqlnonquery("CREATE TABLE DRIVERS(drivernumber int NOT NULL PRIMARY KEY, trucknumber int);");
                 SQL.sqlnonquery("CREATE TABLE SALES(itemnumber int NOT NULL, quantity int NOT NULL, saledate timestamp NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, trucknumber int NOT NULL, routenumber int NOT NULL, drivernumber int NOT NULL);");
             }
         }
@@ -434,7 +434,7 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        public static List<Driver> getDrivers()
+        public static List<Driver> getAllDrivers()
         {
             List<Driver> driverList = new List<Driver>();
             SQLResult result = sqlquery("SELECT * FROM DRIVERS;");

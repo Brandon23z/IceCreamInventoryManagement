@@ -204,10 +204,10 @@ namespace IceCreamInventoryManagement
             public int trucknumber;
             public int drivernumber;
 
-            public Driver(int trucknumber_, int drivernumber_)
+            public Driver(int drivernumber_, int trucknumber_)
             {
-                trucknumber = trucknumber_;
                 drivernumber = drivernumber_;
+                trucknumber = trucknumber_;
             }
 
             public Driver(int drivernumber_)
