@@ -28,8 +28,8 @@ namespace IceCreamInventoryManagement
                 SQL.sqlnonquery("CREATE TABLE TRUCKS(trucknumber int NOT NULL PRIMARY KEY, routenumber int);");
                 SQL.sqlnonquery("CREATE TABLE TRUCKINVENTORY(trucknumber int NOT NULL PRIMARY KEY, itemnumber int NOT NULL, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL);");
                 SQL.sqlnonquery("CREATE TABLE INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(30));");
-                SQL.sqlnonquery("CREATE TABLE SALES(itemnumber int NOT NULL, quantity int NOT NULL, saledate timestamp NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, trucknumber int NOT NULL, routenumber int NOT NULL, drivernumber int NOT NULL);");
                 SQL.sqlnonquery("CREATE TABLE DRIVERS(drivernumber int NOT NULL PRIMARY KEY, int trucknumber);");
+                SQL.sqlnonquery("CREATE TABLE SALES(itemnumber int NOT NULL, quantity int NOT NULL, saledate timestamp NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, trucknumber int NOT NULL, routenumber int NOT NULL, drivernumber int NOT NULL);");
             }
         }
 
@@ -148,9 +148,9 @@ namespace IceCreamInventoryManagement
                     string citylabel8 = result.data.getField(i, "citylabel8");
                     string citylabel9 = result.data.getField(i, "citylabel9");
                     string citylabel10 = result.data.getField(i, "citylabel10");
-                    Route tempRoute = new Route(routenumber, citylabel1, citylabel2, citylabel3
-                        , citylabel4, citylabel5, citylabel6, citylabel7
-                        , citylabel8, citylabel9, citylabel10);
+
+                    string[] citylabels = { citylabel1, citylabel2, citylabel3, citylabel4, citylabel5, citylabel6, citylabel7, citylabel8, citylabel9 };
+                    Route tempRoute = new Route(routenumber, citylabels);
                     routeList.Add(tempRoute);
                 }
                 return routeList;
@@ -220,8 +220,6 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
-
-
         //ROUTE//
 
         //TRUCK//
@@ -336,20 +334,18 @@ namespace IceCreamInventoryManagement
         //TRUCK INVENTORY//
 
         //INVENTORY//
-        public static Truck getInventoryItem(int getItemNumber)
+        public static InventoryItem getInventoryItem(int getItemNumber)
         {
-            // SQL.sqlnonquery("CREATE TABLE INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(30));");
             SQLResult result = sqlquery("SELECT * FROM INVENTORY WHERE itemnumber = @itemnumber;",
                 new Dictionary<string, string>() { { "@itemnumber", getItemNumber.ToString() } });
             if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
             {
                 int itemnumber = Convert.ToInt32(result.data.getField(0, "itemnumber"));
-                int quantity = Convert.ToInt32(result.data.getField(0, "routenumber"));
-                int initialprice = Convert.ToInt32(result.data.getField(0, "routenumber"));
-                int saleprice = Convert.ToInt32(result.data.getField(0, "routenumber"));
-                int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
-                int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
-                return new InventoryItem(asd,);
+                int quantity = Convert.ToInt32(result.data.getField(0, "quantity"));
+                double initialprice = Convert.ToDouble(result.data.getField(0, "initialprice"));
+                double saleprice = Convert.ToDouble(result.data.getField(0, "saleprice"));
+                string description = result.data.getField(0, "description");
+                return new InventoryItem(itemnumber, quantity, initialprice, saleprice, description);
             }
             else
             {
@@ -357,19 +353,23 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        public static List<Truck> getAllTrucks()
+        public static List<InventoryItem> getInventory()
         {
-            List<Truck> truckList = new List<Truck>();
-            SQLResult result = sqlquery("SELECT * FROM TRUCKS;");
+            List<InventoryItem> itemList = new List<InventoryItem>();
+            SQLResult result = sqlquery("SELECT * FROM INVENTORY;");
             if (result.error == SQLError.none && result.data != null)
             {
                 for (int i = 0; i < result.data.data.Count; i++)
                 {
-                    int trucknumber = Convert.ToInt32(result.data.getField(i, "trucknumber"));
-                    int routenumber = Convert.ToInt32(result.data.getField(i, "routenumber"));
-                    truckList.Add(new Truck(trucknumber, routenumber));
+                    int itemnumber = Convert.ToInt32(result.data.getField(i, "itemnumber"));
+                    int quantity = Convert.ToInt32(result.data.getField(i, "quantity"));
+                    double initialprice = Convert.ToDouble(result.data.getField(i, "initialprice"));
+                    double saleprice = Convert.ToDouble(result.data.getField(i, "saleprice"));
+                    string description = result.data.getField(i, "description");
+                    InventoryItem item = new InventoryItem(itemnumber, quantity, initialprice, saleprice, description);
+                    itemList.Add(item);
                 }
-                return truckList;
+                return itemList;
             }
             else
             {
@@ -377,10 +377,12 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        public static bool addTruck(Truck addTruck)
+        public static bool addInventoryItem(InventoryItem addItem)
         {
-            SQLResult result = sqlquery("INSERT INTO TRUCKS VALUES (@trucknumber, @routenumber);",
-                new Dictionary<string, string>() { { "@trucknumber", addTruck.trucknumber.ToString() }, { "@routenumber", addTruck.routenumber.ToString() } });
+            //INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(30));
+            SQLResult result = sqlquery("INSERT INTO INVENTORY VALUES (@itemnumber, @quantity, @initialprice, @saleprice, @description);",
+                new Dictionary<string, string>() { { "@itemnumber", addItem.itemnumber.ToString() }, { "@quantity", addItem.quantity.ToString() }
+                    , { "@initialprice", addItem.initialprice.ToString() }, { "@saleprice", addItem.saleprice.ToString() }, { "@description", addItem.description }});
             if (result.error == SQLError.none && result.rowsAffected == 1)
             {
                 return true;
@@ -391,9 +393,9 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        public static bool clearTrucks()
+        public static bool clearInventory()
         {
-            SQLResult result = sqlquery("DELETE FROM TRUCKS;");
+            SQLResult result = sqlquery("DELETE FROM INVENTORY;");
             if (result.error == SQLError.none)
             {
                 return true;
@@ -405,5 +407,78 @@ namespace IceCreamInventoryManagement
         }
         //INVENTORY//
 
+        //DRIVERS//
+        public static Driver getDriver(int getDriverNumber)
+        {
+            SQLResult result = sqlquery("SELECT * FROM DRIVERS WHERE drivernumber = @drivernumber;",
+                new Dictionary<string, string>() { { "@drivernumber", getDriverNumber.ToString() } });
+            if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
+            {
+                int itemnumber = Convert.ToInt32(result.data.getField(0, "drivernumber"));
+                int quantity = Convert.ToInt32(result.data.getField(0, "trucknumber"));
+                double initialprice = Convert.ToDouble(result.data.getField(0, "initialprice"));
+                double saleprice = Convert.ToDouble(result.data.getField(0, "saleprice"));
+                string description = result.data.getField(0, "description");
+                return new InventoryItem(itemnumber, quantity, initialprice, saleprice, description);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static List<InventoryItem> getInventory()
+        {
+            List<InventoryItem> itemList = new List<InventoryItem>();
+            SQLResult result = sqlquery("SELECT * FROM INVENTORY;");
+            if (result.error == SQLError.none && result.data != null)
+            {
+                for (int i = 0; i < result.data.data.Count; i++)
+                {
+                    int itemnumber = Convert.ToInt32(result.data.getField(i, "itemnumber"));
+                    int quantity = Convert.ToInt32(result.data.getField(i, "quantity"));
+                    double initialprice = Convert.ToDouble(result.data.getField(i, "initialprice"));
+                    double saleprice = Convert.ToDouble(result.data.getField(i, "saleprice"));
+                    string description = result.data.getField(i, "description");
+                    InventoryItem item = new InventoryItem(itemnumber, quantity, initialprice, saleprice, description);
+                    itemList.Add(item);
+                }
+                return itemList;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool addInventoryItem(InventoryItem addItem)
+        {
+            //INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(30));
+            SQLResult result = sqlquery("INSERT INTO INVENTORY VALUES (@itemnumber, @quantity, @initialprice, @saleprice, @description);",
+                new Dictionary<string, string>() { { "@itemnumber", addItem.itemnumber.ToString() }, { "@quantity", addItem.quantity.ToString() }
+                    , { "@initialprice", addItem.initialprice.ToString() }, { "@saleprice", addItem.saleprice.ToString() }, { "@description", addItem.description }});
+            if (result.error == SQLError.none && result.rowsAffected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool clearInventory()
+        {
+            SQLResult result = sqlquery("DELETE FROM INVENTORY;");
+            if (result.error == SQLError.none)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //DRIVERS//
     }
 }

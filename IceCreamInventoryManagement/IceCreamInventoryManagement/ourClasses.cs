@@ -108,6 +108,11 @@ namespace IceCreamInventoryManagement
                 trucknumber = trucknumber_;
                 routenumber = routenumber_;
             }
+
+            public Truck(int trucknumber_)
+            {
+                trucknumber = trucknumber_;
+            }
         }
 
         public class TruckInventory
@@ -198,6 +203,17 @@ namespace IceCreamInventoryManagement
         {
             public int trucknumber;
             public int drivernumber;
+
+            public Driver(int trucknumber_, int drivernumber_)
+            {
+                trucknumber = trucknumber_;
+                drivernumber = drivernumber_;
+            }
+
+            public Driver(int trucknumber_)
+            {
+                trucknumber =
+            }
         }
     }
 }
