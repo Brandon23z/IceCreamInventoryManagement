@@ -477,7 +477,7 @@ namespace IceCreamInventoryManagement
 
             List<Driver> myDrivers = new List<Driver>();
 
-            myDrivers = getDrivers();
+            myDrivers = getAllDrivers();
 
             for (int i = 0; i < myDrivers.Count(); i++)
             {
