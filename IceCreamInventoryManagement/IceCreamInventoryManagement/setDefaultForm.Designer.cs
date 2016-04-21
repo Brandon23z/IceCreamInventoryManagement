@@ -72,11 +72,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 275);
+            this.ClientSize = new System.Drawing.Size(269, 274);
             this.Controls.Add(this.setDefault);
             this.Controls.Add(this.dataGridView1);
             this.Name = "setDefaultForm";
             this.Text = "setDefaultForm";
+            this.Load += new System.EventHandler(this.setDefaultForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
