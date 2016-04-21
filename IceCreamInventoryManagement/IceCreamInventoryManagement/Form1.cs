@@ -101,6 +101,22 @@ namespace IceCreamInventoryManagement
             //DisplayTableForm d = new DisplayTableForm();
             //d.Show();
 
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            List<Zone> myZones = new List<Zone>();
+
+            myZones = getAllZones();
+
+            for (int i = 0; i < myZones.Count(); i++)
+            {
+                DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
+                row.Cells[0].Value = myZones[i].citylabel;
+                row.Cells[1].Value = myZones[i].cityname;
+                row.Cells[2].Value = myZones[i].state;
+                zoneGridView.Rows.Add(row);
+            }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         private void btnRouteUpload_Click(object sender, EventArgs e)
@@ -196,6 +212,27 @@ namespace IceCreamInventoryManagement
 
 
             addToLog("Route Upload File Valid");
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            List<Route> myRoutes = new List<Route>();
+
+            myRoutes = getAllRoutes();
+
+            for (int i = 0; i < myRoutes.Count(); i++)
+            {
+                DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
+                row.Cells[0].Value = myRoutes[i].routenumber;
+                row.Cells[1].Value = myRoutes[i].cityLabels[0];
+                row.Cells[2].Value = myRoutes[i].cityLabels[1];
+                row.Cells[3].Value = myRoutes[i].cityLabels[2];
+                row.Cells[4].Value = myRoutes[i].cityLabels[3];
+                row.Cells[5].Value = myRoutes[i].cityLabels[4];
+                zoneGridView.Rows.Add(row);
+            }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         private void btnIceCreamFromTrucks_Click(object sender, EventArgs e)
@@ -415,6 +452,23 @@ namespace IceCreamInventoryManagement
 
 
             addToLog("Driver Upload File Valid");
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            List<Driver> myDrivers = new List<Zone>();
+
+            myDrivers = getAllDrivers();
+
+            for (int i = 0; i < myDrivers.Count(); i++)
+            {
+                DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
+                row.Cells[0].Value = myDrivers[i].citylabel;
+                row.Cells[1].Value = myDrivers[i].cityname;
+                row.Cells[2].Value = myDrivers[i].state;
+                zoneGridView.Rows.Add(row);
+            }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         private void btnCustomerRequests_Click(object sender, EventArgs e)

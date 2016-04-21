@@ -76,6 +76,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "autoOrderForm";
             this.Text = "autoOrderForm";
+            this.Load += new System.EventHandler(this.autoOrderForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

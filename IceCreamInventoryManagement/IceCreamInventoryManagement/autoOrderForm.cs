@@ -26,5 +26,10 @@ namespace IceCreamInventoryManagement
             }
 
         }
+
+        private void autoOrderForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

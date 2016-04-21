@@ -212,7 +212,7 @@ namespace IceCreamInventoryManagement
 
             public Driver(int trucknumber_)
             {
-                trucknumber =
+                trucknumber = trucknumber_;
             }
         }
     }
