@@ -59,3 +59,4 @@ C:\Users\scvierk\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManag
 C:\Users\scvierk\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\bin\Debug\firebird.msg
 C:\Users\scvierk\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\bin\Debug\FirebirdSql.Data.FirebirdClient.dll
 C:\Users\scvierk\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\bin\Debug\FirebirdSql.Data.FirebirdClient.pdb
+C:\Users\khanha\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\obj\Debug\IceCreamInventoryManagement.autoOrderForm.resources
