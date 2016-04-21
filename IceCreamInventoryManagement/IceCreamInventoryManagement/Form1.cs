@@ -174,7 +174,7 @@ namespace IceCreamInventoryManagement
                         string[] citylabels = new string[10];
                         citylabels[0] = r.groupValues[3];
                         int temp = 4;
-                        for (int k = 4; k < 14; k++)
+                        for (int k = 1; k < 14; k++)
                         {
                             if (r.groupValues[temp] == "")
                                 break;
@@ -191,7 +191,7 @@ namespace IceCreamInventoryManagement
                         string[] citylabels = new string[10];
                         citylabels[0] = r.groupValues[3];
 
-                        for (int k = 4; k < 14; k++)
+                        for (int k = 1; k < 14; k++)
                         {
                             if (r.groupValues[k] == "")
                                 break;
