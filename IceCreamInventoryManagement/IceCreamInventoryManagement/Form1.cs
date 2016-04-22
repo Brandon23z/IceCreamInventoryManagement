@@ -509,8 +509,8 @@ namespace IceCreamInventoryManagement
                     int itemnumber = Int32.Parse(r.groupValues[1]);
                     int quantity = Int32.Parse(r.groupValues[2]);
                     double initialprice = Convert.ToDouble(r.groupValues[3] + "." + r.groupValues[4]);
-                    double saleprice = Int32.Parse(r.groupValues[5]);
-                    string description = r.groupValues[6];
+                    double saleprice = Convert.ToDouble(r.groupValues[5] + "." + r.groupValues[6]);
+                    string description = r.groupValues[7];
                     bool test = addInventoryItem(new InventoryItem(itemnumber, quantity, initialprice, saleprice, description));
                 }
             }

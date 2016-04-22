@@ -28,7 +28,7 @@ namespace IceCreamInventoryManagement
             public const string dayStatus = "0";
             public const string currentDate = "0";
 
-            public const string 
+            //public const string 
         }
 
         public class settingsContainer
