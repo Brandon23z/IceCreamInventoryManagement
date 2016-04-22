@@ -21,12 +21,23 @@ namespace IceCreamInventoryManagement
             public const string truckUploadFile = "0";
             public const string driverUploadFile = "0";
             public const string routeUploadFile = "0";
-            public const string truckRouteDriverUploadFile = "0";
             public const string warehouseUploadFile = "0";
+            public const string truckRouteDriverUploadFile = "0";
             public const string truckInventoryUploadFile = "0";
 
-            public const string dayStatus = "0";
-            public const string currentDate = "0";
+            public const string dayStatus = "0"; //0 = day not started 1 = first file input day started 2 = trucks sent out
+            public const string currentDate = "2000-01-01";
+
+            public const string sequenceCityUploadFile = "0";
+            public const string sequenceTruckUploadFile = "0";
+            public const string sequenceDriverUploadFile = "0";
+            public const string sequenceRouteUploadFile = "0";
+            public const string sequenceWarehouseUploadFile = "0";
+            public const string sequenceTruckRouteDriverUploadFile = "0";
+            public const string sequenceTruckInventoryUploadFile = "0";
+            public const string sequenceTruckSalesUploadFile = "0";
+            public const string sequenceCustomerRequest = "0";
+
 
             //public const string 
         }
