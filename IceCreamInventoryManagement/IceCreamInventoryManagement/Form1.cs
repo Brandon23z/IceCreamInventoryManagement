@@ -575,6 +575,7 @@ namespace IceCreamInventoryManagement
                     double initialprice = Convert.ToDouble(r.groupValues[3] + "." + r.groupValues[4]);
                     double saleprice = Convert.ToDouble(r.groupValues[5] + "." + r.groupValues[6]);
                     string description = r.groupValues[7];
+                    ////////////////// addInventoryItem does not work if you put duplicates
                     bool test = addInventoryItem(new InventoryItem(itemnumber, quantity, initialprice, saleprice, description));
                 }
             }
