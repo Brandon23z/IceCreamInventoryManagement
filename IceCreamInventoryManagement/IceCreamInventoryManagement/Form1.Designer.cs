@@ -82,6 +82,7 @@
             this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.truckInventoryGridView = new System.Windows.Forms.DataGridView();
+            this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -470,7 +471,7 @@
             this.Column18,
             this.Column19,
             this.Column20});
-            this.saleGridView.Location = new System.Drawing.Point(34, 628);
+            this.saleGridView.Location = new System.Drawing.Point(12, 628);
             this.saleGridView.Name = "saleGridView";
             this.saleGridView.ReadOnly = true;
             this.saleGridView.Size = new System.Drawing.Size(745, 150);
@@ -564,15 +565,22 @@
             this.truckInventoryGridView.AllowUserToDeleteRows = false;
             this.truckInventoryGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.truckInventoryGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column25,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4});
-            this.truckInventoryGridView.Location = new System.Drawing.Point(800, 628);
+            this.truckInventoryGridView.Location = new System.Drawing.Point(763, 628);
             this.truckInventoryGridView.Name = "truckInventoryGridView";
             this.truckInventoryGridView.ReadOnly = true;
-            this.truckInventoryGridView.Size = new System.Drawing.Size(445, 150);
+            this.truckInventoryGridView.Size = new System.Drawing.Size(522, 150);
             this.truckInventoryGridView.TabIndex = 32;
+            // 
+            // Column25
+            // 
+            this.Column25.HeaderText = "Truck Number";
+            this.Column25.Name = "Column25";
+            this.Column25.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -602,7 +610,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1286, 802);
+            this.ClientSize = new System.Drawing.Size(1307, 802);
             this.Controls.Add(this.truckInventoryGridView);
             this.Controls.Add(this.inventoryGridView);
             this.Controls.Add(this.saleGridView);
@@ -704,6 +712,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column23;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column24;
         private System.Windows.Forms.DataGridView truckInventoryGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column25;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;

@@ -343,7 +343,7 @@ namespace IceCreamInventoryManagement
 
             for (int i = 0; i < myTrucks.Count(); i++)
             {
-                for (int k = 0; k < myTrucks.Count(); k++)
+                for (int k = 0; k < 5; k++)
                 {
                     InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
                     bool test = addTruckInventoryItem(myTrucks[i].trucknumber, new TruckInventoryItem(temp.itemnumber, DefaultOrder.defaults[k].amount, temp.initialprice, temp.saleprice));
@@ -352,62 +352,65 @@ namespace IceCreamInventoryManagement
             /////////////////////////////////////
             // SUBTRACT THE AMOUNT THAT YOU ADD TO THE TRUCKS
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            List<InventoryItem> myInventory = new List<InventoryItem>();
-
-            //myInventory = getAllTruckInventory();
-
             truckInventoryGridView.Rows.Clear();
-            for (int i = 0; i < myInventory.Count(); i++)
+
+            Dictionary<int, TruckInventoryItem> myInventory = new Dictionary<int, TruckInventoryItem>();
+            for (int k = 0; k < myTrucks.Count(); k++)
             {
-                truckInventoryGridView.Rows.Add(myInventory[i].itemnumber, myInventory[i].quantity, myInventory[i].initialprice, myInventory[i].saleprice);
+                myInventory = getTruckInventory(myTrucks[k].trucknumber);
+
+                foreach (KeyValuePair<int, TruckInventoryItem> item in myInventory)
+                {
+                    truckInventoryGridView.Rows.Add(myTrucks[k].trucknumber, item.Value.itemnumber, item.Value.quantity, item.Value.initialprice, item.Value.saleprice);
+                }
+
             }
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            int trucknumber = 0;
-            bool inTruck = false;
-            int itemsAdded = 0;
-            for (int i = 1; i < iceCreamtoTrucksFile.Length - 1; i++)
-            {
-                if (checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx).valid && inTruck == false)
-                {
-                    r = checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx);
-                    trucknumber = Int32.Parse(r.groupValues[2]);
-                    inTruck = true;
-                    Console.WriteLine("Filling truck " + trucknumber.ToString());
-                }
-                else if (checkRegex(iceCreamtoTrucksFile[i], truckItemEx).valid && inTruck == true)
-                {
-                    r = checkRegex(iceCreamtoTrucksFile[i], truckItemEx);
-                    int itemnumber = Int32.Parse(r.groupValues[1]);
-                    int amount = Int32.Parse(r.groupValues[2]);
-                    itemsAdded++;
-                    Console.WriteLine("Adding " + amount.ToString() + " of item " + itemnumber + " to truck " + trucknumber);
-                    //update amount
-                }
-                else if (checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx).valid && inTruck == true)
-                {
-                    r = checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx);
-                    int numberOfItems = Int32.Parse(r.groupValues[2]);
-                    if (numberOfItems != itemsAdded)
-                    {
-                        Console.WriteLine("Number of items in trailer does not match the number of items added");
-                    }
+            //int trucknumber = 0;
+            //bool inTruck = false;
+            //int itemsAdded = 0;
+            //for (int i = 1; i < iceCreamtoTrucksFile.Length - 1; i++)
+            //{
+            //    if (checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx).valid && inTruck == false)
+            //    {
+            //        r = checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx);
+            //        trucknumber = Int32.Parse(r.groupValues[2]);
+            //        inTruck = true;
+            //        Console.WriteLine("Filling truck " + trucknumber.ToString());
+            //    }
+            //    else if (checkRegex(iceCreamtoTrucksFile[i], truckItemEx).valid && inTruck == true)
+            //    {
+            //        r = checkRegex(iceCreamtoTrucksFile[i], truckItemEx);
+            //        int itemnumber = Int32.Parse(r.groupValues[1]);
+            //        int amount = Int32.Parse(r.groupValues[2]);
+            //        itemsAdded++;
+            //        Console.WriteLine("Adding " + amount.ToString() + " of item " + itemnumber + " to truck " + trucknumber);
+            //        //update amount
+            //    }
+            //    else if (checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx).valid && inTruck == true)
+            //    {
+            //        r = checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx);
+            //        int numberOfItems = Int32.Parse(r.groupValues[2]);
+            //        if (numberOfItems != itemsAdded)
+            //        {
+            //            Console.WriteLine("Number of items in trailer does not match the number of items added");
+            //        }
 
-                    inTruck = false;
-                    itemsAdded = 0;
-                    Console.WriteLine("Done filling truck " + trucknumber);
-                }
-                else
-                {
-                    //file is invalid in format
-                    Console.WriteLine("File is invalid in format");
-                }
-            }
+            //        inTruck = false;
+            //        itemsAdded = 0;
+            //        Console.WriteLine("Done filling truck " + trucknumber);
+            //    }
+            //    else
+            //    {
+            //        //file is invalid in format
+            //        Console.WriteLine("File is invalid in format");
+            //    }
+            //}
 
 
-            addToLog("Ice Cream to Trucks File Valid");
+            //addToLog("Ice Cream to Trucks File Valid");
         }
 
         private void btnTruckRouteUpload_Click(object sender, EventArgs e)
