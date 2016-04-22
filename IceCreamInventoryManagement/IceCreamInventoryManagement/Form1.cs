@@ -355,7 +355,7 @@ namespace IceCreamInventoryManagement
 
             List<InventoryItem> myInventory = new List<InventoryItem>();
 
-            myInventory = getAllTruckInventory();
+            //myInventory = getAllTruckInventory();
 
             truckInventoryGridView.Rows.Clear();
             for (int i = 0; i < myInventory.Count(); i++)

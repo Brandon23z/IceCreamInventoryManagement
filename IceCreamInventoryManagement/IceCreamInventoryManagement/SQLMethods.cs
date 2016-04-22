@@ -26,10 +26,10 @@ namespace IceCreamInventoryManagement
                 SQL.sqlnonquery("CREATE TABLE ZONES(citylabel VARCHAR(20) NOT NULL PRIMARY KEY, cityname VARCHAR(20) NOT NULL, state VARCHAR(2) NOT NULL);");
                 SQL.sqlnonquery("CREATE TABLE ROUTES(routenumber int NOT NULL PRIMARY KEY, citylabel1 VARCHAR(20) NOT NULL, citylabel2 VARCHAR(20), citylabel3 VARCHAR(20), citylabel4 VARCHAR(20), citylabel5 VARCHAR(20), citylabel6 VARCHAR(20), citylabel7 VARCHAR(20), citylabel8 VARCHAR(20), citylabel9 VARCHAR(20), citylabel10 VARCHAR(20));");
                 SQL.sqlnonquery("CREATE TABLE TRUCKS(trucknumber int NOT NULL PRIMARY KEY, routenumber int);");
-                SQL.sqlnonquery("CREATE TABLE TRUCKINVENTORY(trucknumber int NOT NULL PRIMARY KEY, itemnumber int NOT NULL, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL);");
-                SQL.sqlnonquery("CREATE TABLE INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(30));");
+                SQL.sqlnonquery("CREATE TABLE TRUCKINVENTORY(trucknumber int NOT NULL PRIMARY KEY, itemnumber int NOT NULL, quantity int NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL);");
+                SQL.sqlnonquery("CREATE TABLE INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, description VARCHAR(30));");
                 SQL.sqlnonquery("CREATE TABLE DRIVERS(drivernumber int NOT NULL PRIMARY KEY, trucknumber int);");
-                SQL.sqlnonquery("CREATE TABLE SALES(itemnumber int NOT NULL, quantity int NOT NULL, saledate timestamp NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, trucknumber int NOT NULL, routenumber int NOT NULL, drivernumber int NOT NULL);");
+                SQL.sqlnonquery("CREATE TABLE SALES(itemnumber int NOT NULL, quantity int NOT NULL, saledate timestamp NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, trucknumber int NOT NULL, routenumber int NOT NULL, drivernumber int NOT NULL);");
                 SQL.sqlnonquery("CREATE TABLE settings(key VARCHAR(30) NOT NULL PRIMARY KEY, val VARCHAR(300))");
             }
         }
@@ -410,7 +410,7 @@ namespace IceCreamInventoryManagement
 
         public static bool addInventoryItem(InventoryItem addItem)
         {
-            //INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(20));
+            //INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, description VARCHAR(20));
             SQLResult result = sqlquery("INSERT INTO INVENTORY VALUES (@itemnumber, @quantity, @initialprice, @saleprice, @description);",
                 new Dictionary<string, string>() { { "@itemnumber", addItem.itemnumber.ToString() }, { "@quantity", addItem.quantity.ToString() }
                     , { "@initialprice", addItem.initialprice.ToString() }, { "@saleprice", addItem.saleprice.ToString() }, { "@description", addItem.description }});
