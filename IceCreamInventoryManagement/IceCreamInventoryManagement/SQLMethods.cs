@@ -26,7 +26,7 @@ namespace IceCreamInventoryManagement
                 SQL.sqlnonquery("CREATE TABLE ZONES(citylabel VARCHAR(20) NOT NULL PRIMARY KEY, cityname VARCHAR(20) NOT NULL, state VARCHAR(2) NOT NULL);");
                 SQL.sqlnonquery("CREATE TABLE ROUTES(routenumber int NOT NULL PRIMARY KEY, citylabel1 VARCHAR(20) NOT NULL, citylabel2 VARCHAR(20), citylabel3 VARCHAR(20), citylabel4 VARCHAR(20), citylabel5 VARCHAR(20), citylabel6 VARCHAR(20), citylabel7 VARCHAR(20), citylabel8 VARCHAR(20), citylabel9 VARCHAR(20), citylabel10 VARCHAR(20));");
                 SQL.sqlnonquery("CREATE TABLE TRUCKS(trucknumber int NOT NULL PRIMARY KEY, routenumber int);");
-                SQL.sqlnonquery("CREATE TABLE TRUCKINVENTORY(trucknumber int NOT NULL, itemnumber int NOT NULL, quantity int NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL);");
+                SQL.sqlnonquery("CREATE TABLE TRUCKINVENTORY(trucknumber int NOT NULL, itemnumber int NOT NULL, quantity int NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, PRIMARY KEY(trucknumber,itemnumber));");
                 SQL.sqlnonquery("CREATE TABLE INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, description VARCHAR(30));");
                 SQL.sqlnonquery("CREATE TABLE DRIVERS(drivernumber int NOT NULL PRIMARY KEY, trucknumber int);");
                 SQL.sqlnonquery("CREATE TABLE SALES(itemnumber int NOT NULL, quantity int NOT NULL, saledate timestamp NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, trucknumber int NOT NULL, routenumber int NOT NULL, drivernumber int NOT NULL);");
@@ -335,7 +335,7 @@ namespace IceCreamInventoryManagement
 
         public static bool addTruckInventoryItem(int truckNumber, TruckInventoryItem addItem)
         {
-            SQLResult result = sqlquery("INSERT INTO TRUCKINVENTORY VALUES (@trucknumber, @itemnumber, @quantity, @initialprice, @saleprice);",
+            SQLResult result = sqlquery("UPDATE or INSERT INTO TRUCKINVENTORY VALUES (@trucknumber, @itemnumber, COALESCE((SELECT quantity FROM TRUCKINVENTORY WHERE trucknumber = @trucknumber AND itemnumber = @itemnumber)+@quantity, @quantity), @initialprice, @saleprice);",
                 new Dictionary<string, string>() { { "@trucknumber", truckNumber.ToString() }, { "@itemnumber", addItem.itemnumber.ToString() }
                 , { "@quantity", addItem.quantity.ToString() }, { "@initialprice", addItem.initialprice.ToString() }, { "@saleprice", addItem.saleprice.ToString() }});
             if (result.error == SQLError.none && result.rowsAffected == 1)
@@ -405,6 +405,83 @@ namespace IceCreamInventoryManagement
             else
             {
                 return null;
+            }
+        }
+
+        public static bool setInventoryItem(int itemnumber, int quantity, int initialprice = 0, int saleprice = 0, string description = "")
+        {
+            string query = "UPDATE INVENTORY set quantity = @quantity ";
+            if(initialprice != 0)
+            {
+                query += "initialprice = @initialprice ";
+            }
+            if (saleprice != 0)
+            {
+                query += "saleprice = @saleprice ";
+            }
+            if(description.Replace(" ", "") != "")
+            {
+                query += "description = @description ";
+            }
+
+            query += " WHERE itemnumber = @itemnumber;";
+            SQLResult result = sqlquery(query,
+                new Dictionary<string, string>() { { "@itemnumber", itemnumber.ToString() }, { "@quantity", quantity.ToString() }
+                , { "@initialprice", initialprice.ToString() }, { "@saleprice", saleprice.ToString() }, { "@description", description.ToString() }});
+            if (result.error == SQLError.none && result.rowsAffected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static int moveItemToTruck(int itemnumber, int trucknumber, int quantityDifference)
+        {
+            InventoryItem item = getInventoryItem(itemnumber);
+            Truck truck = getTruck(trucknumber);
+            if (item != null && truck != null && quantityDifference != 0)
+            {
+                int giveAmount = 0;
+                int setAmount = item.quantity;
+                if (item.quantity + quantityDifference > 0)
+                {
+                    giveAmount = quantityDifference;
+                    setAmount = item.quantity + quantityDifference;
+                }
+                else
+                {
+                    giveAmount = -item.quantity;
+                    setAmount = 0;
+                }
+
+                SQLResult result = sqlquery("UPDATE INVENTORY set quantity = @quantity WHERE itemnumber = @itemnumber;",
+                    new Dictionary<string, string>() { { "@itemnumber", itemnumber.ToString() }, { "@quantity", setAmount.ToString() } });
+                if (result.error == SQLError.none && result.rowsAffected == 1)
+                {
+                    item.quantity = item.quantity + (-giveAmount);
+                    TruckInventoryItem truckItem = new TruckInventoryItem(item.itemnumber, item.quantity, item.initialprice, item.saleprice);
+                    bool success = addTruckInventoryItem(truck.trucknumber, truckItem);
+                    if (success)
+                    {
+                        return giveAmount;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+            else
+            {
+                return 0;
             }
         }
 
