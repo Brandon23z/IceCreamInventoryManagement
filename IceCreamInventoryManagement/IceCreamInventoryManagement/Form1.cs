@@ -336,6 +336,35 @@ namespace IceCreamInventoryManagement
                 addToLog("Ice Cream to Trucks File Invalid: Trailer # does not match Actual # of Rows");
             }
 
+            //add default inventory to each truck
+            List<Truck> myTrucks = new List<Truck>();
+
+            myTrucks = getAllTrucks();
+
+            for (int i = 0; i < myTrucks.Count(); i++)
+            {
+                for (int k = 0; k < myTrucks.Count(); k++)
+                {
+                    InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
+                    bool test = addTruckInventoryItem(myTrucks[i].trucknumber, new TruckInventoryItem(temp.itemnumber, DefaultOrder.defaults[k].amount, temp.initialprice, temp.saleprice));
+                }
+            }
+            /////////////////////////////////////
+            // SUBTRACT THE AMOUNT THAT YOU ADD TO THE TRUCKS
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            List<InventoryItem> myInventory = new List<InventoryItem>();
+
+            myInventory = getAllTruckInventory();
+
+            truckInventoryGridView.Rows.Clear();
+            for (int i = 0; i < myInventory.Count(); i++)
+            {
+                truckInventoryGridView.Rows.Add(myInventory[i].itemnumber, myInventory[i].quantity, myInventory[i].initialprice, myInventory[i].saleprice);
+            }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             int trucknumber = 0;
             bool inTruck = false;
             int itemsAdded = 0;
@@ -361,7 +390,7 @@ namespace IceCreamInventoryManagement
                 {
                     r = checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx);
                     int numberOfItems = Int32.Parse(r.groupValues[2]);
-                    if(numberOfItems != itemsAdded)
+                    if (numberOfItems != itemsAdded)
                     {
                         Console.WriteLine("Number of items in trailer does not match the number of items added");
                     }
@@ -524,10 +553,10 @@ namespace IceCreamInventoryManagement
 
             myInventory = getInventory();
 
-            saleGridView.Rows.Clear();
+            inventoryGridView.Rows.Clear();
             for (int i = 0; i < myInventory.Count(); i++)
             {
-                saleGridView.Rows.Add(myInventory[i].itemnumber, myInventory[i].quantity, myInventory[i].initialprice, myInventory[i].saleprice);
+                inventoryGridView.Rows.Add(myInventory[i].itemnumber, myInventory[i].quantity, myInventory[i].initialprice, myInventory[i].saleprice);
             }
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
