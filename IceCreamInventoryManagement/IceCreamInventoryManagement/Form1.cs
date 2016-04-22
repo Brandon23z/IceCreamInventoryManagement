@@ -348,29 +348,12 @@ namespace IceCreamInventoryManagement
                     
                     InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
                     int change = DefaultOrder.defaults[k].amount * (-1);
-                    int myTest = moveItemToTruck(temp.itemnumber, change);
-                    myTest = myTest * (-1);
-                    bool test = addTruckInventoryItem(myTrucks[i].trucknumber, new TruckInventoryItem(temp.itemnumber, myTest, temp.initialprice, temp.saleprice));
+                    int myTest = moveItem(temp.itemnumber, myTrucks[i].trucknumber, change);
                 }
             }
             /////////////////////////////////////
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            truckInventoryGridView.Rows.Clear();
 
-            Dictionary<int, TruckInventoryItem> myInventory = new Dictionary<int, TruckInventoryItem>();
-            for (int k = 0; k < myTrucks.Count(); k++)
-            {
-                myInventory = getTruckInventory(myTrucks[k].trucknumber);
-
-                foreach (KeyValuePair<int, TruckInventoryItem> item in myInventory)
-                {
-                    truckInventoryGridView.Rows.Add(myTrucks[k].trucknumber, item.Value.itemnumber, item.Value.quantity, item.Value.initialprice, item.Value.saleprice);
-                }
-
-            }
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //int trucknumber = 0;
             //bool inTruck = false;
@@ -415,6 +398,23 @@ namespace IceCreamInventoryManagement
 
 
             //addToLog("Ice Cream to Trucks File Valid");
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            truckInventoryGridView.Rows.Clear();
+
+            Dictionary<int, TruckInventoryItem> myInventory = new Dictionary<int, TruckInventoryItem>();
+            for (int k = 0; k < myTrucks.Count(); k++)
+            {
+                myInventory = getTruckInventory(myTrucks[k].trucknumber);
+
+                foreach (KeyValuePair<int, TruckInventoryItem> item in myInventory)
+                {
+                    truckInventoryGridView.Rows.Add(myTrucks[k].trucknumber, item.Value.itemnumber, item.Value.quantity, item.Value.initialprice, item.Value.saleprice);
+                }
+
+            }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         private void btnTruckRouteUpload_Click(object sender, EventArgs e)
@@ -538,14 +538,12 @@ namespace IceCreamInventoryManagement
 
             //clearInventory();
 
-            List<InventoryItem> myInventory = new List<InventoryItem>();
 
-            myInventory = getInventory();
 
-            for (int i = 0; i < myInventory.Count(); i++)
-            {
-                bool test = setInventoryItem(myInventory[i].itemnumber, 0);
-            }
+            //for (int i = 0; i < myInventory.Count(); i++)
+            //{
+            //    bool test = setInventoryItem(myInventory[i].itemnumber, 0);
+            //}
 
             for (int i = 1; i < inventoryUpdateFile.Length - 1; i++)
             {
@@ -566,7 +564,9 @@ namespace IceCreamInventoryManagement
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            
+            List<InventoryItem> myInventory = new List<InventoryItem>();
+
+            myInventory = getInventory();
 
             inventoryGridView.Rows.Clear();
             for (int i = 0; i < myInventory.Count(); i++)

@@ -438,7 +438,15 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        public static int moveItemToTruck(int itemnumber, int trucknumber, int quantityDifference)
+        /// <summary>
+        /// Negative quantityDifference = moves from inventory to truck
+        /// Positive quantityDifference = moves from truck to inventory
+        /// </summary>
+        /// <param name="itemnumber"></param>
+        /// <param name="trucknumber"></param>
+        /// <param name="quantityDifference"></param>
+        /// <returns></returns>
+        public static int moveItem(int itemnumber, int trucknumber, int quantityDifference)
         {
             InventoryItem item = getInventoryItem(itemnumber);
             Truck truck = getTruck(trucknumber);
