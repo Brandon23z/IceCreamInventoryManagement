@@ -345,12 +345,16 @@ namespace IceCreamInventoryManagement
             {
                 for (int k = 0; k < 5; k++)
                 {
+                    
                     InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
-                    bool test = addTruckInventoryItem(myTrucks[i].trucknumber, new TruckInventoryItem(temp.itemnumber, DefaultOrder.defaults[k].amount, temp.initialprice, temp.saleprice));
+                    int change = DefaultOrder.defaults[k].amount * (-1);
+                    int myTest = moveItemToTruck(temp.itemnumber, change);
+                    myTest = myTest * (-1);
+                    bool test = addTruckInventoryItem(myTrucks[i].trucknumber, new TruckInventoryItem(temp.itemnumber, myTest, temp.initialprice, temp.saleprice));
                 }
             }
             /////////////////////////////////////
-            // SUBTRACT THE AMOUNT THAT YOU ADD TO THE TRUCKS
+
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             truckInventoryGridView.Rows.Clear();
 
@@ -532,7 +536,17 @@ namespace IceCreamInventoryManagement
                 addToLog("Inventory Upload File Invalid: Trailer # does not match Actual # of Rows");
             }
 
-            clearInventory();
+            //clearInventory();
+
+            List<InventoryItem> myInventory = new List<InventoryItem>();
+
+            myInventory = getInventory();
+
+            for (int i = 0; i < myInventory.Count(); i++)
+            {
+                bool test = setInventoryItem(myInventory[i].itemnumber, 0);
+            }
+
             for (int i = 1; i < inventoryUpdateFile.Length - 1; i++)
             {
                 r = checkRegex(inventoryUpdateFile[i], inventoryItemEx);
@@ -552,9 +566,7 @@ namespace IceCreamInventoryManagement
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            List<InventoryItem> myInventory = new List<InventoryItem>();
-
-            myInventory = getInventory();
+            
 
             inventoryGridView.Rows.Clear();
             for (int i = 0; i < myInventory.Count(); i++)
