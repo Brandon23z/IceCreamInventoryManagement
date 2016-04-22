@@ -248,13 +248,43 @@ namespace IceCreamInventoryManagement
             openFileDialog1.Title = "Select an Input File";
 
             string[] salesFile = { "" };
+            DateTime date = Convert.ToDateTime("1970-01-01");
+            string seqNum = "";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 salesFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
                 addToLog("Sales File Read");
+            }else
+            {
+                return;
             }
 
+            //Check and parse header
+            RegexClass r = checkRegex(salesFile[0], headerEx);
+            if (r.valid)
+            {
+                seqNum = r.groupValues[2];
+                string dateString = r.groupValues[3];
+                date = Convert.ToDateTime(dateString);
+            }
+
+            //check and parse trailer
+            r = checkRegex(salesFile[salesFile.Length - 1], trailerEx);
+
+            int numOfRows = 0;
+
+            if (r.valid)
+            {
+                string numOfRowsString = r.groupValues[2];
+                numOfRows = Int32.Parse(numOfRowsString);
+            }
+
+
+            if (numOfRows != salesFile.Length - 2)
+            {
+                addToLog("Ice Cream from Trucks File Invalid: Trailer # does not match Actual # of Rows");
+            }
 
 
             if (TextSetting.dailyInventoryCalculated == true)
@@ -435,12 +465,72 @@ namespace IceCreamInventoryManagement
             openFileDialog1.Title = "Select an Input File";
 
             string[] inventoryUpdateFile = { "" };
+            DateTime date = Convert.ToDateTime("1970-01-01");
+            string seqNum = "";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 inventoryUpdateFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
                 addToLog("Inventory Update File Read");
             }
+
+            //Check and parse header
+            RegexClass r = checkRegex(inventoryUpdateFile[0], headerEx);
+            if (r.valid)
+            {
+                seqNum = r.groupValues[2];
+                string dateString = r.groupValues[3];
+                date = Convert.ToDateTime(dateString);
+            }
+
+            //check and parse trailer
+            r = checkRegex(inventoryUpdateFile[inventoryUpdateFile.Length - 1], trailerEx);
+
+            int numOfRows = 0;
+
+            if (r.valid)
+            {
+                string numOfRowsString = r.groupValues[2];
+                numOfRows = Int32.Parse(numOfRowsString);
+            }
+
+
+            if (numOfRows != inventoryUpdateFile.Length - 2)
+            {
+                addToLog("Inventory Upload File Invalid: Trailer # does not match Actual # of Rows");
+            }
+
+            clearInventory();
+            for (int i = 1; i < inventoryUpdateFile.Length - 1; i++)
+            {
+                r = checkRegex(inventoryUpdateFile[i], inventoryItemEx);
+                if (r.valid)
+                {
+                    int itemnumber = Int32.Parse(r.groupValues[1]);
+                    int quantity = Int32.Parse(r.groupValues[2]);
+                    double initialprice = Convert.ToDouble(r.groupValues[3] + "." + r.groupValues[4]);
+                    double saleprice = Int32.Parse(r.groupValues[5]);
+                    string description = r.groupValues[6];
+                    bool test = addInventoryItem(new InventoryItem(itemnumber, quantity, initialprice, saleprice, description));
+                }
+            }
+
+
+            addToLog("Inventory Upload File Valid");
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            List<InventoryItem> myInventory = new List<InventoryItem>();
+
+            myInventory = getInventory();
+
+            saleGridView.Rows.Clear();
+            for (int i = 0; i < myInventory.Count(); i++)
+            {
+                saleGridView.Rows.Add(myInventory[i].itemnumber, myInventory[i].quantity, myInventory[i].initialprice, myInventory[i].saleprice);
+            }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
         }
