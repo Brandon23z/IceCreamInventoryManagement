@@ -356,49 +356,52 @@ namespace IceCreamInventoryManagement
 
 
 
-            //int trucknumber = 0;
-            //bool inTruck = false;
-            //int itemsAdded = 0;
-            //for (int i = 1; i < iceCreamtoTrucksFile.Length - 1; i++)
-            //{
-            //    if (checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx).valid && inTruck == false)
-            //    {
-            //        r = checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx);
-            //        trucknumber = Int32.Parse(r.groupValues[2]);
-            //        inTruck = true;
-            //        Console.WriteLine("Filling truck " + trucknumber.ToString());
-            //    }
-            //    else if (checkRegex(iceCreamtoTrucksFile[i], truckItemEx).valid && inTruck == true)
-            //    {
-            //        r = checkRegex(iceCreamtoTrucksFile[i], truckItemEx);
-            //        int itemnumber = Int32.Parse(r.groupValues[1]);
-            //        int amount = Int32.Parse(r.groupValues[2]);
-            //        itemsAdded++;
-            //        Console.WriteLine("Adding " + amount.ToString() + " of item " + itemnumber + " to truck " + trucknumber);
-            //        //update amount
-            //    }
-            //    else if (checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx).valid && inTruck == true)
-            //    {
-            //        r = checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx);
-            //        int numberOfItems = Int32.Parse(r.groupValues[2]);
-            //        if (numberOfItems != itemsAdded)
-            //        {
-            //            Console.WriteLine("Number of items in trailer does not match the number of items added");
-            //        }
+            int trucknumber = 0;
+            bool inTruck = false;
+            int itemsAdded = 0;
+            for (int i = 1; i < iceCreamtoTrucksFile.Length - 1; i++)
+            {
+                if (checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx).valid && inTruck == false)
+                {
+                    r = checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx);
+                    trucknumber = Int32.Parse(r.groupValues[2]);
+                    inTruck = true;
+                    Console.WriteLine("Filling truck " + trucknumber.ToString());
+                }
+                else if (checkRegex(iceCreamtoTrucksFile[i], truckItemEx).valid && inTruck == true)
+                {
+                    r = checkRegex(iceCreamtoTrucksFile[i], truckItemEx);
+                    int itemnumber = Int32.Parse(r.groupValues[1]);
+                    int amount = Int32.Parse(r.groupValues[2]);
+                    itemsAdded++;
+                    Console.WriteLine("Adding " + amount.ToString() + " of item " + itemnumber + " to truck " + trucknumber);
+                    //update amount
 
-            //        inTruck = false;
-            //        itemsAdded = 0;
-            //        Console.WriteLine("Done filling truck " + trucknumber);
-            //    }
-            //    else
-            //    {
-            //        //file is invalid in format
-            //        Console.WriteLine("File is invalid in format");
-            //    }
-            //}
+                    amount = -amount;
+                    int myTest = moveItem(itemnumber, trucknumber, amount);
+                }
+                else if (checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx).valid && inTruck == true)
+                {
+                    r = checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx);
+                    int numberOfItems = Int32.Parse(r.groupValues[2]);
+                    if (numberOfItems != itemsAdded)
+                    {
+                        Console.WriteLine("Number of items in trailer does not match the number of items added");
+                    }
+
+                    inTruck = false;
+                    itemsAdded = 0;
+                    Console.WriteLine("Done filling truck " + trucknumber);
+                }
+                else
+                {
+                    //file is invalid in format
+                    Console.WriteLine("File is invalid in format");
+                }
+            }
 
 
-            //addToLog("Ice Cream to Trucks File Valid");
+            addToLog("Ice Cream to Trucks File Valid");
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             truckInventoryGridView.Rows.Clear();
@@ -553,11 +556,14 @@ namespace IceCreamInventoryManagement
             //clearInventory();
 
 
+            List<InventoryItem> myInventory1 = new List<InventoryItem>();
 
-            //for (int i = 0; i < myInventory.Count(); i++)
-            //{
-            //    bool test = setInventoryItem(myInventory[i].itemnumber, 0);
-            //}
+            myInventory1 = getInventory();
+
+            for (int i = 0; i < myInventory1.Count(); i++)
+            {
+                bool test = setInventoryItem(myInventory1[i].itemnumber, 0);
+            }
 
             for (int i = 1; i < inventoryUpdateFile.Length - 1; i++)
             {
