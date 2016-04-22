@@ -38,7 +38,7 @@ namespace IceCreamInventoryManagement
 
         //LOAD INVENTORY UPDATE//
         //|Item Number||Warehouse Quantity||Price||Description|
-        public const string inventoryItemEx = @"^(\d{4})(\d{6})((\d{4})(.{0,30}))?(?: )*$";
+        public const string inventoryItemEx = @"^(\d{4})(\d{6})(\d{2})(\d{2})(\d{2})(\d{2})(.{0,30})(?: )*$";
 
         //LOAD TRUCK ROUTE//
         //|Truck Number||Route Number||Driver Number|

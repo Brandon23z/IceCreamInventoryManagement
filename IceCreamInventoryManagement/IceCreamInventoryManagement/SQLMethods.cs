@@ -30,6 +30,7 @@ namespace IceCreamInventoryManagement
                 SQL.sqlnonquery("CREATE TABLE INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, description VARCHAR(30));");
                 SQL.sqlnonquery("CREATE TABLE DRIVERS(drivernumber int NOT NULL PRIMARY KEY, trucknumber int);");
                 SQL.sqlnonquery("CREATE TABLE SALES(itemnumber int NOT NULL, quantity int NOT NULL, saledate timestamp NOT NULL, initialprice decimal NOT NULL, saleprice decimal NOT NULL, trucknumber int NOT NULL, routenumber int NOT NULL, drivernumber int NOT NULL);");
+                SQL.sqlnonquery("CREATE TABLE settings(key VARCHAR(30) NOT NULL PRIMARY KEY, val VARCHAR(300))");
             }
         }
 
@@ -521,5 +522,39 @@ namespace IceCreamInventoryManagement
         }
         #endregion
         //DRIVERS//
+
+        //SETTINGS/
+        #region SETTINGS
+        public static bool insertSetting(string setting, string value, bool overwrite = true)
+        {
+            string sql = "UPDATE or INSERT INTO SETTINGS (key, val) VALUES (@setting, @value)";
+            if (overwrite == false)
+            {
+                sql = "INSERT INTO SETTINGS (key, val) VALUES (@setting, @value)";
+            }
+            SQLResult queryResult = sqlnonquery(sql,
+                new Dictionary<string, string>() { { "@setting", setting }, { "@value", value } });
+            if (queryResult.rowsAffected == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static string retrieveSetting(string setting)
+        {
+            string value = "";
+            string sql = "SELECT val FROM SETTINGS WHERE key = @setting";
+            SQLResult queryResult = sqlquery(sql,
+                new Dictionary<string, string>() { { "@setting", setting } });
+            if (queryResult.error == SQLError.none && queryResult.data != null && queryResult.data.data.Count == 1)
+            {
+                value = queryResult.data.getField(0, "val");
+            }
+
+            return value;
+        }
+        #endregion
+        //SETTINGS//
     }
 }

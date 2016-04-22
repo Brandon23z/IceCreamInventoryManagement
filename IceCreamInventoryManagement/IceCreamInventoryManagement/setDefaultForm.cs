@@ -31,6 +31,7 @@ namespace IceCreamInventoryManagement
             defaultA[2] = new DefaultItem(Convert.ToInt32(nudItem3Product.Value), Convert.ToInt32(nudItem3Quantity.Value));
             defaultA[3] = new DefaultItem(Convert.ToInt32(nudItem4Product.Value), Convert.ToInt32(nudItem4Quantity.Value));
             defaultA[4] = new DefaultItem(Convert.ToInt32(nudItem5Product.Value), Convert.ToInt32(nudItem5Quantity.Value));
+            string value = nudItem1Product.Value.ToString() + ":" + nudItem1Quantity.Value.ToString();
             DefaultOrder.defaults = defaultA;
             this.Close();
         }

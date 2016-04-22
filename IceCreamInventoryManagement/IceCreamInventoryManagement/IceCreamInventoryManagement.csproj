@@ -80,6 +80,7 @@
     <Compile Include="setDefaultForm.Designer.cs">
       <DependentUpon>setDefaultForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="settingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
