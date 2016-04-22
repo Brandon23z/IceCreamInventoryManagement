@@ -34,6 +34,18 @@ namespace IceCreamInventoryManagement
             }
         }
 
+        public static void clearDatabase()
+        {
+            SQL.sqlnonquery("DELETE FROM ZONES");
+            SQL.sqlnonquery("DELETE FROM ROUTES");
+            SQL.sqlnonquery("DELETE FROM TRUCKS");
+            SQL.sqlnonquery("DELETE FROM TRUCKINVENTORY");
+            SQL.sqlnonquery("DELETE FROM INVENTORY");
+            SQL.sqlnonquery("DELETE FROM DRIVERS");
+            SQL.sqlnonquery("DELETE FROM SALES");
+            SQL.sqlnonquery("DELETE FROM settings");
+        }
+
         //ZONE//
         #region ZONE
         public static Zone getZone(string getCityLabel)
@@ -77,7 +89,7 @@ namespace IceCreamInventoryManagement
 
         public static bool addZone(Zone addCityLabel)
         {
-            SQLResult result = sqlquery("INSERT INTO ZONES (citylabel, cityname, state) VALUES (@citylabel, @cityname, @state);",
+            SQLResult result = sqlnonquery("INSERT INTO ZONES (citylabel, cityname, state) VALUES (@citylabel, @cityname, @state);",
                 new Dictionary<string, string>() { { "@citylabel", addCityLabel.citylabel }, { "@cityname", addCityLabel.cityname }, { "@state", addCityLabel.state } });
             if(result.error == SQLError.none && result.rowsAffected == 1)
             {
@@ -91,7 +103,7 @@ namespace IceCreamInventoryManagement
 
         public static bool clearZones()
         {
-            SQLResult result = sqlquery("DELETE FROM ZONES;");
+            SQLResult result = sqlnonquery("DELETE FROM ZONES;");
             if (result.error == SQLError.none)
             {
                 return true;
@@ -166,7 +178,7 @@ namespace IceCreamInventoryManagement
 
         public static bool addRoute(Route addRoute)
         {
-            SQLResult result = sqlquery("INSERT INTO ROUTES VALUES (@routenumber, @citylabel1, @citylabel2, @citylabel3, @citylabel4, @citylabel5, @citylabel6, @citylabel7, @citylabel8, @citylabel9, @citylabel10);",
+            SQLResult result = sqlnonquery("INSERT INTO ROUTES VALUES (@routenumber, @citylabel1, @citylabel2, @citylabel3, @citylabel4, @citylabel5, @citylabel6, @citylabel7, @citylabel8, @citylabel9, @citylabel10);",
                 new Dictionary<string, string>() { { "@routenumber", addRoute.routenumber.ToString() }, { "@citylabel1", addRoute.cityLabels[0] }, { "@citylabel2", addRoute.cityLabels[1] }
                                                 , { "@citylabel3", addRoute.cityLabels[2] }, { "@citylabel4", addRoute.cityLabels[3] }, { "@citylabel5", addRoute.cityLabels[4] }
                                                 , { "@citylabel6", addRoute.cityLabels[5] }, { "@citylabel7", addRoute.cityLabels[6] }, { "@citylabel8", addRoute.cityLabels[7] }
@@ -182,7 +194,7 @@ namespace IceCreamInventoryManagement
         }
         public static bool updateRoute(Route addRoute)
         {
-            SQLResult result = sqlquery("UPDATE ROUTES set citylabel1 = @citylabel1, citylabel2 = @citylabel2, " +
+            SQLResult result = sqlnonquery("UPDATE ROUTES set citylabel1 = @citylabel1, citylabel2 = @citylabel2, " +
                                         "citylabel3 = @citylabel3, citylabel4 = @citylabel4, citylabel5 = @citylabel5, citylabel6 = @citylabel6, " +
                                         "citylabel7 = @citylabel7, citylabel8 = @citylabel8, citylabel9 = @citylabel9, citylabel10 = @citylabel10 where routenumber = @routenumber;",
                 new Dictionary<string, string>() { { "@routenumber", addRoute.routenumber.ToString() }, { "@citylabel1", addRoute.cityLabels[0] }, { "@citylabel2", addRoute.cityLabels[1] }
@@ -201,7 +213,7 @@ namespace IceCreamInventoryManagement
 
         public static bool clearRoutes()
         {
-            SQLResult result = sqlquery("DELETE FROM ROUTES;");
+            SQLResult result = sqlnonquery("DELETE FROM ROUTES;");
             if (result.error == SQLError.none)
             {
                 return true;
@@ -213,7 +225,7 @@ namespace IceCreamInventoryManagement
         }
         public static bool deleteRoute(int routeID)
         {
-            SQLResult result = sqlquery("DELETE FROM ROUTES WHERE routenumber=@routenumber;", new Dictionary<string, string>() { { "@routenumber", routeID.ToString() } });
+            SQLResult result = sqlnonquery("DELETE FROM ROUTES WHERE routenumber=@routenumber;", new Dictionary<string, string>() { { "@routenumber", routeID.ToString() } });
             if (result.error == SQLError.none)
             {
                 return true;
@@ -266,7 +278,7 @@ namespace IceCreamInventoryManagement
 
         public static bool addTruck(Truck addTruck)
         {
-            SQLResult result = sqlquery("INSERT INTO TRUCKS VALUES (@trucknumber, @routenumber);",
+            SQLResult result = sqlnonquery("INSERT INTO TRUCKS VALUES (@trucknumber, @routenumber);",
                 new Dictionary<string, string>() { { "@trucknumber", addTruck.trucknumber.ToString() }, { "@routenumber", addTruck.routenumber.ToString() } });
             if (result.error == SQLError.none && result.rowsAffected == 1)
             {
@@ -280,7 +292,7 @@ namespace IceCreamInventoryManagement
 
         public static bool assignTruckToRoute(int trucknumber, int routenumber)
         {
-            SQLResult result = sqlquery("UPDATE TRUCKS set routenumber = @routenumber WHERE trucknumber = @trucknumber;",
+            SQLResult result = sqlnonquery("UPDATE TRUCKS set routenumber = @routenumber WHERE trucknumber = @trucknumber;",
                 new Dictionary<string, string>() { { "@trucknumber", trucknumber.ToString() }, { "@routenumber", routenumber.ToString() } });
             if (result.error == SQLError.none && result.rowsAffected == 1)
             {
@@ -293,7 +305,7 @@ namespace IceCreamInventoryManagement
         }
         public static bool clearTrucks()
         {
-            SQLResult result = sqlquery("DELETE FROM TRUCKS;");
+            SQLResult result = sqlnonquery("DELETE FROM TRUCKS;");
             if (result.error == SQLError.none)
             {
                 return true;
@@ -335,7 +347,7 @@ namespace IceCreamInventoryManagement
 
         public static bool addTruckInventoryItem(int truckNumber, TruckInventoryItem addItem)
         {
-            SQLResult result = sqlquery("UPDATE or INSERT INTO TRUCKINVENTORY VALUES (@trucknumber, @itemnumber, COALESCE((SELECT quantity FROM TRUCKINVENTORY WHERE trucknumber = @trucknumber AND itemnumber = @itemnumber)+@quantity, @quantity), @initialprice, @saleprice);",
+            SQLResult result = sqlnonquery("UPDATE or INSERT INTO TRUCKINVENTORY VALUES (@trucknumber, @itemnumber, COALESCE((SELECT quantity FROM TRUCKINVENTORY WHERE trucknumber = @trucknumber AND itemnumber = @itemnumber)+@quantity, @quantity), @initialprice, @saleprice);",
                 new Dictionary<string, string>() { { "@trucknumber", truckNumber.ToString() }, { "@itemnumber", addItem.itemnumber.ToString() }
                 , { "@quantity", addItem.quantity.ToString() }, { "@initialprice", addItem.initialprice.ToString() }, { "@saleprice", addItem.saleprice.ToString() }});
             if (result.error == SQLError.none && result.rowsAffected == 1)
@@ -350,7 +362,7 @@ namespace IceCreamInventoryManagement
 
         public static bool clearAllTruckInventory()
         {
-            SQLResult result = sqlquery("DELETE FROM TRUCKINVENTORY;");
+            SQLResult result = sqlnonquery("DELETE FROM TRUCKINVENTORY;");
             if (result.error == SQLError.none)
             {
                 return true;
@@ -425,7 +437,7 @@ namespace IceCreamInventoryManagement
             }
 
             query += " WHERE itemnumber = @itemnumber;";
-            SQLResult result = sqlquery(query,
+            SQLResult result = sqlnonquery(query,
                 new Dictionary<string, string>() { { "@itemnumber", itemnumber.ToString() }, { "@quantity", quantity.ToString() }
                 , { "@initialprice", initialprice.ToString() }, { "@saleprice", saleprice.ToString() }, { "@description", description.ToString() }});
             if (result.error == SQLError.none && result.rowsAffected == 1)
@@ -465,11 +477,12 @@ namespace IceCreamInventoryManagement
                     setAmount = 0;
                 }
 
-                SQLResult result = sqlquery("UPDATE INVENTORY set quantity = @quantity WHERE itemnumber = @itemnumber;",
+                SQLResult result = sqlnonquery("UPDATE INVENTORY set quantity = @quantity WHERE itemnumber = @itemnumber;",
                     new Dictionary<string, string>() { { "@itemnumber", itemnumber.ToString() }, { "@quantity", setAmount.ToString() } });
+                int rows = result.rowsAffected;
                 if (result.error == SQLError.none && result.rowsAffected == 1)
                 {
-                    item.quantity = item.quantity + (-giveAmount);
+                    item.quantity = (-giveAmount);
                     TruckInventoryItem truckItem = new TruckInventoryItem(item.itemnumber, item.quantity, item.initialprice, item.saleprice);
                     bool success = addTruckInventoryItem(truck.trucknumber, truckItem);
                     if (success)
@@ -496,7 +509,7 @@ namespace IceCreamInventoryManagement
         public static bool addInventoryItem(InventoryItem addItem)
         {
             //INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, description VARCHAR(20));
-            SQLResult result = sqlquery("INSERT INTO INVENTORY VALUES (@itemnumber, @quantity, @initialprice, @saleprice, @description);",
+            SQLResult result = sqlnonquery("INSERT INTO INVENTORY VALUES (@itemnumber, @quantity, @initialprice, @saleprice, @description);",
                 new Dictionary<string, string>() { { "@itemnumber", addItem.itemnumber.ToString() }, { "@quantity", addItem.quantity.ToString() }
                     , { "@initialprice", addItem.initialprice.ToString() }, { "@saleprice", addItem.saleprice.ToString() }, { "@description", addItem.description }});
             if (result.error == SQLError.none && result.rowsAffected == 1)
@@ -511,7 +524,7 @@ namespace IceCreamInventoryManagement
 
         public static bool clearInventory()
         {
-            SQLResult result = sqlquery("DELETE FROM INVENTORY;");
+            SQLResult result = sqlnonquery("DELETE FROM INVENTORY;");
             if (result.error == SQLError.none)
             {
                 return true;
@@ -567,7 +580,7 @@ namespace IceCreamInventoryManagement
         {
             //SQL.sqlnonquery("CREATE TABLE DRIVERS(drivernumber int NOT NULL PRIMARY KEY, int trucknumber);");
 
-            SQLResult result = sqlquery("INSERT INTO DRIVERS VALUES (@drivernumber, @trucknumber);",
+            SQLResult result = sqlnonquery("INSERT INTO DRIVERS VALUES (@drivernumber, @trucknumber);",
                 new Dictionary<string, string>() { { "@drivernumber", addDriver.drivernumber.ToString() }, { "@trucknumber", addDriver.trucknumber.ToString() } });
             if (result.error == SQLError.none && result.rowsAffected == 1)
             {
@@ -581,7 +594,7 @@ namespace IceCreamInventoryManagement
 
         public static bool assignDriverToTruck(int drivernumber, int trucknumber)
         {
-            SQLResult result = sqlquery("UPDATE DRIVERS set trucknumber = @trucknumber WHERE drivernumber = @drivernumber;",
+            SQLResult result = sqlnonquery("UPDATE DRIVERS set trucknumber = @trucknumber WHERE drivernumber = @drivernumber;",
                 new Dictionary<string, string>() { { "@drivernumber", drivernumber.ToString() }, { "@trucknumber", trucknumber.ToString() } });
             if (result.error == SQLError.none && result.rowsAffected == 1)
             {
@@ -595,7 +608,7 @@ namespace IceCreamInventoryManagement
 
         public static bool clearDrivers()
         {
-            SQLResult result = sqlquery("DELETE FROM DRIVERS;");
+            SQLResult result = sqlnonquery("DELETE FROM DRIVERS;");
             if (result.error == SQLError.none)
             {
                 return true;

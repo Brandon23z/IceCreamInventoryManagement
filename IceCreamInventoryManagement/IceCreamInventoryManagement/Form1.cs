@@ -34,6 +34,7 @@ namespace IceCreamInventoryManagement
         private void Form1_Load(object sender, EventArgs e)
         {
             initializeDatabase();
+            clearDatabase();
         }
 
         private void btnCityUpload_Click(object sender, EventArgs e)
@@ -412,6 +413,19 @@ namespace IceCreamInventoryManagement
                     truckInventoryGridView.Rows.Add(myTrucks[k].trucknumber, item.Value.itemnumber, item.Value.quantity, item.Value.initialprice, item.Value.saleprice);
                 }
 
+            }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            List<InventoryItem> myInventory1 = new List<InventoryItem>();
+
+            myInventory1 = getInventory();
+
+            inventoryGridView.Rows.Clear();
+            for (int i = 0; i < myInventory1.Count(); i++)
+            {
+                inventoryGridView.Rows.Add(myInventory1[i].itemnumber, myInventory1[i].quantity, myInventory1[i].initialprice, myInventory1[i].saleprice);
             }
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
