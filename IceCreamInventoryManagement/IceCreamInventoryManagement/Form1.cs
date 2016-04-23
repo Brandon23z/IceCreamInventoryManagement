@@ -35,6 +35,7 @@ namespace IceCreamInventoryManagement
         {
             initializeDatabase();
             clearDatabase();
+            Settings.saveDefaults();
         }
 
         private void btnCityUpload_Click(object sender, EventArgs e)
@@ -820,7 +821,5 @@ namespace IceCreamInventoryManagement
         {
 
         }
-
-
     }
 }

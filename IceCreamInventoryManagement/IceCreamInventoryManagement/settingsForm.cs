@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static IceCreamInventoryManagement.ourClasses;
+using static IceCreamInventoryManagement.Settings;
 
 namespace IceCreamInventoryManagement
 {
@@ -20,7 +21,7 @@ namespace IceCreamInventoryManagement
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            TextSetting.phoneNumber = textBox1.Text;
+            TextSetting.phoneNumber = txtPhoneNumber.Text;
         }
 
         private void truckInvReset_CheckedChanged(object sender, EventArgs e)
@@ -56,27 +57,64 @@ namespace IceCreamInventoryManagement
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == 0)
+            if (cboCarrier.SelectedIndex == 0)
                 TextSetting.carrier = "@txt.att.net"; //AT & T
-            if (comboBox1.SelectedIndex == 1)
+            if (cboCarrier.SelectedIndex == 1)
                 TextSetting.carrier = "@vtext.com"; //Verizon
-            if (comboBox1.SelectedIndex == 2)
+            if (cboCarrier.SelectedIndex == 2)
                 TextSetting.carrier = "@messaging.sprintpcs.com"; //Sprint
-            if (comboBox1.SelectedIndex == 3)
+            if (cboCarrier.SelectedIndex == 3)
                 TextSetting.carrier = "@tmomail.net"; //T - Mobile
-            if (comboBox1.SelectedIndex == 4)
+            if (cboCarrier.SelectedIndex == 4)
                 TextSetting.carrier = "@vmobl.com"; //Virgin Mobile
-            if (comboBox1.SelectedIndex == 5)
+            if (cboCarrier.SelectedIndex == 5)
                 TextSetting.carrier = "@myboostmobile.com"; //Boost Mobile
-            if (comboBox1.SelectedIndex == 6)
+            if (cboCarrier.SelectedIndex == 6)
                 TextSetting.carrier = "@sms.mycricket.com"; //Cricket
-            if (comboBox1.SelectedIndex == 7)
+            if (cboCarrier.SelectedIndex == 7)
                 TextSetting.carrier = "@mymetropcs.com"; //Metro PCS
-            if (comboBox1.SelectedIndex == 8)
+            if (cboCarrier.SelectedIndex == 8)
                 TextSetting.carrier = "@mmst5.tracfone.com"; //Tracfone
-            if (comboBox1.SelectedIndex == 9)
+            if (cboCarrier.SelectedIndex == 9)
                 TextSetting.carrier = "@messaging.nextel.com"; //Nextel
         }
 
+        private string[] carriers = { "@txt.att.net", "@vtext.com", "@messaging.sprintpcs.com", "@tmomail.net", "@vmobl.com", "@myboostmobile.com", "@sms.mycricket.com", "@mymetropcs.com", "@mmst5.tracfone.com" , "@messaging.nextel.com" };
+
+        private int findCarrier(string c)
+        {
+            List<string> providers = carriers.ToList();
+            int index = 0;
+            foreach (string s in providers)
+            {
+                if (s.StartsWith(c)) { return index; }
+                index ++;
+            }
+            return 0;
+        }
+
+        private void settingsForm_Load(object sender, EventArgs e)
+        {
+            NotificationSettings settings = getNotificationSettings();
+            truckInvReset.Checked = settings.notifTruckInventoryReset;
+            dailyInvCalc.Checked = settings.notifDailyInventoryCalculated;
+            itemAddedAutoOrder.Checked = settings.notifItemAddedToAutoOrder;
+            autoOrderGen.Checked = settings.notifAutoOrderGenerated;
+            txtPhoneNumber.Text = settings.notifPhoneNumber;
+            cboCarrier.SelectedIndex = findCarrier(settings.notifCarrier);
+        }
+
+        private void setDefault_Click(object sender, EventArgs e)
+        {
+            NotificationSettings settings = new NotificationSettings();
+            settings.notifTruckInventoryReset = truckInvReset.Checked;
+            settings.notifDailyInventoryCalculated = dailyInvCalc.Checked;
+            settings.notifItemAddedToAutoOrder = itemAddedAutoOrder.Checked;
+            settings.notifAutoOrderGenerated = autoOrderGen.Checked;
+            settings.notifPhoneNumber = txtPhoneNumber.Text;
+            settings.notifCarrier = carriers[cboCarrier.SelectedIndex];
+            saveNotificationSettings(settings);
+            this.Close();
+        }
     }
 }

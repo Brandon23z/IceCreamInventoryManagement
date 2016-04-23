@@ -34,7 +34,7 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        public static void clearDatabase()
+        public static void clearDatabase(bool settings = false)
         {
             SQL.sqlnonquery("DELETE FROM ZONES");
             SQL.sqlnonquery("DELETE FROM ROUTES");
@@ -43,7 +43,10 @@ namespace IceCreamInventoryManagement
             SQL.sqlnonquery("DELETE FROM INVENTORY");
             SQL.sqlnonquery("DELETE FROM DRIVERS");
             SQL.sqlnonquery("DELETE FROM SALES");
-            SQL.sqlnonquery("DELETE FROM settings");
+            if (settings)
+            {
+                SQL.sqlnonquery("DELETE FROM settings");
+            }
         }
 
         //ZONE//
@@ -509,7 +512,7 @@ namespace IceCreamInventoryManagement
         public static bool addInventoryItem(InventoryItem addItem)
         {
             //INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, description VARCHAR(20));
-            SQLResult result = sqlnonquery("INSERT INTO INVENTORY VALUES (@itemnumber, @quantity, @initialprice, @saleprice, @description);",
+            SQLResult result = sqlnonquery("UPDATE OR INSERT INTO INVENTORY VALUES (@itemnumber, @quantity, @initialprice, @saleprice, @description);",
                 new Dictionary<string, string>() { { "@itemnumber", addItem.itemnumber.ToString() }, { "@quantity", addItem.quantity.ToString() }
                     , { "@initialprice", addItem.initialprice.ToString() }, { "@saleprice", addItem.saleprice.ToString() }, { "@description", addItem.description }});
             if (result.error == SQLError.none && result.rowsAffected == 1)

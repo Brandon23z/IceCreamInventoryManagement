@@ -34,9 +34,10 @@
             this.autoOrderGen = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtPhoneNumber = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cboCarrier = new System.Windows.Forms.ComboBox();
+            this.setDefault = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // truckInvReset
@@ -101,13 +102,13 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Phone Number: ";
             // 
-            // textBox1
+            // txtPhoneNumber
             // 
-            this.textBox1.Location = new System.Drawing.Point(15, 151);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 7;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtPhoneNumber.Location = new System.Drawing.Point(15, 151);
+            this.txtPhoneNumber.Name = "txtPhoneNumber";
+            this.txtPhoneNumber.Size = new System.Drawing.Size(100, 20);
+            this.txtPhoneNumber.TabIndex = 7;
+            this.txtPhoneNumber.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label3
             // 
@@ -118,11 +119,11 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Carrier: ";
             // 
-            // comboBox1
+            // cboCarrier
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cboCarrier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCarrier.FormattingEnabled = true;
+            this.cboCarrier.Items.AddRange(new object[] {
             "AT&T",
             "Verizon",
             "Sprint",
@@ -133,20 +134,31 @@
             "Metro PCS",
             "Tracfone",
             "Nextel"});
-            this.comboBox1.Location = new System.Drawing.Point(131, 150);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 10;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cboCarrier.Location = new System.Drawing.Point(131, 150);
+            this.cboCarrier.Name = "cboCarrier";
+            this.cboCarrier.Size = new System.Drawing.Size(121, 21);
+            this.cboCarrier.TabIndex = 10;
+            this.cboCarrier.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // setDefault
+            // 
+            this.setDefault.Location = new System.Drawing.Point(12, 180);
+            this.setDefault.Name = "setDefault";
+            this.setDefault.Size = new System.Drawing.Size(240, 23);
+            this.setDefault.TabIndex = 11;
+            this.setDefault.Text = "Set Default";
+            this.setDefault.UseVisualStyleBackColor = true;
+            this.setDefault.Click += new System.EventHandler(this.setDefault_Click);
             // 
             // settingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(265, 215);
+            this.Controls.Add(this.setDefault);
+            this.Controls.Add(this.cboCarrier);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtPhoneNumber);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.autoOrderGen);
@@ -155,6 +167,7 @@
             this.Controls.Add(this.truckInvReset);
             this.Name = "settingsForm";
             this.Text = "Settings";
+            this.Load += new System.EventHandler(this.settingsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -168,8 +181,9 @@
         private System.Windows.Forms.CheckBox autoOrderGen;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtPhoneNumber;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboCarrier;
+        private System.Windows.Forms.Button setDefault;
     }
 }

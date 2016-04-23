@@ -89,6 +89,11 @@
             // nudItem1Product
             // 
             this.nudItem1Product.Location = new System.Drawing.Point(54, 25);
+            this.nudItem1Product.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.nudItem1Product.Name = "nudItem1Product";
             this.nudItem1Product.Size = new System.Drawing.Size(87, 20);
             this.nudItem1Product.TabIndex = 4;
@@ -105,6 +110,11 @@
             // nudItem1Quantity
             // 
             this.nudItem1Quantity.Location = new System.Drawing.Point(157, 25);
+            this.nudItem1Quantity.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.nudItem1Quantity.Name = "nudItem1Quantity";
             this.nudItem1Quantity.Size = new System.Drawing.Size(87, 20);
             this.nudItem1Quantity.TabIndex = 7;
@@ -112,6 +122,11 @@
             // nudItem2Quantity
             // 
             this.nudItem2Quantity.Location = new System.Drawing.Point(157, 51);
+            this.nudItem2Quantity.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.nudItem2Quantity.Name = "nudItem2Quantity";
             this.nudItem2Quantity.Size = new System.Drawing.Size(87, 20);
             this.nudItem2Quantity.TabIndex = 10;
@@ -128,6 +143,11 @@
             // nudItem2Product
             // 
             this.nudItem2Product.Location = new System.Drawing.Point(54, 51);
+            this.nudItem2Product.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.nudItem2Product.Name = "nudItem2Product";
             this.nudItem2Product.Size = new System.Drawing.Size(87, 20);
             this.nudItem2Product.TabIndex = 8;
@@ -135,6 +155,11 @@
             // nudItem3Quantity
             // 
             this.nudItem3Quantity.Location = new System.Drawing.Point(157, 77);
+            this.nudItem3Quantity.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.nudItem3Quantity.Name = "nudItem3Quantity";
             this.nudItem3Quantity.Size = new System.Drawing.Size(87, 20);
             this.nudItem3Quantity.TabIndex = 13;
@@ -151,6 +176,11 @@
             // nudItem3Product
             // 
             this.nudItem3Product.Location = new System.Drawing.Point(54, 77);
+            this.nudItem3Product.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.nudItem3Product.Name = "nudItem3Product";
             this.nudItem3Product.Size = new System.Drawing.Size(87, 20);
             this.nudItem3Product.TabIndex = 11;
@@ -158,6 +188,11 @@
             // nudItem4Quantity
             // 
             this.nudItem4Quantity.Location = new System.Drawing.Point(157, 103);
+            this.nudItem4Quantity.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.nudItem4Quantity.Name = "nudItem4Quantity";
             this.nudItem4Quantity.Size = new System.Drawing.Size(87, 20);
             this.nudItem4Quantity.TabIndex = 16;
@@ -174,6 +209,11 @@
             // nudItem4Product
             // 
             this.nudItem4Product.Location = new System.Drawing.Point(54, 103);
+            this.nudItem4Product.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.nudItem4Product.Name = "nudItem4Product";
             this.nudItem4Product.Size = new System.Drawing.Size(87, 20);
             this.nudItem4Product.TabIndex = 14;
@@ -181,6 +221,11 @@
             // nudItem5Quantity
             // 
             this.nudItem5Quantity.Location = new System.Drawing.Point(157, 129);
+            this.nudItem5Quantity.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.nudItem5Quantity.Name = "nudItem5Quantity";
             this.nudItem5Quantity.Size = new System.Drawing.Size(87, 20);
             this.nudItem5Quantity.TabIndex = 19;
@@ -197,6 +242,11 @@
             // nudItem5Product
             // 
             this.nudItem5Product.Location = new System.Drawing.Point(54, 129);
+            this.nudItem5Product.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.nudItem5Product.Name = "nudItem5Product";
             this.nudItem5Product.Size = new System.Drawing.Size(87, 20);
             this.nudItem5Product.TabIndex = 17;
