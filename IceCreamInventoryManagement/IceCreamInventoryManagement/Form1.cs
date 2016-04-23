@@ -757,6 +757,8 @@ namespace IceCreamInventoryManagement
             openFileDialog1.Title = "Select an Input File";
 
             string[] customerRequestFile = { "" };
+            DateTime date = Convert.ToDateTime("1970-01-01");
+            string seqNum = "";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -764,11 +766,82 @@ namespace IceCreamInventoryManagement
                 addToLog("Customer Request File Read");
             }
 
+            //Check and parse header
+            RegexClass r = checkRegex(customerRequestFile[0], headerEx);
+            if (r.valid)
+            {
+                seqNum = r.groupValues[2];
+                string dateString = r.groupValues[3];
+                date = Convert.ToDateTime(dateString);
+            }
+
+            //check and parse trailer
+            r = checkRegex(customerRequestFile[customerRequestFile.Length - 1], trailerEx);
+
+            int numOfRows = 0;
+
+            if (r.valid)
+            {
+                string numOfRowsString = r.groupValues[2];
+                numOfRows = Int32.Parse(numOfRowsString);
+            }
+
+
+            if (numOfRows != customerRequestFile.Length - 2)
+            {
+                addToLog("Customer Request File Invalid: Trailer # does not match Actual # of Rows");
+            }
+
+            //clearInventory();
+
+
+
+
+            for (int i = 1; i < customerRequestFile.Length - 1; i++)
+            {
+                r = checkRegex(customerRequestFile[i], requestedInventoryItemEx);
+                // need to create new regex string for this with itemnumber = r.groupValues[1], description = r.groupValues[2]
+                if (r.valid)
+                {
+                    int itemnumber = Int32.Parse(r.groupValues[1]);
+                    //int quantityRequested = Int32.Parse(r.groupValues[2]);
+                    string description = r.groupValues[2];
+                    bool test = addInventoryItem(new InventoryItem(itemnumber, 0, 0, 0, description));
+
+                    // for any new requested item, only the id and the description will be stored in the Inventory table. The other attrubites will be set to 0.
+                    // in the settings menu, the user will be able to set the default amount for new products. The Auto Order function will then be able to add the new item to 
+                    // the Auto Order list.
+
+                }
+            }
+
+
+
+
+
+            addToLog("New Products added to Automatic Order List");
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            List<InventoryItem> myInventory = new List<InventoryItem>();
+
+            myInventory = getInventory();
+
+            inventoryGridView.Rows.Clear();
+            for (int i = 0; i < myInventory.Count(); i++)
+            {
+                inventoryGridView.Rows.Add(myInventory[i].itemnumber, myInventory[i].quantity, myInventory[i].initialprice, myInventory[i].saleprice);
+            }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
             if (TextSetting.itemAddedToAutoOrder == true)
             {
                 sendTextMessage("New Products added to Automatic Order List");
                 addToLog("Text Message Sent: " + "New Products added to Automatic Order List");
             }
+
 
         }
 
