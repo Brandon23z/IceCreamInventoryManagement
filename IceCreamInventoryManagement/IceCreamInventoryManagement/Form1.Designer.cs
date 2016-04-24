@@ -68,14 +68,7 @@
             this.driverGridView = new System.Windows.Forms.DataGridView();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.saleGridView = new System.Windows.Forms.DataGridView();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salesGridView = new System.Windows.Forms.DataGridView();
             this.inventoryGridView = new System.Windows.Forms.DataGridView();
             this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,19 +80,35 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SettingsTab = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.zoneGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.routeGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.truckGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.driverGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.saleGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.truckInventoryGridView)).BeginInit();
+            this.SettingsTab.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(579, 30);
+            this.label1.Location = new System.Drawing.Point(45, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(113, 13);
             this.label1.TabIndex = 1;
@@ -108,7 +117,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(579, 68);
+            this.label2.Location = new System.Drawing.Point(45, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(125, 13);
             this.label2.TabIndex = 2;
@@ -117,7 +126,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(579, 106);
+            this.label3.Location = new System.Drawing.Point(45, 133);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(124, 13);
             this.label3.TabIndex = 3;
@@ -126,7 +135,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(48, 63);
+            this.label4.Location = new System.Drawing.Point(41, 49);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(156, 13);
             this.label4.TabIndex = 4;
@@ -135,7 +144,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(319, 30);
+            this.label5.Location = new System.Drawing.Point(41, 88);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(128, 13);
             this.label5.TabIndex = 5;
@@ -145,7 +154,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(48, 27);
+            this.label7.Location = new System.Drawing.Point(41, 13);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(141, 13);
             this.label7.TabIndex = 7;
@@ -153,7 +162,7 @@
             // 
             // btnRouteUpload
             // 
-            this.btnRouteUpload.Location = new System.Drawing.Point(741, 63);
+            this.btnRouteUpload.Location = new System.Drawing.Point(207, 90);
             this.btnRouteUpload.Name = "btnRouteUpload";
             this.btnRouteUpload.Size = new System.Drawing.Size(75, 23);
             this.btnRouteUpload.TabIndex = 8;
@@ -163,7 +172,7 @@
             // 
             // btnTruckUpload
             // 
-            this.btnTruckUpload.Location = new System.Drawing.Point(741, 101);
+            this.btnTruckUpload.Location = new System.Drawing.Point(207, 128);
             this.btnTruckUpload.Name = "btnTruckUpload";
             this.btnTruckUpload.Size = new System.Drawing.Size(75, 23);
             this.btnTruckUpload.TabIndex = 9;
@@ -173,7 +182,7 @@
             // 
             // btnTruckRouteUpload
             // 
-            this.btnTruckRouteUpload.Location = new System.Drawing.Point(210, 58);
+            this.btnTruckRouteUpload.Location = new System.Drawing.Point(203, 44);
             this.btnTruckRouteUpload.Name = "btnTruckRouteUpload";
             this.btnTruckRouteUpload.Size = new System.Drawing.Size(75, 23);
             this.btnTruckRouteUpload.TabIndex = 10;
@@ -183,7 +192,7 @@
             // 
             // btnChangeTruckInventory
             // 
-            this.btnChangeTruckInventory.Location = new System.Drawing.Point(459, 25);
+            this.btnChangeTruckInventory.Location = new System.Drawing.Point(201, 83);
             this.btnChangeTruckInventory.Name = "btnChangeTruckInventory";
             this.btnChangeTruckInventory.Size = new System.Drawing.Size(75, 23);
             this.btnChangeTruckInventory.TabIndex = 11;
@@ -193,7 +202,7 @@
             // 
             // btnIceCreamFromTrucks
             // 
-            this.btnIceCreamFromTrucks.Location = new System.Drawing.Point(210, 128);
+            this.btnIceCreamFromTrucks.Location = new System.Drawing.Point(196, 154);
             this.btnIceCreamFromTrucks.Name = "btnIceCreamFromTrucks";
             this.btnIceCreamFromTrucks.Size = new System.Drawing.Size(75, 23);
             this.btnIceCreamFromTrucks.TabIndex = 12;
@@ -203,7 +212,7 @@
             // 
             // btnInventoryUpdate
             // 
-            this.btnInventoryUpdate.Location = new System.Drawing.Point(210, 22);
+            this.btnInventoryUpdate.Location = new System.Drawing.Point(203, 8);
             this.btnInventoryUpdate.Name = "btnInventoryUpdate";
             this.btnInventoryUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnInventoryUpdate.TabIndex = 13;
@@ -213,7 +222,7 @@
             // 
             // btnCityUpload
             // 
-            this.btnCityUpload.Location = new System.Drawing.Point(741, 25);
+            this.btnCityUpload.Location = new System.Drawing.Point(207, 52);
             this.btnCityUpload.Name = "btnCityUpload";
             this.btnCityUpload.Size = new System.Drawing.Size(75, 23);
             this.btnCityUpload.TabIndex = 14;
@@ -224,7 +233,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(59, 133);
+            this.label6.Location = new System.Drawing.Point(45, 159);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(117, 13);
             this.label6.TabIndex = 15;
@@ -233,7 +242,7 @@
             // 
             // btnSetDefault
             // 
-            this.btnSetDefault.Location = new System.Drawing.Point(354, 79);
+            this.btnSetDefault.Location = new System.Drawing.Point(100, 41);
             this.btnSetDefault.Name = "btnSetDefault";
             this.btnSetDefault.Size = new System.Drawing.Size(138, 23);
             this.btnSetDefault.TabIndex = 16;
@@ -243,7 +252,7 @@
             // 
             // btnSettings
             // 
-            this.btnSettings.Location = new System.Drawing.Point(389, 118);
+            this.btnSettings.Location = new System.Drawing.Point(135, 80);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(75, 23);
             this.btnSettings.TabIndex = 17;
@@ -253,7 +262,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(390, 156);
+            this.button1.Location = new System.Drawing.Point(293, 8);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 18;
@@ -264,7 +273,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(580, 143);
+            this.label8.Location = new System.Drawing.Point(46, 170);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(124, 13);
             this.label8.TabIndex = 20;
@@ -272,7 +281,7 @@
             // 
             // btnDriverUpload
             // 
-            this.btnDriverUpload.Location = new System.Drawing.Point(741, 138);
+            this.btnDriverUpload.Location = new System.Drawing.Point(207, 165);
             this.btnDriverUpload.Name = "btnDriverUpload";
             this.btnDriverUpload.Size = new System.Drawing.Size(75, 23);
             this.btnDriverUpload.TabIndex = 21;
@@ -282,7 +291,7 @@
             // 
             // btnAutoOrder
             // 
-            this.btnAutoOrder.Location = new System.Drawing.Point(390, 195);
+            this.btnAutoOrder.Location = new System.Drawing.Point(122, 219);
             this.btnAutoOrder.Name = "btnAutoOrder";
             this.btnAutoOrder.Size = new System.Drawing.Size(75, 23);
             this.btnAutoOrder.TabIndex = 22;
@@ -292,7 +301,7 @@
             // 
             // btnLoadIceCreamToTrucks
             // 
-            this.btnLoadIceCreamToTrucks.Location = new System.Drawing.Point(99, 96);
+            this.btnLoadIceCreamToTrucks.Location = new System.Drawing.Point(85, 122);
             this.btnLoadIceCreamToTrucks.Name = "btnLoadIceCreamToTrucks";
             this.btnLoadIceCreamToTrucks.Size = new System.Drawing.Size(153, 23);
             this.btnLoadIceCreamToTrucks.TabIndex = 23;
@@ -303,7 +312,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(48, 168);
+            this.label9.Location = new System.Drawing.Point(34, 194);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(132, 13);
             this.label9.TabIndex = 24;
@@ -311,7 +320,7 @@
             // 
             // btnCustomerRequests
             // 
-            this.btnCustomerRequests.Location = new System.Drawing.Point(210, 163);
+            this.btnCustomerRequests.Location = new System.Drawing.Point(196, 189);
             this.btnCustomerRequests.Name = "btnCustomerRequests";
             this.btnCustomerRequests.Size = new System.Drawing.Size(75, 23);
             this.btnCustomerRequests.TabIndex = 25;
@@ -328,7 +337,7 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            this.zoneGridView.Location = new System.Drawing.Point(34, 264);
+            this.zoneGridView.Location = new System.Drawing.Point(500, 72);
             this.zoneGridView.Name = "zoneGridView";
             this.zoneGridView.ReadOnly = true;
             this.zoneGridView.Size = new System.Drawing.Size(344, 150);
@@ -458,66 +467,25 @@
             this.Column13.Name = "Column13";
             this.Column13.ReadOnly = true;
             // 
-            // saleGridView
+            // salesGridView
             // 
-            this.saleGridView.AllowUserToAddRows = false;
-            this.saleGridView.AllowUserToDeleteRows = false;
-            this.saleGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.saleGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.salesGridView.AllowUserToAddRows = false;
+            this.salesGridView.AllowUserToDeleteRows = false;
+            this.salesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.salesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column14,
             this.Column17,
+            this.Column26,
             this.Column15,
             this.Column16,
             this.Column18,
             this.Column19,
             this.Column20});
-            this.saleGridView.Location = new System.Drawing.Point(12, 628);
-            this.saleGridView.Name = "saleGridView";
-            this.saleGridView.ReadOnly = true;
-            this.saleGridView.Size = new System.Drawing.Size(745, 150);
-            this.saleGridView.TabIndex = 30;
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "Item Number";
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            // 
-            // Column17
-            // 
-            this.Column17.HeaderText = "Quantity";
-            this.Column17.Name = "Column17";
-            this.Column17.ReadOnly = true;
-            // 
-            // Column15
-            // 
-            this.Column15.HeaderText = "Initial Price";
-            this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
-            // 
-            // Column16
-            // 
-            this.Column16.HeaderText = "Sale Price";
-            this.Column16.Name = "Column16";
-            this.Column16.ReadOnly = true;
-            // 
-            // Column18
-            // 
-            this.Column18.HeaderText = "Truck Number";
-            this.Column18.Name = "Column18";
-            this.Column18.ReadOnly = true;
-            // 
-            // Column19
-            // 
-            this.Column19.HeaderText = "Driver Number";
-            this.Column19.Name = "Column19";
-            this.Column19.ReadOnly = true;
-            // 
-            // Column20
-            // 
-            this.Column20.HeaderText = "Route Number";
-            this.Column20.Name = "Column20";
-            this.Column20.ReadOnly = true;
+            this.salesGridView.Location = new System.Drawing.Point(12, 628);
+            this.salesGridView.Name = "salesGridView";
+            this.salesGridView.ReadOnly = true;
+            this.salesGridView.Size = new System.Drawing.Size(745, 150);
+            this.salesGridView.TabIndex = 30;
             // 
             // inventoryGridView
             // 
@@ -573,7 +541,7 @@
             this.truckInventoryGridView.Location = new System.Drawing.Point(763, 628);
             this.truckInventoryGridView.Name = "truckInventoryGridView";
             this.truckInventoryGridView.ReadOnly = true;
-            this.truckInventoryGridView.Size = new System.Drawing.Size(522, 150);
+            this.truckInventoryGridView.Size = new System.Drawing.Size(542, 150);
             this.truckInventoryGridView.TabIndex = 32;
             // 
             // Column25
@@ -606,41 +574,133 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
+            // Column14
+            // 
+            this.Column14.HeaderText = "Item Number";
+            this.Column14.Name = "Column14";
+            this.Column14.ReadOnly = true;
+            // 
+            // Column17
+            // 
+            this.Column17.HeaderText = "Quantity";
+            this.Column17.Name = "Column17";
+            this.Column17.ReadOnly = true;
+            // 
+            // Column26
+            // 
+            this.Column26.HeaderText = "Sale Date";
+            this.Column26.Name = "Column26";
+            this.Column26.ReadOnly = true;
+            // 
+            // Column15
+            // 
+            this.Column15.HeaderText = "Initial Price";
+            this.Column15.Name = "Column15";
+            this.Column15.ReadOnly = true;
+            // 
+            // Column16
+            // 
+            this.Column16.HeaderText = "Sale Price";
+            this.Column16.Name = "Column16";
+            this.Column16.ReadOnly = true;
+            // 
+            // Column18
+            // 
+            this.Column18.HeaderText = "Truck Number";
+            this.Column18.Name = "Column18";
+            this.Column18.ReadOnly = true;
+            // 
+            // Column19
+            // 
+            this.Column19.HeaderText = "Driver Number";
+            this.Column19.Name = "Column19";
+            this.Column19.ReadOnly = true;
+            // 
+            // Column20
+            // 
+            this.Column20.HeaderText = "Route Number";
+            this.Column20.Name = "Column20";
+            this.Column20.ReadOnly = true;
+            // 
+            // SettingsTab
+            // 
+            this.SettingsTab.AccessibleName = "";
+            this.SettingsTab.Controls.Add(this.tabPage1);
+            this.SettingsTab.Controls.Add(this.tabPage2);
+            this.SettingsTab.Controls.Add(this.tabPage3);
+            this.SettingsTab.Location = new System.Drawing.Point(25, 37);
+            this.SettingsTab.Name = "SettingsTab";
+            this.SettingsTab.SelectedIndex = 0;
+            this.SettingsTab.Size = new System.Drawing.Size(343, 290);
+            this.SettingsTab.TabIndex = 33;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.btnRouteUpload);
+            this.tabPage1.Controls.Add(this.btnTruckUpload);
+            this.tabPage1.Controls.Add(this.btnCityUpload);
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.btnDriverUpload);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(345, 232);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.btnTruckRouteUpload);
+            this.tabPage2.Controls.Add(this.btnIceCreamFromTrucks);
+            this.tabPage2.Controls.Add(this.btnAutoOrder);
+            this.tabPage2.Controls.Add(this.btnInventoryUpdate);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.btnLoadIceCreamToTrucks);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.btnCustomerRequests);
+            this.tabPage2.Controls.Add(this.btnChangeTruckInventory);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(335, 264);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.btnSetDefault);
+            this.tabPage3.Controls.Add(this.btnSettings);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(345, 232);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
+            this.AccessibleName = "";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1307, 802);
+            this.Controls.Add(this.SettingsTab);
             this.Controls.Add(this.truckInventoryGridView);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.inventoryGridView);
-            this.Controls.Add(this.saleGridView);
+            this.Controls.Add(this.salesGridView);
             this.Controls.Add(this.driverGridView);
             this.Controls.Add(this.truckGridView);
             this.Controls.Add(this.routeGridView);
             this.Controls.Add(this.zoneGridView);
-            this.Controls.Add(this.btnCustomerRequests);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.btnLoadIceCreamToTrucks);
-            this.Controls.Add(this.btnAutoOrder);
-            this.Controls.Add(this.btnDriverUpload);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnSettings);
-            this.Controls.Add(this.btnSetDefault);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.btnCityUpload);
-            this.Controls.Add(this.btnInventoryUpdate);
-            this.Controls.Add(this.btnIceCreamFromTrucks);
-            this.Controls.Add(this.btnChangeTruckInventory);
-            this.Controls.Add(this.btnTruckRouteUpload);
-            this.Controls.Add(this.btnTruckUpload);
-            this.Controls.Add(this.btnRouteUpload);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -649,11 +709,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.routeGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.truckGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.driverGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.saleGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.truckInventoryGridView)).EndInit();
+            this.SettingsTab.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -698,14 +763,7 @@
         private System.Windows.Forms.DataGridView driverGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridView saleGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
+        private System.Windows.Forms.DataGridView salesGridView;
         private System.Windows.Forms.DataGridView inventoryGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
@@ -717,6 +775,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column26;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
+        private System.Windows.Forms.TabControl SettingsTab;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
     }
 }
 

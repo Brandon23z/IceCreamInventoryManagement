@@ -31,14 +31,17 @@ namespace IceCreamInventoryManagement
         private void Form1_Load(object sender, EventArgs e)
         {
             initializeDatabase();
-            clearDatabase();
+            //clearDatabase();
             Settings.saveDefaults(true);
+            tabPage1.Text = "Populate System";
+            tabPage2.Text = "Run Simulation";
+            tabPage3.Text = "Settings";
         }
 
         private void btnCityUpload_Click(object sender, EventArgs e)
         {
             string[] cityUploadFile = { "" };
-            string fileName = "Route Upload File";
+            string fileName = "City Upload File";
             Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
             int seqNum = sequenceSettings.sequenceCityUploadFile;
             //if anything is invalid to where the file is invalid
@@ -128,10 +131,22 @@ namespace IceCreamInventoryManagement
                 sendTextMessage("Warehouse Inventory has been calculated.");
         }
 
+        private void refreshSalesView()
+        {
+            List<Sale> mySales = new List<Sale>();
+            //mySales = getAllSales();
+            salesGridView.Rows.Clear();
+            for (int i = 0; i < mySales.Count(); i++)
+            {
+                salesGridView.Rows.Add(mySales[i].itemnumber, mySales[i].quantity, mySales[i].saledate, mySales[i].intitialprice, mySales[i].saleprice, mySales[i].trucknumber, mySales[i].routenumber, mySales[i].drivernumber);
+
+            }
+        }
+
         private void btnChangeTruckInventory_Click(object sender, EventArgs e)
         {
             string[] iceCreamtoTrucksFile = { "" };
-            string fileName = "Truck Inventory Upload File";
+            string fileName = "Make Changes to Default Truck Inventory File";
             Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
             int seqNum = sequenceSettings.sequenceTruckInventoryUploadFile;
             //if anything is invalid to where the file is invalid
@@ -185,7 +200,7 @@ namespace IceCreamInventoryManagement
         private void btnTruckRouteUpload_Click(object sender, EventArgs e)
         {
             string[] truckRouteFile = { "" };
-            string fileName = "Truck Inventory Upload File";
+            string fileName = "Truck-Route-Driver Assignment File";
             Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
             int seqNum = sequenceSettings.sequenceTruckRouteDriverUploadFile;
             //if anything is invalid to where the file is invalid
@@ -228,7 +243,7 @@ namespace IceCreamInventoryManagement
         private void btnInventoryUpdate_Click(object sender, EventArgs e)
         {
             string[] inventoryUpdateFile = { "" };
-            string fileName = "Inventory Upload File";
+            string fileName = "Warehouse Inventory Update File";
             Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
             int seqNum = sequenceSettings.sequenceWarehouseUploadFile;
             //if anything is invalid to where the file is invalid
@@ -363,24 +378,24 @@ namespace IceCreamInventoryManagement
         private void btnLoadIceCreamToTrucks_Click(object sender, EventArgs e)
         {
             // If loadTruck.txt("change the default" file) has NOT been uploaded
-            if ()
-            {
-                //add default inventory to each truck
-                List<Truck> myTrucks = new List<Truck>();
+            //if ()
+            //{
+            //    //add default inventory to each truck
+            //    List<Truck> myTrucks = new List<Truck>();
 
-                myTrucks = getAllTrucks();
+            //    myTrucks = getAllTrucks();
 
-                for (int i = 0; i < myTrucks.Count(); i++)
-                {
-                    for (int k = 0; k < 5; k++)
-                    {
-                        InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
-                        int change = DefaultOrder.defaults[k].amount*(-1);
-                        int myTest = moveItem(temp.itemnumber, myTrucks[i].trucknumber, change);
-                    }
-                }
-                addToLog("Loading default items to trucks");
-            }
+            //    for (int i = 0; i < myTrucks.Count(); i++)
+            //    {
+            //        for (int k = 0; k < 5; k++)
+            //        {
+            //            InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
+            //            int change = DefaultOrder.defaults[k].amount*(-1);
+            //            int myTest = moveItem(temp.itemnumber, myTrucks[i].trucknumber, change);
+            //        }
+            //    }
+            //    addToLog("Loading default items to trucks");
+            //}
             
             if (TextSetting.truckInventoryReset == true)
             {

@@ -287,7 +287,6 @@ namespace IceCreamInventoryManagement
                 }
             }
             addToLog("Truck Inventory Upload File: Loading default items to trucks");
-            /////////////////////////////////////
 
             int trucknumber = 0;
             bool inTruck = false;
@@ -476,11 +475,17 @@ namespace IceCreamInventoryManagement
                             Console.WriteLine("Truck " + trucknumber + " has " + finalquantity + " of item " +
                                               itemnumber +
                                               " and only left with " + truckInv[itemnumber].quantity);
+                            addToLog("Truck " + trucknumber + " has " + finalquantity + " of item " +
+                                              itemnumber +
+                                              " and only left with " + truckInv[itemnumber].quantity);
+
                         }
                         else
                         {
+                            int quantitySold = -1 * (finalquantity - truckInv[itemnumber].quantity);
                             Console.WriteLine("Truck " + trucknumber + " sold " +
-                                              (-1*(finalquantity - truckInv[itemnumber].quantity)));
+                                              (quantitySold));
+                            //bool test = addSale(itemnumber, quantitySold, date, initialPrice, salePrice, trucknumber, routenumber, drivernumber);
                         }
                         Console.WriteLine("Truck " + trucknumber + " has " + finalquantity + "/" +
                                           truckInv[itemnumber].quantity + " of item " + itemnumber);
