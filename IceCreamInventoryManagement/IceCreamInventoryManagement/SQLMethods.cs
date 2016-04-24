@@ -669,6 +669,33 @@ namespace IceCreamInventoryManagement
         }
         //SALES//
 
+        public static TruckRouteDriver getRouteDriverFromTruck(int trucknumber)
+        {
+            SQLResult result = sqlquery("SELECT * FROM TRUCKS,DRIVERS WHERE trucknumber = @trucknumber;",
+                new Dictionary<string, string>() { { "@trucknumber", trucknumber.ToString() } });
+            if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
+            {
+                int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
+                int drivernumber = Convert.ToInt32(result.data.getField(0, "drivernumber"));
+                TruckRouteDriver trd = new TruckRouteDriver();
+                trd.trucknumber = trucknumber;
+                trd.routenumber = routenumber;
+                trd.drivernumber = drivernumber;
+                return trd;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public class TruckRouteDriver
+        {
+            public int trucknumber { get; set; }
+            public int routenumber { get; set; }
+            public int drivernumber { get; set; }
+        }
+
         //SETTINGS/
         #region SETTINGS
         public static bool insertSetting(string setting, string value, bool overwrite = true)
