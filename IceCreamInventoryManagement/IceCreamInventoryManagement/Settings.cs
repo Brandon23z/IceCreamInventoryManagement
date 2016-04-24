@@ -16,6 +16,7 @@ namespace IceCreamInventoryManagement
             public const string notifAutoOrderGenerated = "0";
             public const string notifPhoneNumber = "";
             public const string notifCarrier = "@txt.att.net";
+            public const string setDefaultQuantity = "10";
 
             public const string cityUploadFile = "0";
             public const string truckUploadFile = "0";
@@ -58,6 +59,8 @@ namespace IceCreamInventoryManagement
             public bool notifAutoOrderGenerated { get; set; }
             public string notifPhoneNumber { get; set; }
             public string notifCarrier { get; set; }
+            public string setDefaultQuantity { get; set; }
+            
 
             public bool cityUploadFile { get; set; }
             public bool truckUploadFile { get; set; }
@@ -100,6 +103,7 @@ namespace IceCreamInventoryManagement
             public const string notifAutoOrderGenerated = "notifAutoOrderGenerated";
             public const string notifPhoneNumber = "notifPhoneNumber";
             public const string notifCarrier = "notifCarrier";
+            public const string setDefaultQuantity = "setDefaultQuantity";
 
             public const string cityUploadFile = "cityUploadFile";
             public const string truckUploadFile = "truckUploadFile";
@@ -142,6 +146,7 @@ namespace IceCreamInventoryManagement
             SQLMethods.insertSetting(keys.notifAutoOrderGenerated, defaults.notifAutoOrderGenerated, overwrite);
             SQLMethods.insertSetting(keys.notifPhoneNumber, defaults.notifPhoneNumber, overwrite);
             SQLMethods.insertSetting(keys.notifCarrier, defaults.notifCarrier, overwrite);
+            SQLMethods.insertSetting(keys.setDefaultQuantity, defaults.setDefaultQuantity, overwrite);
 
             SQLMethods.insertSetting(keys.cityUploadFile, defaults.cityUploadFile, overwrite);
             SQLMethods.insertSetting(keys.truckUploadFile, defaults.truckUploadFile, overwrite);
@@ -184,6 +189,7 @@ namespace IceCreamInventoryManagement
             public bool notifAutoOrderGenerated { get; set; }
             public string notifPhoneNumber { get; set; }
             public string notifCarrier { get; set; }
+            public string setDefaultQuantity { get; set; }           
         }
 
         public class FileUploadSettings
@@ -239,6 +245,8 @@ namespace IceCreamInventoryManagement
             notifSettings.notifAutoOrderGenerated = stringtobool(SQLMethods.retrieveSetting(keys.notifAutoOrderGenerated));
             notifSettings.notifPhoneNumber = SQLMethods.retrieveSetting(keys.notifPhoneNumber);
             notifSettings.notifCarrier = SQLMethods.retrieveSetting(keys.notifCarrier);
+            notifSettings.setDefaultQuantity = SQLMethods.retrieveSetting(keys.setDefaultQuantity);
+           
             return notifSettings;
         }
 
@@ -250,6 +258,8 @@ namespace IceCreamInventoryManagement
             SQLMethods.insertSetting(keys.notifAutoOrderGenerated, booltoint(settings.notifAutoOrderGenerated).ToString(), true);
             SQLMethods.insertSetting(keys.notifPhoneNumber, settings.notifPhoneNumber, true);
             SQLMethods.insertSetting(keys.notifCarrier, settings.notifCarrier, true);
+            SQLMethods.insertSetting(keys.setDefaultQuantity, settings.setDefaultQuantity, true);
+            
         }
 
         public static FileUploadSettings getFileUploadSettings()
