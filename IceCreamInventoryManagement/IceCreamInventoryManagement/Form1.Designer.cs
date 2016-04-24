@@ -69,6 +69,14 @@
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.salesGridView = new System.Windows.Forms.DataGridView();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.inventoryGridView = new System.Windows.Forms.DataGridView();
             this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,20 +88,15 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SettingsTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.salesGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -102,12 +105,12 @@
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             ((System.ComponentModel.ISupportInitialize)(this.zoneGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.routeGridView)).BeginInit();
@@ -121,13 +124,17 @@
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 57);
+            this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(113, 13);
             this.label1.TabIndex = 1;
@@ -136,7 +143,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(45, 95);
+            this.label2.Location = new System.Drawing.Point(6, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(125, 13);
             this.label2.TabIndex = 2;
@@ -145,7 +152,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(45, 133);
+            this.label3.Location = new System.Drawing.Point(6, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(124, 13);
             this.label3.TabIndex = 3;
@@ -181,7 +188,7 @@
             // 
             // btnRouteUpload
             // 
-            this.btnRouteUpload.Location = new System.Drawing.Point(207, 90);
+            this.btnRouteUpload.Location = new System.Drawing.Point(134, 40);
             this.btnRouteUpload.Name = "btnRouteUpload";
             this.btnRouteUpload.Size = new System.Drawing.Size(75, 23);
             this.btnRouteUpload.TabIndex = 8;
@@ -191,7 +198,7 @@
             // 
             // btnTruckUpload
             // 
-            this.btnTruckUpload.Location = new System.Drawing.Point(207, 128);
+            this.btnTruckUpload.Location = new System.Drawing.Point(134, 69);
             this.btnTruckUpload.Name = "btnTruckUpload";
             this.btnTruckUpload.Size = new System.Drawing.Size(75, 23);
             this.btnTruckUpload.TabIndex = 9;
@@ -241,7 +248,7 @@
             // 
             // btnCityUpload
             // 
-            this.btnCityUpload.Location = new System.Drawing.Point(207, 52);
+            this.btnCityUpload.Location = new System.Drawing.Point(134, 11);
             this.btnCityUpload.Name = "btnCityUpload";
             this.btnCityUpload.Size = new System.Drawing.Size(75, 23);
             this.btnCityUpload.TabIndex = 14;
@@ -292,7 +299,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(46, 170);
+            this.label8.Location = new System.Drawing.Point(7, 102);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(124, 13);
             this.label8.TabIndex = 20;
@@ -300,7 +307,7 @@
             // 
             // btnDriverUpload
             // 
-            this.btnDriverUpload.Location = new System.Drawing.Point(207, 165);
+            this.btnDriverUpload.Location = new System.Drawing.Point(134, 97);
             this.btnDriverUpload.Name = "btnDriverUpload";
             this.btnDriverUpload.Size = new System.Drawing.Size(75, 23);
             this.btnDriverUpload.TabIndex = 21;
@@ -356,7 +363,7 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            this.zoneGridView.Location = new System.Drawing.Point(685, 311);
+            this.zoneGridView.Location = new System.Drawing.Point(75, 394);
             this.zoneGridView.Name = "zoneGridView";
             this.zoneGridView.ReadOnly = true;
             this.zoneGridView.Size = new System.Drawing.Size(344, 150);
@@ -392,7 +399,7 @@
             this.Column7,
             this.Column8,
             this.Column9});
-            this.routeGridView.Location = new System.Drawing.Point(34, 443);
+            this.routeGridView.Location = new System.Drawing.Point(25, 362);
             this.routeGridView.Name = "routeGridView";
             this.routeGridView.ReadOnly = true;
             this.routeGridView.Size = new System.Drawing.Size(645, 165);
@@ -442,7 +449,7 @@
             this.truckGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column10,
             this.Column11});
-            this.truckGridView.Location = new System.Drawing.Point(124, 330);
+            this.truckGridView.Location = new System.Drawing.Point(890, 617);
             this.truckGridView.Name = "truckGridView";
             this.truckGridView.ReadOnly = true;
             this.truckGridView.Size = new System.Drawing.Size(244, 150);
@@ -468,7 +475,7 @@
             this.driverGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column12,
             this.Column13});
-            this.driverGridView.Location = new System.Drawing.Point(433, 330);
+            this.driverGridView.Location = new System.Drawing.Point(482, 718);
             this.driverGridView.Name = "driverGridView";
             this.driverGridView.ReadOnly = true;
             this.driverGridView.Size = new System.Drawing.Size(246, 150);
@@ -500,98 +507,11 @@
             this.Column18,
             this.Column19,
             this.Column20});
-            this.salesGridView.Location = new System.Drawing.Point(12, 628);
+            this.salesGridView.Location = new System.Drawing.Point(12, 550);
             this.salesGridView.Name = "salesGridView";
             this.salesGridView.ReadOnly = true;
-            this.salesGridView.Size = new System.Drawing.Size(745, 150);
+            this.salesGridView.Size = new System.Drawing.Size(846, 150);
             this.salesGridView.TabIndex = 30;
-            // 
-            // inventoryGridView
-            // 
-            this.inventoryGridView.AllowUserToAddRows = false;
-            this.inventoryGridView.AllowUserToDeleteRows = false;
-            this.inventoryGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.inventoryGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column21,
-            this.Column22,
-            this.Column23,
-            this.Column24});
-            this.inventoryGridView.Location = new System.Drawing.Point(697, 443);
-            this.inventoryGridView.Name = "inventoryGridView";
-            this.inventoryGridView.ReadOnly = true;
-            this.inventoryGridView.Size = new System.Drawing.Size(445, 150);
-            this.inventoryGridView.TabIndex = 31;
-            // 
-            // Column21
-            // 
-            this.Column21.HeaderText = "Item Number";
-            this.Column21.Name = "Column21";
-            this.Column21.ReadOnly = true;
-            // 
-            // Column22
-            // 
-            this.Column22.HeaderText = "Quantity";
-            this.Column22.Name = "Column22";
-            this.Column22.ReadOnly = true;
-            // 
-            // Column23
-            // 
-            this.Column23.HeaderText = "Initial Price";
-            this.Column23.Name = "Column23";
-            this.Column23.ReadOnly = true;
-            // 
-            // Column24
-            // 
-            this.Column24.HeaderText = "Sale Price";
-            this.Column24.Name = "Column24";
-            this.Column24.ReadOnly = true;
-            // 
-            // truckInventoryGridView
-            // 
-            this.truckInventoryGridView.AllowUserToAddRows = false;
-            this.truckInventoryGridView.AllowUserToDeleteRows = false;
-            this.truckInventoryGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.truckInventoryGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column25,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.truckInventoryGridView.Location = new System.Drawing.Point(763, 628);
-            this.truckInventoryGridView.Name = "truckInventoryGridView";
-            this.truckInventoryGridView.ReadOnly = true;
-            this.truckInventoryGridView.Size = new System.Drawing.Size(542, 150);
-            this.truckInventoryGridView.TabIndex = 32;
-            // 
-            // Column25
-            // 
-            this.Column25.HeaderText = "Truck Number";
-            this.Column25.Name = "Column25";
-            this.Column25.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Item Number";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Quantity";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Initial Price";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Sale Price";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // Column14
             // 
@@ -641,6 +561,93 @@
             this.Column20.Name = "Column20";
             this.Column20.ReadOnly = true;
             // 
+            // inventoryGridView
+            // 
+            this.inventoryGridView.AllowUserToAddRows = false;
+            this.inventoryGridView.AllowUserToDeleteRows = false;
+            this.inventoryGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.inventoryGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column21,
+            this.Column22,
+            this.Column23,
+            this.Column24});
+            this.inventoryGridView.Location = new System.Drawing.Point(689, 362);
+            this.inventoryGridView.Name = "inventoryGridView";
+            this.inventoryGridView.ReadOnly = true;
+            this.inventoryGridView.Size = new System.Drawing.Size(445, 150);
+            this.inventoryGridView.TabIndex = 31;
+            // 
+            // Column21
+            // 
+            this.Column21.HeaderText = "Item Number";
+            this.Column21.Name = "Column21";
+            this.Column21.ReadOnly = true;
+            // 
+            // Column22
+            // 
+            this.Column22.HeaderText = "Quantity";
+            this.Column22.Name = "Column22";
+            this.Column22.ReadOnly = true;
+            // 
+            // Column23
+            // 
+            this.Column23.HeaderText = "Initial Price";
+            this.Column23.Name = "Column23";
+            this.Column23.ReadOnly = true;
+            // 
+            // Column24
+            // 
+            this.Column24.HeaderText = "Sale Price";
+            this.Column24.Name = "Column24";
+            this.Column24.ReadOnly = true;
+            // 
+            // truckInventoryGridView
+            // 
+            this.truckInventoryGridView.AllowUserToAddRows = false;
+            this.truckInventoryGridView.AllowUserToDeleteRows = false;
+            this.truckInventoryGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.truckInventoryGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column25,
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.truckInventoryGridView.Location = new System.Drawing.Point(449, 415);
+            this.truckInventoryGridView.Name = "truckInventoryGridView";
+            this.truckInventoryGridView.ReadOnly = true;
+            this.truckInventoryGridView.Size = new System.Drawing.Size(549, 150);
+            this.truckInventoryGridView.TabIndex = 32;
+            // 
+            // Column25
+            // 
+            this.Column25.HeaderText = "Truck Number";
+            this.Column25.Name = "Column25";
+            this.Column25.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Item Number";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Quantity";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Initial Price";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Sale Price";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
             // SettingsTab
             // 
             this.SettingsTab.AccessibleName = "";
@@ -651,7 +658,7 @@
             this.SettingsTab.Location = new System.Drawing.Point(25, 37);
             this.SettingsTab.Name = "SettingsTab";
             this.SettingsTab.SelectedIndex = 0;
-            this.SettingsTab.Size = new System.Drawing.Size(864, 287);
+            this.SettingsTab.Size = new System.Drawing.Size(867, 282);
             this.SettingsTab.TabIndex = 33;
             // 
             // tabPage1
@@ -667,7 +674,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(345, 232);
+            this.tabPage1.Size = new System.Drawing.Size(355, 244);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -689,7 +696,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(335, 264);
+            this.tabPage2.Size = new System.Drawing.Size(355, 244);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -701,7 +708,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(335, 264);
+            this.tabPage3.Size = new System.Drawing.Size(355, 244);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -709,27 +716,65 @@
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.monthCalendar1);
+            this.tabPage4.Controls.Add(this.numericUpDown4);
+            this.tabPage4.Controls.Add(this.numericUpDown3);
+            this.tabPage4.Controls.Add(this.numericUpDown2);
+            this.tabPage4.Controls.Add(this.numericUpDown1);
+            this.tabPage4.Controls.Add(this.radioButton5);
+            this.tabPage4.Controls.Add(this.radioButton4);
             this.tabPage4.Controls.Add(this.radioButton3);
             this.tabPage4.Controls.Add(this.radioButton2);
             this.tabPage4.Controls.Add(this.radioButton1);
-            this.tabPage4.Controls.Add(this.button4);
-            this.tabPage4.Controls.Add(this.button3);
-            this.tabPage4.Controls.Add(this.button2);
-            this.tabPage4.Controls.Add(this.dataGridView1);
+            this.tabPage4.Controls.Add(this.salesGridView1);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(856, 261);
+            this.tabPage4.Size = new System.Drawing.Size(859, 256);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
-            // dataGridView1
+            // radioButton3
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(16, 65);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(69, 17);
+            this.radioButton3.TabIndex = 40;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "By Route";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(16, 41);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(68, 17);
+            this.radioButton2.TabIndex = 39;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "By Truck";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(16, 17);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(68, 17);
+            this.radioButton1.TabIndex = 38;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "By Driver";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // salesGridView1
+            // 
+            this.salesGridView1.AllowUserToAddRows = false;
+            this.salesGridView1.AllowUserToDeleteRows = false;
+            this.salesGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.salesGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7,
@@ -738,11 +783,11 @@
             this.dataGridViewTextBoxColumn10,
             this.dataGridViewTextBoxColumn11,
             this.dataGridViewTextBoxColumn12});
-            this.dataGridView1.Location = new System.Drawing.Point(0, 96);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(845, 150);
-            this.dataGridView1.TabIndex = 34;
+            this.salesGridView1.Location = new System.Drawing.Point(0, 96);
+            this.salesGridView1.Name = "salesGridView1";
+            this.salesGridView1.ReadOnly = true;
+            this.salesGridView1.Size = new System.Drawing.Size(845, 150);
+            this.salesGridView1.TabIndex = 34;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -792,78 +837,69 @@
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.ReadOnly = true;
             // 
-            // button2
+            // radioButton4
             // 
-            this.button2.Location = new System.Drawing.Point(385, 52);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 35;
-            this.button2.Text = "By Driver";
-            this.button2.UseVisualStyleBackColor = true;
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(435, 17);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(63, 17);
+            this.radioButton4.TabIndex = 44;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "By Date";
+            this.radioButton4.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // radioButton5
             // 
-            this.button3.Location = new System.Drawing.Point(687, 52);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 36;
-            this.button3.Text = "By Date";
-            this.button3.UseVisualStyleBackColor = true;
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(225, 17);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(60, 17);
+            this.radioButton5.TabIndex = 45;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "By Item";
+            this.radioButton5.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // numericUpDown1
             // 
-            this.button4.Location = new System.Drawing.Point(491, 52);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 37;
-            this.button4.Text = "By ";
-            this.button4.UseVisualStyleBackColor = true;
+            this.numericUpDown1.Location = new System.Drawing.Point(90, 17);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 46;
             // 
-            // radioButton1
+            // numericUpDown2
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(16, 17);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(68, 17);
-            this.radioButton1.TabIndex = 38;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "By Driver";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.numericUpDown2.Location = new System.Drawing.Point(90, 41);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown2.TabIndex = 47;
             // 
-            // radioButton2
+            // numericUpDown3
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(16, 41);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(68, 17);
-            this.radioButton2.TabIndex = 39;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "By Truck";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.numericUpDown3.Location = new System.Drawing.Point(90, 67);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown3.TabIndex = 48;
             // 
-            // radioButton3
+            // numericUpDown4
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(16, 65);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(74, 17);
-            this.radioButton3.TabIndex = 40;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "By Routes";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.numericUpDown4.Location = new System.Drawing.Point(291, 17);
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown4.TabIndex = 49;
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(264, 17);
+            this.monthCalendar1.Location = new System.Drawing.Point(510, 12);
             this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 41;
+            this.monthCalendar1.TabIndex = 50;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // Form1
             // 
             this.AccessibleName = "";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1307, 802);
+            this.ClientSize = new System.Drawing.Size(1307, 847);
             this.Controls.Add(this.SettingsTab);
             this.Controls.Add(this.truckInventoryGridView);
             this.Controls.Add(this.button1);
@@ -892,7 +928,11 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -963,14 +1003,10 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView salesGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
@@ -979,6 +1015,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.RadioButton radioButton5;
     }
 }
 

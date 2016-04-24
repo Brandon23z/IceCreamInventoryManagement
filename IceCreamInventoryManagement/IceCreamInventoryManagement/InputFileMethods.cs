@@ -223,48 +223,421 @@ namespace IceCreamInventoryManagement
                     if (r.groupValues[1] == "A")
                     {
                         int routenumber = Int32.Parse(r.groupValues[2]);
-                        string[] citylabels = new string[10];
-                        citylabels[0] = r.groupValues[3];
-                        int temp = 4;
-                        for (int k = 1; k < 10; k++)
+
+                        if (doesRouteExist(routenumber))
                         {
-                            if (r.groupValues[temp] == "")
-                                break;
+                            addToLog("Route # " + routenumber + " was not added because it already exists");
+                        }
+                        else
+                        {
+                            bool zoneIsValid = true;
+                            string[] citylabels = new string[10];
+                            citylabels[0] = r.groupValues[3];
+                            if (!(doesZoneExist(citylabels[0])) || (zoneInUse(citylabels[0])))
+                                zoneIsValid = false;
+                            if (zoneIsValid)
+                            {
+                                int k = 1;
+                                int temp = 4;
+                                for (k = 1; k < 10; k++)
+                                {
+                                    if (r.groupValues[temp] == "")
+                                        break;
+                                    else
+                                        citylabels[k] = r.groupValues[temp];
+                                    if (!(doesZoneExist(citylabels[k])) || (zoneInUse(citylabels[k])))
+                                    {
+                                        zoneIsValid = false;
+                                        break;
+                                    }
+                                    temp++;
+                                }
+
+                                if (zoneIsValid)
+                                {
+                                    bool test = addRoute(new Route(routenumber, citylabels));
+                                    if (!test)
+                                        addToLog("Route # " + routenumber + " failed to add.");
+                                }
+                                else
+                                    addToLog("Route # " + routenumber + " was not added because either \"" + citylabels[k] + "\" does not exist as a zone, or it is already in use by another route.");
+
+                            }
                             else
-                                citylabels[k] = r.groupValues[temp];
-                            temp++;
+                                addToLog("Route # " + routenumber + " was not added because either \"" + citylabels[0] + "\" does not exist as a zone, or it is already in use by another route.");
+
                         }
 
-                        bool test = addRoute(new Route(routenumber, citylabels));
                     }
                     else if (r.groupValues[1] == "C")
                     {
                         int routenumber = Int32.Parse(r.groupValues[2]);
-                        string[] citylabels = new string[10];
-                        citylabels[0] = r.groupValues[3];
-                        int temp = 4;
-                        for (int k = 1; k < 10; k++)
-                        {
-                            if (r.groupValues[temp] == "")
-                                break;
-                            else
-                                citylabels[k] = r.groupValues[temp];
-                            temp++;
-                        }
 
-                        bool test = updateRoute(new Route(routenumber, citylabels));
-                        if (!test)
-                            addToLog("Route # " + routenumber + " failed to update.");
+                        if (doesRouteExist(routenumber))
+                        {
+                            bool zoneIsValid = true;
+                            string[] citylabels = new string[10];
+                            citylabels[0] = r.groupValues[3];
+                            if (!(doesZoneExist(citylabels[0])) || (zoneInUse(citylabels[0])))
+                                zoneIsValid = false;
+                            if (zoneIsValid)
+                            {
+                                int k = 1;
+                                int temp = 4;
+                                for (k = 1; k < 10; k++)
+                                {
+                                    if (r.groupValues[temp] == "")
+                                        break;
+                                    else
+                                        citylabels[k] = r.groupValues[temp];
+                                    if (!(doesZoneExist(citylabels[k])) || (zoneInUse(citylabels[k])))
+                                    {
+                                        zoneIsValid = false;
+                                        break;
+                                    }
+                                    temp++;
+                                }
+
+                                if (zoneIsValid)
+                                {
+                                    bool test = updateRoute(new Route(routenumber, citylabels));
+                                    if (!test)
+                                        addToLog("Route # " + routenumber + " failed to update.");
+                                }
+                                else
+                                    addToLog("Route # " + routenumber + " was not changed because either \"" + citylabels[k] + "\" does not exist as a zone, or it is already in use by another route.");
+
+                            }
+                            else
+                            {
+                                addToLog("Route # " + routenumber + " was not changed because either \"" + citylabels[0] + "\" does not exist as a zone, or it is already in use by another route.");
+                            }
+                            
+                        }
+                        else
+                        {
+                            addToLog("Route # " + routenumber + " was not changed because it does not exist");
+                        }
+                        
                     }
                     else if (r.groupValues[13] == "D")
                     {
                         int routenumber = Int32.Parse(r.groupValues[14]);
-                        bool test = deleteRoute(routenumber);
+                        if(doesRouteExist(routenumber))
+                        {
+                            bool test = deleteRoute(routenumber);
+                        }       
+                        else
+                            addToLog("Route # " + routenumber + " was not deleted because it does not exist");
                     }
                 }
                 else
                 {
                     addToLog("Route Upload File: Line " + (i + 1).ToString() + " is invalid!");
+                }
+            }
+        }
+
+        public static bool doesZoneExist(string citylabel)
+        {
+            bool alreadyExists = false;
+            List<Zone> myZones = new List<Zone>();
+
+            myZones = getAllZones();
+
+            foreach (Zone zone in myZones)
+            {
+                if (zone.citylabel == citylabel)
+                {
+                    alreadyExists = true;
+                    break;
+                }
+            }
+            return alreadyExists;
+        }
+
+        public static bool doesRouteExist(int routenumber)
+        {
+            bool alreadyExists = false;
+            List<Route> myRoutes = new List<Route>();
+
+            myRoutes = getAllRoutes();
+
+            foreach (Route route in myRoutes)
+            {
+                if (route.routenumber == routenumber)
+                {
+                    alreadyExists = true;
+                    break;
+                }
+
+            }
+            return alreadyExists;
+        }
+
+        public static bool zoneInUse(string citylabel)
+        {
+            bool alreadyInUse= false;
+            List<Route> myRoutes = new List<Route>();
+
+            myRoutes = getAllRoutes();
+
+            foreach (Route route in myRoutes)
+            {
+                for (int i = 0; i < route.cityLabels.Count(); i++)
+                {
+                    if (route.cityLabels[i] == citylabel)
+                    {
+                        alreadyInUse = true;
+                        break;
+                    }
+                }
+                if (alreadyInUse)
+                    break;
+            }
+            return alreadyInUse;
+        }
+    
+
+        public static void processTruckRouteDriverUploadFileBody(string[] content)
+        {
+            for (int i = 1; i < content.Length - 1; i++)
+            {
+                RegexMethods.RegexClass r = checkRegex(content[i], truckRouteEx);
+                if (r.valid)
+                {
+                    int trucknumber = Int32.Parse(r.groupValues[1]);
+                    int routenumber = Int32.Parse(r.groupValues[2]);
+                    int drivernumber = Int32.Parse(r.groupValues[3]);
+
+                    if (doesTruckExist(trucknumber))
+                    {
+                        if (doesDriverExist(drivernumber))
+                        {
+                            if (driverAssignedToTruck(drivernumber) || truckAssignedToDriver(trucknumber))
+                            {
+                                addToLog("Unable to assign Driver # " + drivernumber + " to Truck # " + trucknumber
+                                    + " because one of the two is already assigned.");
+                            }
+                            else
+                            {
+                                assignDriverToTruck(drivernumber, trucknumber);
+                            }
+                        }
+                        else
+                        {
+                            addToLog("Unable to assign Driver # " + drivernumber + " to Truck # " + trucknumber
+                            + " because Driver # " + drivernumber + " does not exist.");
+                        }
+
+                        if (doesRouteExist(routenumber))
+                        {
+                            if (routeAssignedToTruck(routenumber) || truckAssignedToRoute(trucknumber))
+                            {
+                                addToLog("Unable to assign Route # " + routenumber + " to Truck # " + trucknumber
+                                    + " because one of the two is already assigned.");
+                            }
+                            else
+                            {
+                                assignTruckToRoute(trucknumber, routenumber);
+                            }
+                        }
+                        else
+                        {
+                            addToLog("Unable to assign Route # " + routenumber + " to Truck # " + trucknumber
+                            + " because Route # " + routenumber + " does not exist.");
+                        }
+                    }
+                    else
+                    {
+                        addToLog("Unable to assign Route # " + routenumber + ", Driver # " + drivernumber + ", and Truck # " + trucknumber 
+                            + " to each other because Truck # " + trucknumber + " does not exist.");
+                    }
+                    
+                    
+                }
+                else
+                {
+                    addToLog("Truck Inventory Upload File: Line " + (i + 1).ToString() + " is invalid!");
+                }
+            }
+        }
+
+        public static bool doesDriverExist(int drivernumber)
+        {
+            bool alreadyExists = false;
+            List<Driver> myDrivers = new List<Driver>();
+
+            myDrivers = getAllDrivers();
+
+            foreach (Driver driver in myDrivers)
+            {
+                if (driver.drivernumber == drivernumber)
+                {
+                    alreadyExists = true;
+                    break;
+                }
+            }
+            return alreadyExists;
+        }
+
+        public static bool doesTruckExist(int trucknumber)
+        {
+            bool alreadyExists = false;
+            List<Truck> myTrucks = new List<Truck>();
+
+            myTrucks = getAllTrucks();
+
+            foreach (Truck truck in myTrucks)
+            {
+                if (truck.trucknumber == trucknumber)
+                {
+                    alreadyExists = true;
+                    break;
+                }
+            }
+            return alreadyExists;
+        }
+
+        public static bool doesItemExist(int itemnumber)
+        {
+            bool alreadyExists = false;
+            List<InventoryItem> myItems = new List<InventoryItem>();
+
+            myItems = getInventory();
+
+            foreach (InventoryItem item in myItems)
+            {
+                if (item.itemnumber == itemnumber)
+                {
+                    alreadyExists = true;
+                    break;
+                }
+            }
+            return alreadyExists;
+        }
+
+        public static bool truckAssignedToDriver(int trucknumber)
+        {
+            bool alreadyInUse = false;
+            List<Driver> myDrivers = new List<Driver>();
+
+            myDrivers = getAllDrivers();
+
+            foreach (Driver driver in myDrivers)
+            {
+                if (driver.trucknumber == trucknumber)
+                {
+                    alreadyInUse = true;
+                    break;
+                }
+            }
+            return alreadyInUse;
+        }
+        
+        public static bool driverAssignedToTruck(int drivernumber)
+        {
+            bool alreadyInUse = true;
+            Driver myDriver = getDriver(drivernumber);
+
+            if (myDriver.trucknumber == 0)
+                alreadyInUse = false;
+
+            return alreadyInUse;
+        }
+
+        public static bool routeAssignedToTruck(int routenumber)
+        {
+            bool alreadyInUse = false;
+            List<Truck> myTrucks = new List<Truck>();
+
+            myTrucks = getAllTrucks();
+
+            foreach (Truck truck in myTrucks)
+            {
+                if (truck.routenumber == routenumber)
+                {
+                    alreadyInUse = true;
+                    break;
+                }
+            }
+            return alreadyInUse;
+        }
+
+        public static bool truckAssignedToRoute(int trucknumber)
+        {
+            bool alreadyInUse = true;
+            Truck myTruck = getTruck(trucknumber);
+
+            if (myTruck.routenumber == 0)
+                alreadyInUse = false;
+
+            return alreadyInUse;
+        }
+
+        public static void processTruckUploadBody(string[] content)
+        {
+            clearTrucks();
+            for (int i = 1; i < content.Length - 1; i++)
+            {
+                RegexMethods.RegexClass r = checkRegex(content[i], trucksEx);
+                if (r.valid)
+                {
+                    int trucknumber = Int32.Parse(r.groupValues[1]);
+                    bool test = addTruck(new Truck(trucknumber));
+                }
+                else
+                {
+                    addToLog("Truck Upload File: Line " + (i + 1).ToString() + " is invalid!");
+                }
+            }
+        }
+
+        public static void processDriverUploadBody(string[] content)
+        {
+            clearDrivers();
+            for (int i = 1; i < content.Length - 1; i++)
+            {
+                RegexMethods.RegexClass r = checkRegex(content[i], trucksEx);
+                if (r.valid)
+                {
+                    int drivernumber = Int32.Parse(r.groupValues[1]);
+                    bool test = addDriver(new Driver(drivernumber));
+                }
+                else
+                {
+                    addToLog("Driver Upload File: Line " + (i + 1).ToString() + " is invalid!");
+                }
+            }
+        }
+
+
+        public static void processInventoryUpdateBody(string[] content)
+        {
+            List<InventoryItem> myInventory1 = new List<InventoryItem>();
+
+            myInventory1 = getInventory();
+
+            for (int i = 0; i < myInventory1.Count(); i++)
+            {
+                bool test = setInventoryItem(myInventory1[i].itemnumber, 0);
+            }
+
+            for (int i = 1; i < content.Length - 1; i++)
+            {
+                RegexMethods.RegexClass r = checkRegex(content[i], inventoryItemEx);
+                if (r.valid)
+                {
+                    int itemnumber = Int32.Parse(r.groupValues[1]);
+                    int quantity = Int32.Parse(r.groupValues[2]);
+                    double initialprice = Convert.ToDouble(r.groupValues[3] + "." + r.groupValues[4]);
+                    double saleprice = Convert.ToDouble(r.groupValues[5] + "." + r.groupValues[6]);
+                    string description = r.groupValues[7];
+                    bool test = addInventoryItem(new InventoryItem(itemnumber, quantity, initialprice, saleprice, description));
+                }
+                else
+                {
+                    addToLog("Inventory Upload File: Line " + (i + 1).ToString() + " is invalid!");
                 }
             }
         }
@@ -282,7 +655,7 @@ namespace IceCreamInventoryManagement
                 {
 
                     InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
-                    int change = DefaultOrder.defaults[k].amount*(-1);
+                    int change = DefaultOrder.defaults[k].amount * (-1);
                     int myTest = moveItem(temp.itemnumber, myTrucks[i].trucknumber, change);
                 }
             }
@@ -334,107 +707,30 @@ namespace IceCreamInventoryManagement
                 }
             }
         }
-
-        public static void processTruckRouteDriverUploadFileBody(string[] content)
-        {
-            for (int i = 1; i < content.Length - 1; i++)
-            {
-                RegexMethods.RegexClass r = checkRegex(content[i], truckRouteEx);
-                if (r.valid)
-                {
-                    int trucknumber = Int32.Parse(r.groupValues[1]);
-                    int routenumber = Int32.Parse(r.groupValues[2]);
-                    int drivernumber = Int32.Parse(r.groupValues[3]);
-                    assignTruckToRoute(trucknumber, routenumber);
-                    assignDriverToTruck(drivernumber, trucknumber);
-                }
-                else
-                {
-                    addToLog("Truck Inventory Upload File: Line " + (i + 1).ToString() + " is invalid!");
-                }
-            }
-        }
-
-        public static void processInventoryUpdateBody(string[] content)
-        {
-            List<InventoryItem> myInventory1 = new List<InventoryItem>();
-
-            myInventory1 = getInventory();
-
-            for (int i = 0; i < myInventory1.Count(); i++)
-            {
-                bool test = setInventoryItem(myInventory1[i].itemnumber, 0);
-            }
-
-            for (int i = 1; i < content.Length - 1; i++)
-            {
-                RegexMethods.RegexClass r = checkRegex(content[i], inventoryItemEx);
-                if (r.valid)
-                {
-                    int itemnumber = Int32.Parse(r.groupValues[1]);
-                    int quantity = Int32.Parse(r.groupValues[2]);
-                    double initialprice = Convert.ToDouble(r.groupValues[3] + "." + r.groupValues[4]);
-                    double saleprice = Convert.ToDouble(r.groupValues[5] + "." + r.groupValues[6]);
-                    string description = r.groupValues[7];
-                    ////////////////// addInventoryItem does not work if you put duplicates
-                    bool test =
-                        addInventoryItem(new InventoryItem(itemnumber, quantity, initialprice, saleprice, description));
-                }
-                else
-                {
-                    addToLog("Inventory Upload File: Line " + (i + 1).ToString() + " is invalid!");
-                }
-            }
-        }
-
-        public static void processTruckUploadBody(string[] content)
-        {
-            clearTrucks();
-            for (int i = 1; i < content.Length - 1; i++)
-            {
-                RegexMethods.RegexClass r = checkRegex(content[i], trucksEx);
-                if (r.valid)
-                {
-                    int trucknumber = Int32.Parse(r.groupValues[1]);
-                    bool test = addTruck(new Truck(trucknumber));
-                }
-                else
-                {
-                    addToLog("Truck Upload File: Line " + (i + 1).ToString() + " is invalid!");
-                }
-            }
-        }
-
-        public static void processDriverUploadBody(string[] content)
-        {
-            clearDrivers();
-            for (int i = 1; i < content.Length - 1; i++)
-            {
-                RegexMethods.RegexClass r = checkRegex(content[i], trucksEx);
-                if (r.valid)
-                {
-                    int drivernumber = Int32.Parse(r.groupValues[1]);
-                    bool test = addDriver(new Driver(drivernumber));
-                }
-                else
-                {
-                    addToLog("Driver Upload File: Line " + (i + 1).ToString() + " is invalid!");
-                }
-            }
-        }
+        //needs error handling
 
         public static void processCustomerRequestBody(string[] content)
         {
             for (int i = 1; i < content.Length - 1; i++)
             {
-                RegexMethods.RegexClass r = checkRegex(content[i], "replace me!");//requestedInventoryItemEx);
+                RegexMethods.RegexClass r = checkRegex(content[i], "replace me!");//requestedInventoryItemEx
                 // need to create new regex string for this with itemnumber = r.groupValues[1], description = r.groupValues[2]
                 if (r.valid)
                 {
                     int itemnumber = Int32.Parse(r.groupValues[1]);
                     //int quantityRequested = Int32.Parse(r.groupValues[2]);
                     string description = r.groupValues[2];
-                    bool test = addInventoryItem(new InventoryItem(itemnumber, 0, 0, 0, description));
+
+                    if (doesItemExist(itemnumber))
+                        addToLog("Cannot add Item # " + itemnumber + " as a newly requested item, since it already exists");
+                    else
+                    {
+                        bool test = addInventoryItem(new InventoryItem(itemnumber, 0, 0, 0, description));
+                        AutoOrder.ProductID.Add(itemnumber);
+                        //AutoOrder.amount.Add(quantity);
+                        // get quantity from settings
+                    
+                    }
 
                     // for any new requested item, only the id and the description will be stored in the Inventory table. The other attrubites will be set to 0.
                     // in the settings menu, the user will be able to set the default amount for new products. The Auto Order function will then be able to add the new item to 
@@ -484,9 +780,12 @@ namespace IceCreamInventoryManagement
                         {
                             int quantitySold = -1 * (finalquantity - truckInv[itemnumber].quantity);
                             Settings.DaySettings daySettings = Settings.getDaySettings();
+                            TruckRouteDriver temp = getRouteDriverFromTruck(trucknumber);
                             Console.WriteLine("Truck " + trucknumber + " sold " +
                                               (quantitySold));
-                            bool test = addSale(itemnumber, trucknumber, routenumber, drivernumber, quantitySold, daySettings.currentDate, initialPrice, salePrice);
+                            bool test = addSale(itemnumber, trucknumber, temp.routenumber, temp.drivernumber, quantitySold, daySettings.currentDate, truckInv[itemnumber].initialprice, truckInv[itemnumber].saleprice);
+                            AutoOrder.ProductID.Add(itemnumber);
+                            AutoOrder.amount.Add(quantitySold);
                         }
                         Console.WriteLine("Truck " + trucknumber + " has " + finalquantity + "/" +
                                           truckInv[itemnumber].quantity + " of item " + itemnumber);
@@ -519,8 +818,9 @@ namespace IceCreamInventoryManagement
                     Console.WriteLine("File is invalid in format");
                 }
             }
-        }
 
+        }
+        //needs error handling
 
     }
 }

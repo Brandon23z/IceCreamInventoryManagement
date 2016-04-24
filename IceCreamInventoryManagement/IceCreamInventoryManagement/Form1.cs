@@ -17,7 +17,6 @@ namespace IceCreamInventoryManagement
 {
     public partial class Form1 : Form
     {
-        //public List<string> log = new List<string>();
 
         DateTime now = DateTime.Now;
 
@@ -31,12 +30,13 @@ namespace IceCreamInventoryManagement
         private void Form1_Load(object sender, EventArgs e)
         {
             initializeDatabase();
-            //clearDatabase();
+            clearDatabase();
             Settings.saveDefaults(true);
             tabPage1.Text = "Populate System";
             tabPage2.Text = "Run Simulation";
             tabPage3.Text = "Settings";
             tabPage4.Text = "Display Sales";
+            refreshSalesView();
         }
 
         private void btnCityUpload_Click(object sender, EventArgs e)
@@ -126,6 +126,7 @@ namespace IceCreamInventoryManagement
 
             //refresh datagridview
             refreshRoutesView();
+            refreshSalesView();
 
 
             if (TextSetting.dailyInventoryCalculated == true)
@@ -135,11 +136,13 @@ namespace IceCreamInventoryManagement
         private void refreshSalesView()
         {
             List<Sale> mySales = new List<Sale>();
-            //mySales = getAllSales();
+            mySales = getAllSales();
             salesGridView.Rows.Clear();
+            salesGridView1.Rows.Clear();
             for (int i = 0; i < mySales.Count(); i++)
             {
-                salesGridView.Rows.Add(mySales[i].itemnumber, mySales[i].quantity, mySales[i].saledate, mySales[i].intitialprice, mySales[i].saleprice, mySales[i].trucknumber, mySales[i].routenumber, mySales[i].drivernumber);
+                salesGridView.Rows.Add(mySales[i].itemnumber, mySales[i].quantity, mySales[i].saledate, mySales[i].initialprice, mySales[i].saleprice, mySales[i].trucknumber, mySales[i].routenumber, mySales[i].drivernumber);
+                salesGridView1.Rows.Add(mySales[i].itemnumber, mySales[i].quantity, mySales[i].saledate, mySales[i].initialprice, mySales[i].saleprice, mySales[i].trucknumber, mySales[i].routenumber, mySales[i].drivernumber);
 
             }
         }
@@ -167,6 +170,8 @@ namespace IceCreamInventoryManagement
             //refresh datagridview
             refreshTruckInvView();
             refreshInventoryView();
+
+            SQLMethods.insertSetting(Settings.keys.truckInventoryUploadFile, "1", true);
 
 
         }
@@ -335,6 +340,39 @@ namespace IceCreamInventoryManagement
 
         }
 
+        private void btnLoadIceCreamToTrucks_Click(object sender, EventArgs e)
+        {
+            //If loadTruck.txt("change the default" file) has NOT been uploaded
+            Settings.FileUploadSettings settings = Settings.getFileUploadSettings();
+
+            if (settings.truckInventoryUploadFile)
+            {
+                //add default inventory to each truck
+                List<Truck> myTrucks = new List<Truck>();
+
+                myTrucks = getAllTrucks();
+
+                for (int i = 0; i < myTrucks.Count(); i++)
+                {
+                    for (int k = 0; k < 5; k++)
+                    {
+                        InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
+                        int change = DefaultOrder.defaults[k].amount * (-1);
+                        int myTest = moveItem(temp.itemnumber, myTrucks[i].trucknumber, change);
+                    }
+                }
+                addToLog("Loading default items to trucks");
+            }
+
+            refreshInventoryView();
+
+
+            if (TextSetting.truckInventoryReset == true)
+            {
+                sendTextMessage("Truck inventories have been loaded.");
+            }
+        }
+
         setDefaultForm setDefaultForm = new setDefaultForm();
         settingsForm settingsForm = new settingsForm();
         autoOrderForm autoOrderForm = new autoOrderForm();
@@ -376,35 +414,115 @@ namespace IceCreamInventoryManagement
 
         }
 
-        private void btnLoadIceCreamToTrucks_Click(object sender, EventArgs e)
+
+        private void label6_Click(object sender, EventArgs e)
         {
-            // If loadTruck.txt("change the default" file) has NOT been uploaded
-            //if ()
-            //{
-            //    //add default inventory to each truck
-            //    List<Truck> myTrucks = new List<Truck>();
 
-            //    myTrucks = getAllTrucks();
+        }
 
-            //    for (int i = 0; i < myTrucks.Count(); i++)
-            //    {
-            //        for (int k = 0; k < 5; k++)
-            //        {
-            //            InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
-            //            int change = DefaultOrder.defaults[k].amount*(-1);
-            //            int myTest = moveItem(temp.itemnumber, myTrucks[i].trucknumber, change);
-            //        }
-            //    }
-            //    addToLog("Loading default items to trucks");
-            //}
-            
-            if (TextSetting.truckInventoryReset == true)
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sortSales(string startDateString = "", string endDateString = "", int drivernumber = 0, int routenumber = 0, int trucknumber = 0, int itemnumber = 0)
+        {
+            List<Sale> result1 = new List<Sale>();
+            List<Sale> result2 = new List<Sale>();
+            List<Sale> result3 = new List<Sale>();
+            List<Sale> result4 = new List<Sale>();
+            List<Sale> result5 = new List<Sale>();
+
+            List<Sale> mySales = new List<Sale>();
+
+            DateTime startDate = Convert.ToDateTime(startDateString);
+            DateTime endDate = Convert.ToDateTime(endDateString);
+
+            mySales = getAllSales();
+
+            for (int i = 0; i < mySales.Count(); i++)
             {
-                sendTextMessage("Truck inventories have been loaded.");
+                if (drivernumber != 0)
+                {
+                    if (mySales[i].drivernumber == drivernumber)
+                        result1.Add(mySales[i]);
+                }
+                else
+                {
+                    result1 = mySales;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < result1.Count(); i++)
+            {
+                if (trucknumber != 0)
+                {
+                    if (result1[i].trucknumber == trucknumber)
+                        result2.Add(result1[i]);
+                }
+                else
+                {
+                    result2 = result1;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < result2.Count(); i++)
+            {
+                if (routenumber != 0)
+                {
+                    if (result2[i].routenumber == routenumber)
+                        result3.Add(result2[i]);
+                }
+                else
+                {
+                    result3 = result2;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < result3.Count(); i++)
+            {
+                if (itemnumber != 0)
+                {
+                    if (result3[i].itemnumber == itemnumber)
+                        result4.Add(result3[i]);
+                }
+                else
+                {
+                    result4 = result3;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < result4.Count(); i++)
+            {
+                if (startDateString != "" && endDateString != "")
+                {
+                    if (result4[i].saledate >= startDate && result4[i].saledate <= endDate)
+                        result5.Add(result4[i]);
+                }
+                else
+                {
+                    result5 = result4;
+                    break;
+                }
+            }
+
+            salesGridView1.Rows.Clear();
+            for (int i = 0; i < mySales.Count(); i++)
+            {
+                salesGridView1.Rows.Add(result5[i].itemnumber, result5[i].quantity, result5[i].saledate, result5[i].initialprice, result5[i].saleprice, result5[i].trucknumber, result5[i].routenumber, result5[i].drivernumber);
             }
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
 
         }

@@ -45,6 +45,7 @@ namespace IceCreamInventoryManagement
             defaultA[4] = new DefaultItem(Convert.ToInt32(nudItem5Product.Value), Convert.ToInt32(nudItem5Quantity.Value));
             string value = nudItem1Product.Value.ToString() + ":" + nudItem1Quantity.Value.ToString();
             DefaultOrder.defaults = defaultA;
+
             DefaultItemsSettings settings = new DefaultItemsSettings();
             settings.defaultItem1ID = Convert.ToInt32(nudItem1Product.Value);
             settings.defaultItem1Quantity = Convert.ToInt32(nudItem1Quantity.Value);
@@ -59,6 +60,7 @@ namespace IceCreamInventoryManagement
             saveDefaultItemsSettings(settings);
             this.Close();
         }
+        //needs error handling
 
         private void setDefaultForm_Load(object sender, EventArgs e)
         {

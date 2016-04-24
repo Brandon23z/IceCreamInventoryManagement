@@ -625,6 +625,7 @@ namespace IceCreamInventoryManagement
         //DRIVERS//
 
         //SALES//
+        #region SALES
         public static bool addSale(int itemNumber, int truckNumber, int routeNumber, int driverNumber, int quantitySold, DateTime saledate, double initialPrice, double salePrice)
         {
             //CREATE TABLE SALES(itemnumber int NOT NULL, quantity int NOT NULL, saledate timestamp NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, trucknumber int NOT NULL, routenumber int NOT NULL, drivernumber int NOT NULL);");
@@ -641,7 +642,6 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
-
         public static List<Sale> getAllSales()
         {
             List<Sale> saleList = new List<Sale>();
@@ -694,7 +694,9 @@ namespace IceCreamInventoryManagement
             public int trucknumber { get; set; }
             public int routenumber { get; set; }
             public int drivernumber { get; set; }
-        }
+        } 
+        #endregion
+        //SALES//
 
         //SETTINGS/
         #region SETTINGS
