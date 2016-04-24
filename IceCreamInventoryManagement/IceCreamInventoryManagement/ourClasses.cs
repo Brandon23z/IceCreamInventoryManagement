@@ -218,12 +218,24 @@ namespace IceCreamInventoryManagement
         {
             public int itemnumber;
             public int quantity;
-            public double intitialprice;
+            public double initialprice;
             public double saleprice;
-            public TimeSpan saledate;
+            public DateTime saledate;
             public int trucknumber;
             public int routenumber;
             public int drivernumber;
+
+            public Sale(int itemnumber_, int quantity_, double initialprice_, double saleprice_, DateTime saledate_, int trucknumber_, int routenumber_, int drivernumber_)
+            {
+                itemnumber = itemnumber_;
+                quantity = quantity_;
+                initialprice = initialprice_;
+                saleprice = saleprice_;
+                saledate = saledate_;
+                trucknumber = trucknumber_;
+                routenumber = routenumber_;
+                drivernumber = drivernumber_;
+            }
         }
 
         public class Driver
