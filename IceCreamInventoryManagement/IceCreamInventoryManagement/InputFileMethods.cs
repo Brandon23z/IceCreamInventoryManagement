@@ -483,9 +483,10 @@ namespace IceCreamInventoryManagement
                         else
                         {
                             int quantitySold = -1 * (finalquantity - truckInv[itemnumber].quantity);
+                            Settings.DaySettings daySettings = Settings.getDaySettings();
                             Console.WriteLine("Truck " + trucknumber + " sold " +
                                               (quantitySold));
-                            //bool test = addSale(itemnumber, quantitySold, date, initialPrice, salePrice, trucknumber, routenumber, drivernumber);
+                            bool test = addSale(itemnumber, trucknumber, routenumber, drivernumber, quantitySold, daySettings.currentDate, initialPrice, salePrice);
                         }
                         Console.WriteLine("Truck " + trucknumber + " has " + finalquantity + "/" +
                                           truckInv[itemnumber].quantity + " of item " + itemnumber);

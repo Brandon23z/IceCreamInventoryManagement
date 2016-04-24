@@ -36,6 +36,7 @@ namespace IceCreamInventoryManagement
             tabPage1.Text = "Populate System";
             tabPage2.Text = "Run Simulation";
             tabPage3.Text = "Settings";
+            tabPage4.Text = "Display Sales";
         }
 
         private void btnCityUpload_Click(object sender, EventArgs e)
