@@ -624,6 +624,51 @@ namespace IceCreamInventoryManagement
         #endregion
         //DRIVERS//
 
+        //SALES//
+        public static bool addSale(int itemNumber, int truckNumber, int routeNumber, int driverNumber, int quantitySold, DateTime saledate, double initialPrice, double salePrice)
+        {
+            //CREATE TABLE SALES(itemnumber int NOT NULL, quantity int NOT NULL, saledate timestamp NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, trucknumber int NOT NULL, routenumber int NOT NULL, drivernumber int NOT NULL);");
+            SQLResult result = sqlnonquery("INSERT INTO SALES VALUES (@itemnumber, @quantity, @saledate, @initialprice, @saleprice, @trucknumber, @routenumber, @drivernumber );",
+                new Dictionary<string, string>() { { "@itemnumber", itemNumber.ToString() }, { "@quantity", quantitySold.ToString() }
+                , { "@saledate", saledate.ToString() }, { "@initialprice", initialPrice.ToString() }, { "@saleprice", salePrice.ToString() }
+                , { "@trucknumber", truckNumber.ToString() }, { "@routenumber", routeNumber.ToString() }, { "@drivernumber", driverNumber.ToString() }});
+            if (result.error == SQLError.none && result.rowsAffected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static List<Sale> getAllSales()
+        {
+            List<Sale> saleList = new List<Sale>();
+            SQLResult result = sqlquery("SELECT * FROM SALES;");
+            if (result.error == SQLError.none && result.data != null)
+            {
+                for (int i = 0; i < result.data.data.Count; i++)
+                {
+                    int itemnumber = Convert.ToInt32(result.data.getField(i, "itemnumber"));
+                    int quantity = Convert.ToInt32(result.data.getField(i, "quantity"));
+                    DateTime saledate = Convert.ToDateTime(result.data.getField(i, "saledate"));
+                    double initialprice = Convert.ToDouble(result.data.getField(i, "initialprice"));
+                    double saleprice = Convert.ToDouble(result.data.getField(i, "saleprice"));
+                    int trucknumber = Convert.ToInt32(result.data.getField(i, "trucknumber"));
+                    int routenumber = Convert.ToInt32(result.data.getField(i, "routenumber"));
+                    int drivernumber = Convert.ToInt32(result.data.getField(i, "drivernumber"));
+                    saleList.Add(new Sale(itemnumber, quantity, initialprice, saleprice, saledate, trucknumber, routenumber, drivernumber));
+                }
+                return saleList;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        //SALES//
+
         //SETTINGS/
         #region SETTINGS
         public static bool insertSetting(string setting, string value, bool overwrite = true)
