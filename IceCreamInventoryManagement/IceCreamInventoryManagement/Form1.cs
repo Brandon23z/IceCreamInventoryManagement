@@ -11,7 +11,7 @@ using static IceCreamInventoryManagement.RegexMethods;
 using static IceCreamInventoryManagement.RegexStr;
 using static IceCreamInventoryManagement.ourClasses;
 using static IceCreamInventoryManagement.SQLMethods;
-using System.Globalization;
+using static IceCreamInventoryManagement.InputFileMethods;
 
 namespace IceCreamInventoryManagement
 {
@@ -23,9 +23,6 @@ namespace IceCreamInventoryManagement
 
         string dateTimeFormat = "M/d/yy - h:mm ";
 
-
-
-
         public Form1()
         {
             InitializeComponent();
@@ -35,258 +32,96 @@ namespace IceCreamInventoryManagement
         {
             initializeDatabase();
             clearDatabase();
-            Settings.saveDefaults();
+            Settings.saveDefaults(true);
         }
 
         private void btnCityUpload_Click(object sender, EventArgs e)
         {
-
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Text Files|*.txt";
-            openFileDialog1.Title = "Select an Input File";
-
             string[] cityUploadFile = { "" };
-            DateTime date = Convert.ToDateTime("1970-01-01");
-            string seqNum = "";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                cityUploadFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
-                addToLog("City Upload File Read");
-            }
-
-            //Check and parse header
-            RegexClass r = checkRegex(cityUploadFile[0], headerEx);
-            if (r.valid)
-            {
-                seqNum = r.groupValues[2];
-                string dateString = r.groupValues[3];
-                date = Convert.ToDateTime(dateString);
-            }
-
-            //check and parse trailer
-            r = checkRegex(cityUploadFile[cityUploadFile.Length - 1], trailerEx);
-
-            int numOfRows = 0;
-
-            if (r.valid)
-            {
-                string numOfRowsString = r.groupValues[2];
-                numOfRows = Int32.Parse(numOfRowsString); 
-            }
-
-
-            if (numOfRows != cityUploadFile.Length - 2)
-            {
-                addToLog("City Upload File Invalid: Trailer # does not match Actual # of Rows");
-            }
-
-
-            clearRoutes();
-            clearZones();
-            for (int i = 1; i < cityUploadFile.Length - 1; i++)
-            {
-                r = checkRegex(cityUploadFile[i], cityEx);
-                if (r.valid)
-                {
-                    string citylabel = r.groupValues[1];
-                    string cityname = r.groupValues[2];
-                    string state = r.groupValues[3];
-                    bool test = addZone(new Zone(citylabel, cityname, state));
-                }
-            }
-            
-
-            addToLog("City Upload File Valid");
-            //MessageBox.Show("file read succesfully");
-
-            //temporary form
-
-            //DisplayTableForm d = new DisplayTableForm();
-            //d.Show();
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            List<Zone> myZones = new List<Zone>();
-
-            myZones = getAllZones();
-            zoneGridView.Rows.Clear();
-            for (int i = 0; i < myZones.Count(); i++)
-            {
-                //DataGridViewRow row = new DataGridViewRow();
-                zoneGridView.Rows.Add(myZones[i].citylabel, myZones[i].cityname, myZones[i].state);
-                //row.Cells[0].Value = myZones[i].citylabel;
-                //row.Cells[1].Value = myZones[i].cityname;
-                //row.Cells[2].Value = myZones[i].state;
-                //zoneGridView.Rows.Add(row);
-            }
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        }
-
-        private void btnRouteUpload_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Text Files|*.txt";
-            openFileDialog1.Title = "Select an Input File";
-
-            string[] routeUploadFile = { "" };
-            DateTime date = Convert.ToDateTime("1970-01-01");
-            string seqNum = "";
-
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                routeUploadFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
-                addToLog("Route Upload File Read");
-            }
-
-            //Check and parse header
-            RegexClass r = checkRegex(routeUploadFile[0], headerEx);
-            if (r.valid)
-            {
-                seqNum = r.groupValues[2];
-                string dateString = r.groupValues[3];
-                date = Convert.ToDateTime(dateString);
-            }
-
-            //check and parse trailer
-            r = checkRegex(routeUploadFile[routeUploadFile.Length - 1], trailerEx);
-
-            int numOfRows = 0;
-
-            if (r.valid)
-            {
-                numOfRows = Int32.Parse(r.groupValues[2]);
-            }
-
-
-            if (numOfRows != routeUploadFile.Length - 2)
-            {
-                addToLog("Route Upload File Invalid: Trailer # does not match Actual # of Rows");
-            }
-
-
-            for (int i = 1; i < routeUploadFile.Length - 1; i++)
-            {
-                r = checkRegex(routeUploadFile[i], routeCitys);
-                if (r.valid)
-                {
-                    if (r.groupValues[1] == "A")
-                    {
-                        int routenumber = Int32.Parse(r.groupValues[2]);
-                        string[] citylabels = new string[10];
-                        citylabels[0] = r.groupValues[3];
-                        int temp = 4;
-                        for (int k = 1; k < 10; k++)
-                        {
-                            if (r.groupValues[temp] == "")
-                                break;
-                            else
-                                citylabels[k] = r.groupValues[temp];
-                            temp++;
-                        }
-
-                        bool test = addRoute(new Route(routenumber, citylabels));
-                    }
-                    if (r.groupValues[1] == "C")
-                    {
-                        int routenumber = Int32.Parse(r.groupValues[2]);
-                        string[] citylabels = new string[10];
-                        citylabels[0] = r.groupValues[3];
-                        int temp = 4;
-                        for (int k = 1; k < 10; k++)
-                        {
-                            if (r.groupValues[temp] == "")
-                                break;
-                            else
-                                citylabels[k] = r.groupValues[temp];
-                            temp++;
-                        }
-
-                        bool test = updateRoute(new Route(routenumber, citylabels));
-                        if(!test)
-                            addToLog("Route # " + routenumber + "failed to update.");
-                    }
-                    if (r.groupValues[13] == "D")
-                    {
-                        int routenumber = Int32.Parse(r.groupValues[14]);
-                        bool test = deleteRoute(routenumber);
-                    }
-                }
-            }
-
-
-            addToLog("Route Upload File Valid");
-
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            List<Route> myRoutes = new List<Route>();
-
-            myRoutes = getAllRoutes();
-
-            routeGridView.Rows.Clear();
-            for (int i = 0; i < myRoutes.Count(); i++)
-            {
-                //DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
-                routeGridView.Rows.Add(myRoutes[i].routenumber, myRoutes[i].cityLabels[0], myRoutes[i].cityLabels[1], myRoutes[i].cityLabels[2], myRoutes[i].cityLabels[3], myRoutes[i].cityLabels[4]);
-                //row.Cells[0].Value = myRoutes[i].routenumber;
-                //row.Cells[1].Value = myRoutes[i].cityLabels[0];
-                //row.Cells[2].Value = myRoutes[i].cityLabels[1];
-                //row.Cells[3].Value = myRoutes[i].cityLabels[2];
-                //row.Cells[4].Value = myRoutes[i].cityLabels[3];
-                //row.Cells[5].Value = myRoutes[i].cityLabels[4];
-                //zoneGridView.Rows.Add(row);
-            }
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        }
-
-        private void btnIceCreamFromTrucks_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Text Files|*.txt";
-            openFileDialog1.Title = "Select an Input File";
-
-            string[] salesFile = { "" };
-            DateTime date = Convert.ToDateTime("1970-01-01");
-            string seqNum = "";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                salesFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
-                addToLog("Sales File Read");
-            }else
+            string fileName = "Route Upload File";
+            Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
+            int seqNum = sequenceSettings.sequenceCityUploadFile;
+            //if anything is invalid to where the file is invalid
+            if (!checkFileGeneric(out cityUploadFile, fileName, seqNum, Settings.keys.sequenceCityUploadFile))
             {
                 return;
             }
 
-            //Check and parse header
-            RegexClass r = checkRegex(salesFile[0], headerEx);
-            if (r.valid)
+            //Empty Cities and Routes Tables
+            clearRoutes();
+            clearZones();
+
+            //process the city upload file, adding any zones to database
+            processCityUploadFileBody(cityUploadFile);
+
+            addToLog(fileName + " Processed Successfully");
+
+            //refresh datagridview
+            refreshZonesView();
+        }
+
+        private void refreshZonesView()
+        {
+            List<Zone> myZones = new List<Zone>();
+            myZones = getAllZones();
+            zoneGridView.Rows.Clear();
+            for (int i = 0; i < myZones.Count(); i++)
             {
-                seqNum = r.groupValues[2];
-                string dateString = r.groupValues[3];
-                date = Convert.ToDateTime(dateString);
+                zoneGridView.Rows.Add(myZones[i].citylabel, myZones[i].cityname, myZones[i].state);
+            }
+        }
+
+        private void btnRouteUpload_Click(object sender, EventArgs e)
+        {
+            string[] routeUploadFile = { "" };
+            string fileName = "Route Upload File";
+            Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
+            int seqNum = sequenceSettings.sequenceRouteUploadFile;
+            //if anything is invalid to where the file is invalid
+            if (!checkFileGeneric(out routeUploadFile, fileName, seqNum, Settings.keys.sequenceRouteUploadFile))
+            {
+                return;
             }
 
-            //check and parse trailer
-            r = checkRegex(salesFile[salesFile.Length - 1], trailerEx);
+            //process the city upload file, adding any zones to database
+            processRouteUploadFileBody(routeUploadFile);
 
-            int numOfRows = 0;
+            addToLog(fileName + " Processed Successfully");
 
-            if (r.valid)
+            //refresh datagridview
+            refreshRoutesView();
+        }
+
+        private void refreshRoutesView()
+        {
+            List<Route> myRoutes = new List<Route>();
+            myRoutes = getAllRoutes();
+            routeGridView.Rows.Clear();
+            for (int i = 0; i < myRoutes.Count(); i++)
             {
-                string numOfRowsString = r.groupValues[2];
-                numOfRows = Int32.Parse(numOfRowsString);
+                routeGridView.Rows.Add(myRoutes[i].routenumber, myRoutes[i].cityLabels[0], myRoutes[i].cityLabels[1], myRoutes[i].cityLabels[2], myRoutes[i].cityLabels[3], myRoutes[i].cityLabels[4]);
+            }
+        }
+
+        private void btnIceCreamFromTrucks_Click(object sender, EventArgs e)
+        {
+            string[] salesFile = { "" };
+            string fileName = "Sales File";
+            Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
+            int seqNum = sequenceSettings.sequenceTruckSalesUploadFile;
+            //if anything is invalid to where the file is invalid
+            if (!checkFileGeneric(out salesFile, fileName, seqNum, Settings.keys.sequenceTruckSalesUploadFile, false))
+            {
+                return;
             }
 
+            //process the city upload file, adding any zones to database
+            processSalesFileBody(salesFile);
 
-            if (numOfRows != salesFile.Length - 2)
-            {
-                addToLog("Ice Cream from Trucks File Invalid: Trailer # does not match Actual # of Rows");
-            }
+            addToLog(fileName + " Processed Successfully");
+
+            //refresh datagridview
+            refreshRoutesView();
 
 
             if (TextSetting.dailyInventoryCalculated == true)
@@ -295,579 +130,222 @@ namespace IceCreamInventoryManagement
 
         private void btnChangeTruckInventory_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Text Files|*.txt";
-            openFileDialog1.Title = "Select an Input File";
-
             string[] iceCreamtoTrucksFile = { "" };
-            DateTime date = Convert.ToDateTime("1970-01-01");
-            string seqNum = "";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                iceCreamtoTrucksFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
-                addToLog("Ice Cream to Trucks File Read");
-            }else
+            string fileName = "Truck Inventory Upload File";
+            Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
+            int seqNum = sequenceSettings.sequenceTruckInventoryUploadFile;
+            //if anything is invalid to where the file is invalid
+            if (!checkFileGeneric(out iceCreamtoTrucksFile, fileName, seqNum, Settings.keys.sequenceTruckInventoryUploadFile, false))
             {
                 return;
             }
 
-            //Check and parse header
-            RegexClass r = checkRegex(iceCreamtoTrucksFile[0], headerEx);
-            if (r.valid)
-            {
-                seqNum = r.groupValues[2];
-                string dateString = r.groupValues[3];
-                date = Convert.ToDateTime(dateString);
-            }
-
-            //check and parse trailer
-            r = checkRegex(iceCreamtoTrucksFile[iceCreamtoTrucksFile.Length - 1], trailerEx);
-
-            int numOfRows = 0;
-
-            if (r.valid)
-            {
-                string numOfRowsString = r.groupValues[2];
-                numOfRows = Int32.Parse(numOfRowsString);
-            }
+            //check trailer here
 
 
-            if (numOfRows != iceCreamtoTrucksFile.Length - 2)
-            {
-                addToLog("Ice Cream to Trucks File Invalid: Trailer # does not match Actual # of Rows");
-            }
+            //process the city upload file, adding any zones to database
+            processTruckInventoryUploadFileBody(iceCreamtoTrucksFile);
 
-            //add default inventory to each truck
-            List<Truck> myTrucks = new List<Truck>();
+            addToLog(fileName + " Processed Successfully");
 
-            myTrucks = getAllTrucks();
-
-            for (int i = 0; i < myTrucks.Count(); i++)
-            {
-                for (int k = 0; k < 5; k++)
-                {
-                    
-                    InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
-                    int change = DefaultOrder.defaults[k].amount * (-1);
-                    int myTest = moveItem(temp.itemnumber, myTrucks[i].trucknumber, change);
-                }
-            }
-            /////////////////////////////////////
+            //refresh datagridview
+            refreshTruckInvView();
+            refreshInventoryView();
 
 
+        }
 
-            int trucknumber = 0;
-            bool inTruck = false;
-            int itemsAdded = 0;
-            for (int i = 1; i < iceCreamtoTrucksFile.Length - 1; i++)
-            {
-                if (checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx).valid && inTruck == false)
-                {
-                    r = checkRegex(iceCreamtoTrucksFile[i], truckHeaderEx);
-                    trucknumber = Int32.Parse(r.groupValues[2]);
-                    inTruck = true;
-                    Console.WriteLine("Filling truck " + trucknumber.ToString());
-                }
-                else if (checkRegex(iceCreamtoTrucksFile[i], truckItemEx).valid && inTruck == true)
-                {
-                    r = checkRegex(iceCreamtoTrucksFile[i], truckItemEx);
-                    int itemnumber = Int32.Parse(r.groupValues[1]);
-                    int amount = Int32.Parse(r.groupValues[2]);
-                    itemsAdded++;
-                    Console.WriteLine("Adding " + amount.ToString() + " of item " + itemnumber + " to truck " + trucknumber);
-                    //update amount
-
-                    amount = -amount;
-                    int myTest = moveItem(itemnumber, trucknumber, amount);
-                }
-                else if (checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx).valid && inTruck == true)
-                {
-                    r = checkRegex(iceCreamtoTrucksFile[i], truckItemsTrailerEx);
-                    int numberOfItems = Int32.Parse(r.groupValues[2]);
-                    if (numberOfItems != itemsAdded)
-                    {
-                        Console.WriteLine("Number of items in trailer does not match the number of items added");
-                    }
-
-                    inTruck = false;
-                    itemsAdded = 0;
-                    Console.WriteLine("Done filling truck " + trucknumber);
-                }
-                else
-                {
-                    //file is invalid in format
-                    Console.WriteLine("File is invalid in format");
-                }
-            }
-
-
-            addToLog("Ice Cream to Trucks File Valid");
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void refreshTruckInvView()
+        {
             truckInventoryGridView.Rows.Clear();
-
+            List<Truck> myTrucks = new List<Truck>();
+            myTrucks = getAllTrucks();
             Dictionary<int, TruckInventoryItem> myInventory = new Dictionary<int, TruckInventoryItem>();
             for (int k = 0; k < myTrucks.Count(); k++)
             {
                 myInventory = getTruckInventory(myTrucks[k].trucknumber);
-
                 foreach (KeyValuePair<int, TruckInventoryItem> item in myInventory)
                 {
                     truckInventoryGridView.Rows.Add(myTrucks[k].trucknumber, item.Value.itemnumber, item.Value.quantity, item.Value.initialprice, item.Value.saleprice);
                 }
-
             }
+        }
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            List<InventoryItem> myInventory1 = new List<InventoryItem>();
-
-            myInventory1 = getInventory();
-
+        private void refreshInventoryView()
+        {
             inventoryGridView.Rows.Clear();
+            List<InventoryItem> myInventory1 = new List<InventoryItem>();
+            myInventory1 = getInventory();
             for (int i = 0; i < myInventory1.Count(); i++)
             {
                 inventoryGridView.Rows.Add(myInventory1[i].itemnumber, myInventory1[i].quantity, myInventory1[i].initialprice, myInventory1[i].saleprice);
             }
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         private void btnTruckRouteUpload_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Text Files|*.txt";
-            openFileDialog1.Title = "Select an Input File";
-
             string[] truckRouteFile = { "" };
-            DateTime date = Convert.ToDateTime("1970-01-01");
-            string seqNum = "";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            string fileName = "Truck Inventory Upload File";
+            Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
+            int seqNum = sequenceSettings.sequenceTruckRouteDriverUploadFile;
+            //if anything is invalid to where the file is invalid
+            if (!checkFileGeneric(out truckRouteFile, fileName, seqNum, Settings.keys.sequenceTruckRouteDriverUploadFile))
             {
-                truckRouteFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
-                //addToLog("Truck-Route File Read"); 
+                return;
             }
 
-            //Check and parse header
-            RegexClass r = checkRegex(truckRouteFile[0], headerEx);
-            if (r.valid)
-            {
-                seqNum = r.groupValues[2];
-                string dateString = r.groupValues[3];
-                date = Convert.ToDateTime(dateString);
-            }
+            //process the upload file
+            processTruckRouteDriverUploadFileBody(truckRouteFile);
+            addToLog(fileName + " Processed Successfully");
 
-            //check and parse trailer
-            r = checkRegex(truckRouteFile[truckRouteFile.Length - 1], trailerEx);
+            //refresh datagridview
+            refreshTrucksView();
+            refreshDriversView();
+        }
 
-            int numOfRows = 0;
-
-            if (r.valid)
-            {
-                string numOfRowsString = r.groupValues[2];
-                numOfRows = Int32.Parse(numOfRowsString);
-            }
-
-
-            if (numOfRows != truckRouteFile.Length - 2)
-            {
-                //addToLog("Truck Upload File Invalid: Trailer # does not match Actual # of Rows");
-            }
-
-            for (int i = 1; i < truckRouteFile.Length - 1; i++)
-            {
-                r = checkRegex(truckRouteFile[i], truckRouteEx);
-                if (r.valid)
-                {
-                    int trucknumber = Int32.Parse(r.groupValues[1]);
-                    int routenumber = Int32.Parse(r.groupValues[2]);
-                    int drivernumber = Int32.Parse(r.groupValues[3]);
-                    assignTruckToRoute(trucknumber, routenumber);
-                    assignDriverToTruck(drivernumber, trucknumber);
-                }
-            }
-            //addToLog("Truck Upload File Valid");
-
+        private void refreshTrucksView()
+        {
             List<Truck> myTrucks = new List<Truck>();
-
             myTrucks = getAllTrucks();
             truckGridView.Rows.Clear();
             for (int i = 0; i < myTrucks.Count(); i++)
             {
                 truckGridView.Rows.Add(myTrucks[i].trucknumber, myTrucks[i].routenumber);
             }
+        }
 
+        private void refreshDriversView()
+        {
             List<Driver> myDrivers = new List<Driver>();
-
             myDrivers = getAllDrivers();
-
             driverGridView.Rows.Clear();
             for (int i = 0; i < myDrivers.Count(); i++)
             {
                 driverGridView.Rows.Add(myDrivers[i].drivernumber, myDrivers[i].trucknumber);
             }
-
         }
 
         private void btnInventoryUpdate_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Text Files|*.txt";
-            openFileDialog1.Title = "Select an Input File";
-
             string[] inventoryUpdateFile = { "" };
-            DateTime date = Convert.ToDateTime("1970-01-01");
-            string seqNum = "";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            string fileName = "Inventory Upload File";
+            Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
+            int seqNum = sequenceSettings.sequenceWarehouseUploadFile;
+            //if anything is invalid to where the file is invalid
+            if (!checkFileGeneric(out inventoryUpdateFile, fileName, seqNum, Settings.keys.sequenceWarehouseUploadFile))
             {
-                inventoryUpdateFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
-                addToLog("Inventory Update File Read");
+                return;
             }
 
-            //Check and parse header
-            RegexClass r = checkRegex(inventoryUpdateFile[0], headerEx);
-            if (r.valid)
-            {
-                seqNum = r.groupValues[2];
-                string dateString = r.groupValues[3];
-                date = Convert.ToDateTime(dateString);
-            }
+            //process the upload file
+            processInventoryUpdateBody(inventoryUpdateFile);
 
-            //check and parse trailer
-            r = checkRegex(inventoryUpdateFile[inventoryUpdateFile.Length - 1], trailerEx);
+            addToLog(fileName + " Processed Successfully");
 
-            int numOfRows = 0;
-
-            if (r.valid)
-            {
-                string numOfRowsString = r.groupValues[2];
-                numOfRows = Int32.Parse(numOfRowsString);
-            }
-
-
-            if (numOfRows != inventoryUpdateFile.Length - 2)
-            {
-                addToLog("Inventory Upload File Invalid: Trailer # does not match Actual # of Rows");
-            }
-
-            //clearInventory();
-
-
-            List<InventoryItem> myInventory1 = new List<InventoryItem>();
-
-            myInventory1 = getInventory();
-
-            for (int i = 0; i < myInventory1.Count(); i++)
-            {
-                bool test = setInventoryItem(myInventory1[i].itemnumber, 0);
-            }
-
-            for (int i = 1; i < inventoryUpdateFile.Length - 1; i++)
-            {
-                r = checkRegex(inventoryUpdateFile[i], inventoryItemEx);
-                if (r.valid)
-                {
-                    int itemnumber = Int32.Parse(r.groupValues[1]);
-                    int quantity = Int32.Parse(r.groupValues[2]);
-                    double initialprice = Convert.ToDouble(r.groupValues[3] + "." + r.groupValues[4]);
-                    double saleprice = Convert.ToDouble(r.groupValues[5] + "." + r.groupValues[6]);
-                    string description = r.groupValues[7];
-                    ////////////////// addInventoryItem does not work if you put duplicates
-                    bool test = addInventoryItem(new InventoryItem(itemnumber, quantity, initialprice, saleprice, description));
-                }
-            }
-
-
-            addToLog("Inventory Upload File Valid");
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            List<InventoryItem> myInventory = new List<InventoryItem>();
-
-            myInventory = getInventory();
-
-            inventoryGridView.Rows.Clear();
-            for (int i = 0; i < myInventory.Count(); i++)
-            {
-                inventoryGridView.Rows.Add(myInventory[i].itemnumber, myInventory[i].quantity, myInventory[i].initialprice, myInventory[i].saleprice);
-            }
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+            //refresh datagridview
+            refreshInventoryView();
 
         }
 
         private void btnTruckUpload_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Text Files|*.txt";
-            openFileDialog1.Title = "Select an Input File";
-
             string[] truckUploadFile = { "" };
-            DateTime date = Convert.ToDateTime("1970-01-01");
-            string seqNum = "";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            string fileName = "Truck Upload File";
+            Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
+            int seqNum = sequenceSettings.sequenceTruckUploadFile;
+            //if anything is invalid to where the file is invalid
+            if (!checkFileGeneric(out truckUploadFile, fileName, seqNum, Settings.keys.sequenceTruckUploadFile))
             {
-                truckUploadFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
-                addToLog("Truck Upload File Read");
+                return;
             }
 
-            //Check and parse header
-            RegexClass r = checkRegex(truckUploadFile[0], headerEx);
-            if (r.valid)
-            {
-                seqNum = r.groupValues[2];
-                string dateString = r.groupValues[3];
-                date = Convert.ToDateTime(dateString);
-            }
+            //process the upload file
+            processTruckUploadBody(truckUploadFile);
 
-            //check and parse trailer
-            r = checkRegex(truckUploadFile[truckUploadFile.Length - 1], trailerEx);
+            addToLog(fileName + " Processed Successfully");
 
-            int numOfRows = 0;
-
-            if (r.valid)
-            {
-                string numOfRowsString = r.groupValues[2];
-                numOfRows = Int32.Parse(numOfRowsString);
-            }
-
-
-            if (numOfRows != truckUploadFile.Length - 2)
-            {
-                addToLog("Truck Upload File Invalid: Trailer # does not match Actual # of Rows");
-            }
-
-
-            clearTrucks();
-            for (int i = 1; i < truckUploadFile.Length - 1; i++)
-            {
-                r = checkRegex(truckUploadFile[i], trucksEx);
-                if (r.valid)
-                {
-                    int trucknumber = Int32.Parse(r.groupValues[1]);
-                    bool test = addTruck(new Truck(trucknumber));
-                }
-            }
-            addToLog("Truck Upload File Valid");
-
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            List<Truck> myTrucks = new List<Truck>();
-
-            myTrucks = getAllTrucks();
-            truckGridView.Rows.Clear();
-            for (int i = 0; i < myTrucks.Count(); i++)
-            {
-                truckGridView.Rows.Add(myTrucks[i].trucknumber, myTrucks[i].routenumber);
-                //DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
-                //row.Cells[0].Value = myTrucks[i].trucknumber;
-                //row.Cells[1].Value = myTrucks[i].routenumber;
-                //zoneGridView.Rows.Add(row);
-            }
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //refresh datagridview
+            refreshTrucksView();
         }
 
         private void btnDriverUpload_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Text Files|*.txt";
-            openFileDialog1.Title = "Select an Input File";
-
             string[] driverUploadFile = { "" };
-            DateTime date = Convert.ToDateTime("1970-01-01");
-            string seqNum = "";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            string fileName = "Driver Upload File";
+            Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
+            int seqNum = sequenceSettings.sequenceDriverUploadFile;
+            //if anything is invalid to where the file is invalid
+            if (!checkFileGeneric(out driverUploadFile, fileName, seqNum, Settings.keys.sequenceDriverUploadFile))
             {
-                driverUploadFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
-                addToLog("Driver Upload File Read");
+                return;
             }
 
-            //Check and parse header
-            RegexClass r = checkRegex(driverUploadFile[0], headerEx);
-            if (r.valid)
-            {
-                seqNum = r.groupValues[2];
-                string dateString = r.groupValues[3];
-                date = Convert.ToDateTime(dateString);
-            }
+            //process the upload file
+            processDriverUploadBody(driverUploadFile);
 
-            //check and parse trailer
-            r = checkRegex(driverUploadFile[driverUploadFile.Length - 1], trailerEx);
+            addToLog(fileName + " Processed Successfully");
 
-            int numOfRows = 0;
+            //refresh datagridview
+            refreshDriversView();
 
-            if (r.valid)
-            {
-                string numOfRowsString = r.groupValues[2];
-                numOfRows = Int32.Parse(numOfRowsString);
-            }
-
-
-            if (numOfRows != driverUploadFile.Length - 2)
-            {
-                addToLog("Driver Upload File Invalid: Trailer # does not match Actual # of Rows");
-            }
-
-            clearDrivers();
-            for (int i = 1; i < driverUploadFile.Length - 1; i++)
-            {
-                r = checkRegex(driverUploadFile[i], trucksEx);
-                if (r.valid)
-                {
-                    int drivernumber = Int32.Parse(r.groupValues[1]);
-                    bool test = addDriver(new Driver(drivernumber));
-                }
-            }
-
-
-            addToLog("Driver Upload File Valid");
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            List<Driver> myDrivers = new List<Driver>();
-
-            myDrivers = getAllDrivers();
-
-            driverGridView.Rows.Clear();
-            for (int i = 0; i < myDrivers.Count(); i++)
-            {
-                driverGridView.Rows.Add(myDrivers[i].drivernumber, myDrivers[i].trucknumber);
-                //DataGridViewRow row = (DataGridViewRow)zoneGridView.Rows[0].Clone();
-                //row.Cells[0].Value = myDrivers[i].drivernumber;
-                //row.Cells[1].Value = myDrivers[i].trucknumber;
-                //zoneGridView.Rows.Add(row);
-            }
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         private void btnCustomerRequests_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Text Files|*.txt";
-            openFileDialog1.Title = "Select an Input File";
-
             string[] customerRequestFile = { "" };
-            DateTime date = Convert.ToDateTime("1970-01-01");
-            string seqNum = "";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            string fileName = "Customer Request File";
+            Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
+            int seqNum = sequenceSettings.sequenceCustomerRequest;
+            //if anything is invalid to where the file is invalid
+            if (!checkFileGeneric(out customerRequestFile, fileName, seqNum, Settings.keys.sequenceCustomerRequest))
             {
-                customerRequestFile = System.IO.File.ReadAllLines(openFileDialog1.FileName.ToString());
-                addToLog("Customer Request File Read");
+                return;
             }
 
-            //Check and parse header
-            RegexClass r = checkRegex(customerRequestFile[0], headerEx);
-            if (r.valid)
-            {
-                seqNum = r.groupValues[2];
-                string dateString = r.groupValues[3];
-                date = Convert.ToDateTime(dateString);
-            }
+            //process the upload file
+            processCustomerRequestBody(customerRequestFile);
 
-            //check and parse trailer
-            r = checkRegex(customerRequestFile[customerRequestFile.Length - 1], trailerEx);
+            addToLog(fileName + " Processed Successfully");
 
-            int numOfRows = 0;
+            //refresh datagridview
+            refreshInventoryView();
 
-            if (r.valid)
-            {
-                string numOfRowsString = r.groupValues[2];
-                numOfRows = Int32.Parse(numOfRowsString);
-            }
-
-
-            if (numOfRows != customerRequestFile.Length - 2)
-            {
-                addToLog("Customer Request File Invalid: Trailer # does not match Actual # of Rows");
-            }
-
-            //clearInventory();
-
-
-
-
-            for (int i = 1; i < customerRequestFile.Length - 1; i++)
-            {
-                r = checkRegex(customerRequestFile[i], requestedInventoryItemEx);
-                // need to create new regex string for this with itemnumber = r.groupValues[1], description = r.groupValues[2]
-                if (r.valid)
-                {
-                    int itemnumber = Int32.Parse(r.groupValues[1]);
-                    //int quantityRequested = Int32.Parse(r.groupValues[2]);
-                    string description = r.groupValues[2];
-                    bool test = addInventoryItem(new InventoryItem(itemnumber, 0, 0, 0, description));
-
-                    // for any new requested item, only the id and the description will be stored in the Inventory table. The other attrubites will be set to 0.
-                    // in the settings menu, the user will be able to set the default amount for new products. The Auto Order function will then be able to add the new item to 
-                    // the Auto Order list.
-
-                }
-            }
-
-
-
-
-
-            addToLog("New Products added to Automatic Order List");
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            List<InventoryItem> myInventory = new List<InventoryItem>();
-
-            myInventory = getInventory();
-
-            inventoryGridView.Rows.Clear();
-            for (int i = 0; i < myInventory.Count(); i++)
-            {
-                inventoryGridView.Rows.Add(myInventory[i].itemnumber, myInventory[i].quantity, myInventory[i].initialprice, myInventory[i].saleprice);
-            }
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+            //send text
             if (TextSetting.itemAddedToAutoOrder == true)
             {
                 sendTextMessage("New Products added to Automatic Order List");
                 addToLog("Text Message Sent: " + "New Products added to Automatic Order List");
             }
 
-
         }
 
         setDefaultForm setDefaultForm = new setDefaultForm();
         settingsForm settingsForm = new settingsForm();
-        logForm logForm = new logForm();
         autoOrderForm autoOrderForm = new autoOrderForm();
 
         private void btnSetDefault_Click(object sender, EventArgs e)
         {
+            setDefaultForm.StartPosition = FormStartPosition.CenterParent;
             setDefaultForm.ShowDialog();
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
+            settingsForm.StartPosition = FormStartPosition.CenterParent;
             settingsForm.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            logForm.ShowDialog();
+            logForm logForm = new logForm();
+            logForm.StartPosition = FormStartPosition.CenterParent;
+            logForm.Show();
         }
 
 
         private void btnAutoOrder_Click(object sender, EventArgs e)
         {
+            autoOrderForm.StartPosition = FormStartPosition.CenterParent;
             autoOrderForm.ShowDialog();
         }
 

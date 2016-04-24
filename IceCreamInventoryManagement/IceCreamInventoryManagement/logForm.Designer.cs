@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.timerRefreshLog = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -38,6 +40,12 @@
             this.richTextBox1.Size = new System.Drawing.Size(414, 291);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
+            // 
+            // timerRefreshLog
+            // 
+            this.timerRefreshLog.Enabled = true;
+            this.timerRefreshLog.Interval = 1000;
+            this.timerRefreshLog.Tick += new System.EventHandler(this.timerRefreshLog_Tick);
             // 
             // logForm
             // 
@@ -56,5 +64,6 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Timer timerRefreshLog;
     }
 }

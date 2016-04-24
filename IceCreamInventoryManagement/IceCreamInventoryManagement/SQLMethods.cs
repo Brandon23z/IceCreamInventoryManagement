@@ -30,7 +30,7 @@ namespace IceCreamInventoryManagement
                 SQL.sqlnonquery("CREATE TABLE INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, description VARCHAR(30));");
                 SQL.sqlnonquery("CREATE TABLE DRIVERS(drivernumber int NOT NULL PRIMARY KEY, trucknumber int);");
                 SQL.sqlnonquery("CREATE TABLE SALES(itemnumber int NOT NULL, quantity int NOT NULL, saledate timestamp NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, trucknumber int NOT NULL, routenumber int NOT NULL, drivernumber int NOT NULL);");
-                SQL.sqlnonquery("CREATE TABLE settings(key VARCHAR(30) NOT NULL PRIMARY KEY, val VARCHAR(300))");
+                SQL.sqlnonquery("CREATE TABLE settings(key VARCHAR(40) NOT NULL PRIMARY KEY, val VARCHAR(300))");
             }
         }
 
