@@ -32,10 +32,6 @@ namespace IceCreamInventoryManagement
             initializeDatabase();
             clearDatabase();
             Settings.saveDefaults(true);
-            tabPage1.Text = "Populate System";
-            tabPage2.Text = "Run Simulation";
-            tabPage3.Text = "Settings";
-            tabPage4.Text = "Display Sales";
             refreshSalesView();
         }
 
@@ -525,6 +521,182 @@ namespace IceCreamInventoryManagement
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
 
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if ((rbSalesDate1.Checked || rbSalesDate1andDate2.Checked) && txtBeginningDate.Text == "")
+            {
+                MessageBox.Show("Invalid Date!");
+                return;
+            }
+            if (rbSalesDate1andDate2.Checked && txtEndDate.Text == "")
+            {
+                MessageBox.Show("Invalid Date!");
+                return;
+            }
+            SalesSpecifics specs = new SalesSpecifics();
+
+            specs.date1 = txtBeginningDate.Text;
+            specs.date2 = txtEndDate.Text;
+            specs.truck = chkSalesTruck.Checked;
+            specs.route = chkSalesRoute.Checked;
+            specs.driver = chkSalesDriver.Checked;
+            specs.item = chkSalesItem.Checked;
+            specs.trucknumber = Convert.ToInt32(nudSalesTruck.Value);
+            specs.routenumber = Convert.ToInt32(nudSalesRoute.Value);
+            specs.drivernumber = Convert.ToInt32(nudSalesDriver.Value);
+            specs.itemnumber = Convert.ToInt32(nudSalesItem.Value);
+
+            if (rbSalesAnyDate.Checked)
+            {
+                specs.datetype = 0;
+            }
+            if (rbSalesDate1.Checked)
+            {
+                specs.datetype = 1;
+            }
+            if (rbSalesDate1andDate2.Checked)
+            {
+                specs.datetype = 2;
+            }
+
+            List<Sale> mySales = new List<Sale>();
+            mySales = getAllSalesSpecific(specs);
+            salesGridView1.Rows.Clear();
+            for (int i = 0; i < mySales.Count(); i++)
+            {
+                salesGridView1.Rows.Add(mySales[i].itemnumber, mySales[i].quantity, mySales[i].saledate, mySales[i].initialprice, mySales[i].saleprice, mySales[i].trucknumber, mySales[i].routenumber, mySales[i].drivernumber);
+            }
+        }
+
+        private void txtBeginningDate_Click(object sender, EventArgs e)
+        {
+            DateSelect ds = new DateSelect();
+            ds.ShowDialog();
+            DateTime dtDate = ds.dateSelected;
+            txtBeginningDate.Text = dtDate.ToString("yyyy-MM-dd");
+        }
+
+        private void txtEndDate_Click(object sender, EventArgs e)
+        {
+            DateSelect ds = new DateSelect();
+            ds.ShowDialog();
+            DateTime dtDate = ds.dateSelected;
+            txtEndDate.Text = dtDate.ToString("yyyy-MM-dd");
+        }
+
+        private void btnRefreshCompanyInventory_Click(object sender, EventArgs e)
+        {
+            dgvCompanyInventory.Rows.Clear();
+            List<InventoryItem> myInventory1 = new List<InventoryItem>();
+            myInventory1 = getInventory();
+            for (int i = 0; i < myInventory1.Count(); i++)
+            {
+                dgvCompanyInventory.Rows.Add(myInventory1[i].itemnumber, myInventory1[i].quantity, myInventory1[i].initialprice, myInventory1[i].saleprice, myInventory1[i].description);
+            }
+        }
+
+        private void btnRefreshTruckInventory_Click(object sender, EventArgs e)
+        {
+            dgvTruckInventory.Rows.Clear();
+
+            Dictionary<int, TruckInventoryItem> myInventory = new Dictionary<int, TruckInventoryItem>();
+            int truckNum = Convert.ToInt32(nudTruckNumberInventory.Value);
+            if (doesTruckExist(truckNum))
+            {
+                myInventory = getTruckInventory(truckNum);
+                foreach (KeyValuePair<int, TruckInventoryItem> item in myInventory)
+                {
+                    dgvTruckInventory.Rows.Add(truckNum, item.Value.itemnumber, item.Value.quantity, item.Value.initialprice, item.Value.saleprice);
+                }
+            }
+        }
+
+        private int logLines = 0;
+        private void timerLog_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (LogVariable.log.Count > logLines)
+                {
+                    rtbLog.Clear();
+                    for (int i = 0; i < LogVariable.log.Count; i++)
+                    {
+                        rtbLog.AppendText(LogVariable.log[i]);
+                    }
+                    logLines = LogVariable.log.Count;
+                    if (rtbLog.Text.Length > 2)
+                    {
+                        rtbLog.SelectionStart = rtbLog.Text.Length;
+                        rtbLog.ScrollToCaret();
+                    }
+                }
+            }
+            catch { }
+        }
+
+        private void btnAssignTruckRouteDriver_Click(object sender, EventArgs e)
+        {
+            string[] file = new string[3];
+            file[0] = "";
+            file[2] = "";
+            string trucknumber = Convert.ToInt32(nudAssignTrucknum.Value).ToString().PadLeft(4, '0');
+            string routenumber = Convert.ToInt32(nudAssignRoutenum.Value).ToString().PadLeft(4, '0');
+            string drivernumber = Convert.ToInt32(nudAssignDrivernum.Value).ToString().PadLeft(4, '0');
+            file[1] = trucknumber + "" + routenumber + "" + drivernumber;
+            processTruckRouteDriverUploadFileBody(file);
+        }
+
+        private void btnUpdateInventoryItem_Click(object sender, EventArgs e)
+        {
+            int itemnumber = Convert.ToInt32(nudCompanyInventoryItemNumber.Value);
+            int quantity = Convert.ToInt32(nudCompanyInventoryQuantity.Value);
+            double initialprice = Convert.ToDouble(nudCompanyInventoryIPrice.Value);
+            double saleprice = Convert.ToDouble(nudCompanyInventorySPrice.Value);
+            string description = txtCompanyInventoryDescription.Text;
+            InventoryItem addItem = new InventoryItem(itemnumber, quantity, initialprice, saleprice, description);
+            addInventoryItem(addItem);
+        }
+
+        private void btnTRDSearch_Click(object sender, EventArgs e)
+        {
+            dgvRouteCities.Rows.Clear();
+            dgvTRD.Rows.Clear();
+            int type = 0;
+            int number = 0;
+            if (rbTRDTruckNumber.Checked)
+            {
+                type = 0;
+                number = Convert.ToInt32(nudTRDTruckNumber.Value);
+            }
+            if (rbTRDRouteNumber.Checked)
+            {
+                type = 1;
+                number = Convert.ToInt32(nudTRDRouteNumber.Value);
+            }
+            if (rbTRDDriverNumber.Checked)
+            {
+                type = 2;
+                number = Convert.ToInt32(nudTRDDriverNumber.Value);
+            }
+            TruckRouteDriver trd = getTRD(type, number);
+            if (trd != null)
+            {
+                Route r = getRoute(trd.routenumber);
+                dgvTRD.Rows.Add(trd.trucknumber, trd.routenumber, trd.drivernumber, r.cityLabels[0], r.cityLabels[1],
+                    r.cityLabels[2], r.cityLabels[3], r.cityLabels[4], r.cityLabels[5], r.cityLabels[6], r.cityLabels[7],
+                    r.cityLabels[8], r.cityLabels[9]);
+                foreach (string s in r.cityLabels)
+                {
+                    if (s != null && s != "")
+                    {
+                        Zone z = getZone(s);
+                        dgvRouteCities.Rows.Add(z.citylabel, z.cityname, z.state);
+                    }
+                }
+            }
+            
         }
     }
 }

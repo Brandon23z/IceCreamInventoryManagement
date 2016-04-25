@@ -423,27 +423,10 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        public static bool setInventoryItem(int itemnumber, int quantity, int initialprice = 0, int saleprice = 0, string description = "")
+        public static bool setInventoryQuantityToZero()
         {
-            string query = "UPDATE INVENTORY set quantity = @quantity ";
-            if(initialprice != 0)
-            {
-                query += "initialprice = @initialprice ";
-            }
-            if (saleprice != 0)
-            {
-                query += "saleprice = @saleprice ";
-            }
-            if(description.Replace(" ", "") != "")
-            {
-                query += "description = @description ";
-            }
-
-            query += " WHERE itemnumber = @itemnumber;";
-            SQLResult result = sqlnonquery(query,
-                new Dictionary<string, string>() { { "@itemnumber", itemnumber.ToString() }, { "@quantity", quantity.ToString() }
-                , { "@initialprice", initialprice.ToString() }, { "@saleprice", saleprice.ToString() }, { "@description", description.ToString() }});
-            if (result.error == SQLError.none && result.rowsAffected == 1)
+            SQLResult result = sqlnonquery("UPDATE INVENTORY set quantity = 0;");
+            if (result.error == SQLError.none)
             {
                 return true;
             }
@@ -511,8 +494,27 @@ namespace IceCreamInventoryManagement
 
         public static bool addInventoryItem(InventoryItem addItem)
         {
+            string query = "UPDATE OR INSERT INTO INVENTORY VALUES (@itemnumber, @quantity, @initialprice, @saleprice, @description);";
             //INVENTORY(itemnumber int NOT NULL PRIMARY KEY, quantity int NOT NULL, initialprice float NOT NULL, saleprice float NOT NULL, description VARCHAR(20));
-            SQLResult result = sqlnonquery("UPDATE OR INSERT INTO INVENTORY VALUES (@itemnumber, @quantity, @initialprice, @saleprice, @description);",
+            if (InputFileMethods.doesItemExist(addItem.itemnumber))
+            {
+                query = "UPDATE INVENTORY set quantity = @quantity";
+                if (addItem.initialprice > 0)
+                {
+                    query += ", initialprice = @initialprice";
+                }
+                if (addItem.saleprice > 0)
+                {
+                    query += ", saleprice = @saleprice";
+                }
+                if (addItem.description.Replace(" ", "") != "")
+                {
+                    query += ", description = @description";
+                }
+                query += " WHERE itemnumber = @itemnumber;";
+            }
+
+            SQLResult result = sqlnonquery(query,
                 new Dictionary<string, string>() { { "@itemnumber", addItem.itemnumber.ToString() }, { "@quantity", addItem.quantity.ToString() }
                     , { "@initialprice", addItem.initialprice.ToString() }, { "@saleprice", addItem.saleprice.ToString() }, { "@description", addItem.description }});
             if (result.error == SQLError.none && result.rowsAffected == 1)
@@ -642,6 +644,7 @@ namespace IceCreamInventoryManagement
                 return false;
             }
         }
+
         public static List<Sale> getAllSales()
         {
             List<Sale> saleList = new List<Sale>();
@@ -667,11 +670,118 @@ namespace IceCreamInventoryManagement
                 return null;
             }
         }
-        //SALES//
+
+        public static List<Sale> getAllSalesSpecific(SalesSpecifics specs)
+        {
+            string query = "SELECT * FROM SALES";
+            string queryadd = "";
+            if (specs.truck || specs.route || specs.driver || specs.item)
+            {
+                query += " WHERE";
+            }
+            if (specs.truck)
+            {
+                queryadd += " trucknumber = @trucknumber";
+            }
+            if (specs.route)
+            {
+                if (queryadd.Length > 0)
+                {
+                    queryadd += " AND";
+                }
+                queryadd += " routenumber = @routenumber";
+            }
+            if (specs.driver)
+            {
+                if (queryadd.Length > 0)
+                {
+                    queryadd += " AND";
+                }
+                queryadd += " drivernumber = @drivernumber";
+            }
+            if (specs.item)
+            {
+                if (queryadd.Length > 0)
+                {
+                    queryadd += " AND";
+                }
+                queryadd += " itemnumber = @itemnumber";
+            }
+
+            switch (specs.datetype)
+            {
+                case 1:
+                    if (!query.Contains("WHERE"))
+                    {
+                        queryadd += " WHERE saledate BETWEEN @date1 AND @date1";
+                    }
+                    else
+                    {
+                        queryadd += " AND saledate BETWEEN @date1 AND @date1";
+                    }
+                    break;
+                case 2:
+                    if (!query.Contains("WHERE"))
+                    {
+                        queryadd += " WHERE saledate BETWEEN @date1 AND @date2";
+                    }
+                    else
+                    {
+                        queryadd += " AND saledate BETWEEN @date1 AND @date2";
+                    }
+                    break;
+            }
+            
+
+            query += queryadd + ";";
+
+            List<Sale> saleList = new List<Sale>();
+            SQLResult result = sqlquery(query, new Dictionary<string, string>()
+            {
+                { "@trucknumber", specs.trucknumber.ToString() },{ "@routenumber", specs.routenumber.ToString() },
+                { "@drivernumber", specs.drivernumber.ToString() }, { "@itemnumber", specs.itemnumber.ToString() },
+                { "@date1", specs.date1 }, { "@date2", specs.date2 }
+            });
+            if (result.error == SQLError.none && result.data != null)
+            {
+                for (int i = 0; i < result.data.data.Count; i++)
+                {
+                    int itemnumber = Convert.ToInt32(result.data.getField(i, "itemnumber"));
+                    int quantity = Convert.ToInt32(result.data.getField(i, "quantity"));
+                    DateTime saledate = Convert.ToDateTime(result.data.getField(i, "saledate"));
+                    double initialprice = Convert.ToDouble(result.data.getField(i, "initialprice"));
+                    double saleprice = Convert.ToDouble(result.data.getField(i, "saleprice"));
+                    int trucknumber = Convert.ToInt32(result.data.getField(i, "trucknumber"));
+                    int routenumber = Convert.ToInt32(result.data.getField(i, "routenumber"));
+                    int drivernumber = Convert.ToInt32(result.data.getField(i, "drivernumber"));
+                    saleList.Add(new Sale(itemnumber, quantity, initialprice, saleprice, saledate, trucknumber, routenumber, drivernumber));
+                }
+                return saleList;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public class SalesSpecifics
+        {
+            public int datetype;
+            public string date1;
+            public string date2;
+            public bool truck;
+            public bool route;
+            public bool driver;
+            public bool item;
+            public int trucknumber;
+            public int routenumber;
+            public int drivernumber;
+            public int itemnumber;
+        }
 
         public static TruckRouteDriver getRouteDriverFromTruck(int trucknumber)
         {
-            SQLResult result = sqlquery("SELECT * FROM TRUCKS,DRIVERS WHERE trucknumber = @trucknumber;",
+            SQLResult result = sqlquery("SELECT TRUCKS.TRUCKNUMBER, ROUTENUMBER, DRIVERNUMBER FROM TRUCKS,DRIVERS WHERE TRUCKS.TRUCKNUMBER = @trucknumber AND DRIVERS.TRUCKNUMBER = @trucknumber;",
                 new Dictionary<string, string>() { { "@trucknumber", trucknumber.ToString() } });
             if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
             {
@@ -694,9 +804,43 @@ namespace IceCreamInventoryManagement
             public int trucknumber { get; set; }
             public int routenumber { get; set; }
             public int drivernumber { get; set; }
-        } 
+        }
         #endregion
         //SALES//
+
+        public static TruckRouteDriver getTRD(int type, int number)
+        {
+            string query = "SELECT TRUCKS.TRUCKNUMBER,DRIVERS.DRIVERNUMBER,ROUTENUMBER FROM TRUCKS,DRIVERS WHERE TRUCKS.TRUCKNUMBER = DRIVERS.TRUCKNUMBER AND ";
+            switch (type)
+            {
+                case 0://AND TRUCKS.ROUTENUMBER = 3"
+                    query += "TRUCKS.trucknumber = @trucknumber AND DRIVERS.trucknumber = @trucknumber;";
+                    break;
+                case 1:
+                    query += "TRUCKS.routenumber = @routenumber;";
+                    break;
+                case 2:
+                    query += "DRIVERS.DRIVERNUMBER = @drivernumber;";
+                    break;
+            }
+            SQLResult result = sqlquery(query,
+                new Dictionary<string, string>() { { "@trucknumber", number.ToString() }, { "@routenumber", number.ToString() }, { "@drivernumber", number.ToString() } });
+            if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
+            {
+                int trucknumber = Convert.ToInt32(result.data.getField(0, "trucknumber"));
+                int routenumber = Convert.ToInt32(result.data.getField(0, "routenumber"));
+                int drivernumber = Convert.ToInt32(result.data.getField(0, "drivernumber"));
+                TruckRouteDriver trd = new TruckRouteDriver();
+                trd.trucknumber = trucknumber;
+                trd.routenumber = routenumber;
+                trd.drivernumber = drivernumber;
+                return trd;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         //SETTINGS/
         #region SETTINGS

@@ -204,7 +204,14 @@ namespace IceCreamInventoryManagement
                     string citylabel = r.groupValues[1];
                     string cityname = r.groupValues[2];
                     string state = r.groupValues[3];
-                    bool test = addZone(new Zone(citylabel, cityname, state));
+                    if (!doesZoneExist(citylabel))
+                    {
+                        bool test = addZone(new Zone(citylabel, cityname, state));
+                    }
+                    else
+                    {
+                        addToLog("Failed to add City " + citylabel + " it already exists!");
+                    }
                 }
                 else
                 {
@@ -414,38 +421,29 @@ namespace IceCreamInventoryManagement
                     {
                         if (doesDriverExist(drivernumber))
                         {
-                            if (driverAssignedToTruck(drivernumber) || truckAssignedToDriver(trucknumber))
+                            if (doesRouteExist(routenumber))
                             {
-                                addToLog("Unable to assign Driver # " + drivernumber + " to Truck # " + trucknumber
-                                    + " because one of the two is already assigned.");
+                                if (driverAssignedToTruck(drivernumber) || truckAssignedToDriver(trucknumber) || routeAssignedToTruck(routenumber))
+                                {
+                                    addToLog("Unable to assign Driver # " + drivernumber + " Truck # " + trucknumber
+                                             + " and Route # " + routenumber + " because one or more is already assigned.");
+                                }
+                                else
+                                {
+                                    assignDriverToTruck(drivernumber, trucknumber);
+                                    assignTruckToRoute(trucknumber, routenumber);
+                                }
                             }
                             else
                             {
-                                assignDriverToTruck(drivernumber, trucknumber);
+                                addToLog("Unable to assign Route # " + routenumber + " to Truck # " + trucknumber
+                                            + " because Route # " + routenumber + " does not exist.");
                             }
                         }
                         else
                         {
                             addToLog("Unable to assign Driver # " + drivernumber + " to Truck # " + trucknumber
                             + " because Driver # " + drivernumber + " does not exist.");
-                        }
-
-                        if (doesRouteExist(routenumber))
-                        {
-                            if (routeAssignedToTruck(routenumber) || truckAssignedToRoute(trucknumber))
-                            {
-                                addToLog("Unable to assign Route # " + routenumber + " to Truck # " + trucknumber
-                                    + " because one of the two is already assigned.");
-                            }
-                            else
-                            {
-                                assignTruckToRoute(trucknumber, routenumber);
-                            }
-                        }
-                        else
-                        {
-                            addToLog("Unable to assign Route # " + routenumber + " to Truck # " + trucknumber
-                            + " because Route # " + routenumber + " does not exist.");
                         }
                     }
                     else
@@ -584,7 +582,14 @@ namespace IceCreamInventoryManagement
                 if (r.valid)
                 {
                     int trucknumber = Int32.Parse(r.groupValues[1]);
-                    bool test = addTruck(new Truck(trucknumber));
+                    if (!doesTruckExist(trucknumber))
+                    {
+                        bool test = addTruck(new Truck(trucknumber));
+                    }
+                    else
+                    {
+                        addToLog("Truck " + trucknumber + " already exists!");
+                    }
                 }
                 else
                 {
@@ -602,7 +607,15 @@ namespace IceCreamInventoryManagement
                 if (r.valid)
                 {
                     int drivernumber = Int32.Parse(r.groupValues[1]);
-                    bool test = addDriver(new Driver(drivernumber));
+                    if (!doesDriverExist(drivernumber))
+                    {
+                        bool test = addDriver(new Driver(drivernumber));
+                    }
+                    else
+                    {
+                        addToLog("Driver " + drivernumber + " already exists!");
+                    }
+                    
                 }
                 else
                 {
@@ -614,14 +627,7 @@ namespace IceCreamInventoryManagement
 
         public static void processInventoryUpdateBody(string[] content)
         {
-            List<InventoryItem> myInventory1 = new List<InventoryItem>();
-
-            myInventory1 = getInventory();
-
-            for (int i = 0; i < myInventory1.Count(); i++)
-            {
-                bool test = setInventoryItem(myInventory1[i].itemnumber, 0);
-            }
+            setInventoryQuantityToZero();
 
             for (int i = 1; i < content.Length - 1; i++)
             {
@@ -686,6 +692,16 @@ namespace IceCreamInventoryManagement
                     amount = -amount;
                     if(doesItemExist(itemnumber))
                     {
+                        if (amount > 0)
+                        {
+                            Dictionary<int, TruckInventoryItem> tinv = getTruckInventory(trucknumber);
+                            if (!(tinv[itemnumber].quantity >= amount))
+                            {
+                                addToLog("Unable to move " + amount + " of item " + itemnumber + " from truck " + trucknumber + " to inventory, not enough on the truck!");
+                                return;
+                            }
+
+                        }
                         int myTest = moveItem(itemnumber, trucknumber, amount);
                     }
                     else
