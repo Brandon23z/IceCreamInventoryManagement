@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
+using System.IO;
 
 namespace IceCreamInventoryManagement
 {
@@ -50,29 +51,35 @@ namespace IceCreamInventoryManagement
 
         public static void sendTextMessage(string messageBody)
         {
-            var fromAddress = new MailAddress("winterwaterinteractive@gmail.com", "Winter Water Interactive");
-            var toAddress = new MailAddress(TextSetting.phoneNumber + TextSetting.carrier, TextSetting.phoneNumber);
-            const string fromPassword = "Cis375WWI";
-            const string subject = "Ice Cream Management";
-            string body = messageBody;
+            try {
+                var fromAddress = new MailAddress("winterwaterinteractive@gmail.com", "Winter Water Interactive");
+                var toAddress = new MailAddress(TextSetting.phoneNumber + TextSetting.carrier, TextSetting.phoneNumber);
+                const string fromPassword = "Cis375WWI";
+                const string subject = "Ice Cream Management";
+                string body = messageBody;
 
-            var smtp = new SmtpClient
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword),
+                    Timeout = 20000
+                };
+                using (var message = new MailMessage(fromAddress, toAddress)
+                {
+                    Subject = subject,
+                    Body = body
+                })
+                {
+                    smtp.Send(message);
+                    addToLog("Message Sent: " + messageBody);
+                }
+            }
+            catch
             {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword),
-                Timeout = 20000
-            };
-            using (var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                Body = body
-            })
-            {
-                smtp.Send(message);
-                addToLog("Message sent: " + messageBody);
+                addToLog("Message Failed to Send!");
             }
         }
 
@@ -86,9 +93,16 @@ namespace IceCreamInventoryManagement
         {
             DateTime now = DateTime.Now;
 
-            string dateTimeFormat = "M/d/yy - h:mm ";
-
-            LogVariable.log.Add("(" + now.ToString(dateTimeFormat) + ") "+ x + "\n");
+            string dateTimeFormat = "M/d/yy - h:mm";
+            string logString = "[" + now.ToString(dateTimeFormat) + "] " + x;
+            try {
+                using (StreamWriter sw = File.AppendText("log.txt"))
+                {
+                    sw.WriteLine(logString);
+                }
+            }
+            catch { }
+            LogVariable.log.Add(logString + "\n");
         }
 
         public class Zone

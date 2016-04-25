@@ -102,8 +102,6 @@ namespace IceCreamInventoryManagement
                 //file was not selected/read
                 return false;
             }
-            //file was selected and read
-            addToLog(fileName + ": Read");
 
             //Check and parse header
             checkHeaderResults header;
@@ -166,6 +164,9 @@ namespace IceCreamInventoryManagement
                              (uploadFile.Length - 2));
                 }
             }
+
+            //file was selected and read
+            addToLog(fileName + ": Read");
 
             return true;
         }

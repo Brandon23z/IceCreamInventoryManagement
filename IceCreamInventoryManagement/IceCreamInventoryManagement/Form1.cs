@@ -58,6 +58,7 @@ namespace IceCreamInventoryManagement
 
             //refresh datagridview
             refreshZonesView();
+            refreshRoutesView();
         }
 
         private void refreshZonesView()
@@ -146,7 +147,7 @@ namespace IceCreamInventoryManagement
         private void btnChangeTruckInventory_Click(object sender, EventArgs e)
         {
             string[] iceCreamtoTrucksFile = { "" };
-            string fileName = "Make Changes to Default Truck Inventory File";
+            string fileName = "Change Truck Inventory File";
             Settings.SequenceNumberSettings sequenceSettings = Settings.getSequenceNumberSettings();
             int seqNum = sequenceSettings.sequenceTruckInventoryUploadFile;
             //if anything is invalid to where the file is invalid
