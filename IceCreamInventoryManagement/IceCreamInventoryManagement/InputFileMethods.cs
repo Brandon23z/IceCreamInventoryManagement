@@ -682,9 +682,17 @@ namespace IceCreamInventoryManagement
                     Console.WriteLine("Adding " + amount.ToString() + " of item " + itemnumber + " to truck " +
                                       trucknumber);
                     //update amount
-
+                    
                     amount = -amount;
-                    int myTest = moveItem(itemnumber, trucknumber, amount);
+                    if(doesItemExist(itemnumber))
+                    {
+                        int myTest = moveItem(itemnumber, trucknumber, amount);
+                    }
+                    else
+                    {
+                        addToLog("Unable to add/subtract Item # " + itemnumber + " to/from Truck # " + trucknumber 
+                            + " because Item #" + itemnumber + " does not exist.");
+                    }
                 }
                 else if (checkRegex(contents[i], truckItemsTrailerEx).valid && inTruck == true)
                 {
