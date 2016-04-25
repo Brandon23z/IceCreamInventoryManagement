@@ -44,11 +44,12 @@ Warnings:
 * Do Not Delete Database Files. This Will Delete All Data In The Software.
 * Do Not Delete .exe or DLL Files. This Will Remove The Software From System.
 * File Processing Is Character Sensitive. Data Must Fit All Spaces Exactly.
+* Files must be submitted in the correct order.
 
 How To Use The Software
   1. Place files in a safe directory that you will access within the program. 
   2. Make sure file names and the data in them are correct. Example files and names shown below. 
-  3. Click the browse button that corresponds to the file you'd like to upload. Files must be submitted in the correct order.
+  3. Click the browse button that corresponds to the file you'd like to upload. 
   4. Once data is processed, you may access tables with the sorted data.
 
 Files
