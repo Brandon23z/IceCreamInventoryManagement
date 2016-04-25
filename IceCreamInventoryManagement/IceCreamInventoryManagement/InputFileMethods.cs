@@ -671,22 +671,31 @@ namespace IceCreamInventoryManagement
             int trucknumber = 0;
             bool inTruck = false;
             int itemsAdded = 0;
+            bool truckValid = true;
             for (int i = 1; i < contents.Length - 1; i++)
             {
                 if (checkRegex(contents[i], truckHeaderEx).valid && inTruck == false)
                 {
                     RegexMethods.RegexClass r = checkRegex(contents[i], truckHeaderEx);
+                    truckValid = doesTruckExist(trucknumber);
                     trucknumber = Int32.Parse(r.groupValues[2]);
                     inTruck = true;
-                    Console.WriteLine("Filling truck " + trucknumber.ToString());
+                    if (!truckValid)
+                    {
+                        addToLog("Unable to load Truck # " + trucknumber + " because it does not exist.");
+                    }
+                    else
+                    {
+                        addToLog("Filling truck " + trucknumber.ToString());
+                    }
                 }
-                else if (checkRegex(contents[i], truckItemEx).valid && inTruck == true)
+                else if (checkRegex(contents[i], truckItemEx).valid && inTruck == true && truckValid)
                 {
                     RegexMethods.RegexClass r = checkRegex(contents[i], truckItemEx);
                     int itemnumber = Int32.Parse(r.groupValues[1]);
                     int amount = Int32.Parse(r.groupValues[2]);
                     itemsAdded++;
-                    Console.WriteLine("Adding " + amount.ToString() + " of item " + itemnumber + " to truck " +
+                    addToLog("Adding " + amount.ToString() + " of item " + itemnumber + " to truck " +
                                       trucknumber);
                     //update amount
                     
@@ -711,24 +720,23 @@ namespace IceCreamInventoryManagement
                             + " because Item #" + itemnumber + " does not exist.");
                     }
                 }
-                else if (checkRegex(contents[i], truckItemsTrailerEx).valid && inTruck == true)
+                else if (checkRegex(contents[i], truckItemsTrailerEx).valid && inTruck == true && truckValid)
                 {
                     RegexMethods.RegexClass r = checkRegex(contents[i], truckItemsTrailerEx);
                     int numberOfItems = Int32.Parse(r.groupValues[2]);
                     if (numberOfItems != itemsAdded)
                     {
-                        Console.WriteLine("Number of items in trailer does not match the number of items added");
+                        addToLog("Number of items in trailer does not match the number of items added");
                     }
 
                     inTruck = false;
                     itemsAdded = 0;
-                    Console.WriteLine("Done filling truck " + trucknumber);
+                    addToLog("Done filling truck " + trucknumber);
                 }
                 else
                 {
                     //file is invalid in format
                     addToLog("Truck Inventory Upload File: Line " + (i + 1).ToString() + " is invalid!");
-                    Console.WriteLine("File is invalid in format");
                 }
             }
         }
