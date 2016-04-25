@@ -29,7 +29,6 @@ Minimum:
   Memory: 4 GB RAM
   Graphics: 246 MB or more. DirectX 9-compatible
   DirectX: Version 9.0c
-  Network: Dial-Up Internet Connection
   Storage: 200 MB available space
 Recommended: 
   OS: Windows 7/8/10
@@ -39,10 +38,12 @@ Recommended:
   DirectX: Version 11
   Network: Gigabit Internet Connection
   Storage: 1 GB available space
+  Internet Connection And Phone For Notification Service
   
 Warnings:
 * Do Not Delete Database Files. This Will Delete All Data In The Software.
-* Do Not Delete .exe or DLL Files. This Will Remove The Software From System. 
+* Do Not Delete .exe or DLL Files. This Will Remove The Software From System.
+* File Processing Is Character Sensitive. Data Must Fit All Spaces Exactly.
 
 How To Use The Software
   1. Place files in a safe directory that you will access within the program. 
