@@ -99,9 +99,6 @@
     <EmbeddedResource Include="autoOrderForm.resx">
       <DependentUpon>autoOrderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DateSelect.resx">
-      <DependentUpon>DateSelect.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
