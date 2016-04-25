@@ -482,7 +482,6 @@ namespace IceCreamInventoryManagement
 
         public static bool doesTruckExist(int trucknumber)
         {
-            bool alreadyExists = false;
             List<Truck> myTrucks = new List<Truck>();
 
             myTrucks = getAllTrucks();
@@ -491,11 +490,10 @@ namespace IceCreamInventoryManagement
             {
                 if (truck.trucknumber == trucknumber)
                 {
-                    alreadyExists = true;
-                    break;
+                    return true;
                 }
             }
-            return alreadyExists;
+            return false;
         }
 
         public static bool doesItemExist(int itemnumber)
@@ -677,8 +675,8 @@ namespace IceCreamInventoryManagement
                 if (checkRegex(contents[i], truckHeaderEx).valid && inTruck == false)
                 {
                     RegexMethods.RegexClass r = checkRegex(contents[i], truckHeaderEx);
-                    truckValid = doesTruckExist(trucknumber);
                     trucknumber = Int32.Parse(r.groupValues[2]);
+                    truckValid = doesTruckExist(trucknumber);
                     inTruck = true;
                     if (!truckValid)
                     {
@@ -733,14 +731,13 @@ namespace IceCreamInventoryManagement
                     itemsAdded = 0;
                     addToLog("Done filling truck " + trucknumber);
                 }
-                else
+                else if(truckValid)
                 {
-                    //file is invalid in format
+                    //line is invalid in format
                     addToLog("Truck Inventory Upload File: Line " + (i + 1).ToString() + " is invalid!");
                 }
             }
         }
-        //needs error handling
 
         public static void processCustomerRequestBody(string[] content)
         {
