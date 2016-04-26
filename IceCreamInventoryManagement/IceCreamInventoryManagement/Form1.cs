@@ -699,5 +699,31 @@ namespace IceCreamInventoryManagement
             }
             
         }
+
+        private void btnTRDShowAllRouteCities_Click(object sender, EventArgs e)
+        {
+            /*
+            dgvRouteCities.Rows.Clear();
+            dgvTRD.Rows.Clear();
+            int type = 0;
+            int number = 0;
+            get
+            if (trd != null)
+            {
+                Route r = getRoute(trd.routenumber);
+                dgvTRD.Rows.Add(trd.trucknumber, trd.routenumber, trd.drivernumber, r.cityLabels[0], r.cityLabels[1],
+                    r.cityLabels[2], r.cityLabels[3], r.cityLabels[4], r.cityLabels[5], r.cityLabels[6], r.cityLabels[7],
+                    r.cityLabels[8], r.cityLabels[9]);
+                foreach (string s in r.cityLabels)
+                {
+                    if (s != null && s != "")
+                    {
+                        Zone z = getZone(s);
+                        dgvRouteCities.Rows.Add(z.citylabel, z.cityname, z.state);
+                    }
+                }
+            }
+            */
+        }
     }
 }
