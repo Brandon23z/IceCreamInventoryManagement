@@ -60,6 +60,8 @@ Files
 	The Program Accepts Several Different Files. They All Vary By Name And Data.
 	
 	City Upload File
+		File: cityUpload.txt
+		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
 		|------city label----||------city name-----||state|
@@ -73,6 +75,8 @@ Files
 		T 0003  
 	
 	Daily Inventory File
+		File: dailyInventory.txt
+		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
 		|Item Number||Warehouse Quantity||Price||Description|
@@ -88,6 +92,8 @@ Files
 		T 0005
 		
 	Route Upload File
+		File: routeUpload.txt
+		
 		Format:
 		HD SEQ#      YYYY-MM-DD 
 		|action code||Route Number||-----city label-----|*10
@@ -101,6 +107,8 @@ Files
 		T 0003
 	
 	Truck Upload File
+		File: truckUpload.txt
+		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
 		|Truck Number|
@@ -114,6 +122,8 @@ Files
 		T 0003
 		
 	Driver Upload File
+		File: driverUpload.txt
+		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
 		|Driver Number|
@@ -127,6 +137,8 @@ Files
 		T 0003
 		
 	Load Truck Route Driver File
+		File: truckRouteDriverUpload.txt
+	
 		Format:
 		HD SEQ#      YYYY-MM-DD 
 		|Truck Number||Route Number||Driver Number|
@@ -140,7 +152,9 @@ Files
 		000400010002
 		T 0004
 		
-	Load Ice Cream Inventory File
+	Load Ice Cream Truck Inventory File
+		File: loadTruck.txt
+		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
 		TR |Truck Number|
@@ -158,6 +172,8 @@ Files
 		T 0004
 
 	Sales File
+		File: dailySales.txt
+		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
 		TR |Truck Number|
