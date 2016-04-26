@@ -47,7 +47,7 @@ namespace IceCreamInventoryManagement
 
             Settings.NotificationSettings settings = Settings.getNotificationSettings();
 
-            int quantitySuggested = Int32.Parse(settings.setDefaultQuantity);
+            int quantitySuggested = settings.setDefaultQuantity;
 
             for (int i = 0; i < mySales1.Count(); i++)
             {

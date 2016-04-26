@@ -102,6 +102,7 @@ namespace IceCreamInventoryManagement
             autoOrderGen.Checked = settings.notifAutoOrderGenerated;
             txtPhoneNumber.Text = settings.notifPhoneNumber;
             cboCarrier.SelectedIndex = findCarrier(settings.notifCarrier);
+            numericUpDown1.Value = settings.setDefaultQuantity;
         }
 
         private void setDefault_Click(object sender, EventArgs e)
@@ -113,6 +114,8 @@ namespace IceCreamInventoryManagement
             settings.notifAutoOrderGenerated = autoOrderGen.Checked;
             settings.notifPhoneNumber = txtPhoneNumber.Text;
             settings.notifCarrier = carriers[cboCarrier.SelectedIndex];
+            int setDefaultQ = Convert.ToInt32(numericUpDown1.Value);
+            settings.setDefaultQuantity = setDefaultQ;
             saveNotificationSettings(settings);
             this.Close();
         }
