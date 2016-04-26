@@ -195,6 +195,7 @@
             this.rtbLog = new System.Windows.Forms.RichTextBox();
             this.timerLog = new System.Windows.Forms.Timer(this.components);
             this.btnTRDShowAllRouteCities = new System.Windows.Forms.Button();
+            this.btnTruckInventoryShowAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.zoneGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.routeGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.truckGridView)).BeginInit();
@@ -988,6 +989,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.btnTruckInventoryShowAll);
             this.groupBox4.Controls.Add(this.btnRefreshTruckInventory);
             this.groupBox4.Controls.Add(this.nudTruckNumberInventory);
             this.groupBox4.Controls.Add(this.label12);
@@ -1842,6 +1844,16 @@
             this.btnTRDShowAllRouteCities.UseVisualStyleBackColor = true;
             this.btnTRDShowAllRouteCities.Click += new System.EventHandler(this.btnTRDShowAllRouteCities_Click);
             // 
+            // btnTruckInventoryShowAll
+            // 
+            this.btnTruckInventoryShowAll.Location = new System.Drawing.Point(16, 397);
+            this.btnTruckInventoryShowAll.Name = "btnTruckInventoryShowAll";
+            this.btnTruckInventoryShowAll.Size = new System.Drawing.Size(75, 23);
+            this.btnTruckInventoryShowAll.TabIndex = 48;
+            this.btnTruckInventoryShowAll.Text = "Show All";
+            this.btnTruckInventoryShowAll.UseVisualStyleBackColor = true;
+            this.btnTruckInventoryShowAll.Click += new System.EventHandler(this.btnTruckInventoryShowAll_Click);
+            // 
             // Form1
             // 
             this.AccessibleName = "";
@@ -2081,6 +2093,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.Button btnTRDShowAllRouteCities;
+        private System.Windows.Forms.Button btnTruckInventoryShowAll;
     }
 }
 

@@ -578,6 +578,14 @@ namespace IceCreamInventoryManagement
             string description = txtCompanyInventoryDescription.Text;
             InventoryItem addItem = new InventoryItem(itemnumber, quantity, initialprice, saleprice, description);
             addInventoryItem(addItem);
+
+            dgvCompanyInventory.Rows.Clear();
+            List<InventoryItem> myInventory1 = new List<InventoryItem>();
+            myInventory1 = getInventory();
+            for (int i = 0; i < myInventory1.Count(); i++)
+            {
+                dgvCompanyInventory.Rows.Add(myInventory1[i].itemnumber, myInventory1[i].quantity, myInventory1[i].initialprice, myInventory1[i].saleprice, myInventory1[i].description);
+            }
         }
 
         private void btnTRDSearch_Click(object sender, EventArgs e)
@@ -644,6 +652,22 @@ namespace IceCreamInventoryManagement
                 }
             }
             */
+        }
+
+        private void btnTruckInventoryShowAll_Click(object sender, EventArgs e)
+        {
+            dgvTruckInventory.Rows.Clear();
+            List<Truck> trucks = getAllTrucks();
+            foreach (Truck t in trucks)
+            {
+                Dictionary<int, TruckInventoryItem> myInventory = new Dictionary<int, TruckInventoryItem>();
+                int truckNum = Convert.ToInt32(nudTruckNumberInventory.Value);
+                myInventory = getTruckInventory(truckNum);
+                foreach (KeyValuePair<int, TruckInventoryItem> item in myInventory)
+                {
+                    dgvTruckInventory.Rows.Add(truckNum, item.Value.itemnumber, item.Value.quantity, item.Value.initialprice, item.Value.saleprice);
+                }
+            }
         }
     }
 }
