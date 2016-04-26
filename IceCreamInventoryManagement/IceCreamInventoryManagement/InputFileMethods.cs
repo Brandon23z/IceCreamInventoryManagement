@@ -756,9 +756,6 @@ namespace IceCreamInventoryManagement
                     else
                     {
                         bool test = addInventoryItem(new InventoryItem(itemnumber, 0, 0, 0, description));
-                        AutoOrder.ProductID.Add(itemnumber);
-                        //AutoOrder.amount.Add(quantity);
-                        // get quantity from settings
                     
                     }
 
@@ -779,16 +776,18 @@ namespace IceCreamInventoryManagement
             int trucknumber = 0;
             bool inTruck = false;
             int itemsChecked = 0;
+            bool truckValid = true;
             for (int i = 1; i < contents.Length - 1; i++)
             {
                 if (checkRegex(contents[i], truckHeaderEx).valid && inTruck == false)
                 {
                     RegexMethods.RegexClass r = checkRegex(contents[i], truckHeaderEx);
                     trucknumber = Int32.Parse(r.groupValues[2]);
+                    truckValid = doesTruckExist(trucknumber);
                     inTruck = true;
                     Console.WriteLine("Gettings sales for truck " + trucknumber.ToString());
                 }
-                else if (checkRegex(contents[i], truckSalesEx).valid && inTruck == true)
+                else if (checkRegex(contents[i], truckSalesEx).valid && inTruck == true && truckValid)
                 {
                     RegexMethods.RegexClass r = checkRegex(contents[i], truckSalesEx);
                     int itemnumber = Int32.Parse(r.groupValues[1]);
@@ -814,8 +813,6 @@ namespace IceCreamInventoryManagement
                             Console.WriteLine("Truck " + trucknumber + " sold " +
                                               (quantitySold));
                             bool test = addSale(itemnumber, trucknumber, temp.routenumber, temp.drivernumber, quantitySold, daySettings.currentDate, truckInv[itemnumber].initialprice, truckInv[itemnumber].saleprice);
-                            AutoOrder.ProductID.Add(itemnumber);
-                            AutoOrder.amount.Add(quantitySold);
                         }
                         Console.WriteLine("Truck " + trucknumber + " has " + finalquantity + "/" +
                                           truckInv[itemnumber].quantity + " of item " + itemnumber);
@@ -828,7 +825,7 @@ namespace IceCreamInventoryManagement
                     
                     itemsChecked ++;
                 }
-                else if (checkRegex(contents[i], truckSalesTrailerEx).valid && inTruck == true)
+                else if (checkRegex(contents[i], truckSalesTrailerEx).valid && inTruck == true && truckValid)
                 {
                     RegexMethods.RegexClass r = checkRegex(contents[i], truckSalesTrailerEx);
                     int numberOfItems = Int32.Parse(r.groupValues[2]);
@@ -841,13 +838,15 @@ namespace IceCreamInventoryManagement
                     itemsChecked = 0;
                     Console.WriteLine("Done unloading truck " + trucknumber);
                 }
-                else
+                else if(truckValid)
                 {
                     //file is invalid in format
                     addToLog("Sales File: Line " + (i + 1).ToString() + " is invalid!");
                     Console.WriteLine("File is invalid in format");
                 }
             }
+
+
 
         }
         //needs error handling

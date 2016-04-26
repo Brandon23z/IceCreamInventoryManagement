@@ -30,9 +30,8 @@ namespace IceCreamInventoryManagement
         private void Form1_Load(object sender, EventArgs e)
         {
             initializeDatabase();
-            clearDatabase();
-            Settings.saveDefaults(true);
-            refreshSalesView();
+            //clearDatabase();
+            //Settings.saveDefaults(true);
         }
 
         private void btnCityUpload_Click(object sender, EventArgs e)
@@ -55,6 +54,9 @@ namespace IceCreamInventoryManagement
             processCityUploadFileBody(cityUploadFile);
 
             addToLog(fileName + " Processed Successfully");
+
+            SQLMethods.insertSetting(Settings.keys.cityUploadFile, "1", true);
+            SQLMethods.insertSetting(Settings.keys.routeUploadFile, "0", true);
 
             //refresh datagridview
             refreshZonesView();
@@ -88,6 +90,8 @@ namespace IceCreamInventoryManagement
             processRouteUploadFileBody(routeUploadFile);
 
             addToLog(fileName + " Processed Successfully");
+
+            SQLMethods.insertSetting(Settings.keys.routeUploadFile, "1", true);
 
             //refresh datagridview
             refreshRoutesView();
@@ -128,6 +132,14 @@ namespace IceCreamInventoryManagement
 
             if (TextSetting.dailyInventoryCalculated == true)
                 sendTextMessage("Warehouse Inventory has been calculated.");
+
+
+            if (TextSetting.autoOrderGenerated == true)
+            {
+                sendTextMessage("Auto Order has been generated.");
+            }
+
+            addToLog("Auto Order has been generated.");
         }
 
         private void refreshSalesView()
@@ -331,8 +343,8 @@ namespace IceCreamInventoryManagement
             //send text
             if (TextSetting.itemAddedToAutoOrder == true)
             {
-                sendTextMessage("New Products added to Automatic Order List");
-                addToLog("Text Message Sent: " + "New Products added to Automatic Order List");
+                sendTextMessage("Customer Requests added to Automatic Order List");
+                addToLog("Text Message Sent: " + "Customer Requests added to Automatic Order List");
             }
 
         }
@@ -425,98 +437,6 @@ namespace IceCreamInventoryManagement
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void sortSales(string startDateString = "", string endDateString = "", int drivernumber = 0, int routenumber = 0, int trucknumber = 0, int itemnumber = 0)
-        {
-            List<Sale> result1 = new List<Sale>();
-            List<Sale> result2 = new List<Sale>();
-            List<Sale> result3 = new List<Sale>();
-            List<Sale> result4 = new List<Sale>();
-            List<Sale> result5 = new List<Sale>();
-
-            List<Sale> mySales = new List<Sale>();
-
-            DateTime startDate = Convert.ToDateTime(startDateString);
-            DateTime endDate = Convert.ToDateTime(endDateString);
-
-            mySales = getAllSales();
-
-            for (int i = 0; i < mySales.Count(); i++)
-            {
-                if (drivernumber != 0)
-                {
-                    if (mySales[i].drivernumber == drivernumber)
-                        result1.Add(mySales[i]);
-                }
-                else
-                {
-                    result1 = mySales;
-                    break;
-                }
-            }
-
-            for (int i = 0; i < result1.Count(); i++)
-            {
-                if (trucknumber != 0)
-                {
-                    if (result1[i].trucknumber == trucknumber)
-                        result2.Add(result1[i]);
-                }
-                else
-                {
-                    result2 = result1;
-                    break;
-                }
-            }
-
-            for (int i = 0; i < result2.Count(); i++)
-            {
-                if (routenumber != 0)
-                {
-                    if (result2[i].routenumber == routenumber)
-                        result3.Add(result2[i]);
-                }
-                else
-                {
-                    result3 = result2;
-                    break;
-                }
-            }
-
-            for (int i = 0; i < result3.Count(); i++)
-            {
-                if (itemnumber != 0)
-                {
-                    if (result3[i].itemnumber == itemnumber)
-                        result4.Add(result3[i]);
-                }
-                else
-                {
-                    result4 = result3;
-                    break;
-                }
-            }
-
-            for (int i = 0; i < result4.Count(); i++)
-            {
-                if (startDateString != "" && endDateString != "")
-                {
-                    if (result4[i].saledate >= startDate && result4[i].saledate <= endDate)
-                        result5.Add(result4[i]);
-                }
-                else
-                {
-                    result5 = result4;
-                    break;
-                }
-            }
-
-            salesGridView1.Rows.Clear();
-            for (int i = 0; i < mySales.Count(); i++)
-            {
-                salesGridView1.Rows.Add(result5[i].itemnumber, result5[i].quantity, result5[i].saledate, result5[i].initialprice, result5[i].saleprice, result5[i].trucknumber, result5[i].routenumber, result5[i].drivernumber);
-            }
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)

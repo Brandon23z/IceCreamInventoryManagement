@@ -29,11 +29,6 @@ namespace IceCreamInventoryManagement
             }
         }
 
-        public class AutoOrder
-        {
-            public static List<int> ProductID = new List<int>();
-            public static List<int> amount = new List<int>();
-        }
 
         public class TextSetting
         {
