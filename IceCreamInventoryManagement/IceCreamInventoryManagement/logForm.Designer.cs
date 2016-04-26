@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(logForm));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timerRefreshLog = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
@@ -53,6 +54,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 315);
             this.Controls.Add(this.richTextBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "logForm";
             this.Text = "logForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.logForm_FormClosed);

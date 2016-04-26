@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(settingsForm));
             this.truckInvReset = new System.Windows.Forms.CheckBox();
             this.dailyInvCalc = new System.Windows.Forms.CheckBox();
             this.itemAddedAutoOrder = new System.Windows.Forms.CheckBox();
@@ -186,6 +187,7 @@
             this.Controls.Add(this.itemAddedAutoOrder);
             this.Controls.Add(this.dailyInvCalc);
             this.Controls.Add(this.truckInvReset);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "settingsForm";
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.settingsForm_Load);

@@ -51,5 +51,9 @@ namespace IceCreamInventoryManagement
         //TRUCK UPLOAD//
         //|Truck Number|
         public const string trucksEx = @"^(\d{4})(?: )*$";
+
+        //CUSTOMER REQUEST//
+        //|Truck Number|
+        public const string customerRequestEx = @"^(\d{4})(.{0,30})(?: )*$";
     }
 }

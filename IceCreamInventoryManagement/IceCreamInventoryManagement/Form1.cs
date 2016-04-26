@@ -60,6 +60,25 @@ namespace IceCreamInventoryManagement
             }
 
             Settings.FileUploadSettings settings = Settings.getFileUploadSettings();
+
+            if (daySettings.dayStatus == 2)
+            {
+                btnIceCreamFromTrucks.Enabled = true;
+                btnRouteUpload.Enabled = false;
+                btnCityUpload.Enabled = false;
+                btnDriverUpload.Enabled = false;
+                btnTruckUpload.Enabled = false;
+                btnInventoryUpdate.Enabled = false;
+            }
+            else
+            {
+                btnIceCreamFromTrucks.Enabled = false;
+                btnRouteUpload.Enabled = true;
+                btnCityUpload.Enabled = true;
+                btnDriverUpload.Enabled = true;
+                btnTruckUpload.Enabled = true;
+                btnInventoryUpdate.Enabled = true;
+            }
             if (settings.cityUploadFile && daySettings.dayStatus <= 1)
             {
                 btnRouteUpload.Enabled = true;
@@ -112,26 +131,6 @@ namespace IceCreamInventoryManagement
             else
             {
                 btnLoadIceCreamToTrucks.Enabled = false;
-            }
-            if (daySettings.dayStatus == 2)
-            {
-                btnIceCreamFromTrucks.Enabled = true;
-                btnCustomerRequests.Enabled = true;
-                btnRouteUpload.Enabled = false;
-                btnCityUpload.Enabled = false;
-                btnDriverUpload.Enabled = false;
-                btnTruckUpload.Enabled = false;
-                btnInventoryUpdate.Enabled = false;
-            }
-            else
-            {
-                btnIceCreamFromTrucks.Enabled = false;
-                btnCustomerRequests.Enabled = false;
-                btnRouteUpload.Enabled = true;
-                btnCityUpload.Enabled = true;
-                btnDriverUpload.Enabled = true;
-                btnTruckUpload.Enabled = true;
-                btnInventoryUpdate.Enabled = true;
             }
             if (daySettings.dayStatus == 2 && settings.salesUploadFile)
             {
@@ -240,23 +239,16 @@ namespace IceCreamInventoryManagement
 
             //refresh datagridview
             refreshRoutesView();
-            refreshSalesView();
 
             SQLMethods.insertSetting(Settings.keys.salesUploadFile, "1", true);
 
             if (TextSetting.dailyInventoryCalculated == true)
                 sendTextMessage("Warehouse Inventory has been calculated.");
 
-
-            if (TextSetting.autoOrderGenerated == true)
-            {
-                sendTextMessage("Auto Order has been generated.");
-            }
-
-            addToLog("Auto Order has been generated.");
             refreshButtonStates();
         }
 
+        /*
         private void refreshSalesView()
         {
             List<Sale> mySales = new List<Sale>();
@@ -270,6 +262,7 @@ namespace IceCreamInventoryManagement
 
             }
         }
+        */
 
         private void btnChangeTruckInventory_Click(object sender, EventArgs e)
         {
@@ -763,28 +756,68 @@ namespace IceCreamInventoryManagement
 
         private void btnTRDShowAllRouteCities_Click(object sender, EventArgs e)
         {
-            /*
-            dgvRouteCities.Rows.Clear();
-            dgvTRD.Rows.Clear();
-            int type = 0;
-            int number = 0;
-            get
-            if (trd != null)
-            {
-                Route r = getRoute(trd.routenumber);
-                dgvTRD.Rows.Add(trd.trucknumber, trd.routenumber, trd.drivernumber, r.cityLabels[0], r.cityLabels[1],
-                    r.cityLabels[2], r.cityLabels[3], r.cityLabels[4], r.cityLabels[5], r.cityLabels[6], r.cityLabels[7],
-                    r.cityLabels[8], r.cityLabels[9]);
-                foreach (string s in r.cityLabels)
+            try {
+                dgvRouteCities.Rows.Clear();
+                dgvTRD.Rows.Clear();
+
+                List<Route> allRoutes = getAllRoutes();
+                foreach (Route route in allRoutes)
                 {
-                    if (s != null && s != "")
+                    string[] cityLabels = new string[10];
+                    cityLabels[0] = "";
+                    cityLabels[1] = "";
+                    cityLabels[2] = "";
+                    cityLabels[3] = "";
+                    cityLabels[4] = "";
+                    cityLabels[5] = "";
+                    cityLabels[6] = "";
+                    cityLabels[7] = "";
+                    cityLabels[8] = "";
+                    cityLabels[9] = "";
+
+                    for (int i = 0; i < route.cityLabels.Length; i++)
                     {
-                        Zone z = getZone(s);
-                        dgvRouteCities.Rows.Add(z.citylabel, z.cityname, z.state);
+                        cityLabels[i] = route.cityLabels[i];
+                    }
+
+
+                    TruckRouteDriver trd = getTRD(1, route.routenumber);
+                    if (trd != null)
+                    {
+                        dgvTRD.Rows.Add(trd.trucknumber, trd.routenumber, trd.drivernumber, cityLabels[0], cityLabels[1],
+                            cityLabels[2], cityLabels[3], cityLabels[4], cityLabels[5], cityLabels[6], cityLabels[7],
+                            cityLabels[8], cityLabels[9]);
+                    }
+                    else
+                    {
+                        dgvTRD.Rows.Add(0, route.routenumber, 0, cityLabels[0], cityLabels[1],
+                            cityLabels[2], cityLabels[3], cityLabels[4], cityLabels[5], cityLabels[6], cityLabels[7],
+                            cityLabels[8], cityLabels[9]);
                     }
                 }
+
+                List<Zone> allZones = getAllZones();
+
+                foreach (Zone zone in allZones)
+                {
+                    dgvRouteCities.Rows.Add(zone.citylabel, zone.cityname, zone.state);
+                }
+
+                dgvTrucks.Rows.Clear();
+                List<Truck> allTrucks = getAllTrucks();
+                foreach (Truck t in allTrucks)
+                {
+                    dgvTrucks.Rows.Add(t.trucknumber.ToString());
+                }
+
+                dgvDrivers.Rows.Clear();
+                List<Driver> allDrivers = getAllDrivers();
+                foreach (Driver d in allDrivers)
+                {
+                    dgvDrivers.Rows.Add(d.drivernumber.ToString());
+                }
             }
-            */
+            catch { }
         }
 
         private void btnTruckInventoryShowAll_Click(object sender, EventArgs e)
@@ -813,6 +846,15 @@ namespace IceCreamInventoryManagement
             
                 
             SQLMethods.insertSetting(Settings.keys.dayStatus, "0", true);
+
+            if (TextSetting.autoOrderGenerated == true)
+            {
+                sendTextMessage("Auto Order has been generated.");
+            }
+
+            addToLog("Auto Order has been generated.");
+            autoOrderForm.StartPosition = FormStartPosition.CenterParent;
+            autoOrderForm.ShowDialog();
             refreshButtonStates();
         }
 
@@ -849,6 +891,12 @@ namespace IceCreamInventoryManagement
                     break;
                 case 2:
 
+                    break;
+                case 3:
+                    try {
+                        btnSearch.PerformClick();
+                    }
+                    catch { }
                     break;
             }
         }

@@ -771,7 +771,7 @@ namespace IceCreamInventoryManagement
         {
             for (int i = 1; i < content.Length - 1; i++)
             {
-                RegexMethods.RegexClass r = checkRegex(content[i], "replace me!");//requestedInventoryItemEx
+                RegexMethods.RegexClass r = checkRegex(content[i], customerRequestEx);//requestedInventoryItemEx
                 // need to create new regex string for this with itemnumber = r.groupValues[1], description = r.groupValues[2]
                 if (r.valid)
                 {

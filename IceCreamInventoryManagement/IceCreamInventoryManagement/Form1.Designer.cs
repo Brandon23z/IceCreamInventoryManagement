@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -191,10 +192,6 @@
             this.nudSalesTruck = new System.Windows.Forms.NumericUpDown();
             this.nudSalesRoute = new System.Windows.Forms.NumericUpDown();
             this.salesGridView1 = new System.Windows.Forms.DataGridView();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.rtbLog = new System.Windows.Forms.RichTextBox();
-            this.timerLog = new System.Windows.Forms.Timer(this.components);
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -205,6 +202,14 @@
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.rtbLog = new System.Windows.Forms.RichTextBox();
+            this.timerLog = new System.Windows.Forms.Timer(this.components);
+            this.dgvDrivers = new System.Windows.Forms.DataGridView();
+            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvTrucks = new System.Windows.Forms.DataGridView();
+            this.Column37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.zoneGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.routeGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.truckGridView)).BeginInit();
@@ -257,6 +262,8 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDrivers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTrucks)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -1225,6 +1232,8 @@
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage6.Controls.Add(this.dgvTrucks);
+            this.tabPage6.Controls.Add(this.dgvDrivers);
             this.tabPage6.Controls.Add(this.groupTruckRouteDriver);
             this.tabPage6.Controls.Add(this.groupBox12);
             this.tabPage6.Controls.Add(this.groupBox11);
@@ -1244,7 +1253,7 @@
             this.groupTruckRouteDriver.Controls.Add(this.label22);
             this.groupTruckRouteDriver.Controls.Add(this.nudAssignTrucknum);
             this.groupTruckRouteDriver.Controls.Add(this.label21);
-            this.groupTruckRouteDriver.Location = new System.Drawing.Point(8, 177);
+            this.groupTruckRouteDriver.Location = new System.Drawing.Point(8, 222);
             this.groupTruckRouteDriver.Name = "groupTruckRouteDriver";
             this.groupTruckRouteDriver.Size = new System.Drawing.Size(320, 120);
             this.groupTruckRouteDriver.TabIndex = 32;
@@ -1327,7 +1336,7 @@
             // groupBox12
             // 
             this.groupBox12.Controls.Add(this.dgvRouteCities);
-            this.groupBox12.Location = new System.Drawing.Point(736, 177);
+            this.groupBox12.Location = new System.Drawing.Point(736, 222);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(387, 291);
             this.groupBox12.TabIndex = 31;
@@ -1377,7 +1386,7 @@
             this.groupBox11.Controls.Add(this.nudTRDRouteNumber);
             this.groupBox11.Controls.Add(this.rbTRDTruckNumber);
             this.groupBox11.Controls.Add(this.nudTRDTruckNumber);
-            this.groupBox11.Location = new System.Drawing.Point(492, 177);
+            this.groupBox11.Location = new System.Drawing.Point(492, 222);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(238, 129);
             this.groupBox11.TabIndex = 29;
@@ -1477,7 +1486,7 @@
             this.groupBox10.Controls.Add(this.dgvTRD);
             this.groupBox10.Location = new System.Drawing.Point(8, 13);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(1121, 158);
+            this.groupBox10.Size = new System.Drawing.Size(1121, 203);
             this.groupBox10.TabIndex = 29;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Truck, Route, Driver View";
@@ -1504,7 +1513,7 @@
             this.dgvTRD.Location = new System.Drawing.Point(6, 19);
             this.dgvTRD.Name = "dgvTRD";
             this.dgvTRD.ReadOnly = true;
-            this.dgvTRD.Size = new System.Drawing.Size(1109, 126);
+            this.dgvTRD.Size = new System.Drawing.Size(1109, 173);
             this.dgvTRD.TabIndex = 28;
             // 
             // Column27
@@ -1606,7 +1615,7 @@
             // 
             this.lblSales.AutoSize = true;
             this.lblSales.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSales.Location = new System.Drawing.Point(739, 451);
+            this.lblSales.Location = new System.Drawing.Point(833, 94);
             this.lblSales.Name = "lblSales";
             this.lblSales.Size = new System.Drawing.Size(215, 16);
             this.lblSales.TabIndex = 54;
@@ -1616,7 +1625,7 @@
             // 
             this.lblProfit.AutoSize = true;
             this.lblProfit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfit.Location = new System.Drawing.Point(739, 476);
+            this.lblProfit.Location = new System.Drawing.Point(833, 119);
             this.lblProfit.Name = "lblProfit";
             this.lblProfit.Size = new System.Drawing.Size(189, 16);
             this.lblProfit.TabIndex = 53;
@@ -1843,58 +1852,6 @@
             this.salesGridView1.Size = new System.Drawing.Size(1076, 305);
             this.salesGridView1.TabIndex = 34;
             // 
-            // tabPage5
-            // 
-            this.tabPage5.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage5.Controls.Add(this.routeGridView);
-            this.tabPage5.Controls.Add(this.truckInventoryGridView);
-            this.tabPage5.Controls.Add(this.truckGridView);
-            this.tabPage5.Controls.Add(this.driverGridView);
-            this.tabPage5.Controls.Add(this.salesGridView);
-            this.tabPage5.Controls.Add(this.inventoryGridView);
-            this.tabPage5.Controls.Add(this.zoneGridView);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1137, 550);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "tabPage5";
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.SettingsTab);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.rtbLog);
-            this.splitContainer1.Size = new System.Drawing.Size(1145, 652);
-            this.splitContainer1.SplitterDistance = 576;
-            this.splitContainer1.TabIndex = 34;
-            // 
-            // rtbLog
-            // 
-            this.rtbLog.BackColor = System.Drawing.SystemColors.Control;
-            this.rtbLog.DetectUrls = false;
-            this.rtbLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbLog.Location = new System.Drawing.Point(0, 0);
-            this.rtbLog.Name = "rtbLog";
-            this.rtbLog.ReadOnly = true;
-            this.rtbLog.Size = new System.Drawing.Size(1145, 72);
-            this.rtbLog.TabIndex = 0;
-            this.rtbLog.Text = "";
-            // 
-            // timerLog
-            // 
-            this.timerLog.Enabled = true;
-            this.timerLog.Interval = 1000;
-            this.timerLog.Tick += new System.EventHandler(this.timerLog_Tick);
-            // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.HeaderText = "Item Number";
@@ -1955,6 +1912,96 @@
             this.Column34.Name = "Column34";
             this.Column34.ReadOnly = true;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage5.Controls.Add(this.routeGridView);
+            this.tabPage5.Controls.Add(this.truckInventoryGridView);
+            this.tabPage5.Controls.Add(this.truckGridView);
+            this.tabPage5.Controls.Add(this.driverGridView);
+            this.tabPage5.Controls.Add(this.salesGridView);
+            this.tabPage5.Controls.Add(this.inventoryGridView);
+            this.tabPage5.Controls.Add(this.zoneGridView);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(1137, 550);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "tabPage5";
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.SettingsTab);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.rtbLog);
+            this.splitContainer1.Size = new System.Drawing.Size(1145, 652);
+            this.splitContainer1.SplitterDistance = 576;
+            this.splitContainer1.TabIndex = 34;
+            // 
+            // rtbLog
+            // 
+            this.rtbLog.BackColor = System.Drawing.SystemColors.Control;
+            this.rtbLog.DetectUrls = false;
+            this.rtbLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbLog.Location = new System.Drawing.Point(0, 0);
+            this.rtbLog.Name = "rtbLog";
+            this.rtbLog.ReadOnly = true;
+            this.rtbLog.Size = new System.Drawing.Size(1145, 72);
+            this.rtbLog.TabIndex = 0;
+            this.rtbLog.Text = "";
+            // 
+            // timerLog
+            // 
+            this.timerLog.Enabled = true;
+            this.timerLog.Interval = 1000;
+            this.timerLog.Tick += new System.EventHandler(this.timerLog_Tick);
+            // 
+            // dgvDrivers
+            // 
+            this.dgvDrivers.AllowUserToAddRows = false;
+            this.dgvDrivers.AllowUserToDeleteRows = false;
+            this.dgvDrivers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDrivers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column36});
+            this.dgvDrivers.Location = new System.Drawing.Point(8, 348);
+            this.dgvDrivers.Name = "dgvDrivers";
+            this.dgvDrivers.ReadOnly = true;
+            this.dgvDrivers.Size = new System.Drawing.Size(171, 190);
+            this.dgvDrivers.TabIndex = 33;
+            // 
+            // Column36
+            // 
+            this.Column36.HeaderText = "Driver Number";
+            this.Column36.Name = "Column36";
+            this.Column36.ReadOnly = true;
+            // 
+            // dgvTrucks
+            // 
+            this.dgvTrucks.AllowUserToAddRows = false;
+            this.dgvTrucks.AllowUserToDeleteRows = false;
+            this.dgvTrucks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTrucks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column37});
+            this.dgvTrucks.Location = new System.Drawing.Point(185, 348);
+            this.dgvTrucks.Name = "dgvTrucks";
+            this.dgvTrucks.ReadOnly = true;
+            this.dgvTrucks.Size = new System.Drawing.Size(171, 190);
+            this.dgvTrucks.TabIndex = 34;
+            // 
+            // Column37
+            // 
+            this.Column37.HeaderText = "Truck Number";
+            this.Column37.Name = "Column37";
+            this.Column37.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AccessibleName = "";
@@ -1962,6 +2009,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1145, 652);
             this.Controls.Add(this.splitContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Ice Cream System - Winter Water Interactive";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -2029,6 +2077,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDrivers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTrucks)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2210,6 +2260,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column35;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column34;
+        private System.Windows.Forms.DataGridView dgvTrucks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column37;
+        private System.Windows.Forms.DataGridView dgvDrivers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column36;
     }
 }
 
