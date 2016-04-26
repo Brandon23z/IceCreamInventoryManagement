@@ -45,6 +45,10 @@ Warnings:
 * Do Not Delete .exe or DLL Files. This Will Remove The Software From System.
 * File Processing Is Character Sensitive. Data Must Fit All Spaces Exactly.
 * Files must be submitted in the correct order.
+* 
+
+Assumptions:
+* Must have internet connection for Text Message Notification system.
 
 How To Use The Software
 	1. Place files in a safe directory that you will access within the program. 
@@ -54,3 +58,121 @@ How To Use The Software
 
 Files
 	The Program Accepts Several Different Files. They All Vary By Name And Data.
+	
+	City Upload File
+		Format: 
+		HD SEQ#      YYYY-MM-DD 
+		|------city label----||------city name-----||state|
+		T #ROWS
+		
+		Example:
+		HD 0103      2016-03-01
+		Dearborn 1          Dearborn            MI
+		Dearborn 2          Dearborn            MI
+		Dearborn 3          Dearborn            MI
+		T 0003  
+	
+	Daily Inventory File
+		Format: 
+		HD SEQ#      YYYY-MM-DD 
+		|Item Number||Warehouse Quantity||Price||Description|
+		T #ROWS IN FILE
+		
+		Example:
+		HD 0025      2016-03-24 
+		000300005005500650Chocolate Ice Cream
+		000400010006500750Strawberry Ice Cream
+		000500005207500850Mint Ice Cream
+		000600005508500950Lemon Ice Cream
+		000700006009501067Vanilla Ice Cream
+		T 0005
+		
+	Route Upload File
+		Format:
+		HD SEQ#      YYYY-MM-DD 
+		|action code||Route Number||-----city label-----|*10
+		T #ROWS
+		
+		Example:
+		HD 0053      2016-03-18
+		A0001Dearborn 1          Dearborn 2          Dearborn 3
+		C0003Royal Oak
+		D0005
+		T 0003
+	
+	Truck Upload File
+		Format: 
+		HD SEQ#      YYYY-MM-DD 
+		|Truck Number|
+		T #ROWS
+		
+		Example:
+		HD 0001      2016-03-24
+		0001
+		0010
+		0110
+		T 0003
+		
+	Driver Upload File
+		Format: 
+		HD SEQ#      YYYY-MM-DD 
+		|Driver Number|
+		T #ROWS
+		
+		Example:
+		HD 0001      2016-03-24 
+		0001 
+		0002 
+		0003
+		T 0003
+		
+	Load Truck Route Driver File
+		Format:
+		HD SEQ#      YYYY-MM-DD 
+		|Truck Number||Route Number||Driver Number|
+		T #ROWS
+		
+		Example:
+		HD 0001      2016-03-24
+		000100020003
+		000200030005
+		000300040001
+		000400010002
+		T 0004
+		
+	Load Ice Cream Inventory File
+		Format: 
+		HD SEQ#      YYYY-MM-DD 
+		TR |Truck Number|
+		|Item Number||Adjustment Quantity|
+		IR #ROWS FOR TRUCK
+		T #ROWS IN FILE
+		
+		Example: 
+		HD 0001      2016-03-24
+		TR 0001
+		00030500
+		IR 0003
+		TR 0002
+		IR 0001
+		T 0004
+
+	Sales File
+		Format: 
+		HD SEQ#      YYYY-MM-DD 
+		TR |Truck Number|
+		|Item Number||Final Quantity|
+		SR #ROWS FOR TRUCK
+		T #ROWS IN FILE
+		
+		Example:
+		HD 0009      2016-03-12
+		TR 0001
+		00010001  
+		00170002
+		01180003
+		SR 0003
+		TR 0002
+		01180003
+		SR 0001
+		T 0004
