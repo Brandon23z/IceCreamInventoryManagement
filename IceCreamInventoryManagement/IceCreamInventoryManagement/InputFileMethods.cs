@@ -756,9 +756,6 @@ namespace IceCreamInventoryManagement
                     else
                     {
                         bool test = addInventoryItem(new InventoryItem(itemnumber, 0, 0, 0, description));
-                        AutoOrder.ProductID.Add(itemnumber);
-                        //AutoOrder.amount.Add(quantity);
-                        // get quantity from settings
                     
                     }
 
@@ -816,8 +813,6 @@ namespace IceCreamInventoryManagement
                             Console.WriteLine("Truck " + trucknumber + " sold " +
                                               (quantitySold));
                             bool test = addSale(itemnumber, trucknumber, temp.routenumber, temp.drivernumber, quantitySold, daySettings.currentDate, truckInv[itemnumber].initialprice, truckInv[itemnumber].saleprice);
-                            AutoOrder.ProductID.Add(itemnumber);
-                            AutoOrder.amount.Add(quantitySold);
                         }
                         Console.WriteLine("Truck " + trucknumber + " has " + finalquantity + "/" +
                                           truckInv[itemnumber].quantity + " of item " + itemnumber);

@@ -70,9 +70,9 @@
             this.itemAddedAutoOrder.AutoSize = true;
             this.itemAddedAutoOrder.Location = new System.Drawing.Point(13, 80);
             this.itemAddedAutoOrder.Name = "itemAddedAutoOrder";
-            this.itemAddedAutoOrder.Size = new System.Drawing.Size(146, 17);
+            this.itemAddedAutoOrder.Size = new System.Drawing.Size(218, 17);
             this.itemAddedAutoOrder.TabIndex = 3;
-            this.itemAddedAutoOrder.Text = "Item Added to Auto Order";
+            this.itemAddedAutoOrder.Text = "Customer Requests Added to Auto Order";
             this.itemAddedAutoOrder.UseVisualStyleBackColor = true;
             this.itemAddedAutoOrder.CheckedChanged += new System.EventHandler(this.itemAddedAutoOrder_CheckedChanged);
             // 

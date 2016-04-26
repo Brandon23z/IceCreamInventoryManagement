@@ -26,7 +26,7 @@ namespace IceCreamInventoryManagement
             public const string truckRouteDriverUploadFile = "0";
             public const string truckInventoryUploadFile = "0";
 
-            public const string dayStatus = "0"; //0 = day not started 1 = first file input day started 2 = trucks sent out
+            public const string dayStatus = "0"; //0 = day not started, 1 = first file input day started, 2 = trucks sent out
             public const string currentDate = "2000-01-01";
 
             public const string sequenceCityUploadFile = "0";

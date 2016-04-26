@@ -30,9 +30,8 @@ namespace IceCreamInventoryManagement
         private void Form1_Load(object sender, EventArgs e)
         {
             initializeDatabase();
-            clearDatabase();
-            Settings.saveDefaults(true);
-            refreshSalesView();
+            //clearDatabase();
+            //Settings.saveDefaults(true);
         }
 
         private void btnCityUpload_Click(object sender, EventArgs e)
@@ -55,6 +54,9 @@ namespace IceCreamInventoryManagement
             processCityUploadFileBody(cityUploadFile);
 
             addToLog(fileName + " Processed Successfully");
+
+            SQLMethods.insertSetting(Settings.keys.cityUploadFile, "1", true);
+            SQLMethods.insertSetting(Settings.keys.routeUploadFile, "0", true);
 
             //refresh datagridview
             refreshZonesView();
@@ -88,6 +90,8 @@ namespace IceCreamInventoryManagement
             processRouteUploadFileBody(routeUploadFile);
 
             addToLog(fileName + " Processed Successfully");
+
+            SQLMethods.insertSetting(Settings.keys.routeUploadFile, "1", true);
 
             //refresh datagridview
             refreshRoutesView();
@@ -128,6 +132,14 @@ namespace IceCreamInventoryManagement
 
             if (TextSetting.dailyInventoryCalculated == true)
                 sendTextMessage("Warehouse Inventory has been calculated.");
+
+
+            if (TextSetting.autoOrderGenerated == true)
+            {
+                sendTextMessage("Auto Order has been generated.");
+            }
+
+            addToLog("Auto Order has been generated.");
         }
 
         private void refreshSalesView()
@@ -163,8 +175,6 @@ namespace IceCreamInventoryManagement
             processTruckInventoryUploadFileBody(iceCreamtoTrucksFile);
 
             addToLog(fileName + " Processed Successfully");
-
-            //Settings.saveFileUploadSettings fileUpload
 
             //refresh datagridview
             refreshTruckInvView();
@@ -333,8 +343,8 @@ namespace IceCreamInventoryManagement
             //send text
             if (TextSetting.itemAddedToAutoOrder == true)
             {
-                sendTextMessage("New Products added to Automatic Order List");
-                addToLog("Text Message Sent: " + "New Products added to Automatic Order List");
+                sendTextMessage("Customer Requests added to Automatic Order List");
+                addToLog("Text Message Sent: " + "Customer Requests added to Automatic Order List");
             }
 
         }
