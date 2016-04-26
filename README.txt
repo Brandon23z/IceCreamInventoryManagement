@@ -45,7 +45,7 @@ Warnings:
 * Do Not Delete .exe or DLL Files. This Will Remove The Software From System.
 * File Processing Is Character Sensitive. Data Must Fit All Spaces Exactly.
 * Files must be submitted in the correct order.
-* 
+* Route, Truck, Driver, and Item Numbers MUST NOT BE ZERO. This May Cause Errors in the Software.
 
 Assumptions:
 * Must have internet connection for Text Message Notification system.
