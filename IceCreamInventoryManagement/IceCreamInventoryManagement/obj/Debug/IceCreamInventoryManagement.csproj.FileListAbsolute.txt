@@ -40,7 +40,6 @@ C:\Users\khanha\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManage
 C:\Users\khanha\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\bin\Debug\IceCreamInventoryManagement.pdb
 C:\Users\khanha\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\bin\Debug\FirebirdSql.Data.FirebirdClient.dll
 C:\Users\khanha\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\bin\Debug\FirebirdSql.Data.FirebirdClient.pdb
-C:\Users\Spencer\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\obj\Debug\IceCreamInventoryManagement.DateSelect.resources
 C:\Users\scvierk\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\bin\Debug\IceCreamInventoryManagement.exe.config
 C:\Users\scvierk\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\obj\Debug\IceCreamInventoryManagement.exe
 C:\Users\scvierk\Source\Repos\IceCreamInventoryManagement\IceCreamInventoryManagement\IceCreamInventoryManagement\obj\Debug\IceCreamInventoryManagement.pdb

@@ -112,21 +112,6 @@ namespace IceCreamInventoryManagement
                 return false;
             }
 
-            //if first file of day set current date and daystatus
-            if (!checkFirstFileOfDay(header))
-            {
-                addToLog(fileName + " Invalid: Date must be greater than previous day's file!");
-                return false;
-            }
-
-            //check correct date here
-            Settings.DaySettings daySettings = Settings.getDaySettings();
-            if (header.date != daySettings.currentDate)
-            {
-                addToLog(fileName + " Invalid: Today's date must be the same across all files!");
-                return false;
-            }
-
             //Check for correct sequence number here
             if (((header.sequenceNumber == (currentSequenceNum + 1)) && currentSequenceNum != 9999) || (header.sequenceNumber == 1 && currentSequenceNum == 9999))
             {
@@ -145,6 +130,21 @@ namespace IceCreamInventoryManagement
                 {
                     addToLog(fileName + " Invalid: Sequence number is not 1 greater than previous, should be 1");
                 }
+                return false;
+            }
+
+            //if first file of day set current date and daystatus
+            if (!checkFirstFileOfDay(header))
+            {
+                addToLog(fileName + " Invalid: Date must be greater than previous day's file!");
+                return false;
+            }
+
+            //check correct date here
+            Settings.DaySettings daySettings = Settings.getDaySettings();
+            if (header.date != daySettings.currentDate)
+            {
+                addToLog(fileName + " Invalid: Today's date must be the same across all files!");
                 return false;
             }
 
@@ -205,6 +205,7 @@ namespace IceCreamInventoryManagement
                     string citylabel = r.groupValues[1];
                     string cityname = r.groupValues[2];
                     string state = r.groupValues[3];
+
                     if (!doesZoneExist(citylabel))
                     {
                         bool test = addZone(new Zone(citylabel, cityname, state));
@@ -231,8 +232,11 @@ namespace IceCreamInventoryManagement
                     if (r.groupValues[1] == "A")
                     {
                         int routenumber = Int32.Parse(r.groupValues[2]);
-
-                        if (doesRouteExist(routenumber))
+                        if (routenumber == 0)
+                        {
+                            addToLog("Route Number Can Not be 0");
+                        }
+                        else if (doesRouteExist(routenumber))
                         {
                             addToLog("Route # " + routenumber + " was not added because it already exists");
                         }
@@ -281,7 +285,11 @@ namespace IceCreamInventoryManagement
                     {
                         int routenumber = Int32.Parse(r.groupValues[2]);
 
-                        if (doesRouteExist(routenumber))
+                        if (routenumber == 0)
+                        {
+                            addToLog("Route Number Can Not be 0");
+                        }
+                        else if (doesRouteExist(routenumber))
                         {
                             bool zoneIsValid = true;
                             string[] citylabels = new string[10];
@@ -331,7 +339,11 @@ namespace IceCreamInventoryManagement
                     else if (r.groupValues[13] == "D")
                     {
                         int routenumber = Int32.Parse(r.groupValues[14]);
-                        if(doesRouteExist(routenumber))
+                        if (routenumber == 0)
+                        {
+                            addToLog("Route Number Can Not be 0");
+                        }
+                        else if (doesRouteExist(routenumber))
                         {
                             bool test = deleteRoute(routenumber);
                         }       
@@ -581,7 +593,11 @@ namespace IceCreamInventoryManagement
                 if (r.valid)
                 {
                     int trucknumber = Int32.Parse(r.groupValues[1]);
-                    if (!doesTruckExist(trucknumber))
+                    if (trucknumber == 0)
+                    {
+                        addToLog("Truck Number Can Not be 0");
+                    }
+                    else if (!doesTruckExist(trucknumber))
                     {
                         bool test = addTruck(new Truck(trucknumber));
                     }
@@ -606,7 +622,11 @@ namespace IceCreamInventoryManagement
                 if (r.valid)
                 {
                     int drivernumber = Int32.Parse(r.groupValues[1]);
-                    if (!doesDriverExist(drivernumber))
+                    if (drivernumber == 0)
+                    {
+                        addToLog("Driver Number Can Not be 0");
+                    }
+                    else if (!doesDriverExist(drivernumber))
                     {
                         bool test = addDriver(new Driver(drivernumber));
                     }
@@ -638,7 +658,16 @@ namespace IceCreamInventoryManagement
                     double initialprice = Convert.ToDouble(r.groupValues[3] + "." + r.groupValues[4]);
                     double saleprice = Convert.ToDouble(r.groupValues[5] + "." + r.groupValues[6]);
                     string description = r.groupValues[7];
-                    bool test = addInventoryItem(new InventoryItem(itemnumber, quantity, initialprice, saleprice, description));
+                    if (itemnumber != 0)
+                    {
+                        bool test =
+                            addInventoryItem(new InventoryItem(itemnumber, quantity, initialprice, saleprice,
+                                description));
+                    }
+                    else
+                    {
+                        addToLog("Item Number Can Not be 0");
+                    }
                 }
                 else
                 {
@@ -655,26 +684,6 @@ namespace IceCreamInventoryManagement
 
         public static void processTruckInventoryUploadFileBody(string[] contents)
         {
-            //add default inventory to each truck
-            List<Truck> myTrucks = new List<Truck>();
-
-            myTrucks = getAllTrucks();
-            Settings.DefaultItemsSettings mySettings = Settings.getDefaultItemsSettings();
-            for (int i = 0; i < myTrucks.Count(); i++)
-            {
-                
-                moveDefaultToTruck(mySettings.defaultItem1ID, mySettings.defaultItem1Quantity, myTrucks[i].trucknumber);
-
-                moveDefaultToTruck(mySettings.defaultItem2ID, mySettings.defaultItem2Quantity, myTrucks[i].trucknumber);
-
-                moveDefaultToTruck(mySettings.defaultItem3ID, mySettings.defaultItem3Quantity, myTrucks[i].trucknumber);
-
-                moveDefaultToTruck(mySettings.defaultItem4ID, mySettings.defaultItem4Quantity, myTrucks[i].trucknumber);
-
-                moveDefaultToTruck(mySettings.defaultItem5ID, mySettings.defaultItem5Quantity, myTrucks[i].trucknumber);
-            }
-            addToLog("Truck Inventory Upload File: Loading default items to trucks");
-
             int trucknumber = 0;
             bool inTruck = false;
             int itemsAdded = 0;
@@ -702,29 +711,39 @@ namespace IceCreamInventoryManagement
                     int itemnumber = Int32.Parse(r.groupValues[1]);
                     int amount = Int32.Parse(r.groupValues[2]);
                     itemsAdded++;
-                    addToLog("Adding " + amount.ToString() + " of item " + itemnumber + " to truck " +
-                                      trucknumber);
-                    //update amount
-                    
-                    amount = -amount;
-                    if(doesItemExist(itemnumber))
+                    if ((numberOfItemsOnTruck(trucknumber) > 9) &&
+                        !getTruckInventory(trucknumber).ContainsKey(itemnumber))
                     {
-                        if (amount > 0)
-                        {
-                            Dictionary<int, TruckInventoryItem> tinv = getTruckInventory(trucknumber);
-                            if (!(tinv[itemnumber].quantity >= amount))
-                            {
-                                addToLog("Unable to move " + amount + " of item " + itemnumber + " from truck " + trucknumber + " to inventory, not enough on the truck!");
-                                return;
-                            }
-
-                        }
-                        int myTest = moveItem(itemnumber, trucknumber, amount);
+                        addToLog("Unable to add item " + itemnumber + " to truck " + trucknumber +
+                                 "; maximum number of items on truck already!");
                     }
                     else
                     {
-                        addToLog("Unable to add/subtract Item # " + itemnumber + " to/from Truck # " + trucknumber 
-                            + " because Item #" + itemnumber + " does not exist.");
+                        addToLog("Adding " + amount.ToString() + " of item " + itemnumber + " to truck " +
+                                 trucknumber);
+                        //update amount
+
+                        amount = -amount;
+                        if (doesItemExist(itemnumber))
+                        {
+                            if (amount > 0)
+                            {
+                                Dictionary<int, TruckInventoryItem> tinv = getTruckInventory(trucknumber);
+                                if (!(tinv[itemnumber].quantity >= amount))
+                                {
+                                    addToLog("Unable to move " + amount + " of item " + itemnumber + " from truck " +
+                                             trucknumber + " to inventory, not enough on the truck!");
+                                    return;
+                                }
+
+                            }
+                            int myTest = moveItem(itemnumber, trucknumber, amount);
+                        }
+                        else
+                        {
+                            addToLog("Unable to add/subtract Item # " + itemnumber + " to/from Truck # " + trucknumber
+                                     + " because Item #" + itemnumber + " does not exist.");
+                        }
                     }
                 }
                 else if (checkRegex(contents[i], truckItemsTrailerEx).valid && inTruck == true && truckValid)
@@ -733,7 +752,7 @@ namespace IceCreamInventoryManagement
                     int numberOfItems = Int32.Parse(r.groupValues[2]);
                     if (numberOfItems != itemsAdded)
                     {
-                        addToLog("Number of items in trailer does not match the number of items added");
+                        addToLog("Number of items in trailer does not match the number of items processed");
                     }
 
                     inTruck = false;

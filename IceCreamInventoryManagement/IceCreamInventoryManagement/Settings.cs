@@ -25,6 +25,8 @@ namespace IceCreamInventoryManagement
             public const string warehouseUploadFile = "0";
             public const string truckRouteDriverUploadFile = "0";
             public const string truckInventoryUploadFile = "0";
+            public const string salesUploadFile = "0";
+            public const string loadTruckDefaults = "0";
 
             public const string dayStatus = "0"; //0 = day not started, 1 = first file input day started, 2 = trucks sent out
             public const string currentDate = "2000-01-01";
@@ -69,6 +71,8 @@ namespace IceCreamInventoryManagement
             public bool warehouseUploadFile { get; set; }
             public bool truckRouteDriverUploadFile { get; set; }
             public bool truckInventoryUploadFile { get; set; }
+            public bool salesUploadFile { get; set; }
+            public bool loadTruckDefaults { get; set; }
 
             public int dayStatus { get; set; } //0 = day not started 1 = first file input day started 2 = trucks sent out
             public DateTime currentDate { get; set; }
@@ -112,6 +116,8 @@ namespace IceCreamInventoryManagement
             public const string warehouseUploadFile = "warehouseUploadFile";
             public const string truckRouteDriverUploadFile = "truckRouteDriverUploadFile";
             public const string truckInventoryUploadFile = "truckInventoryUploadFile";
+            public const string salesUploadFile = "salesUploadFile";
+            public const string loadTruckDefaults = "loadTruckDefaults";
 
             public const string dayStatus = "dayStatus"; //0 = day not started 1 = first file input day started 2 = trucks sent out
             public const string currentDate = "currentDate";
@@ -147,6 +153,8 @@ namespace IceCreamInventoryManagement
             SQLMethods.insertSetting(keys.notifPhoneNumber, defaults.notifPhoneNumber, overwrite);
             SQLMethods.insertSetting(keys.notifCarrier, defaults.notifCarrier, overwrite);
             SQLMethods.insertSetting(keys.setDefaultQuantity, defaults.setDefaultQuantity, overwrite);
+            SQLMethods.insertSetting(keys.loadTruckDefaults, defaults.loadTruckDefaults, overwrite);
+            
 
             SQLMethods.insertSetting(keys.cityUploadFile, defaults.cityUploadFile, overwrite);
             SQLMethods.insertSetting(keys.truckUploadFile, defaults.truckUploadFile, overwrite);
@@ -155,6 +163,8 @@ namespace IceCreamInventoryManagement
             SQLMethods.insertSetting(keys.warehouseUploadFile, defaults.warehouseUploadFile, overwrite);
             SQLMethods.insertSetting(keys.truckRouteDriverUploadFile, defaults.truckRouteDriverUploadFile, overwrite);
             SQLMethods.insertSetting(keys.truckInventoryUploadFile, defaults.truckInventoryUploadFile, overwrite);
+            SQLMethods.insertSetting(keys.salesUploadFile, defaults.salesUploadFile, overwrite);
+            
 
             SQLMethods.insertSetting(keys.dayStatus, defaults.dayStatus, overwrite);
             SQLMethods.insertSetting(keys.currentDate, defaults.currentDate, overwrite);
@@ -201,6 +211,8 @@ namespace IceCreamInventoryManagement
             public bool warehouseUploadFile { get; set; }
             public bool truckRouteDriverUploadFile { get; set; }
             public bool truckInventoryUploadFile { get; set; }
+            public bool salesUploadFile { get; set; }
+            public bool loadTruckDefaults { get; set; }
         }
 
         public class DaySettings
@@ -272,6 +284,9 @@ namespace IceCreamInventoryManagement
             fuploadSettings.warehouseUploadFile = stringtobool(SQLMethods.retrieveSetting(keys.warehouseUploadFile));
             fuploadSettings.truckRouteDriverUploadFile = stringtobool(SQLMethods.retrieveSetting(keys.truckRouteDriverUploadFile));
             fuploadSettings.truckInventoryUploadFile = stringtobool(SQLMethods.retrieveSetting(keys.truckInventoryUploadFile));
+            fuploadSettings.salesUploadFile = stringtobool(SQLMethods.retrieveSetting(keys.salesUploadFile));
+            fuploadSettings.loadTruckDefaults = stringtobool(SQLMethods.retrieveSetting(keys.loadTruckDefaults));
+            
             return fuploadSettings;
         }
 
@@ -284,6 +299,9 @@ namespace IceCreamInventoryManagement
             SQLMethods.insertSetting(keys.warehouseUploadFile, booltoint(settings.warehouseUploadFile).ToString(), true);
             SQLMethods.insertSetting(keys.truckRouteDriverUploadFile, booltoint(settings.truckRouteDriverUploadFile).ToString(), true);
             SQLMethods.insertSetting(keys.truckInventoryUploadFile, booltoint(settings.truckInventoryUploadFile).ToString(), true);
+            SQLMethods.insertSetting(keys.salesUploadFile, booltoint(settings.salesUploadFile).ToString(), true);
+            SQLMethods.insertSetting(keys.loadTruckDefaults, booltoint(settings.loadTruckDefaults).ToString(), true);
+            
         }
 
         public static DaySettings getDaySettings()

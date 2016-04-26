@@ -448,7 +448,7 @@ namespace IceCreamInventoryManagement
         {
             InventoryItem item = getInventoryItem(itemnumber);
             Truck truck = getTruck(trucknumber);
-            if (item != null && truck != null && quantityDifference != 0)
+            if (item != null && truck != null)// && quantityDifference != 0
             {
                 int giveAmount = 0;
                 int setAmount = item.quantity;
@@ -839,6 +839,26 @@ namespace IceCreamInventoryManagement
             else
             {
                 return null;
+            }
+        }
+
+        public static void clearRTDAssignment()
+        {
+            sqlnonquery("UPDATE TRUCKS set routenumber = 0;");
+            sqlnonquery("UPDATE DRIVERS set trucknumber = 0;");
+        }
+
+        public static int numberOfItemsOnTruck(int trucknumber)
+        {
+            SQLResult result = sqlquery("SELECT COUNT(*) FROM TRUCKINVENTORY WHERE TRUCKNUMBER = @trucknumber;",
+                new Dictionary<string, string>() {{"@trucknumber", trucknumber.ToString()}});
+            if (result.error == SQLError.none && result.data != null && result.data.data.Count == 1)
+            {
+                return Convert.ToInt32(result.data.getField(0, "COUNT"));
+            }
+            else
+            {
+                return 0;
             }
         }
 

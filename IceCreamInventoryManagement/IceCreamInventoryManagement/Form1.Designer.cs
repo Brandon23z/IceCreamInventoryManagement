@@ -45,10 +45,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnSetDefault = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.btnDriverUpload = new System.Windows.Forms.Button();
-            this.btnAutoOrder = new System.Windows.Forms.Button();
             this.btnLoadIceCreamToTrucks = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.btnCustomerRequests = new System.Windows.Forms.Button();
@@ -91,6 +89,8 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SettingsTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -108,6 +108,7 @@
             this.nudCompanyInventoryItemNumber = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnTruckInventoryShowAll = new System.Windows.Forms.Button();
             this.btnRefreshTruckInventory = new System.Windows.Forms.Button();
             this.nudTruckNumberInventory = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
@@ -126,7 +127,7 @@
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.groupTruckRouteDriver = new System.Windows.Forms.GroupBox();
             this.btnAssignTruckRouteDriver = new System.Windows.Forms.Button();
             this.nudAssignDrivernum = new System.Windows.Forms.NumericUpDown();
             this.label23 = new System.Windows.Forms.Label();
@@ -140,6 +141,7 @@
             this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.btnTRDShowAllRouteCities = new System.Windows.Forms.Button();
             this.btnTRDSearch = new System.Windows.Forms.Button();
             this.rbTRDDriverNumber = new System.Windows.Forms.RadioButton();
             this.nudTRDDriverNumber = new System.Windows.Forms.NumericUpDown();
@@ -182,6 +184,17 @@
             this.nudSalesTruck = new System.Windows.Forms.NumericUpDown();
             this.nudSalesRoute = new System.Windows.Forms.NumericUpDown();
             this.salesGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.rtbLog = new System.Windows.Forms.RichTextBox();
+            this.timerLog = new System.Windows.Forms.Timer(this.components);
+            this.lblCurrentDay = new System.Windows.Forms.Label();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.lblCurrentStatus = new System.Windows.Forms.Label();
+            this.btnSendOutTrucks = new System.Windows.Forms.Button();
+            this.btnEndDay = new System.Windows.Forms.Button();
+            this.lblProfit = new System.Windows.Forms.Label();
+            this.lblSales = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -190,12 +203,8 @@
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.rtbLog = new System.Windows.Forms.RichTextBox();
-            this.timerLog = new System.Windows.Forms.Timer(this.components);
-            this.btnTRDShowAllRouteCities = new System.Windows.Forms.Button();
-            this.btnTruckInventoryShowAll = new System.Windows.Forms.Button();
+            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.zoneGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.routeGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.truckGridView)).BeginInit();
@@ -205,6 +214,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.truckInventoryGridView)).BeginInit();
             this.SettingsTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox14.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -220,7 +231,7 @@
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompanyInventory)).BeginInit();
             this.tabPage6.SuspendLayout();
-            this.groupBox13.SuspendLayout();
+            this.groupTruckRouteDriver.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAssignDrivernum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAssignRoutenum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAssignTrucknum)).BeginInit();
@@ -245,6 +256,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.groupBox15.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -286,7 +298,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 142);
+            this.label5.Location = new System.Drawing.Point(7, 65);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(128, 13);
             this.label5.TabIndex = 5;
@@ -334,7 +346,7 @@
             // 
             // btnChangeTruckInventory
             // 
-            this.btnChangeTruckInventory.Location = new System.Drawing.Point(134, 137);
+            this.btnChangeTruckInventory.Location = new System.Drawing.Point(141, 60);
             this.btnChangeTruckInventory.Name = "btnChangeTruckInventory";
             this.btnChangeTruckInventory.Size = new System.Drawing.Size(75, 23);
             this.btnChangeTruckInventory.TabIndex = 11;
@@ -384,7 +396,7 @@
             // 
             // btnSetDefault
             // 
-            this.btnSetDefault.Location = new System.Drawing.Point(6, 19);
+            this.btnSetDefault.Location = new System.Drawing.Point(6, 24);
             this.btnSetDefault.Name = "btnSetDefault";
             this.btnSetDefault.Size = new System.Drawing.Size(138, 23);
             this.btnSetDefault.TabIndex = 16;
@@ -394,23 +406,13 @@
             // 
             // btnSettings
             // 
-            this.btnSettings.Location = new System.Drawing.Point(6, 48);
+            this.btnSettings.Location = new System.Drawing.Point(6, 53);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(138, 23);
             this.btnSettings.TabIndex = 17;
             this.btnSettings.Text = "Settings";
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(264, 216);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Log";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label8
             // 
@@ -431,21 +433,11 @@
             this.btnDriverUpload.UseVisualStyleBackColor = true;
             this.btnDriverUpload.Click += new System.EventHandler(this.btnDriverUpload_Click);
             // 
-            // btnAutoOrder
-            // 
-            this.btnAutoOrder.Location = new System.Drawing.Point(172, 216);
-            this.btnAutoOrder.Name = "btnAutoOrder";
-            this.btnAutoOrder.Size = new System.Drawing.Size(75, 23);
-            this.btnAutoOrder.TabIndex = 22;
-            this.btnAutoOrder.Text = "Auto Order";
-            this.btnAutoOrder.UseVisualStyleBackColor = true;
-            this.btnAutoOrder.Click += new System.EventHandler(this.btnAutoOrder_Click);
-            // 
             // btnLoadIceCreamToTrucks
             // 
-            this.btnLoadIceCreamToTrucks.Location = new System.Drawing.Point(13, 216);
+            this.btnLoadIceCreamToTrucks.Location = new System.Drawing.Point(47, 24);
             this.btnLoadIceCreamToTrucks.Name = "btnLoadIceCreamToTrucks";
-            this.btnLoadIceCreamToTrucks.Size = new System.Drawing.Size(153, 23);
+            this.btnLoadIceCreamToTrucks.Size = new System.Drawing.Size(143, 23);
             this.btnLoadIceCreamToTrucks.TabIndex = 23;
             this.btnLoadIceCreamToTrucks.Text = "Load Ice Cream to Trucks";
             this.btnLoadIceCreamToTrucks.UseVisualStyleBackColor = true;
@@ -778,22 +770,46 @@
             this.SettingsTab.SelectedIndex = 0;
             this.SettingsTab.Size = new System.Drawing.Size(1145, 576);
             this.SettingsTab.TabIndex = 33;
+            this.SettingsTab.SelectedIndexChanged += new System.EventHandler(this.SettingsTab_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.groupBox15);
+            this.tabPage1.Controls.Add(this.groupBox14);
+            this.tabPage1.Controls.Add(this.groupBox9);
             this.tabPage1.Controls.Add(this.groupBox7);
-            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.groupBox6);
             this.tabPage1.Controls.Add(this.groupBox5);
-            this.tabPage1.Controls.Add(this.btnAutoOrder);
-            this.tabPage1.Controls.Add(this.btnLoadIceCreamToTrucks);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1137, 550);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Files";
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.btnEndDay);
+            this.groupBox14.Controls.Add(this.btnSendOutTrucks);
+            this.groupBox14.Location = new System.Drawing.Point(263, 242);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(192, 96);
+            this.groupBox14.TabIndex = 36;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "Day";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.btnLoadIceCreamToTrucks);
+            this.groupBox9.Controls.Add(this.btnChangeTruckInventory);
+            this.groupBox9.Controls.Add(this.label5);
+            this.groupBox9.Location = new System.Drawing.Point(10, 242);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(248, 96);
+            this.groupBox9.TabIndex = 35;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Load Trucks";
             // 
             // groupBox7
             // 
@@ -805,9 +821,9 @@
             this.groupBox7.Controls.Add(this.btnIceCreamFromTrucks);
             this.groupBox7.Controls.Add(this.btnTruckRouteUpload);
             this.groupBox7.Controls.Add(this.btnCustomerRequests);
-            this.groupBox7.Location = new System.Drawing.Point(6, 19);
+            this.groupBox7.Location = new System.Drawing.Point(8, 91);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(333, 191);
+            this.groupBox7.Size = new System.Drawing.Size(333, 145);
             this.groupBox7.TabIndex = 34;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Daily";
@@ -816,9 +832,9 @@
             // 
             this.groupBox6.Controls.Add(this.btnSetDefault);
             this.groupBox6.Controls.Add(this.btnSettings);
-            this.groupBox6.Location = new System.Drawing.Point(461, 216);
+            this.groupBox6.Location = new System.Drawing.Point(461, 242);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(153, 83);
+            this.groupBox6.Size = new System.Drawing.Size(153, 96);
             this.groupBox6.TabIndex = 27;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Settings";
@@ -833,11 +849,9 @@
             this.groupBox5.Controls.Add(this.btnRouteUpload);
             this.groupBox5.Controls.Add(this.label2);
             this.groupBox5.Controls.Add(this.label3);
-            this.groupBox5.Controls.Add(this.label5);
-            this.groupBox5.Controls.Add(this.btnChangeTruckInventory);
-            this.groupBox5.Location = new System.Drawing.Point(366, 19);
+            this.groupBox5.Location = new System.Drawing.Point(368, 91);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(248, 191);
+            this.groupBox5.Size = new System.Drawing.Size(248, 145);
             this.groupBox5.TabIndex = 26;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "On Demand";
@@ -1001,13 +1015,23 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Truck Inventory";
             // 
+            // btnTruckInventoryShowAll
+            // 
+            this.btnTruckInventoryShowAll.Location = new System.Drawing.Point(16, 397);
+            this.btnTruckInventoryShowAll.Name = "btnTruckInventoryShowAll";
+            this.btnTruckInventoryShowAll.Size = new System.Drawing.Size(75, 23);
+            this.btnTruckInventoryShowAll.TabIndex = 48;
+            this.btnTruckInventoryShowAll.Text = "Show All";
+            this.btnTruckInventoryShowAll.UseVisualStyleBackColor = true;
+            this.btnTruckInventoryShowAll.Click += new System.EventHandler(this.btnTruckInventoryShowAll_Click);
+            // 
             // btnRefreshTruckInventory
             // 
             this.btnRefreshTruckInventory.Location = new System.Drawing.Point(507, 397);
             this.btnRefreshTruckInventory.Name = "btnRefreshTruckInventory";
             this.btnRefreshTruckInventory.Size = new System.Drawing.Size(75, 23);
             this.btnRefreshTruckInventory.TabIndex = 34;
-            this.btnRefreshTruckInventory.Text = "Refresh";
+            this.btnRefreshTruckInventory.Text = "Search";
             this.btnRefreshTruckInventory.UseVisualStyleBackColor = true;
             this.btnRefreshTruckInventory.Click += new System.EventHandler(this.btnRefreshTruckInventory_Click);
             // 
@@ -1150,7 +1174,7 @@
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage6.Controls.Add(this.groupBox13);
+            this.tabPage6.Controls.Add(this.groupTruckRouteDriver);
             this.tabPage6.Controls.Add(this.groupBox12);
             this.tabPage6.Controls.Add(this.groupBox11);
             this.tabPage6.Controls.Add(this.groupBox10);
@@ -1160,21 +1184,21 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Trucks/Routes";
             // 
-            // groupBox13
+            // groupTruckRouteDriver
             // 
-            this.groupBox13.Controls.Add(this.btnAssignTruckRouteDriver);
-            this.groupBox13.Controls.Add(this.nudAssignDrivernum);
-            this.groupBox13.Controls.Add(this.label23);
-            this.groupBox13.Controls.Add(this.nudAssignRoutenum);
-            this.groupBox13.Controls.Add(this.label22);
-            this.groupBox13.Controls.Add(this.nudAssignTrucknum);
-            this.groupBox13.Controls.Add(this.label21);
-            this.groupBox13.Location = new System.Drawing.Point(8, 177);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(320, 120);
-            this.groupBox13.TabIndex = 32;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "Assign Truck/Route/Driver";
+            this.groupTruckRouteDriver.Controls.Add(this.btnAssignTruckRouteDriver);
+            this.groupTruckRouteDriver.Controls.Add(this.nudAssignDrivernum);
+            this.groupTruckRouteDriver.Controls.Add(this.label23);
+            this.groupTruckRouteDriver.Controls.Add(this.nudAssignRoutenum);
+            this.groupTruckRouteDriver.Controls.Add(this.label22);
+            this.groupTruckRouteDriver.Controls.Add(this.nudAssignTrucknum);
+            this.groupTruckRouteDriver.Controls.Add(this.label21);
+            this.groupTruckRouteDriver.Location = new System.Drawing.Point(8, 177);
+            this.groupTruckRouteDriver.Name = "groupTruckRouteDriver";
+            this.groupTruckRouteDriver.Size = new System.Drawing.Size(320, 120);
+            this.groupTruckRouteDriver.TabIndex = 32;
+            this.groupTruckRouteDriver.TabStop = false;
+            this.groupTruckRouteDriver.Text = "Assign Truck/Route/Driver";
             // 
             // btnAssignTruckRouteDriver
             // 
@@ -1308,6 +1332,16 @@
             this.groupBox11.TabIndex = 29;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Search by";
+            // 
+            // btnTRDShowAllRouteCities
+            // 
+            this.btnTRDShowAllRouteCities.Location = new System.Drawing.Point(11, 97);
+            this.btnTRDShowAllRouteCities.Name = "btnTRDShowAllRouteCities";
+            this.btnTRDShowAllRouteCities.Size = new System.Drawing.Size(75, 23);
+            this.btnTRDShowAllRouteCities.TabIndex = 56;
+            this.btnTRDShowAllRouteCities.Text = "Show All";
+            this.btnTRDShowAllRouteCities.UseVisualStyleBackColor = true;
+            this.btnTRDShowAllRouteCities.Click += new System.EventHandler(this.btnTRDShowAllRouteCities_Click);
             // 
             // btnTRDSearch
             // 
@@ -1503,6 +1537,8 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.lblSales);
+            this.tabPage4.Controls.Add(this.lblProfit);
             this.tabPage4.Controls.Add(this.btnSearch);
             this.tabPage4.Controls.Add(this.groupBox2);
             this.tabPage4.Controls.Add(this.groupBox1);
@@ -1727,60 +1763,14 @@
             this.dataGridViewTextBoxColumn9,
             this.dataGridViewTextBoxColumn10,
             this.dataGridViewTextBoxColumn12,
-            this.dataGridViewTextBoxColumn11});
+            this.dataGridViewTextBoxColumn11,
+            this.Column35,
+            this.Column34});
             this.salesGridView1.Location = new System.Drawing.Point(3, 143);
             this.salesGridView1.Name = "salesGridView1";
             this.salesGridView1.ReadOnly = true;
-            this.salesGridView1.Size = new System.Drawing.Size(845, 305);
+            this.salesGridView1.Size = new System.Drawing.Size(1076, 305);
             this.salesGridView1.TabIndex = 34;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Item Number";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Quantity";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Sale Date";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Initial Price";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "Sale Price";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "Truck Number";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "Route Number";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "Driver Number";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
             // 
             // tabPage5
             // 
@@ -1834,25 +1824,136 @@
             this.timerLog.Interval = 1000;
             this.timerLog.Tick += new System.EventHandler(this.timerLog_Tick);
             // 
-            // btnTRDShowAllRouteCities
+            // lblCurrentDay
             // 
-            this.btnTRDShowAllRouteCities.Location = new System.Drawing.Point(11, 97);
-            this.btnTRDShowAllRouteCities.Name = "btnTRDShowAllRouteCities";
-            this.btnTRDShowAllRouteCities.Size = new System.Drawing.Size(75, 23);
-            this.btnTRDShowAllRouteCities.TabIndex = 56;
-            this.btnTRDShowAllRouteCities.Text = "Show All";
-            this.btnTRDShowAllRouteCities.UseVisualStyleBackColor = true;
-            this.btnTRDShowAllRouteCities.Click += new System.EventHandler(this.btnTRDShowAllRouteCities_Click);
+            this.lblCurrentDay.AutoSize = true;
+            this.lblCurrentDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentDay.Location = new System.Drawing.Point(6, 16);
+            this.lblCurrentDay.Name = "lblCurrentDay";
+            this.lblCurrentDay.Size = new System.Drawing.Size(194, 18);
+            this.lblCurrentDay.TabIndex = 35;
+            this.lblCurrentDay.Text = "Current Day: Not Started";
             // 
-            // btnTruckInventoryShowAll
+            // groupBox15
             // 
-            this.btnTruckInventoryShowAll.Location = new System.Drawing.Point(16, 397);
-            this.btnTruckInventoryShowAll.Name = "btnTruckInventoryShowAll";
-            this.btnTruckInventoryShowAll.Size = new System.Drawing.Size(75, 23);
-            this.btnTruckInventoryShowAll.TabIndex = 48;
-            this.btnTruckInventoryShowAll.Text = "Show All";
-            this.btnTruckInventoryShowAll.UseVisualStyleBackColor = true;
-            this.btnTruckInventoryShowAll.Click += new System.EventHandler(this.btnTruckInventoryShowAll_Click);
+            this.groupBox15.Controls.Add(this.lblCurrentStatus);
+            this.groupBox15.Controls.Add(this.lblCurrentDay);
+            this.groupBox15.Location = new System.Drawing.Point(8, 6);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(606, 79);
+            this.groupBox15.TabIndex = 37;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "Status";
+            // 
+            // lblCurrentStatus
+            // 
+            this.lblCurrentStatus.AutoSize = true;
+            this.lblCurrentStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentStatus.Location = new System.Drawing.Point(8, 45);
+            this.lblCurrentStatus.Name = "lblCurrentStatus";
+            this.lblCurrentStatus.Size = new System.Drawing.Size(169, 18);
+            this.lblCurrentStatus.TabIndex = 36;
+            this.lblCurrentStatus.Text = "Status: Awaiting Files";
+            // 
+            // btnSendOutTrucks
+            // 
+            this.btnSendOutTrucks.Location = new System.Drawing.Point(45, 24);
+            this.btnSendOutTrucks.Name = "btnSendOutTrucks";
+            this.btnSendOutTrucks.Size = new System.Drawing.Size(99, 23);
+            this.btnSendOutTrucks.TabIndex = 0;
+            this.btnSendOutTrucks.Text = "Send out Trucks";
+            this.btnSendOutTrucks.UseVisualStyleBackColor = true;
+            this.btnSendOutTrucks.Click += new System.EventHandler(this.btnSendOutTrucks_Click);
+            // 
+            // btnEndDay
+            // 
+            this.btnEndDay.Location = new System.Drawing.Point(45, 53);
+            this.btnEndDay.Name = "btnEndDay";
+            this.btnEndDay.Size = new System.Drawing.Size(99, 23);
+            this.btnEndDay.TabIndex = 38;
+            this.btnEndDay.Text = "End Day";
+            this.btnEndDay.UseVisualStyleBackColor = true;
+            this.btnEndDay.Click += new System.EventHandler(this.btnEndDay_Click);
+            // 
+            // lblProfit
+            // 
+            this.lblProfit.AutoSize = true;
+            this.lblProfit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProfit.Location = new System.Drawing.Point(739, 476);
+            this.lblProfit.Name = "lblProfit";
+            this.lblProfit.Size = new System.Drawing.Size(189, 16);
+            this.lblProfit.TabIndex = 53;
+            this.lblProfit.Text = "Total Profit in Table: $0.00";
+            // 
+            // lblSales
+            // 
+            this.lblSales.AutoSize = true;
+            this.lblSales.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSales.Location = new System.Drawing.Point(739, 451);
+            this.lblSales.Name = "lblSales";
+            this.lblSales.Size = new System.Drawing.Size(193, 16);
+            this.lblSales.TabIndex = 54;
+            this.lblSales.Text = "Total Sales in Table: $0.00";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Item Number";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Quantity";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Sale Date";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Initial Price";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Sale Price";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "Truck Number";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "Route Number";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "Driver Number";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // Column35
+            // 
+            this.Column35.HeaderText = "Sales ($)";
+            this.Column35.Name = "Column35";
+            this.Column35.ReadOnly = true;
+            // 
+            // Column34
+            // 
+            this.Column34.HeaderText = "Profit ($)";
+            this.Column34.Name = "Column34";
+            this.Column34.ReadOnly = true;
             // 
             // Form1
             // 
@@ -1874,6 +1975,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.truckInventoryGridView)).EndInit();
             this.SettingsTab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox14.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -1893,8 +1997,8 @@
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompanyInventory)).EndInit();
             this.tabPage6.ResumeLayout(false);
-            this.groupBox13.ResumeLayout(false);
-            this.groupBox13.PerformLayout();
+            this.groupTruckRouteDriver.ResumeLayout(false);
+            this.groupTruckRouteDriver.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAssignDrivernum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAssignRoutenum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAssignTrucknum)).EndInit();
@@ -1908,6 +2012,7 @@
             this.groupBox10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTRD)).EndInit();
             this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1922,6 +2027,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox15.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1943,10 +2050,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnSetDefault;
         private System.Windows.Forms.Button btnSettings;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnDriverUpload;
-        private System.Windows.Forms.Button btnAutoOrder;
         private System.Windows.Forms.Button btnLoadIceCreamToTrucks;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnCustomerRequests;
@@ -2064,7 +2169,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column31;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column32;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column33;
-        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.GroupBox groupTruckRouteDriver;
         private System.Windows.Forms.Button btnAssignTruckRouteDriver;
         private System.Windows.Forms.NumericUpDown nudAssignDrivernum;
         private System.Windows.Forms.Label label23;
@@ -2084,6 +2189,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
+        private System.Windows.Forms.Button btnTRDShowAllRouteCities;
+        private System.Windows.Forms.Button btnTruckInventoryShowAll;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.GroupBox groupBox15;
+        private System.Windows.Forms.Label lblCurrentStatus;
+        private System.Windows.Forms.Label lblCurrentDay;
+        private System.Windows.Forms.Button btnEndDay;
+        private System.Windows.Forms.Button btnSendOutTrucks;
+        private System.Windows.Forms.Label lblProfit;
+        private System.Windows.Forms.Label lblSales;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
@@ -2092,8 +2208,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.Button btnTRDShowAllRouteCities;
-        private System.Windows.Forms.Button btnTruckInventoryShowAll;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column35;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column34;
     }
 }
 
