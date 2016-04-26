@@ -59,7 +59,7 @@ namespace IceCreamInventoryManagement
             public bool notifAutoOrderGenerated { get; set; }
             public string notifPhoneNumber { get; set; }
             public string notifCarrier { get; set; }
-            public string setDefaultQuantity { get; set; }
+            public int setDefaultQuantity { get; set; }
             
 
             public bool cityUploadFile { get; set; }
@@ -189,7 +189,7 @@ namespace IceCreamInventoryManagement
             public bool notifAutoOrderGenerated { get; set; }
             public string notifPhoneNumber { get; set; }
             public string notifCarrier { get; set; }
-            public string setDefaultQuantity { get; set; }           
+            public int setDefaultQuantity { get; set; }           
         }
 
         public class FileUploadSettings
@@ -245,7 +245,7 @@ namespace IceCreamInventoryManagement
             notifSettings.notifAutoOrderGenerated = stringtobool(SQLMethods.retrieveSetting(keys.notifAutoOrderGenerated));
             notifSettings.notifPhoneNumber = SQLMethods.retrieveSetting(keys.notifPhoneNumber);
             notifSettings.notifCarrier = SQLMethods.retrieveSetting(keys.notifCarrier);
-            notifSettings.setDefaultQuantity = SQLMethods.retrieveSetting(keys.setDefaultQuantity);
+            notifSettings.setDefaultQuantity = Convert.ToInt32(SQLMethods.retrieveSetting(keys.setDefaultQuantity));
            
             return notifSettings;
         }
@@ -258,7 +258,7 @@ namespace IceCreamInventoryManagement
             SQLMethods.insertSetting(keys.notifAutoOrderGenerated, booltoint(settings.notifAutoOrderGenerated).ToString(), true);
             SQLMethods.insertSetting(keys.notifPhoneNumber, settings.notifPhoneNumber, true);
             SQLMethods.insertSetting(keys.notifCarrier, settings.notifCarrier, true);
-            SQLMethods.insertSetting(keys.setDefaultQuantity, settings.setDefaultQuantity, true);
+            SQLMethods.insertSetting(keys.setDefaultQuantity, settings.setDefaultQuantity.ToString(), true);
             
         }
 
