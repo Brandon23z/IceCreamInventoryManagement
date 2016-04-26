@@ -83,7 +83,14 @@ namespace IceCreamInventoryManagement
 
             if (settings.truckRouteDriverUploadFile && settings.warehouseUploadFile && settings.loadTruckDefaults && daySettings.dayStatus <= 1)
             {
-                btnChangeTruckInventory.Enabled = true;
+                if (settings.truckInventoryUploadFile)
+                {
+                    btnChangeTruckInventory.Enabled = false;
+                }
+                else
+                {
+                    btnChangeTruckInventory.Enabled = true;
+                }
                 btnSendOutTrucks.Enabled = true;
             }
             else
@@ -93,7 +100,14 @@ namespace IceCreamInventoryManagement
             }
             if (settings.truckRouteDriverUploadFile && settings.warehouseUploadFile && daySettings.dayStatus <= 1)
             {
-                btnLoadIceCreamToTrucks.Enabled = true;
+                if (settings.loadTruckDefaults)
+                {
+                    btnLoadIceCreamToTrucks.Enabled = false;
+                }
+                else
+                {
+                    btnLoadIceCreamToTrucks.Enabled = true;
+                }
             }
             else
             {
@@ -127,6 +141,7 @@ namespace IceCreamInventoryManagement
             {
                 btnEndDay.Enabled = false;
             }
+
         }
 
         private void btnCityUpload_Click(object sender, EventArgs e)
@@ -794,6 +809,9 @@ namespace IceCreamInventoryManagement
             SQLMethods.insertSetting(Settings.keys.truckRouteDriverUploadFile, "0", true);
             SQLMethods.insertSetting(Settings.keys.salesUploadFile, "0", true);
             SQLMethods.insertSetting(Settings.keys.loadTruckDefaults, "0", true);
+            SQLMethods.insertSetting(Settings.keys.truckInventoryUploadFile, "0", true);
+            
+                
             SQLMethods.insertSetting(Settings.keys.dayStatus, "0", true);
             refreshButtonStates();
         }

@@ -89,7 +89,12 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SettingsTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.lblCurrentStatus = new System.Windows.Forms.Label();
+            this.lblCurrentDay = new System.Windows.Forms.Label();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.btnEndDay = new System.Windows.Forms.Button();
+            this.btnSendOutTrucks = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -165,6 +170,8 @@
             this.Column32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lblSales = new System.Windows.Forms.Label();
+            this.lblProfit = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rbSalesDate1andDate2 = new System.Windows.Forms.RadioButton();
@@ -188,13 +195,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.rtbLog = new System.Windows.Forms.RichTextBox();
             this.timerLog = new System.Windows.Forms.Timer(this.components);
-            this.lblCurrentDay = new System.Windows.Forms.Label();
-            this.groupBox15 = new System.Windows.Forms.GroupBox();
-            this.lblCurrentStatus = new System.Windows.Forms.Label();
-            this.btnSendOutTrucks = new System.Windows.Forms.Button();
-            this.btnEndDay = new System.Windows.Forms.Button();
-            this.lblProfit = new System.Windows.Forms.Label();
-            this.lblSales = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -214,6 +214,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.truckInventoryGridView)).BeginInit();
             this.SettingsTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox15.SuspendLayout();
             this.groupBox14.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -256,7 +257,6 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.groupBox15.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -788,6 +788,37 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Files";
             // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.lblCurrentStatus);
+            this.groupBox15.Controls.Add(this.lblCurrentDay);
+            this.groupBox15.Location = new System.Drawing.Point(8, 6);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(606, 79);
+            this.groupBox15.TabIndex = 37;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "Status";
+            // 
+            // lblCurrentStatus
+            // 
+            this.lblCurrentStatus.AutoSize = true;
+            this.lblCurrentStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentStatus.Location = new System.Drawing.Point(8, 45);
+            this.lblCurrentStatus.Name = "lblCurrentStatus";
+            this.lblCurrentStatus.Size = new System.Drawing.Size(169, 18);
+            this.lblCurrentStatus.TabIndex = 36;
+            this.lblCurrentStatus.Text = "Status: Awaiting Files";
+            // 
+            // lblCurrentDay
+            // 
+            this.lblCurrentDay.AutoSize = true;
+            this.lblCurrentDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentDay.Location = new System.Drawing.Point(6, 16);
+            this.lblCurrentDay.Name = "lblCurrentDay";
+            this.lblCurrentDay.Size = new System.Drawing.Size(194, 18);
+            this.lblCurrentDay.TabIndex = 35;
+            this.lblCurrentDay.Text = "Current Day: Not Started";
+            // 
             // groupBox14
             // 
             this.groupBox14.Controls.Add(this.btnEndDay);
@@ -798,6 +829,26 @@
             this.groupBox14.TabIndex = 36;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Day";
+            // 
+            // btnEndDay
+            // 
+            this.btnEndDay.Location = new System.Drawing.Point(45, 53);
+            this.btnEndDay.Name = "btnEndDay";
+            this.btnEndDay.Size = new System.Drawing.Size(99, 23);
+            this.btnEndDay.TabIndex = 38;
+            this.btnEndDay.Text = "End Day";
+            this.btnEndDay.UseVisualStyleBackColor = true;
+            this.btnEndDay.Click += new System.EventHandler(this.btnEndDay_Click);
+            // 
+            // btnSendOutTrucks
+            // 
+            this.btnSendOutTrucks.Location = new System.Drawing.Point(45, 24);
+            this.btnSendOutTrucks.Name = "btnSendOutTrucks";
+            this.btnSendOutTrucks.Size = new System.Drawing.Size(99, 23);
+            this.btnSendOutTrucks.TabIndex = 0;
+            this.btnSendOutTrucks.Text = "Send out Trucks";
+            this.btnSendOutTrucks.UseVisualStyleBackColor = true;
+            this.btnSendOutTrucks.Click += new System.EventHandler(this.btnSendOutTrucks_Click);
             // 
             // groupBox9
             // 
@@ -1551,6 +1602,26 @@
             this.tabPage4.Text = "Sales";
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
+            // lblSales
+            // 
+            this.lblSales.AutoSize = true;
+            this.lblSales.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSales.Location = new System.Drawing.Point(739, 451);
+            this.lblSales.Name = "lblSales";
+            this.lblSales.Size = new System.Drawing.Size(215, 16);
+            this.lblSales.TabIndex = 54;
+            this.lblSales.Text = "Total Revenue in Table: $0.00";
+            // 
+            // lblProfit
+            // 
+            this.lblProfit.AutoSize = true;
+            this.lblProfit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProfit.Location = new System.Drawing.Point(739, 476);
+            this.lblProfit.Name = "lblProfit";
+            this.lblProfit.Size = new System.Drawing.Size(189, 16);
+            this.lblProfit.TabIndex = 53;
+            this.lblProfit.Text = "Total Profit in Table: $0.00";
+            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(572, 114);
@@ -1824,77 +1895,6 @@
             this.timerLog.Interval = 1000;
             this.timerLog.Tick += new System.EventHandler(this.timerLog_Tick);
             // 
-            // lblCurrentDay
-            // 
-            this.lblCurrentDay.AutoSize = true;
-            this.lblCurrentDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentDay.Location = new System.Drawing.Point(6, 16);
-            this.lblCurrentDay.Name = "lblCurrentDay";
-            this.lblCurrentDay.Size = new System.Drawing.Size(194, 18);
-            this.lblCurrentDay.TabIndex = 35;
-            this.lblCurrentDay.Text = "Current Day: Not Started";
-            // 
-            // groupBox15
-            // 
-            this.groupBox15.Controls.Add(this.lblCurrentStatus);
-            this.groupBox15.Controls.Add(this.lblCurrentDay);
-            this.groupBox15.Location = new System.Drawing.Point(8, 6);
-            this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(606, 79);
-            this.groupBox15.TabIndex = 37;
-            this.groupBox15.TabStop = false;
-            this.groupBox15.Text = "Status";
-            // 
-            // lblCurrentStatus
-            // 
-            this.lblCurrentStatus.AutoSize = true;
-            this.lblCurrentStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentStatus.Location = new System.Drawing.Point(8, 45);
-            this.lblCurrentStatus.Name = "lblCurrentStatus";
-            this.lblCurrentStatus.Size = new System.Drawing.Size(169, 18);
-            this.lblCurrentStatus.TabIndex = 36;
-            this.lblCurrentStatus.Text = "Status: Awaiting Files";
-            // 
-            // btnSendOutTrucks
-            // 
-            this.btnSendOutTrucks.Location = new System.Drawing.Point(45, 24);
-            this.btnSendOutTrucks.Name = "btnSendOutTrucks";
-            this.btnSendOutTrucks.Size = new System.Drawing.Size(99, 23);
-            this.btnSendOutTrucks.TabIndex = 0;
-            this.btnSendOutTrucks.Text = "Send out Trucks";
-            this.btnSendOutTrucks.UseVisualStyleBackColor = true;
-            this.btnSendOutTrucks.Click += new System.EventHandler(this.btnSendOutTrucks_Click);
-            // 
-            // btnEndDay
-            // 
-            this.btnEndDay.Location = new System.Drawing.Point(45, 53);
-            this.btnEndDay.Name = "btnEndDay";
-            this.btnEndDay.Size = new System.Drawing.Size(99, 23);
-            this.btnEndDay.TabIndex = 38;
-            this.btnEndDay.Text = "End Day";
-            this.btnEndDay.UseVisualStyleBackColor = true;
-            this.btnEndDay.Click += new System.EventHandler(this.btnEndDay_Click);
-            // 
-            // lblProfit
-            // 
-            this.lblProfit.AutoSize = true;
-            this.lblProfit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfit.Location = new System.Drawing.Point(739, 476);
-            this.lblProfit.Name = "lblProfit";
-            this.lblProfit.Size = new System.Drawing.Size(189, 16);
-            this.lblProfit.TabIndex = 53;
-            this.lblProfit.Text = "Total Profit in Table: $0.00";
-            // 
-            // lblSales
-            // 
-            this.lblSales.AutoSize = true;
-            this.lblSales.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSales.Location = new System.Drawing.Point(739, 451);
-            this.lblSales.Name = "lblSales";
-            this.lblSales.Size = new System.Drawing.Size(193, 16);
-            this.lblSales.TabIndex = 54;
-            this.lblSales.Text = "Total Sales in Table: $0.00";
-            // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.HeaderText = "Item Number";
@@ -1945,7 +1945,7 @@
             // 
             // Column35
             // 
-            this.Column35.HeaderText = "Sales ($)";
+            this.Column35.HeaderText = "Revenue ($)";
             this.Column35.Name = "Column35";
             this.Column35.ReadOnly = true;
             // 
@@ -1975,6 +1975,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.truckInventoryGridView)).EndInit();
             this.SettingsTab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox15.PerformLayout();
             this.groupBox14.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
@@ -2027,8 +2029,6 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.groupBox15.ResumeLayout(false);
-            this.groupBox15.PerformLayout();
             this.ResumeLayout(false);
 
         }
