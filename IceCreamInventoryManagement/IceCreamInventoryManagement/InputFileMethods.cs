@@ -647,6 +647,12 @@ namespace IceCreamInventoryManagement
             }
         }
 
+        public static void moveDefaultToTruck(int itemID, int quantity, int trucknumber)
+        {
+            int change = quantity * (-1);
+            int myTest = moveItem(itemID, trucknumber, change);
+        }
+
         public static void processTruckInventoryUploadFileBody(string[] contents)
         {
             //add default inventory to each truck
@@ -656,13 +662,16 @@ namespace IceCreamInventoryManagement
 
             for (int i = 0; i < myTrucks.Count(); i++)
             {
-                for (int k = 0; k < 5; k++)
-                {
+                Settings.DefaultItemsSettings mySettings = Settings.getDefaultItemsSettings();
+                moveDefaultToTruck(mySettings.defaultItem1ID, mySettings.defaultItem1Quantity, myTrucks[i].trucknumber);
 
-                    InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
-                    int change = DefaultOrder.defaults[k].amount * (-1);
-                    int myTest = moveItem(temp.itemnumber, myTrucks[i].trucknumber, change);
-                }
+                moveDefaultToTruck(mySettings.defaultItem2ID, mySettings.defaultItem2Quantity, myTrucks[i].trucknumber);
+
+                moveDefaultToTruck(mySettings.defaultItem3ID, mySettings.defaultItem3Quantity, myTrucks[i].trucknumber);
+
+                moveDefaultToTruck(mySettings.defaultItem4ID, mySettings.defaultItem4Quantity, myTrucks[i].trucknumber);
+
+                moveDefaultToTruck(mySettings.defaultItem5ID, mySettings.defaultItem5Quantity, myTrucks[i].trucknumber);
             }
             addToLog("Truck Inventory Upload File: Loading default items to trucks");
 

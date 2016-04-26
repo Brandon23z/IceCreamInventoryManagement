@@ -12,22 +12,22 @@ namespace IceCreamInventoryManagement
     class ourClasses
     {
 
-        public class DefaultOrder
-        {
-            public static DefaultItem[] defaults = new DefaultItem[5];
-        }
+        //public class DefaultOrder
+        //{
+        //    public static DefaultItem[] defaults = new DefaultItem[5];
+        //}
 
-        public class DefaultItem
-        {
-            public int productID { get; set; }
-            public int amount { get; set; }
+        //public class DefaultItem
+        //{
+        //    public int productID { get; set; }
+        //    public int amount { get; set; }
 
-            public DefaultItem(int productID_, int amount_)
-            {
-                productID = productID_;
-                amount = amount_;
-            }
-        }
+        //    public DefaultItem(int productID_, int amount_)
+        //    {
+        //        productID = productID_;
+        //        amount = amount_;
+        //    }
+        //}
 
 
         public class TextSetting

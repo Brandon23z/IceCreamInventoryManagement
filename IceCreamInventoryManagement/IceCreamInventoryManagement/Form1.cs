@@ -349,6 +349,8 @@ namespace IceCreamInventoryManagement
 
         }
 
+
+
         private void btnLoadIceCreamToTrucks_Click(object sender, EventArgs e)
         {
             //If loadTruck.txt("change the default" file) has NOT been uploaded
@@ -363,12 +365,16 @@ namespace IceCreamInventoryManagement
 
                 for (int i = 0; i < myTrucks.Count(); i++)
                 {
-                    for (int k = 0; k < 5; k++)
-                    {
-                        InventoryItem temp = getInventoryItem(DefaultOrder.defaults[k].productID);
-                        int change = DefaultOrder.defaults[k].amount * (-1);
-                        int myTest = moveItem(temp.itemnumber, myTrucks[i].trucknumber, change);
-                    }
+                    Settings.DefaultItemsSettings mySettings = Settings.getDefaultItemsSettings();
+                    moveDefaultToTruck(mySettings.defaultItem1ID, mySettings.defaultItem1Quantity, myTrucks[i].trucknumber);
+
+                    moveDefaultToTruck(mySettings.defaultItem2ID, mySettings.defaultItem2Quantity, myTrucks[i].trucknumber);
+
+                    moveDefaultToTruck(mySettings.defaultItem3ID, mySettings.defaultItem3Quantity, myTrucks[i].trucknumber);
+
+                    moveDefaultToTruck(mySettings.defaultItem4ID, mySettings.defaultItem4Quantity, myTrucks[i].trucknumber);
+
+                    moveDefaultToTruck(mySettings.defaultItem5ID, mySettings.defaultItem5Quantity, myTrucks[i].trucknumber);
                 }
                 addToLog("Loading default items to trucks");
             }
