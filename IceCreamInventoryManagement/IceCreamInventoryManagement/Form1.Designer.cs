@@ -51,43 +51,6 @@
             this.btnLoadIceCreamToTrucks = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.btnCustomerRequests = new System.Windows.Forms.Button();
-            this.zoneGridView = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.routeGridView = new System.Windows.Forms.DataGridView();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.truckGridView = new System.Windows.Forms.DataGridView();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.driverGridView = new System.Windows.Forms.DataGridView();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salesGridView = new System.Windows.Forms.DataGridView();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.inventoryGridView = new System.Windows.Forms.DataGridView();
-            this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.truckInventoryGridView = new System.Windows.Forms.DataGridView();
-            this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SettingsTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
@@ -202,7 +165,6 @@
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.rtbLog = new System.Windows.Forms.RichTextBox();
             this.timerLog = new System.Windows.Forms.Timer(this.components);
@@ -210,13 +172,6 @@
             this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvTrucks = new System.Windows.Forms.DataGridView();
             this.Column37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.zoneGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.routeGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.truckGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.driverGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.salesGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.truckInventoryGridView)).BeginInit();
             this.SettingsTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox15.SuspendLayout();
@@ -257,7 +212,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSalesTruck)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSalesRoute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.salesGridView1)).BeginInit();
-            this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -469,300 +423,6 @@
             this.btnCustomerRequests.UseVisualStyleBackColor = true;
             this.btnCustomerRequests.Click += new System.EventHandler(this.btnCustomerRequests_Click);
             // 
-            // zoneGridView
-            // 
-            this.zoneGridView.AllowUserToAddRows = false;
-            this.zoneGridView.AllowUserToDeleteRows = false;
-            this.zoneGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.zoneGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3});
-            this.zoneGridView.Location = new System.Drawing.Point(3, 159);
-            this.zoneGridView.Name = "zoneGridView";
-            this.zoneGridView.ReadOnly = true;
-            this.zoneGridView.Size = new System.Drawing.Size(496, 150);
-            this.zoneGridView.TabIndex = 26;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "City Label";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "City Name";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "State";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // routeGridView
-            // 
-            this.routeGridView.AllowUserToAddRows = false;
-            this.routeGridView.AllowUserToDeleteRows = false;
-            this.routeGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.routeGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column4,
-            this.Column5,
-            this.Column6,
-            this.Column7,
-            this.Column8,
-            this.Column9});
-            this.routeGridView.Location = new System.Drawing.Point(550, 0);
-            this.routeGridView.Name = "routeGridView";
-            this.routeGridView.ReadOnly = true;
-            this.routeGridView.Size = new System.Drawing.Size(672, 165);
-            this.routeGridView.TabIndex = 27;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Route Number";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "City Label 1";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "City Label 2";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "City Label 3";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "City Label 4";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "City Label 5";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            // 
-            // truckGridView
-            // 
-            this.truckGridView.AllowUserToAddRows = false;
-            this.truckGridView.AllowUserToDeleteRows = false;
-            this.truckGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.truckGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column10,
-            this.Column11});
-            this.truckGridView.Location = new System.Drawing.Point(277, 3);
-            this.truckGridView.Name = "truckGridView";
-            this.truckGridView.ReadOnly = true;
-            this.truckGridView.Size = new System.Drawing.Size(267, 150);
-            this.truckGridView.TabIndex = 28;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "Truck Number";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "Route Number";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            // 
-            // driverGridView
-            // 
-            this.driverGridView.AllowUserToAddRows = false;
-            this.driverGridView.AllowUserToDeleteRows = false;
-            this.driverGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.driverGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column12,
-            this.Column13});
-            this.driverGridView.Location = new System.Drawing.Point(3, 3);
-            this.driverGridView.Name = "driverGridView";
-            this.driverGridView.ReadOnly = true;
-            this.driverGridView.Size = new System.Drawing.Size(268, 150);
-            this.driverGridView.TabIndex = 29;
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "Driver Number";
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "Truck number";
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            // 
-            // salesGridView
-            // 
-            this.salesGridView.AllowUserToAddRows = false;
-            this.salesGridView.AllowUserToDeleteRows = false;
-            this.salesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.salesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column14,
-            this.Column17,
-            this.Column26,
-            this.Column15,
-            this.Column16,
-            this.Column18,
-            this.Column19,
-            this.Column20});
-            this.salesGridView.Location = new System.Drawing.Point(3, 471);
-            this.salesGridView.Name = "salesGridView";
-            this.salesGridView.ReadOnly = true;
-            this.salesGridView.Size = new System.Drawing.Size(1039, 305);
-            this.salesGridView.TabIndex = 30;
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "Item Number";
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            // 
-            // Column17
-            // 
-            this.Column17.HeaderText = "Quantity";
-            this.Column17.Name = "Column17";
-            this.Column17.ReadOnly = true;
-            // 
-            // Column26
-            // 
-            this.Column26.HeaderText = "Sale Date";
-            this.Column26.Name = "Column26";
-            this.Column26.ReadOnly = true;
-            // 
-            // Column15
-            // 
-            this.Column15.HeaderText = "Initial Price";
-            this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
-            // 
-            // Column16
-            // 
-            this.Column16.HeaderText = "Sale Price";
-            this.Column16.Name = "Column16";
-            this.Column16.ReadOnly = true;
-            // 
-            // Column18
-            // 
-            this.Column18.HeaderText = "Truck Number";
-            this.Column18.Name = "Column18";
-            this.Column18.ReadOnly = true;
-            // 
-            // Column19
-            // 
-            this.Column19.HeaderText = "Driver Number";
-            this.Column19.Name = "Column19";
-            this.Column19.ReadOnly = true;
-            // 
-            // Column20
-            // 
-            this.Column20.HeaderText = "Route Number";
-            this.Column20.Name = "Column20";
-            this.Column20.ReadOnly = true;
-            // 
-            // inventoryGridView
-            // 
-            this.inventoryGridView.AllowUserToAddRows = false;
-            this.inventoryGridView.AllowUserToDeleteRows = false;
-            this.inventoryGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.inventoryGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column21,
-            this.Column22,
-            this.Column23,
-            this.Column24});
-            this.inventoryGridView.Location = new System.Drawing.Point(3, 315);
-            this.inventoryGridView.Name = "inventoryGridView";
-            this.inventoryGridView.ReadOnly = true;
-            this.inventoryGridView.Size = new System.Drawing.Size(496, 150);
-            this.inventoryGridView.TabIndex = 31;
-            // 
-            // Column21
-            // 
-            this.Column21.HeaderText = "Item Number";
-            this.Column21.Name = "Column21";
-            this.Column21.ReadOnly = true;
-            // 
-            // Column22
-            // 
-            this.Column22.HeaderText = "Quantity";
-            this.Column22.Name = "Column22";
-            this.Column22.ReadOnly = true;
-            // 
-            // Column23
-            // 
-            this.Column23.HeaderText = "Initial Price";
-            this.Column23.Name = "Column23";
-            this.Column23.ReadOnly = true;
-            // 
-            // Column24
-            // 
-            this.Column24.HeaderText = "Sale Price";
-            this.Column24.Name = "Column24";
-            this.Column24.ReadOnly = true;
-            // 
-            // truckInventoryGridView
-            // 
-            this.truckInventoryGridView.AllowUserToAddRows = false;
-            this.truckInventoryGridView.AllowUserToDeleteRows = false;
-            this.truckInventoryGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.truckInventoryGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column25,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.truckInventoryGridView.Location = new System.Drawing.Point(550, 171);
-            this.truckInventoryGridView.Name = "truckInventoryGridView";
-            this.truckInventoryGridView.ReadOnly = true;
-            this.truckInventoryGridView.Size = new System.Drawing.Size(645, 150);
-            this.truckInventoryGridView.TabIndex = 32;
-            // 
-            // Column25
-            // 
-            this.Column25.HeaderText = "Truck Number";
-            this.Column25.Name = "Column25";
-            this.Column25.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Item Number";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Quantity";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Initial Price";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Sale Price";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
             // SettingsTab
             // 
             this.SettingsTab.AccessibleName = "";
@@ -770,7 +430,6 @@
             this.SettingsTab.Controls.Add(this.tabPage7);
             this.SettingsTab.Controls.Add(this.tabPage6);
             this.SettingsTab.Controls.Add(this.tabPage4);
-            this.SettingsTab.Controls.Add(this.tabPage5);
             this.SettingsTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SettingsTab.Location = new System.Drawing.Point(0, 0);
             this.SettingsTab.Name = "SettingsTab";
@@ -1912,22 +1571,6 @@
             this.Column34.Name = "Column34";
             this.Column34.ReadOnly = true;
             // 
-            // tabPage5
-            // 
-            this.tabPage5.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage5.Controls.Add(this.routeGridView);
-            this.tabPage5.Controls.Add(this.truckInventoryGridView);
-            this.tabPage5.Controls.Add(this.truckGridView);
-            this.tabPage5.Controls.Add(this.driverGridView);
-            this.tabPage5.Controls.Add(this.salesGridView);
-            this.tabPage5.Controls.Add(this.inventoryGridView);
-            this.tabPage5.Controls.Add(this.zoneGridView);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1137, 550);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "tabPage5";
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2014,13 +1657,6 @@
             this.Text = "Ice Cream System - Winter Water Interactive";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.zoneGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.routeGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.truckGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.driverGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.salesGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.truckInventoryGridView)).EndInit();
             this.SettingsTab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox15.ResumeLayout(false);
@@ -2072,7 +1708,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSalesTruck)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSalesRoute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.salesGridView1)).EndInit();
-            this.tabPage5.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -2105,43 +1740,6 @@
         private System.Windows.Forms.Button btnLoadIceCreamToTrucks;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnCustomerRequests;
-        private System.Windows.Forms.DataGridView zoneGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridView routeGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridView truckGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridView driverGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridView salesGridView;
-        private System.Windows.Forms.DataGridView inventoryGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column23;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column24;
-        private System.Windows.Forms.DataGridView truckInventoryGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column25;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column26;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
         private System.Windows.Forms.TabControl SettingsTab;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage4;
@@ -2150,7 +1748,6 @@
         private System.Windows.Forms.NumericUpDown nudSalesDriver;
         private System.Windows.Forms.NumericUpDown nudSalesRoute;
         private System.Windows.Forms.NumericUpDown nudSalesTruck;
-        private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtEndDate;
         private System.Windows.Forms.Label label11;

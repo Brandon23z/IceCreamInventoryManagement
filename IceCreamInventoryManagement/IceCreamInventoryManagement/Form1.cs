@@ -30,8 +30,8 @@ namespace IceCreamInventoryManagement
         private void Form1_Load(object sender, EventArgs e)
         {
             initializeDatabase();
-            clearDatabase();
-            Settings.saveDefaults(true);
+            //clearDatabase();
+            Settings.saveDefaults(false);
             refreshButtonStates();
         }
 
@@ -168,21 +168,7 @@ namespace IceCreamInventoryManagement
             SQLMethods.insertSetting(Settings.keys.routeUploadFile, "0", true);
             SQLMethods.insertSetting(Settings.keys.truckRouteDriverUploadFile, "0", true);
 
-            //refresh datagridview
-            refreshZonesView();
-            refreshRoutesView();
             refreshButtonStates();
-        }
-
-        private void refreshZonesView()
-        {
-            List<Zone> myZones = new List<Zone>();
-            myZones = getAllZones();
-            zoneGridView.Rows.Clear();
-            for (int i = 0; i < myZones.Count(); i++)
-            {
-                zoneGridView.Rows.Add(myZones[i].citylabel, myZones[i].cityname, myZones[i].state);
-            }
         }
 
         private void btnRouteUpload_Click(object sender, EventArgs e)
@@ -204,20 +190,7 @@ namespace IceCreamInventoryManagement
 
             SQLMethods.insertSetting(Settings.keys.routeUploadFile, "1", true);
             SQLMethods.insertSetting(Settings.keys.truckRouteDriverUploadFile, "0", true);
-            //refresh datagridview
-            refreshRoutesView();
             refreshButtonStates();
-        }
-
-        private void refreshRoutesView()
-        {
-            List<Route> myRoutes = new List<Route>();
-            myRoutes = getAllRoutes();
-            routeGridView.Rows.Clear();
-            for (int i = 0; i < myRoutes.Count(); i++)
-            {
-                routeGridView.Rows.Add(myRoutes[i].routenumber, myRoutes[i].cityLabels[0], myRoutes[i].cityLabels[1], myRoutes[i].cityLabels[2], myRoutes[i].cityLabels[3], myRoutes[i].cityLabels[4]);
-            }
         }
 
         private void btnIceCreamFromTrucks_Click(object sender, EventArgs e)
@@ -236,9 +209,6 @@ namespace IceCreamInventoryManagement
             processSalesFileBody(salesFile);
 
             addToLog(fileName + " Processed Successfully");
-
-            //refresh datagridview
-            refreshRoutesView();
 
             SQLMethods.insertSetting(Settings.keys.salesUploadFile, "1", true);
 
@@ -286,38 +256,7 @@ namespace IceCreamInventoryManagement
 
             addToLog(fileName + " Processed Successfully");
 
-            //refresh datagridview
-            refreshTruckInvView();
-            refreshInventoryView();
-
             refreshButtonStates();
-        }
-
-        private void refreshTruckInvView()
-        {
-            truckInventoryGridView.Rows.Clear();
-            List<Truck> myTrucks = new List<Truck>();
-            myTrucks = getAllTrucks();
-            Dictionary<int, TruckInventoryItem> myInventory = new Dictionary<int, TruckInventoryItem>();
-            for (int k = 0; k < myTrucks.Count(); k++)
-            {
-                myInventory = getTruckInventory(myTrucks[k].trucknumber);
-                foreach (KeyValuePair<int, TruckInventoryItem> item in myInventory)
-                {
-                    truckInventoryGridView.Rows.Add(myTrucks[k].trucknumber, item.Value.itemnumber, item.Value.quantity, item.Value.initialprice, item.Value.saleprice);
-                }
-            }
-        }
-
-        private void refreshInventoryView()
-        {
-            inventoryGridView.Rows.Clear();
-            List<InventoryItem> myInventory1 = new List<InventoryItem>();
-            myInventory1 = getInventory();
-            for (int i = 0; i < myInventory1.Count(); i++)
-            {
-                inventoryGridView.Rows.Add(myInventory1[i].itemnumber, myInventory1[i].quantity, myInventory1[i].initialprice, myInventory1[i].saleprice);
-            }
         }
 
         private void btnTruckRouteUpload_Click(object sender, EventArgs e)
@@ -340,31 +279,7 @@ namespace IceCreamInventoryManagement
             addToLog(fileName + " Processed Successfully");
 
             //refresh datagridview
-            refreshTrucksView();
-            refreshDriversView();
             refreshButtonStates();
-        }
-
-        private void refreshTrucksView()
-        {
-            List<Truck> myTrucks = new List<Truck>();
-            myTrucks = getAllTrucks();
-            truckGridView.Rows.Clear();
-            for (int i = 0; i < myTrucks.Count(); i++)
-            {
-                truckGridView.Rows.Add(myTrucks[i].trucknumber, myTrucks[i].routenumber);
-            }
-        }
-
-        private void refreshDriversView()
-        {
-            List<Driver> myDrivers = new List<Driver>();
-            myDrivers = getAllDrivers();
-            driverGridView.Rows.Clear();
-            for (int i = 0; i < myDrivers.Count(); i++)
-            {
-                driverGridView.Rows.Add(myDrivers[i].drivernumber, myDrivers[i].trucknumber);
-            }
         }
 
         private void btnInventoryUpdate_Click(object sender, EventArgs e)
@@ -388,8 +303,6 @@ namespace IceCreamInventoryManagement
 
             addToLog(fileName + " Processed Successfully");
 
-            //refresh datagridview
-            refreshInventoryView();
             refreshButtonStates();
         }
 
@@ -413,8 +326,6 @@ namespace IceCreamInventoryManagement
 
             addToLog(fileName + " Processed Successfully");
 
-            //refresh datagridview
-            refreshTrucksView();
             refreshButtonStates();
         }
 
@@ -438,8 +349,6 @@ namespace IceCreamInventoryManagement
 
             addToLog(fileName + " Processed Successfully");
 
-            //refresh datagridview
-            refreshDriversView();
             refreshButtonStates();
         }
 
@@ -460,8 +369,6 @@ namespace IceCreamInventoryManagement
 
             addToLog(fileName + " Processed Successfully");
 
-            //refresh datagridview
-            refreshInventoryView();
 
             //send text
             if (TextSetting.itemAddedToAutoOrder == true)
@@ -495,8 +402,6 @@ namespace IceCreamInventoryManagement
                 moveDefaultToTruck(mySettings.defaultItem5ID, mySettings.defaultItem5Quantity, myTrucks[i].trucknumber);
             }
             addToLog("Loading default items to trucks");
-
-            refreshInventoryView();
             
             SQLMethods.insertSetting(Settings.keys.loadTruckDefaults, "1", true);
 
@@ -838,6 +743,7 @@ namespace IceCreamInventoryManagement
         private void btnEndDay_Click(object sender, EventArgs e)
         {
             SQLMethods.clearRTDAssignment();
+            SQLMethods.clearAllTruckInventory();
             SQLMethods.insertSetting(Settings.keys.warehouseUploadFile, "0", true);
             SQLMethods.insertSetting(Settings.keys.truckRouteDriverUploadFile, "0", true);
             SQLMethods.insertSetting(Settings.keys.salesUploadFile, "0", true);

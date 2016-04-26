@@ -804,6 +804,7 @@ namespace IceCreamInventoryManagement
             int trucknumber = 0;
             bool inTruck = false;
             int itemsChecked = 0;
+            int itemsThatWereValid = 0;
             bool truckValid = true;
             for (int i = 1; i < contents.Length - 1; i++)
             {
@@ -828,7 +829,7 @@ namespace IceCreamInventoryManagement
                             Console.WriteLine("Truck " + trucknumber + " has " + finalquantity + " of item " +
                                               itemnumber +
                                               " and only left with " + truckInv[itemnumber].quantity);
-                            addToLog("Truck " + trucknumber + " has " + finalquantity + " of item " +
+                            addToLog("Error: Truck " + trucknumber + " has " + finalquantity + " of item " +
                                               itemnumber +
                                               " and only left with " + truckInv[itemnumber].quantity);
 
@@ -841,13 +842,14 @@ namespace IceCreamInventoryManagement
                             Console.WriteLine("Truck " + trucknumber + " sold " +
                                               (quantitySold));
                             bool test = addSale(itemnumber, trucknumber, temp.routenumber, temp.drivernumber, quantitySold, daySettings.currentDate, truckInv[itemnumber].initialprice, truckInv[itemnumber].saleprice);
+                            itemsThatWereValid++;
                         }
                         Console.WriteLine("Truck " + trucknumber + " has " + finalquantity + "/" +
                                           truckInv[itemnumber].quantity + " of item " + itemnumber);
                     }
                     else
                     {
-                        Console.WriteLine("Truck " + trucknumber + " has " + finalquantity + " of item " + itemnumber +
+                        Console.WriteLine("Error: Truck " + trucknumber + " has " + finalquantity + " of item " + itemnumber +
                                           " and it did not leave with that item");
                     }
                     
@@ -862,8 +864,21 @@ namespace IceCreamInventoryManagement
                         Console.WriteLine("Number of items in trailer does not match the number of items in the truck");
                     }
 
+                    try {
+                        bool truckE = doesTruckExist(trucknumber);
+                        if (truckE)
+                        {
+                            Dictionary<int, TruckInventoryItem> truckInv = getTruckInventory(trucknumber);
+                            if (truckInv != null && truckInv.Count != itemsThatWereValid)
+                            {
+                                Console.WriteLine("Truck " + trucknumber + "did not come back with all items that it left with!");
+                            }
+                        }
+                    }
+                    catch { }
                     inTruck = false;
                     itemsChecked = 0;
+                    itemsThatWereValid = 0;
                     Console.WriteLine("Done unloading truck " + trucknumber);
                 }
                 else if(truckValid)
