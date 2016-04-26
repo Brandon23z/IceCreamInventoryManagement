@@ -659,10 +659,10 @@ namespace IceCreamInventoryManagement
             List<Truck> myTrucks = new List<Truck>();
 
             myTrucks = getAllTrucks();
-
+            Settings.DefaultItemsSettings mySettings = Settings.getDefaultItemsSettings();
             for (int i = 0; i < myTrucks.Count(); i++)
             {
-                Settings.DefaultItemsSettings mySettings = Settings.getDefaultItemsSettings();
+                
                 moveDefaultToTruck(mySettings.defaultItem1ID, mySettings.defaultItem1Quantity, myTrucks[i].trucknumber);
 
                 moveDefaultToTruck(mySettings.defaultItem2ID, mySettings.defaultItem2Quantity, myTrucks[i].trucknumber);

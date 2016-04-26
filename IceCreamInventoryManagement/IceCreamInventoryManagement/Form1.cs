@@ -30,8 +30,8 @@ namespace IceCreamInventoryManagement
         private void Form1_Load(object sender, EventArgs e)
         {
             initializeDatabase();
-            //clearDatabase();
-            Settings.saveDefaults(false);
+            clearDatabase();
+            Settings.saveDefaults(true);
         }
 
         private void btnCityUpload_Click(object sender, EventArgs e)
