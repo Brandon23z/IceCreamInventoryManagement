@@ -1,0 +1,257 @@
+[4/26/16 - 9:27] Auto Order has been generated.
+[4/26/16 - 9:28] City Upload File: Read
+[4/26/16 - 9:28] City Upload File Processed Successfully
+[4/26/16 - 9:28] Route Upload File: Read
+[4/26/16 - 9:28] Route Upload File Processed Successfully
+[4/26/16 - 9:28] Truck Upload File: Read
+[4/26/16 - 9:28] Truck Upload File Processed Successfully
+[4/26/16 - 9:28] Driver Upload File: Read
+[4/26/16 - 9:28] Driver Upload File Processed Successfully
+[4/26/16 - 9:28] Warehouse Inventory Update File: Read
+[4/26/16 - 9:28] Warehouse Inventory Update File Processed Successfully
+[4/26/16 - 9:28] Truck-Route-Driver Assignment File: Read
+[4/26/16 - 9:28] Truck-Route-Driver Assignment File Processed Successfully
+[4/26/16 - 9:28] Loading default items to trucks
+[4/26/16 - 9:29] Sales File: Read
+[4/26/16 - 9:29] Sales File Processed Successfully
+[4/26/16 - 9:29] Customer Request File: Read
+[4/26/16 - 9:29] Customer Request File Processed Successfully
+[4/26/16 - 9:29] Auto Order has been generated.
+[4/26/16 - 9:30] Warehouse Inventory Update File: Read
+[4/26/16 - 9:30] Warehouse Inventory Update File Processed Successfully
+[4/26/16 - 9:30] Truck-Route-Driver Assignment File: Read
+[4/26/16 - 9:30] Truck-Route-Driver Assignment File Processed Successfully
+[4/26/16 - 9:30] Loading default items to trucks
+[4/26/16 - 9:31] Sales File: Read
+[4/26/16 - 9:31] Sales File Processed Successfully
+[4/26/16 - 9:31] Auto Order has been generated.
+[4/26/16 - 9:31] Warehouse Inventory Update File: Trailer # 6 does not match Actual # of Rows 5
+[4/26/16 - 9:31] Warehouse Inventory Update File: Read
+[4/26/16 - 9:31] Inventory Upload File: Line 3 is invalid!
+[4/26/16 - 9:31] Inventory Upload File: Line 5 is invalid!
+[4/26/16 - 9:31] Warehouse Inventory Update File Processed Successfully
+[4/26/16 - 9:32] Truck-Route-Driver Assignment File: Read
+[4/26/16 - 9:32] Unable to assign Driver # 17 to Truck # 2 because Driver # 17 does not exist.
+[4/26/16 - 9:32] Truck-Route-Driver Assignment File Processed Successfully
+[4/26/16 - 9:32] Loading default items to trucks
+[4/26/16 - 9:42] City Upload File Invalid: Sequence number is not 1 greater than previous, should be 103
+[4/26/16 - 9:43] Truck Upload File Invalid: Sequence number is not 1 greater than previous, should be 2
+[4/26/16 - 9:43] Driver Upload File Invalid: Sequence number is not 1 greater than previous, should be 2
+[4/26/16 - 9:44] Warehouse Inventory Update File Invalid: Sequence number is not 1 greater than previous, should be 9998
+[4/26/16 - 10:22] City Upload File Invalid: Sequence number is not 1 greater than previous, should be 103
+[4/26/16 - 10:22] City Upload File: Read
+[4/26/16 - 10:22] City Upload File Processed Successfully
+[4/26/16 - 10:22] Route Upload File: Read
+[4/26/16 - 10:22] Route Upload File Processed Successfully
+[4/26/16 - 10:22] Truck Upload File: Read
+[4/26/16 - 10:22] Truck Upload File Processed Successfully
+[4/26/16 - 10:22] Driver Upload File: Read
+[4/26/16 - 10:22] Driver Upload File Processed Successfully
+[4/26/16 - 10:22] Warehouse Inventory Update File: Read
+[4/26/16 - 10:22] Warehouse Inventory Update File Processed Successfully
+[4/26/16 - 10:22] Truck-Route-Driver Assignment File: Read
+[4/26/16 - 10:22] Truck-Route-Driver Assignment File Processed Successfully
+[4/26/16 - 10:23] Loading default items to trucks
+[4/26/16 - 10:23] Sales File: Read
+[4/26/16 - 10:23] Sales File Processed Successfully
+[4/26/16 - 10:23] Customer Request File: Read
+[4/26/16 - 10:23] Customer Request File Processed Successfully
+[4/26/16 - 10:48] City Upload File: Read
+[4/26/16 - 10:48] Added City Dearborn 1          
+[4/26/16 - 10:48] Added City Dearborn 2          
+[4/26/16 - 10:48] Added City Dearborn 3          
+[4/26/16 - 10:48] Added City Dearborn 4          
+[4/26/16 - 10:48] Added City Dearborn 5          
+[4/26/16 - 10:48] Added City Dearborn 6          
+[4/26/16 - 10:48] Added City Dearborn 7          
+[4/26/16 - 10:48] Added City Dearborn 8          
+[4/26/16 - 10:48] Added City Dearborn 9          
+[4/26/16 - 10:48] City Upload File Processed Successfully
+[4/26/16 - 10:48] Route Upload File: Read
+[4/26/16 - 10:48] Added Route 1
+[4/26/16 - 10:48] Added Route 2
+[4/26/16 - 10:48] Added Route 3
+[4/26/16 - 10:48] Added Route 4
+[4/26/16 - 10:48] Route Upload File Processed Successfully
+[4/26/16 - 10:48] Truck Upload File: Read
+[4/26/16 - 10:48] Added Truck 1
+[4/26/16 - 10:48] Added Truck 2
+[4/26/16 - 10:48] Added Truck 3
+[4/26/16 - 10:48] Added Truck 4
+[4/26/16 - 10:48] Truck Upload File Processed Successfully
+[4/26/16 - 10:48] Driver Upload File: Read
+[4/26/16 - 10:48] Added Driver 1
+[4/26/16 - 10:48] Added Driver 2
+[4/26/16 - 10:48] Added Driver 3
+[4/26/16 - 10:48] Added Driver 4
+[4/26/16 - 10:48] Added Driver 5
+[4/26/16 - 10:48] Driver Upload File Processed Successfully
+[4/26/16 - 10:48] Warehouse Inventory Update File: Read
+[4/26/16 - 10:48] Added/Updated Inventory Item 3
+[4/26/16 - 10:48] Added/Updated Inventory Item 4
+[4/26/16 - 10:48] Added/Updated Inventory Item 5
+[4/26/16 - 10:48] Added/Updated Inventory Item 6
+[4/26/16 - 10:48] Added/Updated Inventory Item 7
+[4/26/16 - 10:48] Warehouse Inventory Update File Processed Successfully
+[4/26/16 - 10:48] Truck-Route-Driver Assignment File: Read
+[4/26/16 - 10:48] Assigned Truck 1 Route 2 and Driver 3
+[4/26/16 - 10:48] Assigned Truck 2 Route 3 and Driver 5
+[4/26/16 - 10:48] Assigned Truck 3 Route 4 and Driver 1
+[4/26/16 - 10:48] Assigned Truck 4 Route 1 and Driver 2
+[4/26/16 - 10:48] Truck-Route-Driver Assignment File Processed Successfully
+[4/26/16 - 10:48] Loading default items to trucks
+[4/26/16 - 10:48] Loaded Truck 1 with default inventory
+[4/26/16 - 10:48] Loaded Truck 2 with default inventory
+[4/26/16 - 10:48] Loaded Truck 3 with default inventory
+[4/26/16 - 10:48] Loaded Truck 4 with default inventory
+[4/26/16 - 10:49] City Upload File: Read
+[4/26/16 - 10:49] Added City Dearborn 1          
+[4/26/16 - 10:49] Added City Dearborn 2          
+[4/26/16 - 10:49] Added City Dearborn 3          
+[4/26/16 - 10:49] Added City Dearborn 4          
+[4/26/16 - 10:49] Added City Dearborn 5          
+[4/26/16 - 10:49] Added City Dearborn 6          
+[4/26/16 - 10:49] Added City Dearborn 7          
+[4/26/16 - 10:49] Added City Dearborn 8          
+[4/26/16 - 10:49] Added City Dearborn 9          
+[4/26/16 - 10:49] City Upload File Processed Successfully
+[4/26/16 - 10:49] Route Upload File: Read
+[4/26/16 - 10:49] Added Route 1
+[4/26/16 - 10:49] Added Route 2
+[4/26/16 - 10:49] Added Route 3
+[4/26/16 - 10:49] Added Route 4
+[4/26/16 - 10:49] Route Upload File Processed Successfully
+[4/26/16 - 10:50] Truck Upload File: Read
+[4/26/16 - 10:50] Added Truck 1
+[4/26/16 - 10:50] Added Truck 2
+[4/26/16 - 10:50] Added Truck 3
+[4/26/16 - 10:50] Added Truck 4
+[4/26/16 - 10:50] Truck Upload File Processed Successfully
+[4/26/16 - 10:50] Driver Upload File: Read
+[4/26/16 - 10:50] Added Driver 1
+[4/26/16 - 10:50] Added Driver 2
+[4/26/16 - 10:50] Added Driver 3
+[4/26/16 - 10:50] Added Driver 4
+[4/26/16 - 10:50] Added Driver 5
+[4/26/16 - 10:50] Driver Upload File Processed Successfully
+[4/26/16 - 10:50] Warehouse Inventory Update File: Read
+[4/26/16 - 10:50] Added/Updated Inventory Item 3
+[4/26/16 - 10:50] Added/Updated Inventory Item 4
+[4/26/16 - 10:50] Added/Updated Inventory Item 5
+[4/26/16 - 10:50] Added/Updated Inventory Item 6
+[4/26/16 - 10:50] Added/Updated Inventory Item 7
+[4/26/16 - 10:50] Warehouse Inventory Update File Processed Successfully
+[4/26/16 - 10:50] Truck-Route-Driver Assignment File: Read
+[4/26/16 - 10:50] Assigned Truck 1 Route 2 and Driver 3
+[4/26/16 - 10:50] Assigned Truck 2 Route 3 and Driver 5
+[4/26/16 - 10:50] Assigned Truck 3 Route 4 and Driver 1
+[4/26/16 - 10:50] Assigned Truck 4 Route 1 and Driver 2
+[4/26/16 - 10:50] Truck-Route-Driver Assignment File Processed Successfully
+[4/26/16 - 10:50] Default Inventory Set
+[4/26/16 - 10:51] Loading default items to trucks
+[4/26/16 - 10:51] Loaded Truck 1 with default inventory
+[4/26/16 - 10:51] Loaded Truck 2 with default inventory
+[4/26/16 - 10:51] Loaded Truck 3 with default inventory
+[4/26/16 - 10:51] Loaded Truck 4 with default inventory
+[4/26/16 - 10:51] Change Truck Inventory File: Read
+[4/26/16 - 10:51] Filling truck 1
+[4/26/16 - 10:51] Adding 7 of item 3 to truck 1
+[4/26/16 - 10:51] Number of items in trailer does not match the number of items processed
+[4/26/16 - 10:51] Done filling truck 1
+[4/26/16 - 10:51] Filling truck 2
+[4/26/16 - 10:51] Number of items in trailer does not match the number of items processed
+[4/26/16 - 10:51] Done filling truck 2
+[4/26/16 - 10:51] Change Truck Inventory File Processed Successfully
+[4/26/16 - 10:51] Trucks have been sent out!
+[4/26/16 - 10:51] Sales File: Read
+[4/26/16 - 10:51] Truck 1 sold 9
+[4/26/16 - 10:51] Truck 1 sold 15
+[4/26/16 - 10:51] Truck 1 sold 7
+[4/26/16 - 10:51] Truck 1 sold 7
+[4/26/16 - 10:51] Truck 1 sold 8
+[4/26/16 - 10:51] Truck 2 sold 7
+[4/26/16 - 10:51] Sales File Processed Successfully
+[4/26/16 - 10:51] Customer Request File: Read
+[4/26/16 - 10:51] Added requested item 10
+[4/26/16 - 10:51] Added requested item 11
+[4/26/16 - 10:51] Customer Request File Processed Successfully
+[4/26/16 - 10:51] Day has ended
+[4/26/16 - 10:51] Auto Order has been generated.
+[4/26/16 - 11:06] City Upload File Invalid: Sequence number is not 1 greater than previous, should be 103
+[4/26/16 - 11:06] Route Upload File Invalid: Sequence number is not 1 greater than previous, should be 53
+[4/26/16 - 11:06] Truck Upload File Invalid: Sequence number is not 1 greater than previous, should be 2
+[4/26/16 - 11:06] Driver Upload File Invalid: Sequence number is not 1 greater than previous, should be 2
+[4/26/16 - 11:06] Warehouse Inventory Update File Invalid: Sequence number is not 1 greater than previous, should be 9998
+[4/26/16 - 11:07] Warehouse Inventory Update File Invalid: Sequence number is not 1 greater than previous, should be 9998
+[4/26/16 - 11:07] Warehouse Inventory Update File Invalid: Date must be greater than previous day's file!
+[4/26/16 - 11:07] Warehouse Inventory Update File Invalid: Sequence number is not 1 greater than previous, should be 9999
+[4/26/16 - 11:08] Warehouse Inventory Update File: Read
+[4/26/16 - 11:08] Added/Updated Inventory Item 3
+[4/26/16 - 11:08] Added/Updated Inventory Item 4
+[4/26/16 - 11:08] Added/Updated Inventory Item 5
+[4/26/16 - 11:08] Added/Updated Inventory Item 6
+[4/26/16 - 11:08] Added/Updated Inventory Item 7
+[4/26/16 - 11:08] Warehouse Inventory Update File Processed Successfully
+[4/26/16 - 11:08] Warehouse Inventory Update File Invalid: Sequence number is not 1 greater than previous, should be 1
+[4/26/16 - 11:08] Warehouse Inventory Update File: Read
+[4/26/16 - 11:08] Added/Updated Inventory Item 3
+[4/26/16 - 11:08] Added/Updated Inventory Item 4
+[4/26/16 - 11:08] Added/Updated Inventory Item 5
+[4/26/16 - 11:08] Added/Updated Inventory Item 6
+[4/26/16 - 11:08] Added/Updated Inventory Item 7
+[4/26/16 - 11:08] Warehouse Inventory Update File Processed Successfully
+[4/26/16 - 11:08] Warehouse Inventory Update File Invalid: Sequence number is not 1 greater than previous, should be 2
+[4/26/16 - 11:10] City Upload File: Read
+[4/26/16 - 11:10] Added City Dearborn 1          
+[4/26/16 - 11:10] Added City Dearborn 2          
+[4/26/16 - 11:10] Added City Dearborn 3          
+[4/26/16 - 11:10] Added City Dearborn 4          
+[4/26/16 - 11:10] Added City Dearborn 5          
+[4/26/16 - 11:10] Added City Dearborn 6          
+[4/26/16 - 11:10] Added City Dearborn 7          
+[4/26/16 - 11:10] Added City Dearborn 8          
+[4/26/16 - 11:10] Added City Dearborn 9          
+[4/26/16 - 11:10] City Upload File Processed Successfully
+[4/26/16 - 11:10] Route Upload File: Read
+[4/26/16 - 11:10] Added Route 1
+[4/26/16 - 11:10] Added Route 2
+[4/26/16 - 11:10] Added Route 3
+[4/26/16 - 11:10] Added Route 4
+[4/26/16 - 11:10] Route Upload File Processed Successfully
+[4/26/16 - 11:10] Truck Upload File: Read
+[4/26/16 - 11:10] Added Truck 1
+[4/26/16 - 11:10] Added Truck 2
+[4/26/16 - 11:10] Added Truck 3
+[4/26/16 - 11:10] Added Truck 4
+[4/26/16 - 11:10] Truck Upload File Processed Successfully
+[4/26/16 - 11:10] Driver Upload File: Read
+[4/26/16 - 11:10] Added Driver 1
+[4/26/16 - 11:10] Added Driver 2
+[4/26/16 - 11:10] Added Driver 3
+[4/26/16 - 11:10] Added Driver 4
+[4/26/16 - 11:10] Added Driver 5
+[4/26/16 - 11:10] Driver Upload File Processed Successfully
+[4/26/16 - 11:10] Default Inventory Set
+[4/26/16 - 11:10] Warehouse Inventory Update File: Read
+[4/26/16 - 11:10] Added/Updated Inventory Item 3
+[4/26/16 - 11:10] Added/Updated Inventory Item 4
+[4/26/16 - 11:10] Added/Updated Inventory Item 5
+[4/26/16 - 11:10] Added/Updated Inventory Item 6
+[4/26/16 - 11:10] Added/Updated Inventory Item 7
+[4/26/16 - 11:10] Warehouse Inventory Update File Processed Successfully
+[4/26/16 - 11:10] Truck-Route-Driver Assignment File: Read
+[4/26/16 - 11:10] Assigned Truck 1 Route 2 and Driver 3
+[4/26/16 - 11:10] Assigned Truck 2 Route 3 and Driver 5
+[4/26/16 - 11:10] Assigned Truck 3 Route 4 and Driver 1
+[4/26/16 - 11:10] Assigned Truck 4 Route 1 and Driver 2
+[4/26/16 - 11:10] Truck-Route-Driver Assignment File Processed Successfully
+[4/26/16 - 11:10] Loading default items to trucks
+[4/26/16 - 11:10] Loaded Truck 1 with default inventory
+[4/26/16 - 11:10] Loaded Truck 2 with default inventory
+[4/26/16 - 11:10] Loaded Truck 3 with default inventory
+[4/26/16 - 11:10] Loaded Truck 4 with default inventory
+[4/26/16 - 11:11] Trucks have been sent out!
+[4/26/16 - 11:11] Customer Request File: Read
+[4/26/16 - 11:11] Added requested item 10
+[4/26/16 - 11:11] Added requested item 11
+[4/26/16 - 11:11] Customer Request File Processed Successfully

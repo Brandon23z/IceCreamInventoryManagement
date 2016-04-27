@@ -32,6 +32,20 @@ namespace IceCreamInventoryManagement
             initializeDatabase();
             //clearDatabase();
             Settings.saveDefaults(false);
+            /*
+            Settings.SequenceNumberSettings snSettings = new Settings.SequenceNumberSettings();
+            snSettings.sequenceCityUploadFile = 0102;
+            snSettings.sequenceCustomerRequest = 0001;//
+            snSettings.sequenceDriverUploadFile = 0001;//
+            snSettings.sequenceRouteUploadFile = 0052;
+            snSettings.sequenceTruckInventoryUploadFile = 9999;
+            snSettings.sequenceTruckRouteDriverUploadFile = 9999;
+            snSettings.sequenceTruckSalesUploadFile = 9998;
+            snSettings.sequenceTruckUploadFile = 0001;
+            snSettings.sequenceWarehouseUploadFile = 9997;
+            Settings.saveSequenceNumberSettings(snSettings);
+            */
+            //Settings.SequenceNumberSettings s = Settings.getSequenceNumberSettings();
             refreshButtonStates();
         }
 
@@ -64,6 +78,7 @@ namespace IceCreamInventoryManagement
             if (daySettings.dayStatus == 2)
             {
                 btnIceCreamFromTrucks.Enabled = true;
+                btnCustomerRequests.Enabled = true;
                 btnRouteUpload.Enabled = false;
                 btnCityUpload.Enabled = false;
                 btnDriverUpload.Enabled = false;
@@ -73,6 +88,7 @@ namespace IceCreamInventoryManagement
             else
             {
                 btnIceCreamFromTrucks.Enabled = false;
+                btnCustomerRequests.Enabled = false;
                 btnRouteUpload.Enabled = true;
                 btnCityUpload.Enabled = true;
                 btnDriverUpload.Enabled = true;
@@ -383,6 +399,7 @@ namespace IceCreamInventoryManagement
 
         private void btnLoadIceCreamToTrucks_Click(object sender, EventArgs e)
         {
+            addToLog("Loading default items to trucks");
             //add default inventory to each truck
             List<Truck> myTrucks = new List<Truck>();
 
@@ -400,8 +417,9 @@ namespace IceCreamInventoryManagement
                 moveDefaultToTruck(mySettings.defaultItem4ID, mySettings.defaultItem4Quantity, myTrucks[i].trucknumber);
 
                 moveDefaultToTruck(mySettings.defaultItem5ID, mySettings.defaultItem5Quantity, myTrucks[i].trucknumber);
+                addToLog("Loaded Truck " + myTrucks[i].trucknumber + " with default inventory");
             }
-            addToLog("Loading default items to trucks");
+            
             
             SQLMethods.insertSetting(Settings.keys.loadTruckDefaults, "1", true);
 
@@ -753,6 +771,8 @@ namespace IceCreamInventoryManagement
                 
             SQLMethods.insertSetting(Settings.keys.dayStatus, "0", true);
 
+            addToLog("Day has ended");
+
             if (TextSetting.autoOrderGenerated == true)
             {
                 sendTextMessage("Auto Order has been generated.");
@@ -767,6 +787,7 @@ namespace IceCreamInventoryManagement
         private void btnSendOutTrucks_Click(object sender, EventArgs e)
         {
             SQLMethods.insertSetting(Settings.keys.dayStatus, "2", true);
+            addToLog("Trucks have been sent out!");
             refreshButtonStates();
         }
 

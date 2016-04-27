@@ -208,6 +208,7 @@ namespace IceCreamInventoryManagement
 
                     if (!doesZoneExist(citylabel))
                     {
+                        addToLog("Added City " + citylabel);
                         bool test = addZone(new Zone(citylabel, cityname, state));
                     }
                     else
@@ -269,7 +270,12 @@ namespace IceCreamInventoryManagement
                                 {
                                     bool test = addRoute(new Route(routenumber, citylabels));
                                     if (!test)
+                                    {
                                         addToLog("Route # " + routenumber + " failed to add.");
+                                    }else
+                                    {
+                                        addToLog("Added Route " + routenumber);
+                                    }
                                 }
                                 else
                                     addToLog("Route # " + routenumber + " was not added because either \"" + citylabels[k] + "\" does not exist as a zone, or it is already in use by another route.");
@@ -318,7 +324,13 @@ namespace IceCreamInventoryManagement
                                 {
                                     bool test = updateRoute(new Route(routenumber, citylabels));
                                     if (!test)
+                                    {
                                         addToLog("Route # " + routenumber + " failed to update.");
+                                    }
+                                    else
+                                    {
+                                        addToLog("Route " + routenumber + " has been updated");
+                                    }
                                 }
                                 else
                                     addToLog("Route # " + routenumber + " was not changed because either \"" + citylabels[k] + "\" does not exist as a zone, or it is already in use by another route.");
@@ -346,6 +358,7 @@ namespace IceCreamInventoryManagement
                         else if (doesRouteExist(routenumber))
                         {
                             bool test = deleteRoute(routenumber);
+                            addToLog("Route " + routenumber + " has been deleted");
                         }       
                         else
                             addToLog("Route # " + routenumber + " was not deleted because it does not exist");
@@ -445,6 +458,7 @@ namespace IceCreamInventoryManagement
                                 {
                                     assignDriverToTruck(drivernumber, trucknumber);
                                     assignTruckToRoute(trucknumber, routenumber);
+                                    addToLog("Assigned Truck " + trucknumber + " Route " + routenumber + " and Driver " + drivernumber);
                                 }
                             }
                             else
@@ -600,6 +614,7 @@ namespace IceCreamInventoryManagement
                     else if (!doesTruckExist(trucknumber))
                     {
                         bool test = addTruck(new Truck(trucknumber));
+                        addToLog("Added Truck " + trucknumber);
                     }
                     else
                     {
@@ -629,6 +644,7 @@ namespace IceCreamInventoryManagement
                     else if (!doesDriverExist(drivernumber))
                     {
                         bool test = addDriver(new Driver(drivernumber));
+                        addToLog("Added Driver " + drivernumber);
                     }
                     else
                     {
@@ -663,6 +679,7 @@ namespace IceCreamInventoryManagement
                         bool test =
                             addInventoryItem(new InventoryItem(itemnumber, quantity, initialprice, saleprice,
                                 description));
+                        addToLog("Added/Updated Inventory Item " + itemnumber);
                     }
                     else
                     {
@@ -784,6 +801,7 @@ namespace IceCreamInventoryManagement
                     else
                     {
                         bool test = addInventoryItem(new InventoryItem(itemnumber, 0, 0, 0, description));
+                        addToLog("Added requested item " + itemnumber);
                     
                     }
 
@@ -843,6 +861,7 @@ namespace IceCreamInventoryManagement
                                               (quantitySold));
                             bool test = addSale(itemnumber, trucknumber, temp.routenumber, temp.drivernumber, quantitySold, daySettings.currentDate, truckInv[itemnumber].initialprice, truckInv[itemnumber].saleprice);
                             itemsThatWereValid++;
+                            addToLog("Truck " + trucknumber + " sold " + (quantitySold));
                         }
                         Console.WriteLine("Truck " + trucknumber + " has " + finalquantity + "/" +
                                           truckInv[itemnumber].quantity + " of item " + itemnumber);

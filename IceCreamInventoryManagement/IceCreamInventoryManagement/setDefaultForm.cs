@@ -58,6 +58,9 @@ namespace IceCreamInventoryManagement
             settings.defaultItem5ID = Convert.ToInt32(nudItem5Product.Value);
             settings.defaultItem5Quantity = Convert.ToInt32(nudItem5Quantity.Value);
             saveDefaultItemsSettings(settings);
+
+            addToLog("Default Inventory Set");
+
             this.Close();
         }
         //needs error handling
