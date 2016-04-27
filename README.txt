@@ -33,6 +33,16 @@ Contents
 		Basic Functionality
 		Text Message Notifications
 	5. File Types
+		City Upload File
+		Route Upload File
+		Truck Upload File
+		Driver Upload File
+		Daily Inventory File
+		Load Truck Route Driver File
+		Load Ice Cream Truck Inventory File
+		Customer Request File
+		Sales File
+	6. Program State
 	
 System Requirements
 Minimum: 
@@ -212,7 +222,20 @@ File Types
 		TR 0002
 		IR 0001
 		T 0004
-
+	
+	Customer Request File (ON DEMAND)
+		File: customerRequest.txt
+		
+		Format:
+		HD SEQ#      YYYY-MM-DD
+		|Item Number||Description|
+		T #ROWS IN FILE
+		
+		Example:
+		HD 0001      2016-03-24
+		0023Superman Ice Cream
+		T 0001
+		
 	Sales File (DAILY)
 		File: dailySales.txt
 		
@@ -234,3 +257,6 @@ File Types
 		01180003
 		SR 0001
 		T 0004
+
+Program State
+	The Two Additional Functionalities Require Additional Files. The Header For The driverUpload.txt and customerRequest
