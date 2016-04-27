@@ -113,6 +113,7 @@ File Types
 	
 	City Upload File (FIRST TIME SETUP / ON DEMAND)
 		File: cityUpload.txt
+		Initial Header Sequence: 0102
 		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
@@ -128,6 +129,7 @@ File Types
 		
 	Route Upload File (FIRST TIME SETUP / ON DEMAND)
 		File: routeUpload.txt
+		Initial Header Sequence: 0052 
 		
 		Format:
 		HD SEQ#      YYYY-MM-DD 
@@ -143,6 +145,7 @@ File Types
 	
 	Truck Upload File (FIRST TIME SETUP / ON DEMAND)
 		File: truckUpload.txt
+		Initial Header Sequence: 0001
 		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
@@ -158,6 +161,7 @@ File Types
 		
 	Driver Upload File (FIRST TIME SETUP / ON DEMAND)
 		File: driverUpload.txt
+		Initial Header Sequence: 0001
 		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
@@ -173,6 +177,7 @@ File Types
 		
 	Daily Inventory File (DAILY)
 		File: dailyInventory.txt
+		Initial Header Sequence: 9997
 		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
@@ -190,6 +195,7 @@ File Types
 		
 	Load Truck Route Driver File (DAILY)
 		File: truckRouteDriver.txt
+		Initial Header Sequence: 9999
 	
 		Format:
 		HD SEQ#      YYYY-MM-DD 
@@ -206,6 +212,7 @@ File Types
 		
 	Load Ice Cream Truck Inventory File (ON DEMAND)
 		File: loadTruck.txt
+		Initial Header Sequence: 9999
 		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
@@ -225,6 +232,7 @@ File Types
 	
 	Customer Request File (ON DEMAND)
 		File: customerRequest.txt
+		Initial Header Sequence: 0001
 		
 		Format:
 		HD SEQ#      YYYY-MM-DD
@@ -238,6 +246,7 @@ File Types
 		
 	Sales File (DAILY)
 		File: dailySales.txt
+		Initial Header Sequence: 9998
 		
 		Format: 
 		HD SEQ#      YYYY-MM-DD 
@@ -259,4 +268,8 @@ File Types
 		T 0004
 
 Program State
-	The Two Additional Functionalities Require Additional Files. The Header For The driverUpload.txt and customerRequest
+	Two Additional Functionalities Require Additional Files. The Header Sequence For driverUpload.txt and customerRequest.txt Should Be Set To 0001.
+	
+	The Sequence Numbers Are Set As Requested.
+	
+	The Current Date In The System Is 2016-03-24. To Continue, Dates In Files Must Be Greater Than This Date.
